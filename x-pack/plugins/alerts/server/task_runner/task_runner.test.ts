@@ -211,24 +211,17 @@ describe('Task Runner', () => {
     await taskRunner.run();
     expect(actionsClient.enqueueExecution).toHaveBeenCalledTimes(1);
     expect(actionsClient.enqueueExecution.mock.calls[0]).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "apiKey": "MTIzOmFiYw==",
-          "id": "1",
-          "params": Object {
-            "foo": true,
-          },
-          "source": Object {
-            "source": Object {
-              "id": "1",
-              "type": "alert",
-            },
-            "type": "SAVED_OBJECT",
-          },
-          "spaceId": undefined,
-        },
-      ]
-    `);
+                  Array [
+                    Object {
+                      "apiKey": "MTIzOmFiYw==",
+                      "id": "1",
+                      "params": Object {
+                        "foo": true,
+                      },
+                      "spaceId": undefined,
+                    },
+                  ]
+          `);
 
     const eventLogger = taskRunnerFactoryInitializerParams.eventLogger;
     expect(eventLogger.logEvent).toHaveBeenCalledTimes(4);
@@ -358,24 +351,17 @@ describe('Task Runner', () => {
     });
     expect(actionsClient.enqueueExecution).toHaveBeenCalledTimes(1);
     expect(actionsClient.enqueueExecution.mock.calls[0]).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "apiKey": "MTIzOmFiYw==",
-          "id": "1",
-          "params": Object {
-            "foo": true,
-          },
-          "source": Object {
-            "source": Object {
-              "id": "1",
-              "type": "alert",
-            },
-            "type": "SAVED_OBJECT",
-          },
-          "spaceId": undefined,
-        },
-      ]
-    `);
+                  Array [
+                    Object {
+                      "apiKey": "MTIzOmFiYw==",
+                      "id": "1",
+                      "params": Object {
+                        "foo": true,
+                      },
+                      "spaceId": undefined,
+                    },
+                  ]
+          `);
 
     const eventLogger = taskRunnerFactoryInitializerParams.eventLogger;
     expect(eventLogger.logEvent).toHaveBeenCalledTimes(4);

@@ -4,16 +4,11 @@
  * you may not use this file except in compliance with the Elastic License.
  */
 
-import {
-  KibanaRequest,
-  Logger,
-  SavedObjectsServiceStart,
-  PluginInitializerContext,
-} from 'src/core/server';
 import { PluginStartContract as ActionsPluginStartContract } from '../../actions/server';
 import { AlertsClient } from './alerts_client';
 import { ALERTS_FEATURE_ID } from '../common';
 import { AlertTypeRegistry, SpaceIdToNamespaceFunction } from './types';
+import { KibanaRequest, Logger, SavedObjectsServiceStart } from '../../../../src/core/server';
 import { InvalidateAPIKeyParams, SecurityPluginSetup } from '../../security/server';
 import { EncryptedSavedObjectsClient } from '../../encrypted_saved_objects/server';
 import { TaskManagerStartContract } from '../../task_manager/server';
@@ -35,7 +30,6 @@ export interface AlertsClientFactoryOpts {
   actions: ActionsPluginStartContract;
   features: FeaturesPluginStart;
   eventLog: IEventLogClientService;
-  kibanaVersion: PluginInitializerContext['env']['packageInfo']['version'];
 }
 
 export class AlertsClientFactory {
@@ -51,7 +45,6 @@ export class AlertsClientFactory {
   private actions!: ActionsPluginStartContract;
   private features!: FeaturesPluginStart;
   private eventLog!: IEventLogClientService;
-  private kibanaVersion!: PluginInitializerContext['env']['packageInfo']['version'];
 
   public initialize(options: AlertsClientFactoryOpts) {
     if (this.isInitialized) {
@@ -69,7 +62,6 @@ export class AlertsClientFactory {
     this.actions = options.actions;
     this.features = options.features;
     this.eventLog = options.eventLog;
-    this.kibanaVersion = options.kibanaVersion;
   }
 
   public create(request: KibanaRequest, savedObjects: SavedObjectsServiceStart): AlertsClient {
@@ -88,7 +80,6 @@ export class AlertsClientFactory {
 
     return new AlertsClient({
       spaceId,
-      kibanaVersion: this.kibanaVersion,
       logger: this.logger,
       taskManager: this.taskManager,
       alertTypeRegistry: this.alertTypeRegistry,

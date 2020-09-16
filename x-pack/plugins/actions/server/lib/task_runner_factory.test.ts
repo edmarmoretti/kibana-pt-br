@@ -71,13 +71,13 @@ const taskRunnerFactoryInitializerParams = {
   logger: loggingSystemMock.create().get(),
   encryptedSavedObjectsClient: mockedEncryptedSavedObjectsClient,
   getBasePath: jest.fn().mockReturnValue(undefined),
-  getUnsecuredSavedObjectsClient: jest.fn().mockReturnValue(services.savedObjectsClient),
+  getScopedSavedObjectsClient: jest.fn().mockReturnValue(services.savedObjectsClient),
 };
 
 beforeEach(() => {
   jest.resetAllMocks();
   actionExecutorInitializerParams.getServices.mockReturnValue(services);
-  taskRunnerFactoryInitializerParams.getUnsecuredSavedObjectsClient.mockReturnValue(
+  taskRunnerFactoryInitializerParams.getScopedSavedObjectsClient.mockReturnValue(
     services.savedObjectsClient
   );
 });

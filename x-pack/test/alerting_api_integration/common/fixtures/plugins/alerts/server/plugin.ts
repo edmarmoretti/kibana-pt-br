@@ -12,15 +12,11 @@ import { PluginSetupContract as FeaturesPluginSetup } from '../../../../../../..
 import { defineAlertTypes } from './alert_types';
 import { defineActionTypes } from './action_types';
 import { defineRoutes } from './routes';
-import { SpacesPluginSetup } from '../../../../../../../plugins/spaces/server';
-import { SecurityPluginSetup } from '../../../../../../../plugins/security/server';
 
 export interface FixtureSetupDeps {
   features: FeaturesPluginSetup;
   actions: ActionsPluginSetup;
   alerts: AlertingPluginSetup;
-  spaces?: SpacesPluginSetup;
-  security?: SecurityPluginSetup;
 }
 
 export interface FixtureStartDeps {
@@ -28,10 +24,7 @@ export interface FixtureStartDeps {
 }
 
 export class FixturePlugin implements Plugin<void, void, FixtureSetupDeps, FixtureStartDeps> {
-  public setup(
-    core: CoreSetup<FixtureStartDeps>,
-    { features, actions, alerts, spaces, security }: FixtureSetupDeps
-  ) {
+  public setup(core: CoreSetup<FixtureStartDeps>, { features, actions, alerts }: FixtureSetupDeps) {
     features.registerKibanaFeature({
       id: 'alertsFixture',
       name: 'Alerts',
@@ -104,7 +97,7 @@ export class FixturePlugin implements Plugin<void, void, FixtureSetupDeps, Fixtu
 
     defineActionTypes(core, { actions });
     defineAlertTypes(core, { alerts });
-    defineRoutes(core, { spaces, security });
+    defineRoutes(core);
   }
 
   public start() {}

@@ -8,8 +8,6 @@ import { SavedObjectsClientContract } from '../../../../src/core/server';
 import { TaskManagerStartContract } from '../../task_manager/server';
 import { RawAction, ActionTypeRegistryContract, PreConfiguredAction } from './types';
 import { ACTION_TASK_PARAMS_SAVED_OBJECT_TYPE } from './saved_objects';
-import { ExecuteOptions as ActionExecutorOptions } from './lib/action_executor';
-import { isSavedObjectExecutionSource } from './lib';
 
 interface CreateExecuteFunctionOptions {
   taskManager: TaskManagerStartContract;
@@ -18,14 +16,15 @@ interface CreateExecuteFunctionOptions {
   preconfiguredActions: PreConfiguredAction[];
 }
 
-export interface ExecuteOptions extends Pick<ActionExecutorOptions, 'params' | 'source'> {
+export interface ExecuteOptions {
   id: string;
+  params: Record<string, unknown>;
   spaceId: string;
   apiKey: string | null;
 }
 
 export type ExecutionEnqueuer = (
-  unsecuredSavedObjectsClient: SavedObjectsClientContract,
+  savedObjectsClient: SavedObjectsClientContract,
   options: ExecuteOptions
 ) => Promise<void>;
 
@@ -36,8 +35,8 @@ export function createExecutionEnqueuerFunction({
   preconfiguredActions,
 }: CreateExecuteFunctionOptions) {
   return async function execute(
-    unsecuredSavedObjectsClient: SavedObjectsClientContract,
-    { id, params, spaceId, source, apiKey }: ExecuteOptions
+    savedObjectsClient: SavedObjectsClientContract,
+    { id, params, spaceId, apiKey }: ExecuteOptions
   ) {
     if (isESOUsingEphemeralEncryptionKey === true) {
       throw new Error(
@@ -45,24 +44,19 @@ export function createExecutionEnqueuerFunction({
       );
     }
 
-    const actionTypeId = await getActionTypeId(
-      unsecuredSavedObjectsClient,
-      preconfiguredActions,
-      id
-    );
+    const actionTypeId = await getActionTypeId(id);
 
     if (!actionTypeRegistry.isActionExecutable(id, actionTypeId)) {
       actionTypeRegistry.ensureActionTypeEnabled(actionTypeId);
     }
 
-    const actionTaskParamsRecord = await unsecuredSavedObjectsClient.create(
+    const actionTaskParamsRecord = await savedObjectsClient.create(
       ACTION_TASK_PARAMS_SAVED_OBJECT_TYPE,
       {
         actionId: id,
         params,
         apiKey,
-      },
-      executionSourceAsSavedObjectReferences(source)
+      }
     );
 
     await taskManager.schedule({
@@ -74,34 +68,15 @@ export function createExecutionEnqueuerFunction({
       state: {},
       scope: ['actions'],
     });
-  };
-}
 
-function executionSourceAsSavedObjectReferences(executionSource: ActionExecutorOptions['source']) {
-  return isSavedObjectExecutionSource(executionSource)
-    ? {
-        references: [
-          {
-            name: 'source',
-            ...executionSource.source,
-          },
-        ],
+    async function getActionTypeId(actionId: string): Promise<string> {
+      const pcAction = preconfiguredActions.find((action) => action.id === actionId);
+      if (pcAction) {
+        return pcAction.actionTypeId;
       }
-    : {};
-}
 
-async function getActionTypeId(
-  unsecuredSavedObjectsClient: SavedObjectsClientContract,
-  preconfiguredActions: PreConfiguredAction[],
-  actionId: string
-): Promise<string> {
-  const pcAction = preconfiguredActions.find((action) => action.id === actionId);
-  if (pcAction) {
-    return pcAction.actionTypeId;
-  }
-
-  const {
-    attributes: { actionTypeId },
-  } = await unsecuredSavedObjectsClient.get<RawAction>('action', actionId);
-  return actionTypeId;
+      const actionSO = await savedObjectsClient.get<RawAction>('action', actionId);
+      return actionSO.attributes.actionTypeId;
+    }
+  };
 }

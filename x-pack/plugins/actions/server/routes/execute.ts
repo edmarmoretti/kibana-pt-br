@@ -15,7 +15,6 @@ import { ILicenseState, verifyApiAccess, isErrorThatHandlesItsOwnResponse } from
 
 import { ActionTypeExecutorResult } from '../types';
 import { BASE_ACTION_API_PATH } from '../../common';
-import { asHttpRequestExecutionSource } from '../lib/action_execution_source';
 
 const paramSchema = schema.object({
   id: schema.string(),
@@ -52,7 +51,6 @@ export const executeActionRoute = (router: IRouter, licenseState: ILicenseState)
         const body: ActionTypeExecutorResult<unknown> = await actionsClient.execute({
           params,
           actionId: id,
-          source: asHttpRequestExecutionSource(req),
         });
         return body
           ? res.ok({
