@@ -109,6 +109,8 @@ export const OverviewPageFooter: FC<Props> = ({
         </EuiFlexGroup>
       </footer>
     );
+  } else {
+    return null;
   }
 
   return kbnOverviewFooter;
