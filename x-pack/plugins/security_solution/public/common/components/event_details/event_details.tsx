@@ -101,6 +101,7 @@ const EventDetailsComponent: React.FC<Props> = ({
               timelineId={timelineId}
               timelineTabType={timelineTabType}
             />
+            <EuiSpacer size="l" />
           </>
         ),
       },
