@@ -1,0 +1,25 @@
+{
+  "jobs": [
+    {
+      "repoOwner": "elastic",
+      "repoName": "kibana",
+      "jobName": "jenkins-pr-bot",
+
+      "enabled": true,
+      "target_branch": "master",
+      "allow_org_users": true,
+      "allowed_repo_permissions": ["admin", "write"],
+      "allowed_list": [
+        "brianseeders",
+        "alexwizp",
+        "barlowm",
+        "DziyanaDzeraviankina",
+        "maryia-lapata",
+        "renovate[bot]",
+        "sulemanof",
+        "VladLasitsa"
+      ],
+      "cancel_in_progress_builds_on_update": true
+    }
+  ]
+}
