@@ -19,7 +19,9 @@
         "sulemanof",
         "VladLasitsa"
       ],
-      "cancel_in_progress_builds_on_update": true
+      "cancel_in_progress_builds_on_update": true,
+      "set_commit_status": true,
+      "commit_status_context": "kibana-ci"
     }
   ]
 }
