@@ -6,7 +6,7 @@
       "pipelineSlug": "kibana-brianseeders",
 
       "enabled": true,
-      "target_branch": "buildkite",
+      "target_branch": "kb-bk",
       "allow_org_users": true,
       "allowed_repo_permissions": ["admin", "write"],
       "allowed_list": [
