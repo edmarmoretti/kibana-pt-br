@@ -3,10 +3,10 @@
     {
       "repoOwner": "elastic",
       "repoName": "kibana",
-      "jobName": "jenkins-pr-bot",
+      "pipelineSlug": "kibana-brianseeders",
 
       "enabled": true,
-      "target_branch": "master",
+      "target_branch": "buildkite",
       "allow_org_users": true,
       "allowed_repo_permissions": ["admin", "write"],
       "allowed_list": [
@@ -21,7 +21,7 @@
       ],
       "cancel_in_progress_builds_on_update": true,
       "set_commit_status": true,
-      "commit_status_context": "kibana-ci"
+      "commit_status_context": "kibana-buildkite"
     }
   ]
 }
