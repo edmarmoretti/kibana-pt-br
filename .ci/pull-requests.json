@@ -3,7 +3,7 @@
     {
       "repoOwner": "elastic",
       "repoName": "kibana",
-      "pipelineSlug": "kibana-brianseeders",
+      "pipelineSlug": "kibana",
 
       "enabled": true,
       "target_branch": "kb-bk",
