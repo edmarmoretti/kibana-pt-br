@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+source "$(dirname "${0}")/util.sh"
+
 export DOCKER_BUILDKIT=1
 
 export BASE_IMAGE="us-central1-docker.pkg.dev/elastic-kibana-184716/kibana-buildkite-docker/buildkite/ci/base:$BUILDKITE_COMMIT"
@@ -14,6 +16,8 @@ docker build \
   --build-arg "GIT_COMMIT=$BUILDKITE_COMMIT" \
   --progress plain \
   .
+
+docker_run --rm -it "$BUILD_IMAGE" .buildkite/scripts/post_build_kibana.sh
 
 docker push "$BUILD_IMAGE"
 

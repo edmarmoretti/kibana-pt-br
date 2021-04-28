@@ -25,3 +25,25 @@ verify_no_git_changes() {
     exit 1
   fi
 }
+
+docker_run() {
+  args=()
+
+  if [[ -n "${BUILDKITE_ENV_FILE:-}" ]] ; then
+    # Read in the env file and convert to --env params for docker
+    # This is because --env-file doesn't support newlines or quotes per https://docs.docker.com/compose/env-file/#syntax-rules
+    while read -r var; do
+      args+=( --env "${var%%=*}" )
+    done < "$BUILDKITE_ENV_FILE"
+  fi
+
+  BUILDKITE_AGENT_BINARY_PATH=$(command -v buildkite-agent)
+  args+=(
+    "--env" "BUILDKITE_JOB_ID"
+    "--env" "BUILDKITE_BUILD_ID"
+    "--env" "BUILDKITE_AGENT_ACCESS_TOKEN"
+    "--volume" "$BUILDKITE_AGENT_BINARY_PATH:/usr/bin/buildkite-agent"
+  )
+
+  docker run "${args[@]}" "$@"
+}
