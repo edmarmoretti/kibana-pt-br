@@ -9,3 +9,4 @@ steps:
     build:
       env:
         ES_SNAPSHOT_MANIFEST: '$ES_SNAPSHOT_MANIFEST'
+      branch: '$BUILDKITE_BRANCH'
