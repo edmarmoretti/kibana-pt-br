@@ -1,5 +1,4 @@
 env:
-  ES_SNAPSHOT_MANIFEST: ''
   IGNORE_SHIP_CI_STATS_ERROR: 'true'
 steps:
   - command: .buildkite/setup/pre_build.sh
