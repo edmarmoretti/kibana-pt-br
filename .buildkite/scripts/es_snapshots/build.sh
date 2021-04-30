@@ -6,14 +6,17 @@ source "$(dirname "${0}")/../util.sh"
 
 cd ..
 destination="$(pwd)/es-build"
+rm -rf "$destination"
 mkdir -p "$destination"
 
 mkdir -p elasticsearch && cd elasticsearch
 
 # TODO use mirror from agent image
-git init
-git remote add origin https://github.com/elastic/elasticsearch.git
-git fetch origin --depth 1 master
+if [[ ! -d .git ]]; then
+  git init
+  git remote add origin https://github.com/elastic/elasticsearch.git
+fi
+git fetch origin --depth 1 master # TODO
 git reset --hard FETCH_HEAD
 
 export ELASTICSEARCH_BRANCH=master # TODO
@@ -33,6 +36,16 @@ export "$(grep '^ES_BUILD_JAVA' .ci/java-versions.properties | xargs)"
 
 export PATH="$HOME/.java/$ES_BUILD_JAVA/bin:$PATH"
 export JAVA_HOME="$HOME/.java/$ES_BUILD_JAVA"
+
+docker rm -f dind || true
+docker run -d --rm --privileged --name dind --userns host -p 2377:2376 -e DOCKER_TLS_CERTDIR=/certs -v "$HOME/dind-certs":/certs docker:dind
+
+trap "docker rm -f dind" EXIT
+
+export DOCKER_TLS_VERIFY=true
+export DOCKER_CERT_PATH="$HOME/dind-certs/client"
+export DOCKER_TLS_CERTDIR="$HOME/dind-certs"
+export DOCKER_HOST=localhost:2377
 
 echo "--- Build Elasticsearch"
 ./gradlew -Dbuild.docker=true assemble --parallel
