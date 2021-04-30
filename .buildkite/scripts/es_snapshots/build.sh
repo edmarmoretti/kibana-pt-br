@@ -38,13 +38,15 @@ export PATH="$HOME/.java/$ES_BUILD_JAVA/bin:$PATH"
 export JAVA_HOME="$HOME/.java/$ES_BUILD_JAVA"
 
 docker rm -f dind || true
-docker run -d --rm --privileged --name dind --userns host -p 2377:2376 -e DOCKER_TLS_CERTDIR=/certs -v "$HOME/dind-certs":/certs docker:dind
+CERTS_DIR="$HOME/dind-certs"
+rm -rf "$CERTS_DIR"
+docker run -d --rm --privileged --name dind --userns host -p 2377:2376 -e DOCKER_TLS_CERTDIR=/certs -v "$CERTS_DIR":/certs docker:dind
 
 trap "docker rm -f dind" EXIT
 
 export DOCKER_TLS_VERIFY=true
-export DOCKER_CERT_PATH="$HOME/dind-certs/client"
-export DOCKER_TLS_CERTDIR="$HOME/dind-certs"
+export DOCKER_CERT_PATH="$CERTS_DIR/client"
+export DOCKER_TLS_CERTDIR="$CERTS_DIR"
 export DOCKER_HOST=localhost:2377
 
 echo "--- Build Elasticsearch"
@@ -67,3 +69,11 @@ ls -alh "$destination"
 
 cd "$BUILDKITE_BUILD_CHECKOUT_PATH"
 node "$(dirname "${0}")/create_manifest.js" "$destination"
+
+cat << EOF | buildkite-agent annotate --style "info"
+  - \`ELASTICSEARCH_BRANCH\`: \`$ELASTICSEARCH_BRANCH\`
+  - \`ELASTICSEARCH_GIT_COMMIT\`: \`$ELASTICSEARCH_GIT_COMMIT\`
+  - \`ES_SNAPSHOT_MANIFEST\`: $(buildkite-agent meta-data get ES_SNAPSHOT_MANIFEST)
+  - \`ES_SNAPSHOT_VERSION\`: \`$(buildkite-agent meta-data get ES_SNAPSHOT_VERSION)\`
+  - \`ES_SNAPSHOT_ID\`: \`$(buildkite-agent meta-data get SNAPSHOT_ID)\`
+EOF
