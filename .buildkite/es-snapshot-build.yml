@@ -3,3 +3,9 @@ steps:
     label: Build ES Snapshot
     agents:
       queue: bootstrap
+  - wait
+  - trigger: 'kibana-elasticsearch-snapshot-verify'
+    async: true
+    build:
+      env:
+        ES_SNAPSHOT_MANIFEST: '$ES_SNAPSHOT_MANIFEST'

@@ -71,9 +71,9 @@ cd "$BUILDKITE_BUILD_CHECKOUT_PATH"
 node "$(dirname "${0}")/create_manifest.js" "$destination"
 
 cat << EOF | buildkite-agent annotate --style "info"
-  - \`ELASTICSEARCH_BRANCH\`: \`$ELASTICSEARCH_BRANCH\`
-  - \`ELASTICSEARCH_GIT_COMMIT\`: \`$ELASTICSEARCH_GIT_COMMIT\`
-  - \`ES_SNAPSHOT_MANIFEST\`: $(buildkite-agent meta-data get ES_SNAPSHOT_MANIFEST)
-  - \`ES_SNAPSHOT_VERSION\`: \`$(buildkite-agent meta-data get ES_SNAPSHOT_VERSION)\`
-  - \`ES_SNAPSHOT_ID\`: \`$(buildkite-agent meta-data get SNAPSHOT_ID)\`
+  - \`ELASTICSEARCH_BRANCH\` - \`$ELASTICSEARCH_BRANCH\`
+  - \`ELASTICSEARCH_GIT_COMMIT\` - \`$ELASTICSEARCH_GIT_COMMIT\`
+  - \`ES_SNAPSHOT_MANIFEST\` - $(buildkite-agent meta-data get ES_SNAPSHOT_MANIFEST)
+  - \`ES_SNAPSHOT_VERSION\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_VERSION)\`
+  - \`ES_SNAPSHOT_ID\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_ID)\`
 EOF
