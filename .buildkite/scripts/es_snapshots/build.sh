@@ -77,3 +77,13 @@ cat << EOF | buildkite-agent annotate --style "info"
   - \`ES_SNAPSHOT_VERSION\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_VERSION)\`
   - \`ES_SNAPSHOT_ID\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_ID)\`
 EOF
+
+cat << EOF | buildkite-agent pipeline upload
+steps:
+  - trigger: 'kibana-elasticsearch-snapshot-verify'
+    async: true
+    build:
+      env:
+        ES_SNAPSHOT_MANIFEST: '$ES_SNAPSHOT_MANIFEST'
+      branch: '$BUILDKITE_BRANCH'
+EOF
