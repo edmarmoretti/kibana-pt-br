@@ -21,7 +21,7 @@ const BASE_BUCKET_PERMANENT = 'ci-artifacts.kibana.dev/es-snapshots-permanent-bu
     const manifest = JSON.parse(manifestJson);
     const { id, bucket, version } = manifest;
 
-    const manifestPermanentJson = manifestJson.replace(BASE_BUCKET_DAILY, BASE_BUCKET_PERMANENT);
+    const manifestPermanentJson = manifestJson.split(BASE_BUCKET_DAILY).join(BASE_BUCKET_PERMANENT); // e.g. replaceAll
 
     fs.writeFileSync('manifest-permanent.json', manifestPermanentJson);
 
