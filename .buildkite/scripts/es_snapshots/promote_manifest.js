@@ -1,10 +1,8 @@
-// TODO this file
-
 const fs = require('fs');
 const { execSync } = require('child_process');
 
-const BASE_BUCKET_DAILY = 'kibana-ci-es-snapshots-daily-teamcity';
-const BASE_BUCKET_PERMANENT = 'kibana-ci-es-snapshots-daily-teamcity/permanent';
+const BASE_BUCKET_DAILY = 'ci-artifacts.kibana.dev/es-snapshots-daily-buildkite';
+const BASE_BUCKET_PERMANENT = 'ci-artifacts.kibana.dev/es-snapshots-daily-buildkite/permanent';
 
 (async () => {
   try {
@@ -14,17 +12,13 @@ const BASE_BUCKET_PERMANENT = 'kibana-ci-es-snapshots-daily-teamcity/permanent';
       throw Error('Manifest URL missing');
     }
 
-    if (!fs.existsSync('snapshot-promotion')) {
-      fs.mkdirSync('snapshot-promotion');
-    }
-    process.chdir('snapshot-promotion');
+    fs.mkdirSync('target/snapshot-promotion', { recursive: true });
+    process.chdir('target/snapshot-promotion');
 
     execSync(`curl '${MANIFEST_URL}' > manifest.json`);
 
     const manifest = JSON.parse(fs.readFileSync('manifest.json'));
     const { id, bucket, version } = manifest;
-
-    console.log(`##teamcity[buildNumber '{build.number}-${version}-${id}']`);
 
     const manifestPermanent = {
       ...manifest,

@@ -44,6 +44,15 @@ steps:
       queue: jest
     artifact_paths: target/junit/**/*.xml
 
+  - wait
+
+  - trigger: 'kibana-elasticsearch-snapshot-promote'
+    async: true
+    build:
+      env:
+        ES_SNAPSHOT_MANIFEST: '$ES_SNAPSHOT_MANIFEST'
+      branch: '$BUILDKITE_BRANCH'
+
   - wait: ~
     continue_on_failure: true
   - plugins:
