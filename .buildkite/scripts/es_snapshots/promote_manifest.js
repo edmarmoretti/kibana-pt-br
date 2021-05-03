@@ -12,8 +12,8 @@ const BASE_BUCKET_PERMANENT = 'ci-artifacts.kibana.dev/es-snapshots-permanent-bu
       throw Error('Manifest URL missing');
     }
 
-    fs.mkdirSync('target/snapshot-promotion', { recursive: true });
-    process.chdir('target/snapshot-promotion');
+    const tempDir = fs.mkdtempSync('snapshot-promotion');
+    process.chdir(tempDir);
 
     execSync(`curl '${MANIFEST_URL}' > manifest.json`);
 
