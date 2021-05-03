@@ -2,7 +2,7 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 
 const BASE_BUCKET_DAILY = 'ci-artifacts.kibana.dev/es-snapshots-daily-buildkite';
-const BASE_BUCKET_PERMANENT = 'ci-artifacts.kibana.dev/es-snapshots-daily-buildkite/permanent';
+const BASE_BUCKET_PERMANENT = 'ci-artifacts.kibana.dev/es-snapshots-permanent-buildkite';
 
 (async () => {
   try {
@@ -17,15 +17,13 @@ const BASE_BUCKET_PERMANENT = 'ci-artifacts.kibana.dev/es-snapshots-daily-buildk
 
     execSync(`curl '${MANIFEST_URL}' > manifest.json`);
 
-    const manifest = JSON.parse(fs.readFileSync('manifest.json'));
+    const manifestJson = fs.readFileSync('manifest.json').toString();
+    const manifest = JSON.parse(manifestJson);
     const { id, bucket, version } = manifest;
 
-    const manifestPermanent = {
-      ...manifest,
-      bucket: bucket.replace(BASE_BUCKET_DAILY, BASE_BUCKET_PERMANENT),
-    };
+    const manifestPermanentJson = manifestJson.replace(BASE_BUCKET_DAILY, BASE_BUCKET_PERMANENT);
 
-    fs.writeFileSync('manifest-permanent.json', JSON.stringify(manifestPermanent, null, 2));
+    fs.writeFileSync('manifest-permanent.json', manifestPermanentJson);
 
     execSync(
       `
