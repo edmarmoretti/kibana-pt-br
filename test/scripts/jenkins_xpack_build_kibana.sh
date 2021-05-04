@@ -42,7 +42,19 @@ if [[ -z "$CODE_COVERAGE" ]] ; then
   installDir="$KIBANA_DIR/install/kibana"
   mkdir -p "$installDir"
   tar -xzf "$linuxBuild" -C "$installDir" --strip=1
+  cp "$linuxBuild" "$WORKSPACE/kibana-default.tar.gz"
 
   mkdir -p "$WORKSPACE/kibana-build-xpack"
   cp -pR install/kibana/. $WORKSPACE/kibana-build-xpack/
+
+  echo " -> Archive built plugins"
+  shopt -s globstar
+  tar -zcf \
+    "$WORKSPACE/kibana-default-plugins.tar.gz" \
+    x-pack/plugins/**/target/public \
+    x-pack/test/**/target/public \
+    examples/**/target/public \
+    x-pack/examples/**/target/public \
+    test/**/target/public
+  shopt -u globstar
 fi
