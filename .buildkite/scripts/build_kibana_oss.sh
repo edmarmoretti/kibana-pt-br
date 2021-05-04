@@ -16,10 +16,12 @@ export KBN_NP_PLUGINS_BUILT=true
 echo "--- Build Kibana Distribution"
 node scripts/build --debug --oss
 
-echo "--- Ship Kibana Distribution Metrics to CI Stats"
-node scripts/ship_ci_stats \
-  --metrics target/optimizer_bundle_metrics.json \
-  --metrics packages/kbn-ui-shared-deps/target/metrics.json
+if [[ ! "${DISABLE_CI_STATS_SHIPPING:-}" ]]; then
+  echo "--- Ship Kibana Distribution Metrics to CI Stats"
+  node scripts/ship_ci_stats \
+    --metrics target/optimizer_bundle_metrics.json \
+    --metrics packages/kbn-ui-shared-deps/target/metrics.json
+fi
 
 echo "--- Archive Kibana Distribution"
 cd build/oss

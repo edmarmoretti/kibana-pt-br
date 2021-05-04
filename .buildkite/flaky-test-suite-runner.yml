@@ -1,3 +1,6 @@
+env:
+  DISABLE_CI_STATS_SHIPPING: 'true'
+  IGNORE_SHIP_CI_STATS_ERROR: 'true'
 steps:
   # This input was moved up one level
   # - input: 'Test Suite Runner'

@@ -15,7 +15,7 @@ const pipeline = {
 if (IS_XPACK) {
   steps.push({
     command: '.buildkite/scripts/jobs/build.sh',
-    label: 'Build Kibana Distribution',
+    label: 'Build Kibana Distribution and Plugins',
     agents: { queue: 'bootstrap' },
     key: 'build',
   });
@@ -33,7 +33,7 @@ if (IS_XPACK) {
 } else {
   steps.push({
     command: '.buildkite/scripts/jobs/build_oss.sh',
-    label: 'Build OSS Kibana Distribution',
+    label: 'Build OSS Kibana Distribution and Plugins',
     agents: { queue: 'bootstrap' },
     key: 'build',
   });
