@@ -8,11 +8,12 @@
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { CommonProps } from '@elastic/eui';
+import { CommonProps, EuiPageTemplate } from '@elastic/eui';
 
 import { useGlobalFullScreen } from '../../containers/use_full_screen';
 import { gutterTimeline } from '../../lib/helpers';
-import { AppGlobalStyle } from '../page/index';
+// import { AppGlobalStyle } from '../page/index';
+import { SecuritySolutionSideNav } from './side_nav';
 
 const Wrapper = styled.div`
   padding: ${(props) => `${props.theme.eui.paddingSizes.l}`};
@@ -67,10 +68,26 @@ const WrapperPageComponent: React.FC<WrapperPageProps & CommonProps> = ({
   });
 
   return (
-    <Wrapper className={classes} style={style} {...otherProps}>
+    <EuiPageTemplate
+      pageSideBar={<SecuritySolutionSideNav />}
+      bottomBar={undefined} // Potentially initialize timeline here?
+      pageHeader={{
+        iconType: 'logoElastic', // Pass logo or use default security logo
+        pageTitle: 'Title Prop', // Pass title prop from pages
+        rightSideItems: [],
+        // Get tabs props
+        // tabs: [
+        //   { label: 'Tab 1', isSelected: true },
+        //   {
+        //     label: 'Tab 2',
+        //     // onClick: () => setshowBottomBar((showing) => !showing),
+        //   },
+        // ],
+      }}
+    >
       {children}
-      <AppGlobalStyle />
-    </Wrapper>
+      {/* <AppGlobalStyle /> // TODO update titles */}
+    </EuiPageTemplate>
   );
 };
 
