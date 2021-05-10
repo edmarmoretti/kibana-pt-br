@@ -14,6 +14,7 @@ import { useGlobalFullScreen } from '../../containers/use_full_screen';
 import { gutterTimeline } from '../../lib/helpers';
 // import { AppGlobalStyle } from '../page/index';
 import { SecuritySolutionSideNav } from './side_nav';
+import { useKibana } from '../../lib/kibana';
 
 const Wrapper = styled.div`
   padding: ${(props) => `${props.theme.eui.paddingSizes.l}`};
@@ -56,6 +57,10 @@ const WrapperPageComponent: React.FC<WrapperPageProps & CommonProps> = ({
   ...otherProps
 }) => {
   const { globalFullScreen, setGlobalFullScreen } = useGlobalFullScreen();
+  const {
+    application: { navigateToApp },
+  } = useKibana().services;
+
   useEffect(() => {
     setGlobalFullScreen(false); // exit full screen mode on page load
   }, [setGlobalFullScreen]);
@@ -69,7 +74,7 @@ const WrapperPageComponent: React.FC<WrapperPageProps & CommonProps> = ({
 
   return (
     <EuiPageTemplate
-      pageSideBar={<SecuritySolutionSideNav />}
+      pageSideBar={<SecuritySolutionSideNav navigateToApp={navigateToApp} />}
       bottomBar={undefined} // Potentially initialize timeline here?
       pageHeader={{
         iconType: 'logoElastic', // Pass logo or use default security logo
