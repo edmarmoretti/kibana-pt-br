@@ -19,6 +19,12 @@ steps:
       queue: ci-group-6
     artifact_paths: target/junit/**/*.xml
     depends_on: build
+  - command: CI_GROUP=Docker .buildkite/scripts/xpack-cigroup.sh
+    label: 'Docker CI Group'
+    agents:
+      queue: ci-group-6
+    artifact_paths: target/junit/**/*.xml
+    depends_on: build
 
   - command: .buildkite/scripts/oss-cigroup.sh
     label: 'OSS CI Group %n'
