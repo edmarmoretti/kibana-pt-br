@@ -13,8 +13,6 @@ export default ({ getPageObjects, getService }: FtrProviderContext) => {
   const testSubjects = getService('testSubjects');
 
   describe('When on the Trusted Apps list', function () {
-    this.tags('ciGroup25');
-
     before(async () => {
       await pageObjects.trustedApps.navigateToTrustedAppsList();
     });
