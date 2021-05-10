@@ -11,8 +11,6 @@ export default function ({ getPageObjects, getService }: FtrProviderContext) {
   const { overviewPage } = getPageObjects(['overviewPage']);
 
   describe('When in the Fleet application', function () {
-    this.tags(['ciGroup7']);
-
     describe('and on the Overview page', () => {
       before(async () => {
         await overviewPage.navigateToOverview();
