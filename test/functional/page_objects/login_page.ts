@@ -15,6 +15,11 @@ export function LoginPageProvider({ getService }: FtrProviderContext) {
   const find = getService('find');
 
   const regularLogin = async (user: string, pwd: string) => {
+    if (!(await testSubjects.exists('loginUsername'))) {
+      if (await testSubjects.exists('loginCard-basic/cloud-basic')) {
+        await testSubjects.click('loginCard-basic/cloud-basic');
+      }
+    }
     await testSubjects.setValue('loginUsername', user);
     await testSubjects.setValue('loginPassword', pwd);
     await testSubjects.click('loginSubmit');
