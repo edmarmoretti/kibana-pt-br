@@ -12,6 +12,11 @@ steps:
     agents:
       queue: baseline
 
+  - command: .buildkite/scripts/jobs/baseline_ts_refs.sh
+    label: Build TS Refs
+    agents:
+      queue: baseline
+
   - wait: ~
     continue_on_failure: true
 
