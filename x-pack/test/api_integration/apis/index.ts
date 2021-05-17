@@ -9,7 +9,7 @@ import { FtrProviderContext } from '../ftr_provider_context';
 
 export default function ({ loadTestFile }: FtrProviderContext) {
   describe('apis', function () {
-    describe('', () => {
+    describe('apis ciGroup6', function () {
       this.tags('ciGroup6');
 
       loadTestFile(require.resolve('./search'));
@@ -39,7 +39,7 @@ export default function ({ loadTestFile }: FtrProviderContext) {
       loadTestFile(require.resolve('./file_upload'));
     });
 
-    describe('', () => {
+    describe('apis ciGroup19', function () {
       this.tags('ciGroup19');
 
       loadTestFile(require.resolve('./security'));

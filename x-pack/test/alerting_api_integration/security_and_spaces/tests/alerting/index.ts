@@ -32,7 +32,7 @@ export default function alertingTests({ loadTestFile, getService }: FtrProviderC
         await tearDown(getService);
       });
 
-      describe('', function () {
+      describe('alerts ciGroup18', function () {
         this.tags('ciGroup18');
 
         loadTestFile(require.resolve('./find'));
@@ -56,7 +56,7 @@ export default function alertingTests({ loadTestFile, getService }: FtrProviderC
         loadTestFile(require.resolve('./mustache_templates'));
       });
 
-      describe('', function () {
+      describe('alerts ciGroup10', function () {
         this.tags('ciGroup10');
         loadTestFile(require.resolve('./alerts'));
       });
