@@ -3120,17 +3120,17 @@
               }
             },
             {
-              "plugin": "remoteClusters",
-              "link": {
-                "path": "x-pack/plugins/remote_clusters/server/plugin.ts",
-                "lineNumber": 73
-              }
-            },
-            {
               "plugin": "fleet",
               "link": {
                 "path": "x-pack/plugins/fleet/server/plugin.ts",
                 "lineNumber": 214
+              }
+            },
+            {
+              "plugin": "remoteClusters",
+              "link": {
+                "path": "x-pack/plugins/remote_clusters/server/plugin.ts",
+                "lineNumber": 73
               }
             },
             {

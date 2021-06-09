@@ -10113,7 +10113,7 @@
         ],
         "source": {
           "path": "src/core/server/plugins/types.ts",
-          "lineNumber": 301
+          "lineNumber": 322
         },
         "deprecated": true,
         "references": [
@@ -10167,7 +10167,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 307
+              "lineNumber": 328
             },
             "deprecated": false,
             "children": [
@@ -10190,7 +10190,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 307
+                  "lineNumber": 328
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -10207,7 +10207,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 307
+                  "lineNumber": 328
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -10235,7 +10235,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 309
+              "lineNumber": 330
             },
             "deprecated": false,
             "children": [
@@ -10257,7 +10257,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 309
+                  "lineNumber": 330
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -10274,7 +10274,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 309
+                  "lineNumber": 330
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -10294,7 +10294,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 311
+              "lineNumber": 332
             },
             "deprecated": false,
             "children": [],
@@ -12175,7 +12175,7 @@
         ],
         "source": {
           "path": "src/core/server/plugins/types.ts",
-          "lineNumber": 218
+          "lineNumber": 239
         },
         "deprecated": false,
         "children": [
@@ -12190,7 +12190,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 222
+              "lineNumber": 243
             },
             "deprecated": false
           },
@@ -12208,7 +12208,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 227
+              "lineNumber": 248
             },
             "deprecated": false
           },
@@ -12226,7 +12226,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 233
+              "lineNumber": 254
             },
             "deprecated": false
           },
@@ -12244,7 +12244,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 240
+              "lineNumber": 261
             },
             "deprecated": false
           },
@@ -12262,7 +12262,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 252
+              "lineNumber": 273
             },
             "deprecated": false
           }
@@ -19790,7 +19790,7 @@
         ],
         "source": {
           "path": "src/core/server/plugins/types.ts",
-          "lineNumber": 282
+          "lineNumber": 303
         },
         "deprecated": false,
         "children": [
@@ -19814,7 +19814,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 288
+              "lineNumber": 309
             },
             "deprecated": false,
             "children": [
@@ -19837,7 +19837,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 288
+                  "lineNumber": 309
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -19854,7 +19854,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 288
+                  "lineNumber": 309
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -19882,7 +19882,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 290
+              "lineNumber": 311
             },
             "deprecated": false,
             "children": [
@@ -19904,7 +19904,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 290
+                  "lineNumber": 311
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -19921,7 +19921,7 @@
                 ],
                 "source": {
                   "path": "src/core/server/plugins/types.ts",
-                  "lineNumber": 290
+                  "lineNumber": 311
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -19941,7 +19941,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 292
+              "lineNumber": 313
             },
             "deprecated": false,
             "children": [],
@@ -20080,7 +20080,7 @@
         ],
         "source": {
           "path": "src/core/server/plugins/types.ts",
-          "lineNumber": 337
+          "lineNumber": 358
         },
         "deprecated": false,
         "children": [
@@ -20096,7 +20096,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 338
+              "lineNumber": 359
             },
             "deprecated": false
           },
@@ -20116,7 +20116,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 339
+              "lineNumber": 360
             },
             "deprecated": false
           },
@@ -20134,7 +20134,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 362
+              "lineNumber": 383
             },
             "deprecated": false
           },
@@ -20168,7 +20168,7 @@
             ],
             "source": {
               "path": "src/core/server/plugins/types.ts",
-              "lineNumber": 366
+              "lineNumber": 387
             },
             "deprecated": false
           }
@@ -20373,6 +20373,42 @@
             "source": {
               "path": "src/core/server/plugins/types.ts",
               "lineNumber": 210
+            },
+            "deprecated": false
+          },
+          {
+            "parentPluginId": "core",
+            "id": "def-server.PluginManifest.owner",
+            "type": "Object",
+            "tags": [],
+            "label": "owner",
+            "description": [
+              "\nTODO: make required once all internal plugins have this specified."
+            ],
+            "signature": [
+              "{ readonly name: string; readonly githubTeam?: string | undefined; } | undefined"
+            ],
+            "source": {
+              "path": "src/core/server/plugins/types.ts",
+              "lineNumber": 215
+            },
+            "deprecated": false
+          },
+          {
+            "parentPluginId": "core",
+            "id": "def-server.PluginManifest.description",
+            "type": "string",
+            "tags": [],
+            "label": "description",
+            "description": [
+              "\nTODO: make required once all plugins specify this.\nA brief description of what this plugin does and any capabilities it provides."
+            ],
+            "signature": [
+              "string | undefined"
+            ],
+            "source": {
+              "path": "src/core/server/plugins/types.ts",
+              "lineNumber": 231
             },
             "deprecated": false
           }
@@ -23843,7 +23879,7 @@
         ],
         "source": {
           "path": "src/core/server/plugins/types.ts",
-          "lineNumber": 444
+          "lineNumber": 465
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -24029,7 +24065,7 @@
         ],
         "source": {
           "path": "src/core/server/plugins/types.ts",
-          "lineNumber": 325
+          "lineNumber": 346
         },
         "deprecated": false,
         "initialIsOpen": false

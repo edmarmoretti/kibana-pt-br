@@ -119,7 +119,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/lens/public/datatable_visualization/visualization.tsx",
-          "lineNumber": 48
+          "lineNumber": 51
         },
         "deprecated": false,
         "children": [
@@ -136,7 +136,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/lens/public/datatable_visualization/visualization.tsx",
-              "lineNumber": 49
+              "lineNumber": 52
             },
             "deprecated": false
           },
@@ -149,7 +149,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/lens/public/datatable_visualization/visualization.tsx",
-              "lineNumber": 50
+              "lineNumber": 53
             },
             "deprecated": false
           },
@@ -166,7 +166,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/lens/public/datatable_visualization/visualization.tsx",
-              "lineNumber": 51
+              "lineNumber": 54
             },
             "deprecated": false
           }

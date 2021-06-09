@@ -78,7 +78,7 @@
       ],
       "source": {
         "path": "x-pack/plugins/apm/public/plugin.ts",
-        "lineNumber": 47
+        "lineNumber": 48
       },
       "deprecated": false,
       "lifecycle": "setup",
@@ -96,7 +96,7 @@
       ],
       "source": {
         "path": "x-pack/plugins/apm/public/plugin.ts",
-        "lineNumber": 49
+        "lineNumber": 50
       },
       "deprecated": false,
       "lifecycle": "start",
@@ -144,7 +144,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/apm/server/plugin.ts",
-          "lineNumber": 54
+          "lineNumber": 55
         },
         "deprecated": false,
         "children": [
@@ -160,7 +160,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/apm/server/plugin.ts",
-              "lineNumber": 64
+              "lineNumber": 65
             },
             "deprecated": false,
             "children": [
@@ -183,7 +183,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/apm/server/plugin.ts",
-                  "lineNumber": 64
+                  "lineNumber": 65
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -211,7 +211,7 @@
               "APMPluginStartDependencies",
               ", unknown>, plugins: Pick<",
               "APMPluginSetupDependencies",
-              ", \"data\" | \"security\" | \"home\" | \"features\" | \"ml\" | \"actions\" | \"usageCollection\" | \"apmOss\" | \"licensing\" | \"observability\" | \"ruleRegistry\" | \"spaces\" | \"cloud\" | \"taskManager\" | \"alerting\">) => { config$: ",
+              ", \"data\" | \"security\" | \"home\" | \"features\" | \"fleet\" | \"ml\" | \"actions\" | \"usageCollection\" | \"apmOss\" | \"licensing\" | \"observability\" | \"ruleRegistry\" | \"spaces\" | \"cloud\" | \"taskManager\" | \"alerting\">) => { config$: ",
               "Observable",
               "<{ 'apm_oss.transactionIndices': string; 'apm_oss.spanIndices': string; 'apm_oss.errorIndices': string; 'apm_oss.metricsIndices': string; 'apm_oss.sourcemapIndices': string; 'apm_oss.onboardingIndices': string; 'apm_oss.indexPattern': string; 'xpack.apm.serviceMapEnabled': boolean; 'xpack.apm.serviceMapFingerprintBucketSize': number; 'xpack.apm.serviceMapTraceIdBucketSize': number; 'xpack.apm.serviceMapFingerprintGlobalBucketSize': number; 'xpack.apm.serviceMapTraceIdGlobalBucketSize': number; 'xpack.apm.serviceMapMaxTracesPerRequest': number; 'xpack.apm.ui.enabled': boolean; 'xpack.apm.maxServiceEnvironments': number; 'xpack.apm.maxServiceSelection': number; 'xpack.apm.ui.maxTraceItems': number; 'xpack.apm.ui.transactionGroupBucketSize': number; 'xpack.apm.autocreateApmIndexPattern': boolean; 'xpack.apm.telemetryCollectionEnabled': boolean; 'xpack.apm.searchAggregatedTransactions': ",
               "SearchAggregatedTransactionSetting",
@@ -237,7 +237,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/apm/server/plugin.ts",
-              "lineNumber": 68
+              "lineNumber": 69
             },
             "deprecated": false,
             "children": [
@@ -262,7 +262,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/apm/server/plugin.ts",
-                  "lineNumber": 69
+                  "lineNumber": 70
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -277,11 +277,11 @@
                 "signature": [
                   "Pick<",
                   "APMPluginSetupDependencies",
-                  ", \"data\" | \"security\" | \"home\" | \"features\" | \"ml\" | \"actions\" | \"usageCollection\" | \"apmOss\" | \"licensing\" | \"observability\" | \"ruleRegistry\" | \"spaces\" | \"cloud\" | \"taskManager\" | \"alerting\">"
+                  ", \"data\" | \"security\" | \"home\" | \"features\" | \"fleet\" | \"ml\" | \"actions\" | \"usageCollection\" | \"apmOss\" | \"licensing\" | \"observability\" | \"ruleRegistry\" | \"spaces\" | \"cloud\" | \"taskManager\" | \"alerting\">"
                 ],
                 "source": {
                   "path": "x-pack/plugins/apm/server/plugin.ts",
-                  "lineNumber": 70
+                  "lineNumber": 71
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -309,7 +309,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/apm/server/plugin.ts",
-              "lineNumber": 260
+              "lineNumber": 270
             },
             "deprecated": false,
             "children": [
@@ -331,7 +331,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/apm/server/plugin.ts",
-                  "lineNumber": 260
+                  "lineNumber": 270
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -351,7 +351,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/apm/server/plugin.ts",
-              "lineNumber": 279
+              "lineNumber": 289
             },
             "deprecated": false,
             "children": [],
@@ -691,6 +691,14 @@
                 "docId": "kibHomePluginApi",
                 "section": "def-server.HomeServerPluginStart",
                 "text": "HomeServerPluginStart"
+              },
+              ">; } | undefined; fleet?: { setup: void; start: () => Promise<",
+              {
+                "pluginId": "fleet",
+                "scope": "server",
+                "docId": "kibFleetPluginApi",
+                "section": "def-server.FleetStartContract",
+                "text": "FleetStartContract"
               },
               ">; } | undefined; ml?: { setup: ",
               "SharedServices",
@@ -2429,6 +2437,26 @@
           "ProcessorEvent",
           ">; }, ",
           "APMRouteCreateOptions",
+          ">; } & { \"GET /api/apm/transactions/{transactionId}\": ",
+          "ServerRoute",
+          "<\"GET /api/apm/transactions/{transactionId}\", ",
+          "TypeC",
+          "<{ path: ",
+          "TypeC",
+          "<{ transactionId: ",
+          "StringC",
+          "; }>; }>, ",
+          {
+            "pluginId": "apm",
+            "scope": "server",
+            "docId": "kibApmPluginApi",
+            "section": "def-server.APMRouteHandlerResources",
+            "text": "APMRouteHandlerResources"
+          },
+          ", { transaction: TypeOfProcessorEvent<",
+          "ProcessorEvent",
+          ">; }, ",
+          "APMRouteCreateOptions",
           ">; } & { \"GET /api/apm/services/{serviceName}/transactions/groups\": ",
           "ServerRoute",
           "<\"GET /api/apm/services/{serviceName}/transactions/groups\", ",
@@ -3625,7 +3653,7 @@
       "description": [],
       "source": {
         "path": "x-pack/plugins/apm/server/types.ts",
-        "lineNumber": 51
+        "lineNumber": 55
       },
       "deprecated": false,
       "children": [
@@ -3644,7 +3672,7 @@
           ],
           "source": {
             "path": "x-pack/plugins/apm/server/types.ts",
-            "lineNumber": 52
+            "lineNumber": 56
           },
           "deprecated": false
         },
@@ -3662,7 +3690,7 @@
           ],
           "source": {
             "path": "x-pack/plugins/apm/server/types.ts",
-            "lineNumber": 53
+            "lineNumber": 57
           },
           "deprecated": false,
           "returnComment": [],
@@ -3696,7 +3724,7 @@
           ],
           "source": {
             "path": "x-pack/plugins/apm/server/types.ts",
-            "lineNumber": 54
+            "lineNumber": 58
           },
           "deprecated": false,
           "returnComment": [],
@@ -3723,7 +3751,7 @@
               ],
               "source": {
                 "path": "x-pack/plugins/apm/server/types.ts",
-                "lineNumber": 54
+                "lineNumber": 58
               },
               "deprecated": false
             }

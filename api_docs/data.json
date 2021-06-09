@@ -4818,7 +4818,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 391
+              "lineNumber": 390
             },
             "deprecated": false,
             "children": [
@@ -4836,7 +4836,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 391
+                  "lineNumber": 390
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -4861,7 +4861,145 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 391
+                  "lineNumber": 390
+                },
+                "deprecated": false,
+                "isRequired": true
+              }
+            ],
+            "returnComment": []
+          },
+          {
+            "parentPluginId": "data",
+            "id": "def-public.IndexPattern.hasRuntimeField",
+            "type": "Function",
+            "tags": [],
+            "label": "hasRuntimeField",
+            "description": [
+              "\nChecks if runtime field exists"
+            ],
+            "signature": [
+              "(name: string) => boolean"
+            ],
+            "source": {
+              "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+              "lineNumber": 412
+            },
+            "deprecated": false,
+            "children": [
+              {
+                "parentPluginId": "data",
+                "id": "def-public.IndexPattern.hasRuntimeField.$1",
+                "type": "string",
+                "tags": [],
+                "label": "name",
+                "description": [],
+                "signature": [
+                  "string"
+                ],
+                "source": {
+                  "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+                  "lineNumber": 412
+                },
+                "deprecated": false,
+                "isRequired": true
+              }
+            ],
+            "returnComment": []
+          },
+          {
+            "parentPluginId": "data",
+            "id": "def-public.IndexPattern.getRuntimeField",
+            "type": "Function",
+            "tags": [],
+            "label": "getRuntimeField",
+            "description": [
+              "\nReturns runtime field if exists"
+            ],
+            "signature": [
+              "(name: string) => ",
+              {
+                "pluginId": "data",
+                "scope": "common",
+                "docId": "kibDataIndexPatternsPluginApi",
+                "section": "def-common.RuntimeField",
+                "text": "RuntimeField"
+              },
+              " | null"
+            ],
+            "source": {
+              "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+              "lineNumber": 420
+            },
+            "deprecated": false,
+            "children": [
+              {
+                "parentPluginId": "data",
+                "id": "def-public.IndexPattern.getRuntimeField.$1",
+                "type": "string",
+                "tags": [],
+                "label": "name",
+                "description": [],
+                "signature": [
+                  "string"
+                ],
+                "source": {
+                  "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+                  "lineNumber": 420
+                },
+                "deprecated": false,
+                "isRequired": true
+              }
+            ],
+            "returnComment": []
+          },
+          {
+            "parentPluginId": "data",
+            "id": "def-public.IndexPattern.replaceAllRuntimeFields",
+            "type": "Function",
+            "tags": [],
+            "label": "replaceAllRuntimeFields",
+            "description": [
+              "\nReplaces all existing runtime fields with new fields"
+            ],
+            "signature": [
+              "(newFields: Record<string, ",
+              {
+                "pluginId": "data",
+                "scope": "common",
+                "docId": "kibDataIndexPatternsPluginApi",
+                "section": "def-common.RuntimeField",
+                "text": "RuntimeField"
+              },
+              ">) => void"
+            ],
+            "source": {
+              "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+              "lineNumber": 428
+            },
+            "deprecated": false,
+            "children": [
+              {
+                "parentPluginId": "data",
+                "id": "def-public.IndexPattern.replaceAllRuntimeFields.$1",
+                "type": "Object",
+                "tags": [],
+                "label": "newFields",
+                "description": [],
+                "signature": [
+                  "Record<string, ",
+                  {
+                    "pluginId": "data",
+                    "scope": "common",
+                    "docId": "kibDataIndexPatternsPluginApi",
+                    "section": "def-common.RuntimeField",
+                    "text": "RuntimeField"
+                  },
+                  ">"
+                ],
+                "source": {
+                  "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+                  "lineNumber": 428
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -4876,14 +5014,14 @@
             "tags": [],
             "label": "removeRuntimeField",
             "description": [
-              "\nRemove a runtime field - removed from mapped field or removed unmapped\nfield as appropriate"
+              "\nRemove a runtime field - removed from mapped field or removed unmapped\nfield as appropriate. Doesn't clear associated field attributes."
             ],
             "signature": [
               "(name: string) => void"
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 415
+              "lineNumber": 444
             },
             "deprecated": false,
             "children": [
@@ -4894,14 +5032,14 @@
                 "tags": [],
                 "label": "name",
                 "description": [
-                  "Field name"
+                  "- Field name to remove"
                 ],
                 "signature": [
                   "string"
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 415
+                  "lineNumber": 444
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -4931,7 +5069,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 435
+              "lineNumber": 461
             },
             "deprecated": false,
             "children": [
@@ -4947,7 +5085,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 435
+                  "lineNumber": 461
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -4975,7 +5113,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 442
+              "lineNumber": 468
             },
             "deprecated": false,
             "children": [
@@ -4991,7 +5129,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 443
+                  "lineNumber": 469
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -5008,7 +5146,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 444
+                  "lineNumber": 470
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -5032,7 +5170,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 445
+                  "lineNumber": 471
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -5052,7 +5190,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 453
+              "lineNumber": 479
             },
             "deprecated": false,
             "children": [
@@ -5068,7 +5206,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 453
+                  "lineNumber": 479
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -5085,7 +5223,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 453
+                  "lineNumber": 479
                 },
                 "deprecated": false,
                 "isRequired": false
@@ -5105,7 +5243,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 464
+              "lineNumber": 490
             },
             "deprecated": false,
             "children": [
@@ -5121,7 +5259,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 464
+                  "lineNumber": 490
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -5138,7 +5276,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 464
+                  "lineNumber": 490
                 },
                 "deprecated": false,
                 "isRequired": false
@@ -5166,7 +5304,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 477
+              "lineNumber": 503
             },
             "deprecated": false,
             "children": [
@@ -5182,7 +5320,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 477
+                  "lineNumber": 503
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -5206,7 +5344,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 477
+                  "lineNumber": 503
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -5226,7 +5364,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 481
+              "lineNumber": 507
             },
             "deprecated": false,
             "children": [
@@ -5242,7 +5380,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 481
+                  "lineNumber": 507
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28617,7 +28755,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 391
+              "lineNumber": 390
             },
             "deprecated": false,
             "children": [
@@ -28635,7 +28773,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 391
+                  "lineNumber": 390
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28660,7 +28798,145 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 391
+                  "lineNumber": 390
+                },
+                "deprecated": false,
+                "isRequired": true
+              }
+            ],
+            "returnComment": []
+          },
+          {
+            "parentPluginId": "data",
+            "id": "def-server.IndexPattern.hasRuntimeField",
+            "type": "Function",
+            "tags": [],
+            "label": "hasRuntimeField",
+            "description": [
+              "\nChecks if runtime field exists"
+            ],
+            "signature": [
+              "(name: string) => boolean"
+            ],
+            "source": {
+              "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+              "lineNumber": 412
+            },
+            "deprecated": false,
+            "children": [
+              {
+                "parentPluginId": "data",
+                "id": "def-server.IndexPattern.hasRuntimeField.$1",
+                "type": "string",
+                "tags": [],
+                "label": "name",
+                "description": [],
+                "signature": [
+                  "string"
+                ],
+                "source": {
+                  "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+                  "lineNumber": 412
+                },
+                "deprecated": false,
+                "isRequired": true
+              }
+            ],
+            "returnComment": []
+          },
+          {
+            "parentPluginId": "data",
+            "id": "def-server.IndexPattern.getRuntimeField",
+            "type": "Function",
+            "tags": [],
+            "label": "getRuntimeField",
+            "description": [
+              "\nReturns runtime field if exists"
+            ],
+            "signature": [
+              "(name: string) => ",
+              {
+                "pluginId": "data",
+                "scope": "common",
+                "docId": "kibDataIndexPatternsPluginApi",
+                "section": "def-common.RuntimeField",
+                "text": "RuntimeField"
+              },
+              " | null"
+            ],
+            "source": {
+              "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+              "lineNumber": 420
+            },
+            "deprecated": false,
+            "children": [
+              {
+                "parentPluginId": "data",
+                "id": "def-server.IndexPattern.getRuntimeField.$1",
+                "type": "string",
+                "tags": [],
+                "label": "name",
+                "description": [],
+                "signature": [
+                  "string"
+                ],
+                "source": {
+                  "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+                  "lineNumber": 420
+                },
+                "deprecated": false,
+                "isRequired": true
+              }
+            ],
+            "returnComment": []
+          },
+          {
+            "parentPluginId": "data",
+            "id": "def-server.IndexPattern.replaceAllRuntimeFields",
+            "type": "Function",
+            "tags": [],
+            "label": "replaceAllRuntimeFields",
+            "description": [
+              "\nReplaces all existing runtime fields with new fields"
+            ],
+            "signature": [
+              "(newFields: Record<string, ",
+              {
+                "pluginId": "data",
+                "scope": "common",
+                "docId": "kibDataIndexPatternsPluginApi",
+                "section": "def-common.RuntimeField",
+                "text": "RuntimeField"
+              },
+              ">) => void"
+            ],
+            "source": {
+              "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+              "lineNumber": 428
+            },
+            "deprecated": false,
+            "children": [
+              {
+                "parentPluginId": "data",
+                "id": "def-server.IndexPattern.replaceAllRuntimeFields.$1",
+                "type": "Object",
+                "tags": [],
+                "label": "newFields",
+                "description": [],
+                "signature": [
+                  "Record<string, ",
+                  {
+                    "pluginId": "data",
+                    "scope": "common",
+                    "docId": "kibDataIndexPatternsPluginApi",
+                    "section": "def-common.RuntimeField",
+                    "text": "RuntimeField"
+                  },
+                  ">"
+                ],
+                "source": {
+                  "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
+                  "lineNumber": 428
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28675,14 +28951,14 @@
             "tags": [],
             "label": "removeRuntimeField",
             "description": [
-              "\nRemove a runtime field - removed from mapped field or removed unmapped\nfield as appropriate"
+              "\nRemove a runtime field - removed from mapped field or removed unmapped\nfield as appropriate. Doesn't clear associated field attributes."
             ],
             "signature": [
               "(name: string) => void"
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 415
+              "lineNumber": 444
             },
             "deprecated": false,
             "children": [
@@ -28693,14 +28969,14 @@
                 "tags": [],
                 "label": "name",
                 "description": [
-                  "Field name"
+                  "- Field name to remove"
                 ],
                 "signature": [
                   "string"
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 415
+                  "lineNumber": 444
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28730,7 +29006,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 435
+              "lineNumber": 461
             },
             "deprecated": false,
             "children": [
@@ -28746,7 +29022,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 435
+                  "lineNumber": 461
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28774,7 +29050,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 442
+              "lineNumber": 468
             },
             "deprecated": false,
             "children": [
@@ -28790,7 +29066,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 443
+                  "lineNumber": 469
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28807,7 +29083,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 444
+                  "lineNumber": 470
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28831,7 +29107,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 445
+                  "lineNumber": 471
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28851,7 +29127,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 453
+              "lineNumber": 479
             },
             "deprecated": false,
             "children": [
@@ -28867,7 +29143,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 453
+                  "lineNumber": 479
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28884,7 +29160,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 453
+                  "lineNumber": 479
                 },
                 "deprecated": false,
                 "isRequired": false
@@ -28904,7 +29180,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 464
+              "lineNumber": 490
             },
             "deprecated": false,
             "children": [
@@ -28920,7 +29196,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 464
+                  "lineNumber": 490
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -28937,7 +29213,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 464
+                  "lineNumber": 490
                 },
                 "deprecated": false,
                 "isRequired": false
@@ -28965,7 +29241,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 477
+              "lineNumber": 503
             },
             "deprecated": false,
             "children": [
@@ -28981,7 +29257,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 477
+                  "lineNumber": 503
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -29005,7 +29281,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 477
+                  "lineNumber": 503
                 },
                 "deprecated": false,
                 "isRequired": true
@@ -29025,7 +29301,7 @@
             ],
             "source": {
               "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-              "lineNumber": 481
+              "lineNumber": 507
             },
             "deprecated": false,
             "children": [
@@ -29041,7 +29317,7 @@
                 ],
                 "source": {
                   "path": "src/plugins/data/common/index_patterns/index_patterns/index_pattern.ts",
-                  "lineNumber": 481
+                  "lineNumber": 507
                 },
                 "deprecated": false,
                 "isRequired": true

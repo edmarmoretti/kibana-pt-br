@@ -2536,7 +2536,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 263
+                  "lineNumber": 267
                 },
                 "deprecated": false
               },
@@ -2549,7 +2549,7 @@
                 "description": [],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 264
+                  "lineNumber": 268
                 },
                 "deprecated": false
               },
@@ -2562,7 +2562,7 @@
                 "description": [],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 265
+                  "lineNumber": 269
                 },
                 "deprecated": false
               }
@@ -2913,7 +2913,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 305
+                  "lineNumber": 309
                 },
                 "deprecated": false
               },
@@ -2929,7 +2929,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 306
+                  "lineNumber": 310
                 },
                 "deprecated": false
               }
@@ -3272,7 +3272,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 537
+                  "lineNumber": 541
                 },
                 "deprecated": false
               }
@@ -3623,7 +3623,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 675
+                  "lineNumber": 679
                 },
                 "deprecated": false
               },
@@ -3636,7 +3636,7 @@
                 "description": [],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 676
+                  "lineNumber": 680
                 },
                 "deprecated": false
               },
@@ -3652,7 +3652,7 @@
                 ],
                 "source": {
                   "path": "x-pack/plugins/fleet/server/services/agent_policy.ts",
-                  "lineNumber": 677
+                  "lineNumber": 681
                 },
                 "deprecated": false
               }
@@ -8040,7 +8040,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 335
+          "lineNumber": 342
         },
         "deprecated": false,
         "children": [
@@ -8053,7 +8053,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 336
+              "lineNumber": 343
             },
             "deprecated": false
           },
@@ -8066,7 +8066,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 337
+              "lineNumber": 344
             },
             "deprecated": false
           },
@@ -8114,7 +8114,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 338
+              "lineNumber": 345
             },
             "deprecated": false
           },
@@ -8130,7 +8130,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 339
+              "lineNumber": 346
             },
             "deprecated": false
           }
@@ -11403,7 +11403,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 409
+          "lineNumber": 416
         },
         "deprecated": false,
         "children": [
@@ -11416,7 +11416,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 410
+              "lineNumber": 417
             },
             "deprecated": false
           },
@@ -11432,7 +11432,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 411
+              "lineNumber": 418
             },
             "deprecated": false
           },
@@ -11448,7 +11448,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 412
+              "lineNumber": 419
             },
             "deprecated": false
           },
@@ -11464,7 +11464,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 416
+              "lineNumber": 423
             },
             "deprecated": false
           },
@@ -11480,7 +11480,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 417
+              "lineNumber": 424
             },
             "deprecated": false
           },
@@ -11496,7 +11496,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 418
+              "lineNumber": 425
             },
             "deprecated": false
           }
@@ -11512,7 +11512,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 402
+          "lineNumber": 409
         },
         "deprecated": false,
         "children": [
@@ -11528,7 +11528,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 403
+              "lineNumber": 410
             },
             "deprecated": false
           }
@@ -11555,7 +11555,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 357
+          "lineNumber": 364
         },
         "deprecated": false,
         "children": [
@@ -11578,7 +11578,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 358
+              "lineNumber": 365
             },
             "deprecated": false
           },
@@ -11601,7 +11601,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 359
+              "lineNumber": 366
             },
             "deprecated": false
           },
@@ -11624,7 +11624,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 360
+              "lineNumber": 367
             },
             "deprecated": false
           },
@@ -11640,7 +11640,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 361
+              "lineNumber": 368
             },
             "deprecated": false
           },
@@ -11653,7 +11653,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 362
+              "lineNumber": 369
             },
             "deprecated": false
           },
@@ -11666,7 +11666,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 363
+              "lineNumber": 370
             },
             "deprecated": false
           },
@@ -11682,7 +11682,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 364
+              "lineNumber": 371
             },
             "deprecated": false
           },
@@ -11695,7 +11695,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 365
+              "lineNumber": 372
             },
             "deprecated": false
           },
@@ -11708,7 +11708,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 366
+              "lineNumber": 373
             },
             "deprecated": false
           },
@@ -11724,7 +11724,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 367
+              "lineNumber": 374
             },
             "deprecated": false
           }
@@ -13723,7 +13723,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 370
+          "lineNumber": 377
         },
         "deprecated": false,
         "children": [
@@ -13736,7 +13736,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 371
+              "lineNumber": 378
             },
             "deprecated": false
           }
@@ -14586,7 +14586,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 281
+          "lineNumber": 282
         },
         "deprecated": false,
         "children": [
@@ -14599,7 +14599,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 282
+              "lineNumber": 283
             },
             "deprecated": false
           },
@@ -14615,7 +14615,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 283
+              "lineNumber": 284
             },
             "deprecated": false
           },
@@ -14631,7 +14631,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 284
+              "lineNumber": 285
             },
             "deprecated": false
           },
@@ -14644,7 +14644,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 285
+              "lineNumber": 286
             },
             "deprecated": false
           },
@@ -14657,7 +14657,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 286
+              "lineNumber": 287
             },
             "deprecated": false
           },
@@ -14670,7 +14670,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 287
+              "lineNumber": 288
             },
             "deprecated": false
           },
@@ -14693,7 +14693,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 288
+              "lineNumber": 289
             },
             "deprecated": false
           },
@@ -14706,7 +14706,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 289
+              "lineNumber": 290
             },
             "deprecated": false
           },
@@ -14719,7 +14719,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 290
+              "lineNumber": 291
             },
             "deprecated": false
           },
@@ -14735,7 +14735,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 291
+              "lineNumber": 292
             },
             "deprecated": false
           },
@@ -14758,7 +14758,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 292
+              "lineNumber": 293
             },
             "deprecated": false
           },
@@ -14774,7 +14774,78 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 293
+              "lineNumber": 294
+            },
+            "deprecated": false
+          },
+          {
+            "parentPluginId": "fleet",
+            "id": "def-common.RegistryDataStream.RegistryDataStreamKeys.permissions",
+            "type": "Object",
+            "tags": [],
+            "label": "[RegistryDataStreamKeys.permissions]",
+            "description": [],
+            "signature": [
+              {
+                "pluginId": "fleet",
+                "scope": "common",
+                "docId": "kibFleetPluginApi",
+                "section": "def-common.RegistryDataStreamPermissions",
+                "text": "RegistryDataStreamPermissions"
+              },
+              " | undefined"
+            ],
+            "source": {
+              "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
+              "lineNumber": 295
+            },
+            "deprecated": false
+          }
+        ],
+        "initialIsOpen": false
+      },
+      {
+        "parentPluginId": "fleet",
+        "id": "def-common.RegistryDataStreamPermissions",
+        "type": "Interface",
+        "tags": [],
+        "label": "RegistryDataStreamPermissions",
+        "description": [],
+        "source": {
+          "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
+          "lineNumber": 303
+        },
+        "deprecated": false,
+        "children": [
+          {
+            "parentPluginId": "fleet",
+            "id": "def-common.RegistryDataStreamPermissions.cluster",
+            "type": "Array",
+            "tags": [],
+            "label": "cluster",
+            "description": [],
+            "signature": [
+              "string[] | undefined"
+            ],
+            "source": {
+              "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
+              "lineNumber": 304
+            },
+            "deprecated": false
+          },
+          {
+            "parentPluginId": "fleet",
+            "id": "def-common.RegistryDataStreamPermissions.indices",
+            "type": "Array",
+            "tags": [],
+            "label": "indices",
+            "description": [],
+            "signature": [
+              "string[] | undefined"
+            ],
+            "source": {
+              "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
+              "lineNumber": 305
             },
             "deprecated": false
           }
@@ -14790,7 +14861,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 296
+          "lineNumber": 298
         },
         "deprecated": false,
         "children": [
@@ -14806,7 +14877,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 297
+              "lineNumber": 299
             },
             "deprecated": false
           },
@@ -14822,7 +14893,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 298
+              "lineNumber": 300
             },
             "deprecated": false
           }
@@ -15308,7 +15379,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 317
+          "lineNumber": 324
         },
         "deprecated": false,
         "children": [
@@ -15321,7 +15392,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 318
+              "lineNumber": 325
             },
             "deprecated": false
           },
@@ -15337,7 +15408,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 319
+              "lineNumber": 326
             },
             "deprecated": false
           },
@@ -15353,7 +15424,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 320
+              "lineNumber": 327
             },
             "deprecated": false
           },
@@ -15369,7 +15440,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 321
+              "lineNumber": 328
             },
             "deprecated": false
           },
@@ -15385,7 +15456,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 322
+              "lineNumber": 329
             },
             "deprecated": false
           },
@@ -15401,7 +15472,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 323
+              "lineNumber": 330
             },
             "deprecated": false
           },
@@ -15417,7 +15488,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 324
+              "lineNumber": 331
             },
             "deprecated": false
           },
@@ -15433,7 +15504,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 325
+              "lineNumber": 332
             },
             "deprecated": false
           },
@@ -15449,7 +15520,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 326
+              "lineNumber": 333
             },
             "deprecated": false
           }
@@ -15574,7 +15645,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 421
+          "lineNumber": 428
         },
         "deprecated": false,
         "children": [
@@ -15587,7 +15658,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 422
+              "lineNumber": 429
             },
             "deprecated": false
           },
@@ -15609,7 +15680,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-              "lineNumber": 423
+              "lineNumber": 430
             },
             "deprecated": false
           }
@@ -15874,7 +15945,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 302
+          "lineNumber": 309
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -16444,7 +16515,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 385
+          "lineNumber": 392
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -16728,7 +16799,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 400
+          "lineNumber": 407
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -16968,7 +17039,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 390
+          "lineNumber": 397
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17190,7 +17261,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 374
+          "lineNumber": 381
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17265,7 +17336,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 376
+          "lineNumber": 383
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17375,7 +17446,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 387
+          "lineNumber": 394
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17507,7 +17578,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 381
+          "lineNumber": 388
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17638,7 +17709,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 394
+          "lineNumber": 401
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17750,7 +17821,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 353
+          "lineNumber": 360
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17774,7 +17845,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 346
+          "lineNumber": 353
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17817,7 +17888,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 347
+          "lineNumber": 354
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -17933,7 +18004,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 352
+          "lineNumber": 359
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -18243,7 +18314,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 301
+          "lineNumber": 308
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -18277,7 +18348,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/fleet/common/types/models/epm.ts",
-          "lineNumber": 398
+          "lineNumber": 405
         },
         "deprecated": false,
         "initialIsOpen": false
