@@ -3316,7 +3316,7 @@
         "description": [],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 100
+          "lineNumber": 102
         },
         "deprecated": false,
         "children": [
@@ -3329,7 +3329,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-              "lineNumber": 101
+              "lineNumber": 103
             },
             "deprecated": false
           },
@@ -3342,7 +3342,7 @@
             "description": [],
             "source": {
               "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-              "lineNumber": 102
+              "lineNumber": 104
             },
             "deprecated": false
           },
@@ -3364,7 +3364,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-              "lineNumber": 103
+              "lineNumber": 105
             },
             "deprecated": false
           },
@@ -3387,7 +3387,7 @@
             ],
             "source": {
               "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-              "lineNumber": 104
+              "lineNumber": 106
             },
             "deprecated": false
           }
@@ -5354,7 +5354,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 82
+          "lineNumber": 84
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7270,7 +7270,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 92
+          "lineNumber": 94
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7295,7 +7295,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 84
+          "lineNumber": 86
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7354,7 +7354,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 85
+          "lineNumber": 87
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7379,7 +7379,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 86
+          "lineNumber": 88
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7404,7 +7404,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 89
+          "lineNumber": 91
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7461,7 +7461,31 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 83
+          "lineNumber": 85
+        },
+        "deprecated": false,
+        "initialIsOpen": false
+      },
+      {
+        "parentPluginId": "cases",
+        "id": "def-common.connectorTypes",
+        "type": "Array",
+        "tags": [],
+        "label": "connectorTypes",
+        "description": [],
+        "signature": [
+          {
+            "pluginId": "cases",
+            "scope": "common",
+            "docId": "kibCasesPluginApi",
+            "section": "def-common.ConnectorTypes",
+            "text": "ConnectorTypes"
+          },
+          "[]"
+        ],
+        "source": {
+          "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
+          "lineNumber": 41
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7618,7 +7642,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 99
+          "lineNumber": 101
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -7781,7 +7805,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 94
+          "lineNumber": 96
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -11169,7 +11193,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 74
+          "lineNumber": 76
         },
         "deprecated": false,
         "initialIsOpen": false
@@ -19145,7 +19169,7 @@
         ],
         "source": {
           "path": "x-pack/plugins/cases/common/api/connectors/index.ts",
-          "lineNumber": 66
+          "lineNumber": 68
         },
         "deprecated": false,
         "initialIsOpen": false

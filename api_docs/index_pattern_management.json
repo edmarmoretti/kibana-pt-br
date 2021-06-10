@@ -823,22 +823,7 @@
         "initialIsOpen": false
       }
     ],
-    "enums": [
-      {
-        "parentPluginId": "indexPatternManagement",
-        "id": "def-public.MlCardState",
-        "type": "Enum",
-        "tags": [],
-        "label": "MlCardState",
-        "description": [],
-        "source": {
-          "path": "src/plugins/index_pattern_management/public/types.ts",
-          "lineNumber": 42
-        },
-        "deprecated": false,
-        "initialIsOpen": false
-      }
-    ],
+    "enums": [],
     "misc": [],
     "objects": [],
     "setup": {
@@ -865,9 +850,7 @@
           "section": "def-public.IndexPatternListConfig",
           "text": "IndexPatternListConfig"
         },
-        ") => void; }; environment: { update: (update: Partial<",
-        "Environment",
-        ">) => void; }; }"
+        ") => void; }; }"
       ],
       "source": {
         "path": "src/plugins/index_pattern_management/public/plugin.ts",
