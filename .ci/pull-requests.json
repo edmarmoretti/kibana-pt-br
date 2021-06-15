@@ -21,9 +21,11 @@
       ],
       "set_commit_status": true,
       "commit_status_context": "buildkite/kibana-pull-request",
-      "build_on_commit": false,
+      "build_on_commit": true,
       "build_on_comment": true,
-      "trigger_comment_regex": "^(?:(?:buildkite\\W+)?(?:build|test)\\W+(?:this|it))"
+      "trigger_comment_regex": "^(?:(?:buildkite\\W+)?(?:build|test)\\W+(?:this|it))",
+      "always_trigger_comment_regex": "^(?:(?:buildkite\\W+)?(?:build|test)\\W+(?:this|it))",
+      "labels": ["buildkite-ci"]
     }
   ]
 }
