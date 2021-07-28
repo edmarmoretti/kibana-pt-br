@@ -5,8 +5,8 @@ const keys = execSync('buildkite-agent meta-data keys')
   .split('\n')
   .filter((k) => k.startsWith('ftsr-suite/'));
 
-const defaultCount = parseInt(
-  execSync(`buildkite-agent meta-data get 'ftsr-default-count'`).toString().trim()
+const overrideCount = parseInt(
+  execSync(`buildkite-agent meta-data get 'ftsr-override-count'`).toString().trim()
 );
 
 const testSuites = [];
@@ -15,7 +15,8 @@ for (const key of keys) {
     continue;
   }
 
-  const value = execSync(`buildkite-agent meta-data get '${key}'`).toString().trim();
+  const value =
+    overrideCount || execSync(`buildkite-agent meta-data get '${key}'`).toString().trim();
 
   testSuites.push({
     key: key.replace('ftsr-suite/', ''),

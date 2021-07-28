@@ -3,7 +3,7 @@ const stepInput = (key, nameOfSuite) => {
     key: `ftsr-suite/${key}`,
     text: nameOfSuite,
     required: false,
-    default: '',
+    default: '0',
   };
 };
 
@@ -12,8 +12,8 @@ const XPACK_CI_GROUPS = 13;
 
 const inputs = [
   {
-    key: 'ftsr-default-count',
-    text: 'Default for each suite if empty',
+    key: 'ftsr-override-count',
+    text: 'Override for all suites',
     default: 0,
     required: true,
   },

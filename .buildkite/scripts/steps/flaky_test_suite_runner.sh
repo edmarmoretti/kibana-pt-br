@@ -9,6 +9,6 @@ export UUID
 
 buildkite-agent meta-data keys
 echo '###'
-buildkite-agent meta-data get 'ftsr-default-count'
+buildkite-agent meta-data get 'ftsr-override-count'
 
 node .buildkite/scripts/steps/flaky_test_suite_runner.js
