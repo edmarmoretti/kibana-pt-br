@@ -18,7 +18,7 @@ for (const key of keys) {
   const value = execSync(`buildkite-agent meta-data get '${key}'`).toString().trim();
 
   testSuites.push({
-    key: key,
+    key: key.replace('ftsr-suite/', ''),
     count: value === '' ? defaultCount : parseInt(value),
   });
 }
