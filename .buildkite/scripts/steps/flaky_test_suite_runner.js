@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 const keys = execSync('buildkite-agent meta-data keys')
   .toString()
   .split('\n')
-  .filter((k) => k.startsWith('ftsr-suite:'));
+  .filter((k) => k.startsWith('ftsr-suite/'));
 
 const testSuites = [];
 for (const key of keys) {
@@ -36,7 +36,7 @@ for (const testSuite of testSuites) {
   const RUN_COUNT = testSuite.count;
   const UUID = TEST_SUITE + process.env.UUID;
 
-  const JOB_PARTS = TEST_SUITE.split(':');
+  const JOB_PARTS = TEST_SUITE.split('/');
   const IS_XPACK = JOB_PARTS[0] === 'xpack';
   // const JOB = JOB_PARTS.length > 1 ? JOB_PARTS[1] : JOB_PARTS[0];
   const CI_GROUP = JOB_PARTS.length > 2 ? JOB_PARTS[2] : '';
