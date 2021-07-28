@@ -5,6 +5,10 @@ const keys = execSync('buildkite-agent meta-data keys')
   .split('\n')
   .filter((k) => k.startsWith('ftsr-suite/'));
 
+const defaultCount = parseInt(
+  execSync(`buildkite-agent meta-data get 'ftsr-default-count'`).toString().trim()
+);
+
 const testSuites = [];
 for (const key of keys) {
   if (!key) {
@@ -15,7 +19,7 @@ for (const key of keys) {
 
   testSuites.push({
     key: key,
-    count: parseInt(value),
+    count: value === '' ? defaultCount : parseInt(value),
   });
 }
 

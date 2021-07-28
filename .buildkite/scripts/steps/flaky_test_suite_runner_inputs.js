@@ -3,14 +3,21 @@ const stepInput = (key, nameOfSuite) => {
     key: `ftsr-suite/${key}`,
     text: nameOfSuite,
     required: false,
-    default: 0,
+    default: '',
   };
 };
 
 const OSS_CI_GROUPS = 12;
 const XPACK_CI_GROUPS = 13;
 
-const inputs = [];
+const inputs = [
+  {
+    key: 'ftsr-default-count',
+    text: 'Default for each suite if empty',
+    default: 0,
+    required: true,
+  },
+];
 
 for (let i = 1; i <= OSS_CI_GROUPS; i++) {
   inputs.push(stepInput(`oss/cigroup/${i}`, `OSS CI Group ${i}`));
@@ -30,7 +37,7 @@ const pipeline = {
       wait: '~',
     },
     {
-      command: '.buildkite/scripts/jobs/flaky_test_suite_runner.sh',
+      command: '.buildkite/scripts/steps/flaky_test_suite_runner.sh',
       label: 'Create pipeline',
     },
   ],
