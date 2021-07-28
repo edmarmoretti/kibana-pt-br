@@ -1,4 +1,4 @@
-const stepInput = (key: string, nameOfSuite: string) => {
+const stepInput = (key, nameOfSuite) => {
   return {
     key: `ftsr-suite:${key}`,
     text: nameOfSuite,

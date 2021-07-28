@@ -41,6 +41,10 @@ for (const testSuite of testSuites) {
   // const JOB = JOB_PARTS.length > 1 ? JOB_PARTS[1] : JOB_PARTS[0];
   const CI_GROUP = JOB_PARTS.length > 2 ? JOB_PARTS[2] : '';
 
+  if (RUN_COUNT < 1) {
+    continue;
+  }
+
   if (IS_XPACK) {
     steps.push({
       command: '.buildkite/scripts/xpack-cigroup.sh',
