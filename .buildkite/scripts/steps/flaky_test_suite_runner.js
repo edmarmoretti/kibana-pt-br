@@ -34,7 +34,7 @@ steps.push({
   label: 'Build Kibana Distribution and Plugins',
   agents: { queue: 'c2-8' },
   key: 'build',
-  if: "!build.env('BUILD_ID_FOR_ARTIFACTS')",
+  if: "build.env('BUILD_ID_FOR_ARTIFACTS') == null || build.env('BUILD_ID_FOR_ARTIFACTS') == ''",
 });
 
 for (const testSuite of testSuites) {
