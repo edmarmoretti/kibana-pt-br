@@ -32,7 +32,7 @@ const pipeline = {
 steps.push({
   command: '.buildkite/scripts/jobs/build.sh',
   label: 'Build Kibana Distribution and Plugins',
-  agents: { queue: 'bootstrap' },
+  agents: { queue: 'c2-8' },
   key: 'build',
 });
 
@@ -65,7 +65,7 @@ for (const testSuite of testSuites) {
     steps.push({
       command: '.buildkite/scripts/oss-cigroup.sh',
       label: `OSS CI Group ${CI_GROUP}`,
-      agents: { queue: 'ci-group-6' },
+      agents: { queue: 'ci-group-4d' },
       artifact_paths: 'target/junit/**/*.xml',
       depends_on: 'build',
       parallelism: RUN_COUNT,
