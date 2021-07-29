@@ -30,7 +30,7 @@ const pipeline = {
 };
 
 steps.push({
-  command: '.buildkite/scripts/jobs/build.sh',
+  command: '.buildkite/scripts/steps/flaky_test_suite_runner_build_kibana.sh',
   label: 'Build Kibana Distribution and Plugins',
   agents: { queue: 'c2-8' },
   key: 'build',
@@ -52,7 +52,7 @@ for (const testSuite of testSuites) {
 
   if (IS_XPACK) {
     steps.push({
-      command: '.buildkite/scripts/xpack-cigroup.sh',
+      command: `CI_GROUP=${CI_GROUP} .buildkite/scripts/steps/functional/xpack-cigroup.sh`,
       label: `Default CI Group ${CI_GROUP}`,
       agents: { queue: 'ci-group-6' },
       artifact_paths: 'target/junit/**/*.xml',
@@ -63,7 +63,7 @@ for (const testSuite of testSuites) {
     });
   } else {
     steps.push({
-      command: '.buildkite/scripts/oss-cigroup.sh',
+      command: `CI_GROUP=${CI_GROUP} .buildkite/scripts/steps/functional/oss-cigroup.sh`,
       label: `OSS CI Group ${CI_GROUP}`,
       agents: { queue: 'ci-group-4d' },
       artifact_paths: 'target/junit/**/*.xml',
