@@ -9,6 +9,9 @@ const overrideCount = parseInt(
   execSync(`buildkite-agent meta-data get 'ftsr-override-count'`).toString().trim()
 );
 
+const concurrency =
+  parseInt(execSync(`buildkite-agent meta-data get 'ftsr-concurrency'`).toString().trim()) || 10;
+
 const testSuites = [];
 for (const key of keys) {
   if (!key) {
@@ -59,7 +62,7 @@ for (const testSuite of testSuites) {
       artifact_paths: ['target/junit/**/*.xml', 'x-pack/test/**/screenshots/failure/*.png'],
       depends_on: 'build',
       parallelism: RUN_COUNT,
-      concurrency: 10,
+      concurrency: concurrency,
       concurrency_group: UUID,
     });
   } else {
@@ -70,7 +73,7 @@ for (const testSuite of testSuites) {
       artifact_paths: ['target/junit/**/*.xml', 'test/**/screenshots/failure/*.png'],
       depends_on: 'build',
       parallelism: RUN_COUNT,
-      concurrency: 10,
+      concurrency: concurrency,
       concurrency_group: UUID,
     });
   }
