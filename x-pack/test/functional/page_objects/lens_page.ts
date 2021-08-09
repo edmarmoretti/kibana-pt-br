@@ -651,8 +651,11 @@ export function LensPageProvider({ getService, getPageObjects }: FtrProviderCont
      * Changes the index pattern for the first layer
      */
     async switchFirstLayerIndexPattern(name: string) {
+      await PageObjects.common.sleep(50);
       await testSubjects.click('lns_layerIndexPatternLabel');
+      await PageObjects.common.sleep(100);
       await find.clickByCssSelector(`[title="${name}"]`);
+      await PageObjects.common.sleep(50);
       await PageObjects.header.waitUntilLoadingHasFinished();
     },
 
