@@ -5,7 +5,10 @@
  * in compliance with, at your election, the Elastic License 2.0 or the Server
  * Side Public License, v 1.
  */
-import * as schemaLib from './schema_lib';
+
+import { fold, isRight } from 'fp-ts/lib/Either';
+import { pipe } from 'fp-ts/lib/function';
+import * as t from 'io-ts';
 
 /**
  * This file defines alert fields and rule fields in a declarative format. These are used to generate runtime schemas. These schemas can validate the structure of objects at runtime. This can be used to enforce compliance with the schema in various parts of our code. These declarations can also be used to create Typescript types that can be used to assist in coding against the schema. The types can also assist in statically enforcing schema compliance.
@@ -52,16 +55,21 @@ export interface AlertFieldSpreadsheetRow {
 
 /**
  * Takes an array of row data and returns an array of validated and normalized AlertFieldSpreadsheetRows
+ * Returns undefined if things can't be parsed.
  */
 export function alertFieldDescriptorsFromAlertFieldSpreadsheetRows(
   dataFromCVS: AlertFieldSpreadsheetRow[]
-): [results: AlertFieldDescriptor[], logs: string[]] {
+): AlertFieldDescriptor[] | undefined {
   const logs: string[] = [];
   // validate the data before we work on it
-  if (isCurrentCSVFormat(dataFromCVS)) {
+
+  const maybeResult = CSVFormat.decode(dataFromCVS);
+
+  if (isRight(maybeResult)) {
+    const result = maybeResult.right;
     const descriptors: AlertFieldDescriptor[] = [];
 
-    for (const descriptor of dataFromCVS) {
+    for (const descriptor of result) {
       const required = descriptor['Required for all rule types'];
       const recommended = descriptor['Required for Security, Recommended for all rule types'];
       const optional = descriptor.Optional;
@@ -71,15 +79,9 @@ export function alertFieldDescriptorsFromAlertFieldSpreadsheetRows(
 
       if (fieldOrFieldSet === 'None') {
         // Omit anything with a field of 'None'
-        logs.push(
-          `Omitting a record because it's fieldOrFieldSet is 'None': ${JSON.stringify(descriptor)}.`
-        );
         continue;
       }
 
-      if (!fieldOrFieldSet) {
-        throw new Error(`missing Alerts-as-Data Field(s)`);
-      }
       const level = required
         ? 'required'
         : recommended
@@ -115,23 +117,27 @@ ${JSON.stringify(descriptor)}
         description: description ? description : undefined,
       });
     }
-    return [descriptors, logs];
+    return descriptors;
   } else {
-    throw new Error(isCurrentCSVFormat.explanation(dataFromCVS)[1]!());
+    debugger;
+    return undefined;
   }
 }
 
 /** TODO, consider replacing these schemas with a more Kibana idiomatic library */
 /** A schema that validates that a value is one of: '', 'Yes', or 'yes' */
+/*
 const yesOrEmpty = schemaLib.oneOf([
   schemaLib.literal(''),
   schemaLib.literal('yes'),
   schemaLib.literal('Yes'),
 ]);
+*/
 
 /** this is used to validate that the data from the CSV matches the expectations of this code.
  * if this fails, that means the structure of the CSV has changed, but this file hasn't been updated.
  */
+/*
 const isCurrentCSVFormat = schemaLib.array(
   schemaLib.object({
     'Signal field(s)': schemaLib.string(),
@@ -142,4 +148,108 @@ const isCurrentCSVFormat = schemaLib.array(
     'Proposed (beyond 7.15)': yesOrEmpty,
     'AAD field definition': schemaLib.string(),
   })
+);
+*/
+
+/** Only accepts a string that isn't empty and isn't None */
+const fieldOrFieldSet = new t.Type<string, string, unknown>(
+  'fieldOrFieldSet',
+  (input: unknown): input is string =>
+    typeof input === 'string' && input !== 'None' && input !== '',
+  (input, context) => {
+    return typeof input !== 'string'
+      ? t.failure(input, context, 'Value must be a string')
+      : input === 'None'
+      ? t.failure(input, context, "Value can't be 'None'")
+      : input === ''
+      ? t.failure(input, context, "Value can't be an empty string")
+      : t.success(input);
+  },
+  t.identity
+);
+
+/*
+type Expected = {
+  'Signal field(s)': string;
+  'Alerts-as-Data Field(s)': string;
+  'AAD field definition': string;
+} & (
+  | {
+      'Required for all rule types': 'Yes' | 'yes';
+      'Required for Security, Recommended for all rule types': '';
+      Optional: '';
+      'Proposed (beyond 7.15)': '';
+    }
+  | {
+      'Required for all rule types': '';
+      'Required for Security, Recommended for all rule types': 'Yes' | 'yes';
+      Optional: '';
+      'Proposed (beyond 7.15)': '';
+    }
+  | {
+      'Required for all rule types': '';
+      'Required for Security, Recommended for all rule types': '';
+      Optional: 'Yes' | 'yes';
+      'Proposed (beyond 7.15)': '';
+    }
+  | {
+      'Required for all rule types': '';
+      'Required for Security, Recommended for all rule types': '';
+      Optional: '';
+      'Proposed (beyond 7.15)': 'Yes' | 'yes';
+    }
+);
+*/
+
+const yesOrYes = t.union([t.literal('yes'), t.literal('Yes')], 'yesOrYes');
+
+const CSVFormat = t.array(
+  t.intersection([
+    t.type({
+      'Signal field(s)': t.string,
+      'Alerts-as-Data Field(s)': fieldOrFieldSet,
+      'AAD field definition': t.string,
+    }),
+    t.union(
+      [
+        t.type(
+          {
+            'Required for all rule types': yesOrYes,
+            'Required for Security, Recommended for all rule types': t.literal(''),
+            Optional: t.literal(''),
+            'Proposed (beyond 7.15)': t.literal(''),
+          },
+          'Required'
+        ),
+        t.type(
+          {
+            'Required for all rule types': t.literal(''),
+            'Required for Security, Recommended for all rule types': yesOrYes,
+            Optional: t.literal(''),
+            'Proposed (beyond 7.15)': t.literal(''),
+          },
+          'Recommended'
+        ),
+        t.type(
+          {
+            'Required for all rule types': t.literal(''),
+            'Required for Security, Recommended for all rule types': t.literal(''),
+            Optional: yesOrYes,
+            'Proposed (beyond 7.15)': t.literal(''),
+          },
+          'Optional'
+        ),
+        t.type(
+          {
+            'Required for all rule types': t.literal(''),
+            'Required for Security, Recommended for all rule types': t.literal(''),
+            Optional: t.literal(''),
+            'Proposed (beyond 7.15)': yesOrYes,
+          },
+          'Proposed'
+        ),
+      ],
+      "must have one of the level type properties set to 'yes' or 'Yes'"
+    ),
+  ])
 );
