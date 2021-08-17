@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`""\` should have the expected explanation 1`] = `"Expected a non-null object, but got \\"\\""`;
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`{"page":"1","sort":[{"field":"name","direction":"asc"},{"field":"date","direction":"desc"}]}\` should have the expected explanation 1`] = `
+"Values in object were invalid. Explanations: 
+* Value at key \\"page\\": \\"1\\" was expected to match one of several conditions, but it did not. Here are the explanations: 
+* \\"1\\" was expected to be undefined OR,
+* Expected a number, got a string: \\"1\\" "
+`;
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`{"sort":[{"direction":"desc"}]}\` should have the expected explanation 1`] = `
+"Values in object were invalid. Explanations: 
+* Value at key \\"sort\\": [{\\"direction\\":\\"desc\\"}] was expected to match one of several conditions, but it did not. Here are the explanations: 
+* Values in array were invalid. The explanations: 
+* Value at index 0: Values in object were invalid. Explanations: 
+* Value at key \\"field\\": undefined was expected to match one of several conditions, but it did not. Here are the explanations: 
+* undefined was expected to be \\"name\\" OR,
+* undefined was expected to be \\"ip\\" OR,
+* undefined was expected to be \\"date\\"  OR,
+* [{\\"direction\\":\\"desc\\"}] was expected to be undefined "
+`;
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`{"sort":[{"field":"invalid","direction":"desc"}]}\` should have the expected explanation 1`] = `
+"Values in object were invalid. Explanations: 
+* Value at key \\"sort\\": [{\\"field\\":\\"invalid\\",\\"direction\\":\\"desc\\"}] was expected to match one of several conditions, but it did not. Here are the explanations: 
+* Values in array were invalid. The explanations: 
+* Value at index 0: Values in object were invalid. Explanations: 
+* Value at key \\"field\\": \\"invalid\\" was expected to match one of several conditions, but it did not. Here are the explanations: 
+* \\"invalid\\" was expected to be \\"name\\" OR,
+* \\"invalid\\" was expected to be \\"ip\\" OR,
+* \\"invalid\\" was expected to be \\"date\\"  OR,
+* [{\\"field\\":\\"invalid\\",\\"direction\\":\\"desc\\"}] was expected to be undefined "
+`;
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`{"sort":[{"field":"name","direction":"invalid"}]}\` should have the expected explanation 1`] = `
+"Values in object were invalid. Explanations: 
+* Value at key \\"sort\\": [{\\"field\\":\\"name\\",\\"direction\\":\\"invalid\\"}] was expected to match one of several conditions, but it did not. Here are the explanations: 
+* Values in array were invalid. The explanations: 
+* Value at index 0: Values in object were invalid. Explanations: 
+* Value at key \\"direction\\": \\"invalid\\" was expected to match one of several conditions, but it did not. Here are the explanations: 
+* \\"invalid\\" was expected to be \\"asc\\" OR,
+* \\"invalid\\" was expected to be \\"desc\\"  OR,
+* [{\\"field\\":\\"name\\",\\"direction\\":\\"invalid\\"}] was expected to be undefined "
+`;
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`{"sort":[{"field":"name"}]}\` should have the expected explanation 1`] = `
+"Values in object were invalid. Explanations: 
+* Value at key \\"sort\\": [{\\"field\\":\\"name\\"}] was expected to match one of several conditions, but it did not. Here are the explanations: 
+* Values in array were invalid. The explanations: 
+* Value at index 0: Values in object were invalid. Explanations: 
+* Value at key \\"direction\\": undefined was expected to match one of several conditions, but it did not. Here are the explanations: 
+* undefined was expected to be \\"asc\\" OR,
+* undefined was expected to be \\"desc\\"  OR,
+* [{\\"field\\":\\"name\\"}] was expected to be undefined "
+`;
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`null\` should have the expected explanation 1`] = `"Expected a non-null object, but got null"`;
+
+exports[`a validator made using the 'schema' module which validates that a value has the type:
+{
+  page?: number;
+  sort?: Array<{ field: 'name' | 'ip' | 'date'; direction: 'asc' | 'desc' }>;
+} when the value to be validated is \`true\` should have the expected explanation 1`] = `"Expected a non-null object, but got true"`;

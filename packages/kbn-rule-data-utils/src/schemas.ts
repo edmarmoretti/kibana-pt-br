@@ -69,8 +69,7 @@ export function alertFieldDescriptorsFromAlertFieldSpreadsheetRows(
       const fieldOrFieldSet = descriptor['Alerts-as-Data Field(s)'];
 
       if (fieldOrFieldSet === 'None') {
-        // eslint-disable-next-line no-console
-        console.log(`Omitting one record as it's 'Alerts-as-Data Field(s)' value is 'None'.`);
+        // Omit anything with a field of 'None'
         continue;
       }
 

@@ -40,9 +40,7 @@ describe(`a validator made using the 'schema' module which validates that a valu
       ]),
     });
   });
-  type TestCaseDescriptor =
-    | [value: unknown, valid: true]
-    | [value: unknown, valid: false, expectedExplanation: string];
+  type TestCaseDescriptor = [value: unknown, valid: boolean];
   const testCases: TestCaseDescriptor[] = [
     [
       {
@@ -76,10 +74,6 @@ describe(`a validator made using the 'schema' module which validates that a valu
         ],
       },
       false,
-      `Values in object were invalid. The explanations:
-* Value at key page: "1" was expected to match one of several conditions, but it did not. Here are the explanations:
-* "1" was expected to be undefined OR
-* Expected a number, got a string: "1" `,
     ],
 
     [
@@ -92,7 +86,6 @@ describe(`a validator made using the 'schema' module which validates that a valu
         ],
       },
       false,
-      '',
     ],
     [
       {
@@ -105,7 +98,6 @@ describe(`a validator made using the 'schema' module which validates that a valu
         ],
       },
       false,
-      '',
     ],
     [
       {
@@ -117,7 +109,6 @@ describe(`a validator made using the 'schema' module which validates that a valu
         ],
       },
       false,
-      '',
     ],
     [
       {
@@ -130,7 +121,6 @@ describe(`a validator made using the 'schema' module which validates that a valu
         ],
       },
       false,
-      '',
     ],
     // nothing in the array
     [{ sort: [] }, true],
@@ -139,28 +129,24 @@ describe(`a validator made using the 'schema' module which validates that a valu
     // empty object (valid because all keys are optional.)
     [{}, true],
     // entirely invalid types
-    [null, false, 'Expected a non-null object, but got null'],
-    [true, false, 'Expected a non-null object, but got true'],
-    ['', false, 'Expected a non-null object, but got ""'],
+    [null, false],
+    [true, false],
+    ['', false],
   ];
-  describe.each(testCases)(
-    'when the value to be validated is `%j`',
-    (value, expected, expectedExplanation?) => {
-      it(`${expected ? 'should' : 'should NOT'} be valid`, () => {
-        expect(validator(value)).toBe(expected);
+  describe.each(testCases)('when the value to be validated is `%j`', (value, expected) => {
+    it(`${expected ? 'should' : 'should NOT'} be valid`, () => {
+      expect(validator(value)).toBe(expected);
+    });
+    if (expected) {
+      it(`should not have any explanation`, () => {
+        expect(validator.explanation(value)).toEqual([true, undefined]);
       });
-      if (expected) {
-        it(`should not have any explanation`, () => {
-          expect(validator.explanation(value)).toEqual([true, undefined]);
-        });
-      } else {
-        it(`should have the following explanation: ${expectedExplanation}`, () => {
-          const actual = validator.explanation(value);
-          console.log('explanation');
-          console.log(actual[1]!())
-          expect([actual[0], actual[1]!()]).toEqual([false, expectedExplanation]);
-        });
-      }
+    } else {
+      it(`should have the expected explanation`, () => {
+        const actual = validator.explanation(value);
+        expect(actual[0]).toBe(false);
+        expect(actual[1]!()).toMatchSnapshot();
+      });
     }
-  );
+  });
 });
