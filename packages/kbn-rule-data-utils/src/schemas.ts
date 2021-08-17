@@ -55,7 +55,8 @@ export interface AlertFieldSpreadsheetRow {
  */
 export function alertFieldDescriptorsFromAlertFieldSpreadsheetRows(
   dataFromCVS: AlertFieldSpreadsheetRow[]
-): AlertFieldDescriptor[] {
+): [results: AlertFieldDescriptor[], logs: string[]] {
+  const logs: string[] = [];
   // validate the data before we work on it
   if (isCurrentCSVFormat(dataFromCVS)) {
     const descriptors: AlertFieldDescriptor[] = [];
@@ -70,6 +71,9 @@ export function alertFieldDescriptorsFromAlertFieldSpreadsheetRows(
 
       if (fieldOrFieldSet === 'None') {
         // Omit anything with a field of 'None'
+        logs.push(
+          `Omitting a record because it's fieldOrFieldSet is 'None': ${JSON.stringify(descriptor)}.`
+        );
         continue;
       }
 
@@ -111,9 +115,9 @@ ${JSON.stringify(descriptor)}
         description: description ? description : undefined,
       });
     }
-    return descriptors;
+    return [descriptors, logs];
   } else {
-    throw new Error('invalid data');
+    throw new Error(isCurrentCSVFormat.explanation(dataFromCVS)[1]!());
   }
 }
 

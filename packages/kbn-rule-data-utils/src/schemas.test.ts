@@ -27,7 +27,27 @@ describe('alertFieldDescriptorsFromAlertFieldSpreadsheetRows', () => {
     expectedError: string
   ];
   const failureCases: FailureCaseDescriptor[] = [
-    [[/** by passing an empty object, we should get an error */ {}], 'invalid data'],
+    [[/** by passing an empty object, we should get an error */ {}], `Values in array were invalid. The explanations:
+* Value at index 0: Values in object were invalid. Explanations:
+* Value at key "Signal field(s)": Expected a string, but got a undefined: undefined. ,
+* Value at key "Alerts-as-Data Field(s)": Expected a string, but got a undefined: undefined. ,
+* Value at key "Required for all rule types": undefined was expected to match one of several conditions, but it did not. Here are the explanations:
+* undefined was expected to be "" OR,
+* undefined was expected to be "yes" OR,
+* undefined was expected to be "Yes" ,
+* Value at key "Required for Security, Recommended for all rule types": undefined was expected to match one of several conditions, but it did not. Here are the explanations:
+* undefined was expected to be "" OR,
+* undefined was expected to be "yes" OR,
+* undefined was expected to be "Yes" ,
+* Value at key "Optional": undefined was expected to match one of several conditions, but it did not. Here are the explanations:
+* undefined was expected to be "" OR,
+* undefined was expected to be "yes" OR,
+* undefined was expected to be "Yes" ,
+* Value at key "Proposed (beyond 7.15)": undefined was expected to match one of several conditions, but it did not. Here are the explanations:
+* undefined was expected to be "" OR,
+* undefined was expected to be "yes" OR,
+* undefined was expected to be "Yes" ,
+* Value at key "AAD field definition": Expected a string, but got a undefined: undefined.`],
   ];
   describe.each(failureCases)(
     'when alertFieldDescriptorsFromAlertFieldSpreadsheetRows is called with %p',
