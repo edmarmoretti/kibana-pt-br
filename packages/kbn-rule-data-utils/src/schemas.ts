@@ -38,7 +38,7 @@ interface AlertFieldDescriptor {
 }
 
 /** This describes the json format of a row from the alert fields spreadsheet found at: https://docs.google.com/spreadsheets/d/1Cqv0bRx1BgY6VP9PY4FK6kppUEZJ5qMPoFgr5_XQXJI/edit#gid=1775019155 */
-interface AlertFieldSpreadsheetRow {
+export interface AlertFieldSpreadsheetRow {
   'Signal field(s)': string;
   'Alerts-as-Data Field(s)': string;
   'Required for all rule types': string;
@@ -58,13 +58,21 @@ export function alertFieldDescriptorsFromAlertFieldSpreadsheetRows(
 ): AlertFieldDescriptor[] {
   // validate the data before we work on it
   if (isCurrentCSVFormat(dataFromCVS)) {
-    return dataFromCVS.map(function (descriptor: AlertFieldSpreadsheetRow): AlertFieldDescriptor {
+    const descriptors: AlertFieldDescriptor[] = [];
+
+    for (const descriptor of dataFromCVS) {
       const required = descriptor['Required for all rule types'];
       const recommended = descriptor['Required for Security, Recommended for all rule types'];
       const optional = descriptor.Optional;
       const proposed = descriptor['Proposed (beyond 7.15)'];
 
       const fieldOrFieldSet = descriptor['Alerts-as-Data Field(s)'];
+
+      if (fieldOrFieldSet === 'None') {
+        // eslint-disable-next-line no-console
+        console.log(`Omitting one record as it's 'Alerts-as-Data Field(s)' value is 'None'.`);
+        continue;
+      }
 
       if (!fieldOrFieldSet) {
         throw new Error(`missing Alerts-as-Data Field(s)`);
@@ -94,7 +102,7 @@ ${JSON.stringify(descriptor)}
       const description = descriptor['AAD field definition'];
       const signalIndexFieldOrFieldsetEquivalent = descriptor['Signal field(s)'];
 
-      return {
+      descriptors.push({
         signalIndexFieldOrFieldsetEquivalent: signalIndexFieldOrFieldsetEquivalent
           ? signalIndexFieldOrFieldsetEquivalent
           : undefined,
@@ -102,8 +110,9 @@ ${JSON.stringify(descriptor)}
         level,
         // replace '' with undefined
         description: description ? description : undefined,
-      };
-    });
+      });
+    }
+    return descriptors;
   } else {
     throw new Error('invalid data');
   }

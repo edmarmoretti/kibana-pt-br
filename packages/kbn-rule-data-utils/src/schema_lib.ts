@@ -6,7 +6,13 @@
  * Side Public License, v 1.
  */
 
-type Validator<T> = (value: unknown) => value is T;
+export interface Validator<T> {
+  (value: unknown): value is T;
+  explanation(value: unknown): Explanation;
+}
+type Explanation =
+  | [valid: true, explanation: undefined]
+  | [valid: false, explanation: (newlinePrefix?: string) => string];
 type TypeOf<V extends Validator<unknown>> = V extends Validator<infer T> ? T : never;
 
 /**
@@ -21,17 +27,44 @@ type TypeOf<V extends Validator<unknown>> = V extends Validator<infer T> ? T : n
  * ]);
  * ```
  */
-export function oneOf<V extends Array<Validator<unknown>>>(validators: V) {
-  return function (
+export function oneOf<V extends Array<Validator<unknown>>>(
+  validators: V
+): Validator<V extends Array<Validator<infer ElementType>> ? ElementType : never> {
+  validator.explanation = function (value: unknown): Explanation {
+    const subExplanations: Array<(newlinePrefix?: string) => string> = [];
+    for (const subValidator of validators) {
+      const result = subValidator.explanation(value);
+      if (result[0]) {
+        return [true, undefined];
+      } else {
+        subExplanations.push(result[1]);
+      }
+    }
+    return [
+      false,
+      (newlinePrefix: string = '') => `${JSON.stringify(
+        value,
+        null,
+        newlinePrefix
+      )} was expected to match one of several conditions, but it did not. Here are the explanations:
+      ${subExplanations.map((explanation, index) => {
+        return `${newlinePrefix + '\t'}* ${explanation(newlinePrefix + '\t\t')}${
+          index < subExplanations.length - 1 ? ' OR' : ''
+        }`;
+      })}`,
+    ];
+  };
+  return validator;
+  function validator(
     value: unknown
   ): value is V extends Array<Validator<infer ElementType>> ? ElementType : never {
-    for (const validator of validators) {
-      if (validator(value)) {
+    for (const subValidator of validators) {
+      if (subValidator(value)) {
         return true;
       }
     }
     return false;
-  };
+  }
 }
 
 /**
@@ -45,12 +78,51 @@ export function oneOf<V extends Array<Validator<unknown>>>(validators: V) {
  * ]);
  * ```
  */
-export function array<V extends Validator<unknown>>(elementValidator: V) {
-  return function (
+export function array<V extends Validator<unknown>>(
+  elementValidator: V
+): Validator<Array<V extends Validator<infer ElementType> ? ElementType : never>> {
+  validator.explanation = function (value: unknown): Explanation {
+    // cast Array.isArray to safer type
+    if ((Array.isArray as (value: unknown) => value is unknown[])(value)) {
+      const explanations: Array<
+        [index: number, explanation: (newlinePrefix?: string) => string]
+      > = [];
+      for (const [index, element] of value.entries()) {
+        const result = elementValidator.explanation(element);
+        if (!result[0]) {
+          explanations.push([index, result[1]]);
+        }
+      }
+      if (explanations.length) {
+        return [
+          false,
+          (newlinePrefix: string = '') =>
+            `Values in array were invalid. The explanations: ${explanations.map(
+              ([index, explanation]) => {
+                const prefix = ``;
+                return `
+${newlinePrefix}* Value at index ${index}: ${explanation(newlinePrefix + '\t')}`;
+              }
+            )}`,
+        ];
+      } else {
+        return [true, undefined];
+      }
+    }
+    return [
+      false,
+      (newlinePrefix: string = '') =>
+        `Expected an array, received ${JSON.stringify(value, null, newlinePrefix)}`,
+    ];
+  };
+  return validator;
+  function validator(
     value: unknown
   ): value is Array<V extends Validator<infer ElementType> ? ElementType : never> {
-    if (Array.isArray(value)) {
-      for (const element of value as unknown[]) {
+    // This validator doesn't delegate to its explanation function because it short circuits instead.
+    // cast Array.isArray to safer type
+    if ((Array.isArray as (value: unknown) => value is unknown[])(value)) {
+      for (const element of value) {
         const result = elementValidator(element);
         if (!result) {
           return false;
@@ -59,7 +131,7 @@ export function array<V extends Validator<unknown>>(elementValidator: V) {
       return true;
     }
     return false;
-  };
+  }
 }
 
 /**
@@ -97,8 +169,56 @@ export function object<
   ValidatorDictionary extends {
     [key: string]: Validator<unknown>;
   }
->(validatorDictionary: ValidatorDictionary) {
-  return function (
+>(
+  validatorDictionary: ValidatorDictionary
+): Validator<
+  OptionalKeyWhenValueAcceptsUndefined<
+    {
+      [K in keyof ValidatorDictionary]: TypeOf<ValidatorDictionary[K]>;
+    }
+  >
+> {
+  valiator.explanation = function (value: unknown): Explanation {
+    // This only validates non-null objects
+    if (typeof value !== 'object' || value === null) {
+      return [
+        false,
+        (newlinePrefix: string = '') =>
+          `Expected a non-null object, but got ${JSON.stringify(value, null, newlinePrefix)}`,
+      ];
+    }
+
+    // Rebind value as the result type so that we can interrogate it
+    const trusted = value as { [K in keyof ValidatorDictionary]: TypeOf<ValidatorDictionary[K]> };
+
+    const explanations: Array<[key: string, explanation: (newlinePrefix?: string) => string]> = [];
+
+    // Get each validator in the validator dictionary and use it to validate the corresponding value
+    for (const key of Object.keys(validatorDictionary)) {
+      const result: Explanation = validatorDictionary[key].explanation(trusted[key]);
+      if (!result[0]) {
+        explanations.push([key, result[1]]);
+      }
+    }
+    if (explanations.length) {
+      return [
+        false,
+        (newlinePrefix: string = '') =>
+          `Values in object were invalid. Explanations: ${explanations.map(
+            ([key, explanation]) => `
+${newlinePrefix + '\t'}* Value at key ${JSON.stringify(
+              key,
+              null,
+              newlinePrefix + '\t'
+            )}: ${explanation(newlinePrefix + '\t\t')} `
+          )}`,
+      ];
+    } else {
+      return [true, undefined];
+    }
+  };
+  return valiator;
+  function valiator(
     value: unknown
   ): value is /** If a key can point to `undefined`, then instead make the key optional and exclude `undefined` from the value type. */ OptionalKeyWhenValueAcceptsUndefined<
     {
@@ -121,7 +241,7 @@ export function object<
       }
     }
     return true;
-  };
+  }
 }
 
 /**
@@ -135,10 +255,26 @@ export function object<
  * ]);
  * ```
  */
-export function literal<T>(acceptedValue: T) {
-  return function (value: unknown): value is T {
-    return acceptedValue === value;
+export function literal<T>(acceptedValue: T): Validator<T> {
+  function validator(value: unknown): value is T {
+    return validator.explanation(value)[0];
+  }
+
+  validator.explanation = function (value: unknown): Explanation {
+    return value === acceptedValue
+      ? [true, undefined]
+      : [
+          false,
+          (newlinePrefix: string = '') =>
+            `${JSON.stringify(value, null, newlinePrefix)} was expected to be ${JSON.stringify(
+              acceptedValue,
+              null,
+              newlinePrefix
+            )}`,
+        ];
   };
+
+  return validator;
 }
 
 /**
@@ -150,10 +286,26 @@ export function literal<T>(acceptedValue: T) {
  * const isString: (value: unknown) => value is string = schema.string();
  * ```
  */
-function anyString(): (value: unknown) => value is string {
-  return function (value: unknown): value is string {
-    return typeof value === 'string';
+function anyString(): Validator<string> {
+  validator.explanation = function (value: unknown): Explanation {
+    if (typeof value !== 'string') {
+      return [
+        false,
+        (newlinePrefix: string = '') =>
+          `Expected a string, but got a ${typeof value}: ${JSON.stringify(
+            value,
+            null,
+            newlinePrefix
+          )}.`,
+      ];
+    } else {
+      return [true, undefined];
+    }
   };
+  return validator;
+  function validator(value: unknown): value is string {
+    return validator.explanation(value)[0];
+  }
 }
 
 /**
@@ -166,10 +318,24 @@ function anyString(): (value: unknown) => value is string {
  * const isNumber: (value: unknown) => value is number = schema.number();
  * ```
  */
-function anyNumber(): (value: unknown) => value is number {
-  return function (value: unknown): value is number {
-    return typeof value === 'number';
+function anyNumber(): Validator<number> {
+  validator.explanation = function (value: unknown): Explanation {
+    return typeof value === 'number'
+      ? [true, undefined]
+      : [
+          false,
+          (newlinePrefix: string = '') =>
+            `Expected a number, got a ${typeof value}: ${JSON.stringify(
+              value,
+              null,
+              newlinePrefix
+            )}`,
+        ];
   };
+  return validator;
+  function validator(value: unknown): value is number {
+    return validator.explanation(value)[0];
+  }
 }
 
 /**
