@@ -6,7 +6,6 @@
       "pipelineSlug": "kibana-pull-request",
 
       "enabled": true,
-      "target_branch": "master",
       "allow_org_users": true,
       "allowed_repo_permissions": ["admin", "write"],
       "allowed_list": [
