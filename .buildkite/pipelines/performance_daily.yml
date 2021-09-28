@@ -1,0 +1,6 @@
+steps:
+  - input: "Iterations"
+    fields:
+      - text: "How many iterations should we run?"
+        key: "iterations"
+        required: true
