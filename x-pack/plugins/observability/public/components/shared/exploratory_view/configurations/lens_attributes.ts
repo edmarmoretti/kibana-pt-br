@@ -725,6 +725,7 @@ export class LensAttributes {
           forAccessor: columnId,
           lineStyle: 'solid',
           lineWidth: 2,
+          textVisibility: true,
         })),
       },
     ];
@@ -735,11 +736,10 @@ export class LensAttributes {
     const columns: Record<string, PercentileIndexPatternColumn> = {};
 
     thresholds.forEach((threshold) => {
-      columns[`${threshold}-percentile-threshold-${layerId}`] = this.getPercentileNumberColumn(
-        'transaction.duration.us',
-        threshold,
-        seriesConfig
-      );
+      columns[`${threshold}-percentile-threshold-${layerId}`] = {
+        ...this.getPercentileNumberColumn('transaction.duration.us', threshold, seriesConfig),
+        label: threshold,
+      };
     });
 
     return columns;
