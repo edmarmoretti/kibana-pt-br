@@ -9,34 +9,34 @@ import { i18n } from '@kbn/i18n';
 import { capitalize } from 'lodash';
 import { ExistsFilter, isExistsFilter } from '@kbn/es-query';
 import {
-  CountIndexPatternColumn,
-  DateHistogramIndexPatternColumn,
   AvgIndexPatternColumn,
+  CardinalityIndexPatternColumn,
+  CountIndexPatternColumn,
+  DataType,
+  DateHistogramIndexPatternColumn,
+  FieldBasedIndexPatternColumn,
   MedianIndexPatternColumn,
-  PercentileIndexPatternColumn,
+  OperationMetadata,
   OperationType,
+  PercentileIndexPatternColumn,
   PersistedIndexPatternLayer,
   RangeIndexPatternColumn,
   SeriesType,
-  TypedLensByValueInput,
-  XYState,
-  XYCurveType,
-  DataType,
-  OperationMetadata,
-  FieldBasedIndexPatternColumn,
   SumIndexPatternColumn,
   TermsIndexPatternColumn,
-  CardinalityIndexPatternColumn,
+  TypedLensByValueInput,
+  XYCurveType,
+  XYState,
 } from '../../../../../../lens/public';
 import { urlFiltersToKueryString } from '../utils/stringify_kueries';
 import { IndexPattern } from '../../../../../../../../src/plugins/data/common';
 import {
   FILTER_RECORDS,
-  USE_BREAK_DOWN_COLUMN,
-  TERMS_COLUMN,
-  REPORT_METRIC_FIELD,
   RECORDS_FIELD,
   RECORDS_PERCENTAGE_FIELD,
+  REPORT_METRIC_FIELD,
+  TERMS_COLUMN,
+  USE_BREAK_DOWN_COLUMN,
   PERCENTILE,
   PERCENTILE_RANKS,
   ReportTypes,
@@ -649,6 +649,17 @@ export class LensAttributes {
       };
     });
 
+    const layerId = 'threshold-layer-1';
+    const seriesConfig = this.layerConfigs[0].seriesConfig;
+
+    const thresholdColumns = this.getThresholdColumns(layerId, seriesConfig);
+
+    layers[layerId] = {
+      columnOrder: Object.keys(thresholdColumns),
+      columns: thresholdColumns,
+      incompleteColumns: {},
+    };
+
     return layers;
   }
 
@@ -666,29 +677,72 @@ export class LensAttributes {
       tickLabelsVisibilitySettings: { x: true, yLeft: true, yRight: true },
       gridlinesVisibilitySettings: { x: true, yLeft: true, yRight: true },
       preferredSeriesType: 'line',
-      layers: this.layerConfigs.map((layerConfig, index) => ({
-        accessors: [
-          `y-axis-column-layer${index}`,
-          ...Object.keys(this.getChildYAxises(layerConfig)),
-        ],
-        layerId: `layer${index}`,
-        layerType: 'data',
-        seriesType: layerConfig.seriesType || layerConfig.seriesConfig.defaultSeriesType,
-        palette: layerConfig.seriesConfig.palette,
-        yConfig: layerConfig.seriesConfig.yConfig || [
-          { forAccessor: `y-axis-column-layer${index}`, color: layerConfig.color },
-        ],
-        xAccessor: `x-axis-column-layer${index}`,
-        ...(layerConfig.breakdown &&
-        layerConfig.breakdown !== PERCENTILE &&
-        layerConfig.seriesConfig.xAxisColumn.sourceField !== USE_BREAK_DOWN_COLUMN
-          ? { splitAccessor: `breakdown-column-layer${index}` }
-          : {}),
-      })),
+      layers: this.getDataLayers(),
+    };
+  }
+
+  getDataLayers(): XYState['layers'] {
+    const dataLayers = this.layerConfigs.map((layerConfig, index) => ({
+      accessors: [`y-axis-column-layer${index}`, ...Object.keys(this.getChildYAxises(layerConfig))],
+      layerId: `layer${index}`,
+      layerType: 'data' as any,
+      seriesType: layerConfig.seriesType || layerConfig.seriesConfig.defaultSeriesType,
+      palette: layerConfig.seriesConfig.palette,
+      yConfig: layerConfig.seriesConfig.yConfig || [
+        { forAccessor: `y-axis-column-layer${index}`, color: layerConfig.color },
+      ],
+      xAccessor: `x-axis-column-layer${index}`,
+      ...(layerConfig.breakdown &&
+      layerConfig.breakdown !== PERCENTILE &&
+      layerConfig.seriesConfig.xAxisColumn.sourceField !== USE_BREAK_DOWN_COLUMN
+        ? { splitAccessor: `breakdown-column-layer${index}` }
+        : {}),
       ...(this.layerConfigs[0].seriesConfig.yTitle
         ? { yTitle: this.layerConfigs[0].seriesConfig.yTitle }
         : {}),
-    };
+    }));
+
+    const thresholdLayers = this.getThresholdLayers();
+
+    return [...dataLayers, ...thresholdLayers];
+  }
+
+  getThresholdLayers(): XYState['layers'] {
+    const layerId = 'threshold-layer-1';
+    const seriesConfig = this.layerConfigs[0].seriesConfig;
+
+    const columns = this.getThresholdColumns(layerId, seriesConfig);
+
+    return [
+      {
+        layerId,
+        accessors: Object.keys(columns),
+        layerType: 'threshold',
+        seriesType: 'line',
+        yConfig: Object.keys(columns).map((columnId) => ({
+          axisMode: 'bottom',
+          color: '#6092C0',
+          forAccessor: columnId,
+          lineStyle: 'solid',
+          lineWidth: 2,
+        })),
+      },
+    ];
+  }
+
+  getThresholdColumns(layerId: string, seriesConfig: SeriesConfig) {
+    const thresholds = ['50th', '75th', '90th', '95th', '99th'];
+    const columns: Record<string, PercentileIndexPatternColumn> = {};
+
+    thresholds.forEach((threshold) => {
+      columns[`${threshold}-percentile-threshold-${layerId}`] = this.getPercentileNumberColumn(
+        'transaction.duration.us',
+        threshold,
+        seriesConfig
+      );
+    });
+
+    return columns;
   }
 
   getJSON(refresh?: number): TypedLensByValueInput['attributes'] {
@@ -697,6 +751,7 @@ export class LensAttributes {
     );
 
     const query = this.layerConfigs[0].seriesConfig.query;
+    const layerId = 'threshold-layer-1';
 
     return {
       title: 'Prefilled from exploratory view app',
@@ -713,6 +768,11 @@ export class LensAttributes {
           name: getLayerReferenceName(`layer${index}`),
           type: 'index-pattern',
         })),
+        {
+          id: 'rum_static_index_pattern_id_traces_apm_apm_',
+          name: getLayerReferenceName(layerId),
+          type: 'index-pattern',
+        },
       ],
       state: {
         datasourceStates: {
