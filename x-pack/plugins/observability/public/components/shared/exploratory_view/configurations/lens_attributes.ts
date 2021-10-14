@@ -107,14 +107,21 @@ export interface LayerConfig {
 
 export class LensAttributes {
   layers: Record<string, PersistedIndexPatternLayer>;
-  thresholdLayers: Record<string, PersistedIndexPatternLayer>;
+  seriesThresholds: Record<
+    string,
+    {
+      layerData: PersistedIndexPatternLayer;
+      layerState: XYState['layers'];
+      indexPattern: IndexPattern;
+    }
+  >;
   visualization: XYState;
   layerConfigs: LayerConfig[];
   isMultiSeries: boolean;
 
   constructor(layerConfigs: LayerConfig[]) {
     this.layers = {};
-    this.thresholdLayers = {};
+    this.seriesThresholds = {};
 
     layerConfigs.forEach(({ seriesConfig, operationType }) => {
       if (operationType) {
@@ -264,6 +271,7 @@ export class LensAttributes {
 
   getPercentileBreakdowns(
     layerConfig: LayerConfig,
+    layerId: string,
     columnFilter?: string
   ): Record<string, FieldBasedIndexPatternColumn> {
     const yAxisColumns = layerConfig.seriesConfig.yAxisColumns;
@@ -278,6 +286,7 @@ export class LensAttributes {
           operationType: PERCENTILE_RANKS[i],
           label: mainLabel,
           layerConfig,
+          layerId,
           colIndex: i,
         }),
         filter: { query: columnFilter || '', language: 'kuery' },
@@ -347,6 +356,7 @@ export class LensAttributes {
 
     return this.getColumnBasedOnType({
       layerConfig,
+      layerId,
       label: xAxisColumn.label,
       sourceField: xAxisColumn.sourceField!,
     });
@@ -358,10 +368,12 @@ export class LensAttributes {
     layerConfig,
     operationType,
     colIndex,
+    layerId,
   }: {
     sourceField: string;
     operationType?: OperationType;
     label?: string;
+    layerId: string;
     layerConfig: LayerConfig;
     colIndex?: number;
   }) {
@@ -375,6 +387,10 @@ export class LensAttributes {
       columnFilters,
       showPercentileAnnotations,
     } = this.getFieldMeta(sourceField, layerConfig);
+
+    if (showPercentileAnnotations) {
+      this.addThresholdLayer(fieldName, layerId, layerConfig);
+    }
 
     const { type: fieldType } = fieldMeta ?? {};
 
@@ -481,10 +497,11 @@ export class LensAttributes {
       label,
       layerConfig,
       colIndex: 0,
+      layerId,
     });
   }
 
-  getChildYAxises(layerConfig: LayerConfig, layerId?: string, columnFilter?: string) {
+  getChildYAxises(layerConfig: LayerConfig, layerId: string, columnFilter?: string) {
     const { breakdown } = layerConfig;
     const lensColumns: Record<string, FieldBasedIndexPatternColumn | SumIndexPatternColumn> = {};
     const yAxisColumns = layerConfig.seriesConfig.yAxisColumns;
@@ -496,7 +513,7 @@ export class LensAttributes {
     }
 
     if (yAxisColumns.length === 1 && breakdown === PERCENTILE) {
-      return this.getPercentileBreakdowns(layerConfig, columnFilter);
+      return this.getPercentileBreakdowns(layerConfig, layerId, columnFilter);
     }
 
     if (yAxisColumns.length === 1) {
@@ -513,6 +530,7 @@ export class LensAttributes {
         label,
         layerConfig,
         colIndex: i,
+        layerId,
       });
     }
     return lensColumns;
@@ -679,16 +697,9 @@ export class LensAttributes {
       };
     });
 
-    const layerId = 'threshold-layer-1';
-    const seriesConfig = this.layerConfigs[0].seriesConfig;
-
-    const thresholdColumns = this.getThresholdColumns(layerId, seriesConfig);
-
-    layers[layerId] = {
-      columnOrder: Object.keys(thresholdColumns),
-      columns: thresholdColumns,
-      incompleteColumns: {},
-    };
+    Object.entries(this.seriesThresholds).forEach(([id, { layerData }]) => {
+      layers[id] = layerData;
+    });
 
     return layers;
   }
@@ -713,7 +724,10 @@ export class LensAttributes {
 
   getDataLayers(): XYState['layers'] {
     const dataLayers = this.layerConfigs.map((layerConfig, index) => ({
-      accessors: [`y-axis-column-layer${index}`, ...Object.keys(this.getChildYAxises(layerConfig))],
+      accessors: [
+        `y-axis-column-layer${index}`,
+        ...Object.keys(this.getChildYAxises(layerConfig, `layer${index}`)),
+      ],
       layerId: `layer${index}`,
       layerType: 'data' as any,
       seriesType: layerConfig.seriesType || layerConfig.seriesConfig.defaultSeriesType,
@@ -732,20 +746,45 @@ export class LensAttributes {
         : {}),
     }));
 
-    const thresholdLayers = this.getThresholdLayers();
+    const thresholdLayers: XYState['layers'] = [];
+
+    Object.entries(this.seriesThresholds).forEach(([_id, { layerState }]) => {
+      thresholdLayers.push(layerState[0]);
+    });
 
     return [...dataLayers, ...thresholdLayers];
   }
 
-  getThresholdLayers(): XYState['layers'] {
-    const layerId = 'threshold-layer-1';
-    const seriesConfig = this.layerConfigs[0].seriesConfig;
+  addThresholdLayer(
+    fieldName: string,
+    layerId: string,
+    { seriesConfig, indexPattern }: LayerConfig
+  ) {
+    const thresholdLayerId = `${layerId}-thresholds`;
 
-    const columns = this.getThresholdColumns(layerId, seriesConfig);
+    const thresholdColumns = this.getThresholdColumns(fieldName, thresholdLayerId, seriesConfig);
+
+    const layerData = {
+      columnOrder: Object.keys(thresholdColumns),
+      columns: thresholdColumns,
+      incompleteColumns: {},
+    };
+
+    const layerState = this.getThresholdLayer(fieldName, thresholdLayerId, seriesConfig);
+
+    this.seriesThresholds[thresholdLayerId] = { layerData, layerState, indexPattern };
+  }
+
+  getThresholdLayer(
+    fieldName: string,
+    thresholdLayerId: string,
+    seriesConfig: SeriesConfig
+  ): XYState['layers'] {
+    const columns = this.getThresholdColumns(fieldName, thresholdLayerId, seriesConfig);
 
     return [
       {
-        layerId,
+        layerId: thresholdLayerId,
         accessors: Object.keys(columns),
         layerType: 'threshold',
         seriesType: 'line',
@@ -761,13 +800,13 @@ export class LensAttributes {
     ];
   }
 
-  getThresholdColumns(layerId: string, seriesConfig: SeriesConfig) {
+  getThresholdColumns(fieldName: string, layerId: string, seriesConfig: SeriesConfig) {
     const thresholds = ['50th', '75th', '90th', '95th', '99th'];
     const columns: Record<string, PercentileIndexPatternColumn> = {};
 
     thresholds.forEach((threshold) => {
       columns[`${threshold}-percentile-threshold-${layerId}`] = {
-        ...this.getPercentileNumberColumn('monitor.duration.us', threshold, seriesConfig),
+        ...this.getPercentileNumberColumn(fieldName, threshold, seriesConfig),
         label: threshold,
       };
     });
@@ -781,7 +820,13 @@ export class LensAttributes {
     );
 
     const query = this.layerConfigs[0].seriesConfig.query;
-    const layerId = 'threshold-layer-1';
+    const thresholdReferences = Object.entries(this.seriesThresholds).map(
+      ([id, { indexPattern }]) => ({
+        id: indexPattern.id!,
+        name: getLayerReferenceName(id),
+        type: 'index-pattern',
+      })
+    );
 
     return {
       title: 'Prefilled from exploratory view app',
@@ -798,11 +843,7 @@ export class LensAttributes {
           name: getLayerReferenceName(`layer${index}`),
           type: 'index-pattern',
         })),
-        {
-          id: 'synthetics_static_index_pattern_id_heartbeat_8_synthetics_',
-          name: getLayerReferenceName(layerId),
-          type: 'index-pattern',
-        },
+        ...thresholdReferences,
       ],
       state: {
         datasourceStates: {
