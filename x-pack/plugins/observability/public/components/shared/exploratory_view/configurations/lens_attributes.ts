@@ -737,7 +737,7 @@ export class LensAttributes {
 
     thresholds.forEach((threshold) => {
       columns[`${threshold}-percentile-threshold-${layerId}`] = {
-        ...this.getPercentileNumberColumn('transaction.duration.us', threshold, seriesConfig),
+        ...this.getPercentileNumberColumn('monitor.duration.us', threshold, seriesConfig),
         label: threshold,
       };
     });
@@ -769,7 +769,7 @@ export class LensAttributes {
           type: 'index-pattern',
         })),
         {
-          id: 'rum_static_index_pattern_id_traces_apm_apm_',
+          id: 'synthetics_static_index_pattern_id_heartbeat_8_synthetics_',
           name: getLayerReferenceName(layerId),
           type: 'index-pattern',
         },
