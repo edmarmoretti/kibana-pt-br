@@ -64,6 +64,7 @@ export const parseCustomFieldName = (seriesConfig: SeriesConfig, selectedMetricF
   let columnFilters;
   let timeScale;
   let columnLabel;
+  let showPercentileAnnotations;
 
   const metricOptions = seriesConfig.metricOptions ?? [];
 
@@ -76,10 +77,18 @@ export const parseCustomFieldName = (seriesConfig: SeriesConfig, selectedMetricF
       columnFilters = currField?.columnFilters;
       timeScale = currField?.timeScale;
       columnLabel = currField?.label;
+      showPercentileAnnotations = currField?.showPercentileAnnotations;
     }
   }
 
-  return { fieldName: selectedMetricField!, columnType, columnFilters, timeScale, columnLabel };
+  return {
+    fieldName: selectedMetricField!,
+    columnType,
+    columnFilters,
+    timeScale,
+    columnLabel,
+    showPercentileAnnotations,
+  };
 };
 
 export interface LayerConfig {
@@ -98,12 +107,14 @@ export interface LayerConfig {
 
 export class LensAttributes {
   layers: Record<string, PersistedIndexPatternLayer>;
+  thresholdLayers: Record<string, PersistedIndexPatternLayer>;
   visualization: XYState;
   layerConfigs: LayerConfig[];
   isMultiSeries: boolean;
 
   constructor(layerConfigs: LayerConfig[]) {
     this.layers = {};
+    this.thresholdLayers = {};
 
     layerConfigs.forEach(({ seriesConfig, operationType }) => {
       if (operationType) {
@@ -355,8 +366,15 @@ export class LensAttributes {
     colIndex?: number;
   }) {
     const { breakdown, seriesConfig } = layerConfig;
-    const { fieldMeta, columnType, fieldName, columnLabel, timeScale, columnFilters } =
-      this.getFieldMeta(sourceField, layerConfig);
+    const {
+      fieldMeta,
+      columnType,
+      fieldName,
+      columnLabel,
+      timeScale,
+      columnFilters,
+      showPercentileAnnotations,
+    } = this.getFieldMeta(sourceField, layerConfig);
 
     const { type: fieldType } = fieldMeta ?? {};
 
@@ -420,12 +438,24 @@ export class LensAttributes {
 
   getFieldMeta(sourceField: string, layerConfig: LayerConfig) {
     if (sourceField === REPORT_METRIC_FIELD) {
-      const { fieldName, columnType, columnLabel, columnFilters, timeScale } = parseCustomFieldName(
-        layerConfig.seriesConfig,
-        layerConfig.selectedMetricField
-      );
+      const {
+        fieldName,
+        columnType,
+        columnLabel,
+        columnFilters,
+        timeScale,
+        showPercentileAnnotations,
+      } = parseCustomFieldName(layerConfig.seriesConfig, layerConfig.selectedMetricField);
       const fieldMeta = layerConfig.indexPattern.getFieldByName(fieldName!);
-      return { fieldMeta, fieldName, columnType, columnLabel, columnFilters, timeScale };
+      return {
+        fieldMeta,
+        fieldName,
+        columnType,
+        columnLabel,
+        columnFilters,
+        timeScale,
+        showPercentileAnnotations,
+      };
     } else {
       const fieldMeta = layerConfig.indexPattern.getFieldByName(sourceField);
 
