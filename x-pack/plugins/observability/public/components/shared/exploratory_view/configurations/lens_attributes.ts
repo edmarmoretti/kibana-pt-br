@@ -308,6 +308,7 @@ export class LensAttributes {
       }),
       operationType: 'percentile',
       params: { percentile: Number(percentileValue.split('th')[0]) },
+      customLabel: true,
     };
   }
 
@@ -724,10 +725,7 @@ export class LensAttributes {
 
   getDataLayers(): XYState['layers'] {
     const dataLayers = this.layerConfigs.map((layerConfig, index) => ({
-      accessors: [
-        `y-axis-column-layer${index}`,
-        ...Object.keys(this.getChildYAxises(layerConfig, `layer${index}`)),
-      ],
+      accessors: [`y-axis-column-layer${index}`],
       layerId: `layer${index}`,
       layerType: 'data' as any,
       seriesType: layerConfig.seriesType || layerConfig.seriesConfig.defaultSeriesType,
