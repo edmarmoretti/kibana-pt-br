@@ -187,6 +187,26 @@ export const getDetectionRuleMetrics = async (
   savedObjectClient: SavedObjectsClientContract
 ): Promise<DetectionRuleAdoption> => {
   let rulesUsage: DetectionRulesTypeUsage = initialDetectionRulesUsage;
+
+  /*
+    filter: `(alert.attributes.alertTypeId: siem.eqlRule 
+      OR alert.attributes.alertTypeId: siem.mlRule 
+      OR alert.attributes.alertTypeId: siem.queryRule 
+      OR alert.attributes.alertTypeId: siem.savedQueryRule 
+      OR alert.attributes.alertTypeId: siem.indicatorRule 
+      OR alert.attributes.alertTypeId: siem.thresholdRule
+    ) AND alert.attributes.tags: \"__internal_immutable:true\"`
+  */
+
+  const stuff = await savedObjectClient.find({
+    type: 'alert',
+    fields: [],
+    sortOrder: 'desc',
+    sortField: 'createdAt',
+    page: 1,
+    perPage: 10_000,
+  });
+
   const ruleSearchOptions: RuleSearchParams = {
     body: { query: { bool: { filter: { term: { 'alert.alertTypeId': SIGNALS_ID } } } } },
     filter_path: [],
@@ -197,13 +217,25 @@ export const getDetectionRuleMetrics = async (
 
   try {
     const { body: ruleResults } = await esClient.search<RuleSearchResult>(ruleSearchOptions);
+
+    const cases = await savedObjectClient.find<CasesSavedObject>({
+      type: 'cases-comments',
+      fields: [],
+      page: 1,
+      perPage: MAX_RESULTS_WINDOW,
+      filter: 'cases-comments.attributes.type: alert',
+    });
+
     const { body: detectionAlertsResp } = (await esClient.search({
       index: `${signalsIndex}*`,
-      size: MAX_RESULTS_WINDOW,
+      size: 1,
       body: {
         aggs: {
           detectionAlerts: {
-            terms: { field: 'signal.rule.id.keyword' },
+            terms: {
+              field: 'kibana.alert.rule.rule_id',
+              size: 100,
+            },
           },
         },
         query: {
@@ -222,14 +254,6 @@ export const getDetectionRuleMetrics = async (
         },
       },
     })) as { body: AlertsAggregationResponse };
-
-    const cases = await savedObjectClient.find<CasesSavedObject>({
-      type: 'cases-comments',
-      fields: [],
-      page: 1,
-      perPage: MAX_RESULTS_WINDOW,
-      filter: 'cases-comments.attributes.type: alert',
-    });
 
     const casesCache = cases.saved_objects.reduce((cache, { attributes: casesObject }) => {
       const ruleId = casesObject.rule.id;
