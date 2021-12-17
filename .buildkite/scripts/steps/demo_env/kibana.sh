@@ -11,6 +11,8 @@ export KIBANA_IMAGE="gcr.io/elastic-kibana-184716/demo/kibana:$DEPLOYMENT_NAME-$
 echo '--- Build Kibana'
 node scripts/build --debug --docker-images --example-plugins --skip-os-packages --skip-docker-ubi
 
+sleep 14400
+
 echo '--- Build Docker image with example plugins'
 cd target/example_plugins
 BUILT_IMAGE="docker.elastic.co/kibana/kibana:$DEPLOYMENT_VERSION-SNAPSHOT"
