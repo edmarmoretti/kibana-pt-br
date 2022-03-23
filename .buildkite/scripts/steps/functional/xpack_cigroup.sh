@@ -15,6 +15,6 @@ checks-reporter-with-killswitch "X-Pack Chrome Functional tests / Group ${CI_GRO
   node scripts/functional_tests \
     --bail \
     --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
-    --include-tag "ciGroup$CI_GROUP"
+    --include-tag "ciGroup19"
 
 cd "$KIBANA_DIR"
