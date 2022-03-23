@@ -381,7 +381,9 @@ export default function ({ getService }: FtrProviderContext) {
 
       it('With filters and non-timebased data', async () => {
         // load test data that contains a saved search and documents
-        await esArchiver.load('x-pack/test/functional/es_archives/reporting/sales');
+        const kbnArchive = 'x-pack/test/functional/fixtures/kbn_archiver/reporting/sales';
+        await kibanaServer.savedObjects.cleanStandardList();
+        await kibanaServer.importExport.load(kbnArchive);
 
         const {
           status: resStatus,
@@ -408,7 +410,8 @@ export default function ({ getService }: FtrProviderContext) {
         expect(resType).to.eql('text/csv');
         expectSnapshot(resText).toMatch();
 
-        await esArchiver.unload('x-pack/test/functional/es_archives/reporting/sales');
+        await kibanaServer.importExport.unload(kbnArchive);
+        await kibanaServer.savedObjects.cleanStandardList();
       });
     });
 
