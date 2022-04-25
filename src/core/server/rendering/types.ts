@@ -22,7 +22,7 @@ import type { InternalStatusServiceSetup } from '../status';
 /** @internal */
 export interface RenderingMetadata {
   strictCsp: ICspConfig['strict'];
-  uiPublicUrl: string;
+  uiStaticUrl: string;
   bootstrapScriptUrl: string;
   i18n: typeof i18n.translate;
   locale: string;
