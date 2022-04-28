@@ -41,7 +41,7 @@ CI_STATS_DISABLED=true node scripts/generate_team_assignments.js --verbose --src
 #  echo "### Ingesting coverage for ${x}"
 #  COVERAGE_SUMMARY_FILE=target/kibana-coverage/${x}-combined/coverage-summary.json
 #  # running in background to speed up ingestion
-#  CI_STATS_DISABLED=true node scripts/ingest_coverage.js --verbose --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH &
+#  CI_STATS_DISABLED=true node scripts/ingest_coverage.js --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH &
 #done
 #wait
 
