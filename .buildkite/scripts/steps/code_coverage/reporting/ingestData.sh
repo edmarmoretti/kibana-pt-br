@@ -37,13 +37,17 @@ echo "### debug BUFFER_SIZE: ${BUFFER_SIZE}"
 # Build team assignments file
 CI_STATS_DISABLED=true node scripts/generate_team_assignments.js --verbose --src '.github/CODEOWNERS' --dest $TEAM_ASSIGN_PATH
 
-for x in functional jest; do
-  echo "### Ingesting coverage for ${x}"
-  COVERAGE_SUMMARY_FILE=target/kibana-coverage/${x}-combined/coverage-summary.json
-  # running in background to speed up ingestion
-  CI_STATS_DISABLED=true node scripts/ingest_coverage.js --verbose --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH &
-done
-wait
+#for x in functional jest; do
+#  echo "### Ingesting coverage for ${x}"
+#  COVERAGE_SUMMARY_FILE=target/kibana-coverage/${x}-combined/coverage-summary.json
+#  # running in background to speed up ingestion
+#  CI_STATS_DISABLED=true node scripts/ingest_coverage.js --verbose --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH &
+#done
+#wait
+
+echo "### Ingesting coverage for jest"
+COVERAGE_SUMMARY_FILE=target/kibana-coverage/jest-combined/coverage-summary.json
+CI_STATS_DISABLED=true node scripts/ingest_coverage.js --verbose --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH
 
 echo "###  Ingesting Code Coverage - Complete"
 echo ""
