@@ -26,6 +26,7 @@ const logIdx = (log) => (xs) => {
   const { index } = head;
   const { _index } = index;
   log.verbose(`\n### Ingestion Index: \n\t${_index}`);
+  process.stderr.write(`\n### Ingestion Index: \n\t${_index}`);
 };
 
 export const ingestList = (log) => async (xs) => {
