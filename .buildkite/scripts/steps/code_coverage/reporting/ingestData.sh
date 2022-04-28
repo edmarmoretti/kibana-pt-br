@@ -11,6 +11,7 @@ echo "### debug COVERAGE_JOB_NAME: ${COVERAGE_JOB_NAME}"
 
 BUILD_ID=$2
 export BUILD_ID
+echo "### debug BUILD_ID: ${BUILD_ID}"
 
 CI_RUN_URL=$3
 export CI_RUN_URL
@@ -40,7 +41,7 @@ for x in functional jest; do
   echo "### Ingesting coverage for ${x}"
   COVERAGE_SUMMARY_FILE=target/kibana-coverage/${x}-combined/coverage-summary.json
   # running in background to speed up ingestion
-  CI_STATS_DISABLED=true node scripts/ingest_coverage.js --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH &
+  CI_STATS_DISABLED=true node scripts/ingest_coverage.js --verbose --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH &
 done
 wait
 
