@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+set -x
 
 echo "### Ingesting Code Coverage"
 echo ""
@@ -51,3 +52,5 @@ CI_STATS_DISABLED=true node scripts/ingest_coverage.js --verbose --path ${COVERA
 
 echo "###  Ingesting Code Coverage - Complete"
 echo ""
+
+set +x
