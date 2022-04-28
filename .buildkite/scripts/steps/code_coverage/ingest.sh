@@ -19,10 +19,10 @@ echo "--- Upload new git sha"
 .buildkite/scripts/steps/code_coverage/reporting/uploadPrevSha.sh
 
 .buildkite/scripts/bootstrap.sh
- 
+
 echo "--- Download coverage arctifacts"
 buildkite-agent artifact download target/kibana-coverage/jest/* .
-buildkite-agent artifact download target/kibana-coverage/functional/* .
+#buildkite-agent artifact download target/kibana-coverage/functional/* .
 
 echo "--- process HTML Links"
 .buildkite/scripts/steps/code_coverage/reporting/prokLinks.sh
@@ -38,15 +38,15 @@ sed -i "s|/opt/local-ssd/buildkite/builds/kb-[[:alnum:]\-]\{20,27\}/elastic/kiba
 echo "--- Jest: merging coverage files and generating the final combined report"
 yarn nyc report --nycrc-path src/dev/code_coverage/nyc_config/nyc.jest.config.js
 
-echo "--- Functional: merging json files and generating the final combined report"
-yarn nyc report --nycrc-path src/dev/code_coverage/nyc_config/nyc.functional.config.js
+#echo "--- Functional: merging json files and generating the final combined report"
+#yarn nyc report --nycrc-path src/dev/code_coverage/nyc_config/nyc.functional.config.js
 
 # archive reports to upload as build artifacts
 echo "--- Archive and upload combined reports"
 tar -czf target/kibana-coverage/jest/kibana-jest-coverage.tar.gz target/kibana-coverage/jest-combined
-tar -czf target/kibana-coverage/functional/kibana-functional-coverage.tar.gz target/kibana-coverage/functional-combined
+#tar -czf target/kibana-coverage/functional/kibana-functional-coverage.tar.gz target/kibana-coverage/functional-combined
 buildkite-agent artifact upload 'target/kibana-coverage/jest/kibana-jest-coverage.tar.gz'
-buildkite-agent artifact upload 'target/kibana-coverage/functional/kibana-functional-coverage.tar.gz'
+#buildkite-agent artifact upload 'target/kibana-coverage/functional/kibana-functional-coverage.tar.gz'
 
 echo "--- Upload coverage static site"
 .buildkite/scripts/steps/code_coverage/reporting/uploadStaticSite.sh
