@@ -47,6 +47,7 @@ CI_STATS_DISABLED=true node scripts/generate_team_assignments.js --verbose --src
 
 echo "### Ingesting coverage for jest"
 COVERAGE_SUMMARY_FILE=target/kibana-coverage/jest-combined/coverage-summary.json
+head -50 ${COVERAGE_SUMMARY_FILE}
 CI_STATS_DISABLED=true node scripts/ingest_coverage.js --verbose --path ${COVERAGE_SUMMARY_FILE} --vcsInfoPath ./VCS_INFO.txt --teamAssignmentsPath $TEAM_ASSIGN_PATH
 
 echo "###  Ingesting Code Coverage - Complete"
