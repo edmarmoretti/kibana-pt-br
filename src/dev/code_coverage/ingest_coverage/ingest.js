@@ -21,6 +21,13 @@ const client = new Client({
 });
 const isResearchJob = process.env.COVERAGE_JOB_NAME === RESEARCH_CI_JOB_NAME ? true : false;
 
+const logIdx = (log) => (xs) => {
+  const [head] = xs;
+  const { index } = head;
+  const { _index } = index;
+  log.verbose(`\n### Ingestion Index: \n\t${_index}`);
+};
+
 export const ingestList = (log) => async (xs) => {
   await bulkIngest();
 
@@ -28,6 +35,7 @@ export const ingestList = (log) => async (xs) => {
     log.verbose(`\n${ccMark} Ingesting ${xs.length} docs at a time`);
 
     const body = parseIndexes(xs);
+    logIdx(log)(body);
 
     const bulkResponse = await client.bulk({ refresh: true, body });
 
