@@ -13,6 +13,6 @@ done
 
 gsutil -m cp -r -a public-read -z js,css,html ${x} ${uploadPrefixWithTimeStamp}
 
-for x in 'target/kibana-coverage/functional-combined' 'target/kibana-coverage/jest-combined'; do
-    gsutil -m cp -r -a public-read -z js,css,html ${x} ${uploadPrefixWithTimeStamp}
-done
+# for x in 'target/kibana-coverage/functional-combined' 'target/kibana-coverage/jest-combined'; do
+#     gsutil -m cp -r -a public-read -z js,css,html ${x} ${uploadPrefixWithTimeStamp}
+# done
