@@ -81,7 +81,6 @@ export const SavedObjectNamesCombo = forwardRef(
 
     return (
       <EuiComboBox
-        prepend="Name"
         aria-label="Select a Saved Object"
         placeholder="Select a Saved Object"
         fullWidth
