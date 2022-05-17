@@ -12,6 +12,8 @@ model for authentication, data index authorization, and features that are driven
 by cluster-wide privileges. For more information on enabling audit logging in
 {es}, refer to {ref}/auditing.html[Auditing security events].
 
+You can enable/disable audit logs, configure audit logs location, file/rolling file appenders and ignore filters using {ref}/security-settings-kb.html#audit-logging-settings[audit logging settings].
+
 [NOTE]
 ============================================================================
 Audit logs are **disabled** by default. To enable this functionality, you must
