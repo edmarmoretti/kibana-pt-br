@@ -24,6 +24,7 @@ interface UseGetAgentPolicyOrDefaultResponse {
   created?: boolean;
 }
 export const DEFAULT_AGENT_POLICY_ID: string = 'fleet-first-agent-policy';
+// @ts-expect-error
 export const DEFAULT_AGENT_POLICY: NewAgentPolicy = Object.freeze({
   id: DEFAULT_AGENT_POLICY_ID,
   name: i18n.translate('xpack.fleet.createPackagePolicy.firstAgentPolicyNameText', {

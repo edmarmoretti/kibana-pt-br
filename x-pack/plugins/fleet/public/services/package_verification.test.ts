@@ -53,6 +53,7 @@ const createPackage = ({
 describe('isPackageUnverified', () => {
   describe('When experimental feature is disabled', () => {
     beforeEach(() => {
+      // @ts-expect-error
       mockGet.mockReturnValue({
         packageVerification: false,
       } as ReturnType<typeof ExperimentalFeaturesService['get']>);

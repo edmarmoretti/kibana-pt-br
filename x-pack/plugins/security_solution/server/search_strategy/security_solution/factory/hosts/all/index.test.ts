@@ -70,6 +70,7 @@ describe('allHosts search strategy', () => {
 
   describe('parse', () => {
     test('should parse data correctly', async () => {
+      // @ts-expect-error
       const result = await allHosts.parse(mockOptions, mockSearchStrategyResponse, mockDeps(false));
       expect(result).toMatchObject(formattedSearchStrategyResponse);
     });
@@ -98,6 +99,7 @@ describe('allHosts search strategy', () => {
         },
       });
 
+      // @ts-expect-error
       const result = await allHosts.parse(mockOptions, mockSearchStrategyResponse, mockedDeps);
 
       expect(result.edges[0].node.risk).toBe(risk);
@@ -117,6 +119,7 @@ describe('allHosts search strategy', () => {
       // 2 pages with one item on each
       const pagination = { activePage: 1, cursorStart: 1, fakePossibleCount: 5, querySize: 2 };
 
+      // @ts-expect-error
       await allHosts.parse({ ...mockOptions, pagination }, mockSearchStrategyResponse, mockedDeps);
 
       expect(buildHostsRiskQuery).toHaveBeenCalledWith({
@@ -149,6 +152,7 @@ describe('allHosts search strategy', () => {
         },
       });
 
+      // @ts-expect-error
       const result = await allHosts.parse(mockOptions, mockSearchStrategyResponse, mockedDeps);
 
       expect(result.edges[0].node.risk).toBeUndefined();
@@ -160,6 +164,7 @@ describe('allHosts search strategy', () => {
         throw new IndexNotFoundException();
       });
 
+      // @ts-expect-error
       const result = await allHosts.parse(mockOptions, mockSearchStrategyResponse, mockedDeps);
 
       expect(result.edges[0].node.risk).toBeUndefined();

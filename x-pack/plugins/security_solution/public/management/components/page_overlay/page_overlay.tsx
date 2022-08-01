@@ -271,6 +271,7 @@ export const PageOverlay = memo<PageOverlayProps>(
     useEffect(() => {
       if (
         isMounted &&
+        // @ts-expect-error
         onHide &&
         hideOnUrlPathnameChange &&
         !isHidden &&
