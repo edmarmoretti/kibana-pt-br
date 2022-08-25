@@ -5,10 +5,10 @@
  * 2.0.
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { i18n } from '@kbn/i18n';
 import styled from 'styled-components';
-import { EuiCodeBlock, EuiFlexGroup, EuiTitle, EuiSpacer, EuiText } from '@elastic/eui';
+import { EuiCodeBlock, EuiFlexGroup, EuiTitle, EuiSpacer, EuiText, EuiButton } from '@elastic/eui';
 
 const StyledEuiCodeBlock = styled(EuiCodeBlock)`
   align-self: flex-start;
@@ -33,18 +33,18 @@ export const ResolverNoProcessEvents = () => (
     <EuiText size="s">
       {i18n.translate('xpack.securitySolution.resolver.noProcessEvents.timeRange', {
         defaultMessage: `
-            The Analyze Event tool creates graphs based on process events.
-            If the analyzed event does not have an associated process in the current time range,
-            or stored in Elasticsearch within any time range, a graph will not be created.
-            You can check for associated processes by expanding your time range.
-          `,
+                The Analyze Event tool creates graphs based on process events.
+                If the analyzed event does not have an associated process in the current time range,
+                or stored in Elasticsearch within any time range, a graph will not be created.
+                You can check for associated processes by expanding your time range.
+              `,
       })}
     </EuiText>
     <EuiSpacer size="m" />
     <EuiText size="s">
       {i18n.translate('xpack.securitySolution.resolver.noProcessEvents.dataView', {
         defaultMessage: `In case you selected a different data view,
-          make sure your data view contains all of the indices that are stored in the source event at "{field}".`,
+              make sure your data view contains all of the indices that are stored in the source event at "{field}".`,
         values: { field: 'kibana.alert.rule.parameters.index' },
       })}
     </EuiText>
@@ -52,7 +52,7 @@ export const ResolverNoProcessEvents = () => (
     <EuiText size="s">
       {i18n.translate('xpack.securitySolution.resolver.noProcessEvents.eventCategory', {
         defaultMessage: `You may also add the below to your timeline query to check for process events.
-            If none are listed, a graph cannot be created from events found in that query.`,
+                If none are listed, a graph cannot be created from events found in that query.`,
       })}
     </EuiText>
     <EuiSpacer size="m" />

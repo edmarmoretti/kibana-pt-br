@@ -186,6 +186,17 @@ interface ServerReturnedCurrentRelatedEventData {
   readonly payload: SafeResolverEvent;
 }
 
+interface AppDetectedAdditionalResolverNodes {
+  readonly type: 'appDetectedAdditionalResolverNodes';
+  readonly payload: {
+    detectedLowerBound: string;
+  };
+}
+
+interface UserAppliedLowerBound {
+  readonly type: 'userAppliedLowerBound';
+}
+
 export type DataAction =
   | ServerReturnedResolverData
   | ServerFailedToReturnResolverData
@@ -194,6 +205,8 @@ export type DataAction =
   | ServerFailedToReturnCurrentRelatedEventData
   | ServerReturnedNodeEventsInCategory
   | AppRequestedResolverData
+  | AppDetectedAdditionalResolverNodes
+  | UserAppliedLowerBound
   | UserRequestedAdditionalRelatedEvents
   | ServerFailedToReturnNodeEventsInCategory
   | AppAbortedResolverDataRequest

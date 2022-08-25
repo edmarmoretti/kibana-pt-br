@@ -23,10 +23,11 @@ import {
   EuiDescriptionListTitle,
   EuiDescriptionListDescription,
 } from '@elastic/eui';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SideEffectContext } from './side_effect_context';
 import type { Vector2 } from '../types';
 import * as selectors from '../store/selectors';
+import { useResolverDispatch } from './use_resolver_dispatch';
 import type { ResolverAction } from '../store/actions';
 import { useColors } from './use_colors';
 import { StyledDescriptionList } from './panels/styles';
@@ -125,7 +126,7 @@ export const GraphControls = React.memo(
      */
     className?: string;
   }) => {
-    const dispatch: (action: ResolverAction) => unknown = useDispatch();
+    const dispatch = useResolverDispatch();
     const scalingFactor = useSelector(selectors.scalingFactor);
     const { timestamp } = useContext(SideEffectContext);
     const [activePopover, setPopover] = useState<null | 'schemaInfo' | 'nodeLegend'>(null);
