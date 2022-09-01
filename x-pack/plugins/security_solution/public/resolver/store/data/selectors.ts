@@ -46,8 +46,8 @@ export function isTreeLoading(state: DataState): boolean {
   return state.tree?.pendingRequestParameters !== undefined;
 }
 
-export function detectedLowerBound(state: DataState): string | undefined {
-  return state.detectedLowerBound;
+export function detectedBounds(state: DataState): { from?: string; to?: string } | undefined {
+  return state.detectedBounds;
 }
 
 /**
@@ -320,7 +320,6 @@ export const timeRangeFilters = createSelector(
   (state: DataState) => state,
   function timeRangeFilters(dataState): TimeRange {
     const treeParameters = dataState.tree?.currentParameters;
-    const appliedLowerBound = dataState.appliedLowerBound;
     // Should always be provided from date picker, but provide valid defaults in any case.
     const from = new Date(0);
     const to = new Date(timeRangeModel.maxDate);
@@ -330,11 +329,7 @@ export const timeRangeFilters = createSelector(
     };
     if (treeParameters !== undefined) {
       if (treeParameters.filters.from) {
-        if (appliedLowerBound) {
-          timeRange.from = appliedLowerBound;
-        } else {
-          timeRange.from = treeParameters.filters.from;
-        }
+        timeRange.from = treeParameters.filters.from;
       }
       if (treeParameters.filters.to) {
         timeRange.to = treeParameters.filters.to;

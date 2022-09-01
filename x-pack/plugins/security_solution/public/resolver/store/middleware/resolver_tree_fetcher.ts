@@ -91,23 +91,36 @@ export function ResolverTreeFetcher(
             ancestors: ancestorsRequestAmount(dataSourceSchema),
             descendants: descendantsRequestAmount(),
           });
-          const oldestTimestamp = unboundedTree.map((node) => node.data['@timestamp'][0]).pop();
+          const timestamps = unboundedTree.map((node) => node.data['@timestamp'][0]).sort();
+          const oldestTimestamp = timestamps[0];
           api.dispatch({
             type: 'appDetectedAdditionalResolverNodes',
             payload: {
-              detectedLowerBound: oldestTimestamp,
+              detectedBounds: {
+                from: oldestTimestamp,
+              },
+            },
+          });
+          api.dispatch({
+            type: 'serverReturnedResolverData',
+            payload: {
+              result: { nodes: unboundedTree, originID: entityIDToFetch },
+              dataSource,
+              schema: dataSourceSchema,
+              parameters: databaseParameters,
+            },
+          });
+        } else {
+          api.dispatch({
+            type: 'serverReturnedResolverData',
+            payload: {
+              result: resolverTree,
+              dataSource,
+              schema: dataSourceSchema,
+              parameters: databaseParameters,
             },
           });
         }
-        api.dispatch({
-          type: 'serverReturnedResolverData',
-          payload: {
-            result: resolverTree,
-            dataSource,
-            schema: dataSourceSchema,
-            parameters: databaseParameters,
-          },
-        });
       } catch (error) {
         // https://developer.mozilla.org/en-US/docs/Web/API/DOMException#exception-AbortError
         if (error instanceof DOMException && error.name === 'AbortError') {

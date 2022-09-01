@@ -20,13 +20,11 @@ const initialState: DataState = {
   },
   resolverComponentInstanceID: undefined,
   indices: [],
-  detectedLowerBound: undefined,
-  appliedLowerBound: undefined,
+  detectedBounds: undefined,
 };
 /* eslint-disable complexity */
 export const dataReducer: Reducer<DataState, ResolverAction> = (state = initialState, action) => {
   if (action.type === 'appReceivedNewExternalProperties') {
-    const { appliedLowerBound } = state;
     const nextState: DataState = {
       ...state,
       tree: {
@@ -40,12 +38,8 @@ export const dataReducer: Reducer<DataState, ResolverAction> = (state = initialS
       resolverComponentInstanceID: action.payload.resolverComponentInstanceID,
       locationSearch: action.payload.locationSearch,
       indices: action.payload.indices,
+      detectedBounds: undefined,
     };
-    console.log(nextState);
-    if (appliedLowerBound && nextState.tree?.currentParameters) {
-      nextState.tree.currentParameters.filters.from = appliedLowerBound;
-      console.log(nextState);
-    }
     const panelViewAndParameters = selectors.panelViewAndParameters(nextState);
     return {
       ...nextState,
@@ -224,27 +218,11 @@ export const dataReducer: Reducer<DataState, ResolverAction> = (state = initialS
     };
   } else if (action.type === 'appDetectedAdditionalResolverNodes') {
     const {
-      payload: { detectedLowerBound },
+      payload: { detectedBounds },
     } = action;
     return {
       ...state,
-      detectedLowerBound,
-    };
-  } else if (action.type === 'userAppliedLowerBound') {
-    const { detectedLowerBound } = state;
-    return {
-      ...state,
-      appliedLowerBound: detectedLowerBound,
-      tree: {
-        ...state.tree,
-        currentParameters: {
-          ...state.tree?.currentParameters,
-          filters: {
-            ...state.tree?.currentParameters?.filters,
-            from: detectedLowerBound,
-          },
-        },
-      },
+      detectedBounds,
     };
   } else if (action.type === 'serverFailedToReturnNodeData') {
     const updatedData = nodeDataModel.setErrorNodes(state.nodeData, action.payload.requestedIDs);

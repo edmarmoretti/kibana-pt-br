@@ -312,11 +312,6 @@ export interface DataState {
     to?: string;
   };
 
-  readonly appliedBounds?: {
-    from?: string;
-    to?: string;
-  };
-
   readonly tree?: {
     /**
      * The parameters passed from the resolver properties

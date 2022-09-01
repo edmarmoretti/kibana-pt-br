@@ -189,7 +189,10 @@ interface ServerReturnedCurrentRelatedEventData {
 interface AppDetectedAdditionalResolverNodes {
   readonly type: 'appDetectedAdditionalResolverNodes';
   readonly payload: {
-    detectedLowerBound: string;
+    detectedBounds: {
+      from?: string;
+      to?: string;
+    };
   };
 }
 

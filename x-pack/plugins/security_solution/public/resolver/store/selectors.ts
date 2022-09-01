@@ -59,10 +59,7 @@ export const userIsPanning = composeSelectors(cameraStateSelector, cameraSelecto
  */
 export const isAnimating = composeSelectors(cameraStateSelector, cameraSelectors.isAnimating);
 
-export const detectedLowerBound = composeSelectors(
-  dataStateSelector,
-  dataSelectors.detectedLowerBound
-);
+export const detectedBounds = composeSelectors(dataStateSelector, dataSelectors.detectedBounds);
 
 export const resolverTreeHasNodes = composeSelectors(
   dataStateSelector,
