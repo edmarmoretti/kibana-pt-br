@@ -42,7 +42,7 @@ export default async function ({ readConfigFile, log }: FtrConfigProviderContext
     ...(prId !== undefined ? { prId } : {}),
     testJobId,
     testBuildId,
-    ciBuildName: process.env.BUILDKITE_PIPELINE_SLUG,
+    ciBuildName: process.env.BUILDKITE_PIPELINE_SLUG || '',
   };
 
   return {
