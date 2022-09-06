@@ -11,7 +11,15 @@ steps:
     command: .buildkite/scripts/steps/scalability/benchmarking.sh
     agents:
       queue: kb-static-scalability
+    key: tests
     timeout_in_minutes: 90
+
+  - label: ':shipit: Upload test reports'
+    command: .buildkite/scripts/steps/scalability/report_test_results.sh
+    agents:
+      queue: n2-2
+    depends_on: tests
+    timeout_in_minutes: 10
 
   - wait: ~
     continue_on_failure: true
