@@ -47,8 +47,8 @@ export const useAutotuneTimerange = () => {
   }, [formattedFrom, formattedTo]);
 
   useEffect(() => {
-    if (from && to) {
+    if (detectedBounds?.from || detectedBounds?.to) {
       toasts.addSuccess(toastMessage);
     }
-  }, [toastMessage, toasts, from, to]);
+  }, [toastMessage, toasts, detectedBounds]);
 };
