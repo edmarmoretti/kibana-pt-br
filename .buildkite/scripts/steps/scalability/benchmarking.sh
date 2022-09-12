@@ -57,6 +57,9 @@ checkout_and_compile_load_runner() {
 
 upload_test_results() {
   cd "${KIBANA_DIR}"
+  echo "--- Archive FTR server logs and upload as build artifacts"
+  tar -czf "server-logs.tar.gz" data/ftr_servers_logs/**/*
+  buildkite-agent artifact upload server-logs.tar.gz
   echo "--- Archive Gatling reports and upload as build artifacts"
   tar -czf "scalability_test_report.tar.gz" --exclude=simulation.log -C kibana-load-testing/target gatling
   buildkite-agent artifact upload "scalability_test_report.tar.gz"
@@ -116,6 +119,8 @@ for journey in scalability_traces/server/*; do
       --config x-pack/test/performance/scalability/config.ts \
       --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
       --debug
+      --logToFile
+      --bail
 done
 
 echo "--- Upload test results"
