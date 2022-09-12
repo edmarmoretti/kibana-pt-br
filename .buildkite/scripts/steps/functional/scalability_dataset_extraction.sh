@@ -16,7 +16,7 @@ OUTPUT_DIR="${KIBANA_DIR}/${OUTPUT_REL}"
 .buildkite/scripts/bootstrap.sh
 
 echo "--- Extract APM metrics"
-scalabilityJourneys=("login" "ecommerce_dashboard" "flight_dashboard" "web_logs_dashboard" "promotion_tracking_dashboard" "many_fields_discover")
+scalabilityJourneys=("login")
 
 for i in "${scalabilityJourneys[@]}"; do
     JOURNEY_NAME="${i}"
