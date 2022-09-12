@@ -70,7 +70,7 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
   }
 
   const source = hits[0]!._source as TransactionDocument;
-  const kibanaVersion = source.service.version;
+  const kibanaVersion = source.service.version.replace(/[^0-9.]/g, '');
 
   const kibanaRequests = getKibanaRequests(hits, withoutStaticResources);
   const esRequests = await getESRequests(esClient, kibanaRequests);
@@ -80,10 +80,13 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
   const esStreams = requestsToStreams<Request>(esRequests);
   const kibanaStreams = requestsToStreams<Request>(kibanaRequests);
 
-  const outputDir = path.resolve('target/scalability_traces');
+  const outputDir = path.resolve(
+    `target/scalability_traces/${kibanaVersion}/${journeyName.replace(/ /g, '')}`
+  );
   const fileName = `${journeyName.replace(/ /g, '')}-${buildId}.json`;
 
   if (scalabilitySetup) {
+    // Kibana server requests
     await saveFile(
       {
         journeyName,
@@ -92,12 +95,13 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
         testData,
         streams: kibanaStreams,
       },
-      path.resolve(outputDir, 'server'),
+      path.resolve(outputDir, buildId, 'kibana'),
       fileName,
       log
     );
   }
 
+  // Elasticsearch requests
   await saveFile(
     {
       journeyName,
@@ -105,8 +109,10 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
       testData,
       streams: esStreams,
     },
-    path.resolve(outputDir, 'es'),
+    path.resolve(outputDir, buildId, 'es'),
     fileName,
     log
   );
+  // latest run pointer
+  await fs.writeFile(path.resolve(outputDir, 'latest'), buildId, 'utf8');
 };

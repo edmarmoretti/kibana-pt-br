@@ -9,7 +9,8 @@ PASS_FROM_VAULT="$(retry 5 5 vault read -field=password secret/kibana-issues/dev
 ES_SERVER_URL="https://kibana-ops-e2e-perf.es.us-central1.gcp.cloud.es.io:9243"
 BUILD_ID="${BUILDKITE_BUILD_ID}"
 GCS_BUCKET="gs://kibana-performance/scalability-tests"
-OUTPUT_REL="target/scalability_tests/${BUILD_ID}"
+KIBANA_VERSION=$(cat package.json|grep version|head -1|awk -F: '{ print $2 }'|sed 's/[", ]//g')
+OUTPUT_REL="target/scalability_tests/${KIBANA_VERSION}"
 OUTPUT_DIR="${KIBANA_DIR}/${OUTPUT_REL}"
 
 .buildkite/scripts/bootstrap.sh
@@ -38,15 +39,15 @@ tar -czf "${OUTPUT_DIR}/scalability_traces.tar.gz" -C target scalability_traces
 buildkite-agent artifact upload "${OUTPUT_DIR}/scalability_traces.tar.gz"
 
 echo "--- Downloading Kibana artifacts used in tests"
-download_artifact kibana-default.tar.gz "${OUTPUT_DIR}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
-download_artifact kibana-default-plugins.tar.gz "${OUTPUT_DIR}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
+download_artifact kibana-default.tar.gz "${OUTPUT_DIR}/${BUILD_ID}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
+download_artifact kibana-default-plugins.tar.gz "${OUTPUT_DIR}/${BUILD_ID}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
 
 echo "--- Adding commit info"
-echo "${BUILDKITE_COMMIT}" > "${OUTPUT_DIR}/KIBANA_COMMIT_HASH"
+echo "${BUILDKITE_COMMIT}" > "${OUTPUT_DIR}/${BUILD_ID}/KIBANA_COMMIT_HASH"
 
 echo "--- Uploading ${OUTPUT_REL} dir to ${GCS_BUCKET}"
 cd "${OUTPUT_DIR}/.."
-gsutil -m cp -r "${BUILD_ID}" "${GCS_BUCKET}"
+gsutil -m cp -r "${KIBANA_VERSION}" "${GCS_BUCKET}"
 cd -
 
 echo "--- Promoting '${BUILD_ID}' dataset to LATEST"
