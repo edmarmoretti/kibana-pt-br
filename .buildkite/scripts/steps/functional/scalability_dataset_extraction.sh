@@ -34,10 +34,6 @@ done
 echo "--- Creating scalability dataset in ${OUTPUT_REL}"
 mkdir -p "${OUTPUT_DIR}/${BUILD_ID}"
 
-echo "--- Archiving scalability trace and uploading as build artifact"
-tar -czf "${OUTPUT_DIR}/scalability_traces.tar.gz" -C target scalability_traces
-buildkite-agent artifact upload "${OUTPUT_DIR}/scalability_traces.tar.gz"
-
 echo "--- Downloading Kibana artifacts used in tests"
 download_artifact kibana-default.tar.gz "${OUTPUT_DIR}/${BUILD_ID}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
 download_artifact kibana-default-plugins.tar.gz "${OUTPUT_DIR}/${BUILD_ID}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
@@ -47,11 +43,16 @@ echo "${BUILDKITE_COMMIT}" > "${OUTPUT_DIR}/${BUILD_ID}/KIBANA_COMMIT_HASH"
 
 echo "--- Uploading ${OUTPUT_REL} dir to ${GCS_BUCKET}"
 cd "${OUTPUT_DIR}/.."
+ls -la
 gsutil -m cp -r "${KIBANA_VERSION}" "${GCS_BUCKET}"
 cd -
 
 echo "--- Promoting '${BUILD_ID}' dataset to LATEST"
-cd "${OUTPUT_DIR}/.."
+cd "${OUTPUT_DIR}"
 echo "${BUILD_ID}" > latest
 gsutil cp latest "${GCS_BUCKET}"
 cd -
+
+echo "--- Archiving scalability trace and uploading as build artifact"
+tar -czf "${OUTPUT_DIR}/scalability_traces.tar.gz" -C target scalability_traces
+buildkite-agent artifact upload "${OUTPUT_DIR}/scalability_traces.tar.gz"
