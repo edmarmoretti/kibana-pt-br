@@ -109,7 +109,7 @@ curl --retry 120 \
 
 export ELASTIC_APM_ACTIVE=true
 
-export GATLING_STEP_MAX_USERS_COUNT=700
+export GATLING_STEP_MAX_USERS_COUNT=600
 export GATLING_STEP_DURATION=2m
 
 for journey in scalability_traces/server/*; do
