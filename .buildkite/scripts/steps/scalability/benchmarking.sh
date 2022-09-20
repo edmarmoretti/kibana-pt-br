@@ -44,7 +44,7 @@ checkout_and_compile_load_runner() {
     git init
     git remote add origin https://github.com/elastic/kibana-load-testing.git
   fi
-  git fetch origin --depth 1 "stress-test-with-500-users"
+  git fetch origin --depth 1 "override-scalability-setup"
   git reset --hard FETCH_HEAD
 
   KIBANA_LOAD_TESTING_GIT_COMMIT="$(git rev-parse HEAD)"
@@ -108,6 +108,9 @@ curl --retry 120 \
   -I -XGET "${TEST_ES_URL}/_cluster/health?wait_for_nodes=>=1&wait_for_status=yellow"
 
 export ELASTIC_APM_ACTIVE=true
+
+export GATLING_STEP_MAX_USERS_COUNT=700
+export GATLING_STEP_DURATION=2m
 
 for journey in scalability_traces/server/*; do
     export SCALABILITY_JOURNEY_PATH="$KIBANA_DIR/$journey"
