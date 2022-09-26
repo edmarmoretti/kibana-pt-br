@@ -177,6 +177,7 @@ describe('GuidedOnboarding ApiService', () => {
         .isGuideStepActive$(testGuide, testGuideFirstStep)
         .subscribe((isStepActive) => {
           if (isStepActive) {
+            subscription.unsubscribe();
             done();
           }
         });
@@ -187,6 +188,7 @@ describe('GuidedOnboarding ApiService', () => {
         .isGuideStepActive$(testGuide, testGuideFirstStep)
         .subscribe((isStepActive) => {
           if (!isStepActive) {
+            subscription.unsubscribe();
             done();
           }
         });

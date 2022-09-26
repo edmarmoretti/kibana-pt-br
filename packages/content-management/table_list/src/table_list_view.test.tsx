@@ -49,7 +49,7 @@ const requiredProps: TableListViewProps = {
 
 describe('TableListView', () => {
   beforeAll(() => {
-    jest.useFakeTimers('legacy');
+    jest.useFakeTimers({ legacyFakeTimers: true });
   });
 
   afterAll(() => {
