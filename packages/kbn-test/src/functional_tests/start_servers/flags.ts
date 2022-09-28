@@ -31,8 +31,8 @@ export const FLAG_OPTIONS: FlagOptions = {
 
 export function parseFlags(flags: FlagsReader) {
   const configs = [
-    ...(flags.arrayOfPaths('config') ?? []),
-    ...(flags.arrayOfPaths('journey') ?? []),
+    ...(flags.arrayOfStrings('config') ?? []),
+    ...(flags.arrayOfStrings('journey') ?? []),
   ];
   if (configs.length !== 1) {
     throw createFlagError(`expected exactly one --config or --journey flag`);
