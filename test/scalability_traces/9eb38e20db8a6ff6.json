@@ -1,0 +1,55 @@
+{
+  "journeyName": "GET /api/exception_lists/summary",
+  "kibanaVersion": "8.6.0-SNAPSHOT",
+  "testData": {
+    "esArchives": [
+      "x-pack/performance/es_archives/ecommerce_sample_data"
+    ],
+    "kbnArchives": [
+      "x-pack/performance/kbn_archives/promotion_tracking_dashboard"
+    ]
+  },
+  "streams": [
+    {
+      "startTime": "2022-09-28T15:31:45.374Z",
+      "endTime": "2022-09-28T15:31:45.444Z",
+      "requests": [
+        {
+          "transactionId": "9eb38e20db8a6ff6",
+          "name": "GET /api/exception_lists/summary",
+          "date": "2022-09-28T15:31:45.374Z",
+          "duration": 70251,
+          "http": {
+            "method": "GET",
+            "path": "/api/exception_lists/summary",
+            "query": "?list_id=endpoint_host_isolation_exceptions&namespace_type=agnostic",
+            "headers": {
+              "Cookie": "sid=Fe26.2**5ecfe0feb599f1dac444a94920220c91ab1bdf4e5c02bd8511988072e8e126ee*HXpYxtrySnWiTnb5NVDCAQ*AQCd2M4qQWUj57PojxzLds9vfalN4aQ_fa6W6AusjT2WmOJ7eiZDWo1NO9t-IwuBYuI3SQeF2BRwIhndDEgXGdzUTV1jZmrHMC-m-DeQNOrkkUU-bwtWD67hbM9ycFFGNMDvHvBnqPiMsu94vMzGKUYkw5PVBDEV82G-L7eGu2npldW1I3CyC0lEPaHp-1mUfQA7Jz-8T0A-8L-OnaZAE55zUuXSgGlZKnhzVcGNRDY9gFPB7cPD1OIggF-SnrLA**c81c2193f8e82339d51c9330e7bb90f47429bc995e466e8e4271f1f3edb759fd*TqO-TQP7T-T4Z95n-BoRBbvTly7gSPor5Vtvvf1yV94",
+              "Sec-Ch-Ua": "",
+              "Accept": "*/*",
+              "Kbn-Version": "8.6.0-SNAPSHOT",
+              "Sec-Ch-Ua-Platform": "",
+              "Connection": "keep-alive",
+              "Referer": "http://localhost:5620/app/dashboards",
+              "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/98.0.4695.0 Safari/537.36",
+              "Sec-Fetch-Dest": "empty",
+              "Sec-Fetch-Site": "same-origin",
+              "X-Kbn-Context": "%7B%22name%22%3A%22dashboards%22%2C%22url%22%3A%22%2Fapp%2Fdashboards%22%2C%22type%22%3A%22application%22%2C%22page%22%3A%22list%22%7D",
+              "Host": "localhost:5620",
+              "Accept-Encoding": "gzip, deflate, br",
+              "Pragma": "no-cache",
+              "Traceparent": "00-26d62f2e215b51823e2375f0a2101d2c-6ac4b400d8db90cb-01",
+              "Sec-Fetch-Mode": "cors",
+              "Authorization": "[REDACTED]",
+              "Cache-Control": "no-cache",
+              "Sec-Ch-Ua-Mobile": "?0",
+              "Content-Type": "application/json"
+            },
+            "statusCode": 200
+          },
+          "spanCount": 6
+        }
+      ]
+    }
+  ]
+}

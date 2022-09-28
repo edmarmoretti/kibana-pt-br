@@ -1,0 +1,44 @@
+{
+  "journeyName": "POST /internal/security/login",
+  "kibanaVersion": "8.6.0-SNAPSHOT",
+  "testData": {
+    "esArchives": [
+      "x-pack/performance/es_archives/ecommerce_sample_data"
+    ],
+    "kbnArchives": [
+      "x-pack/performance/kbn_archives/promotion_tracking_dashboard"
+    ]
+  },
+  "streams": [
+    {
+      "startTime": "2022-09-28T15:31:36.680Z",
+      "endTime": "2022-09-28T15:31:37.986Z",
+      "requests": [
+        {
+          "transactionId": "02c395806c3a4a64",
+          "name": "POST /internal/security/login",
+          "date": "2022-09-28T15:31:36.680Z",
+          "duration": 1306005,
+          "http": {
+            "method": "POST",
+            "path": "/internal/security/login",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Kbn-Version": "8.6.0-SNAPSHOT",
+              "User-Agent": "axios/0.27.2",
+              "Connection": "close",
+              "Sec-Fetch-Site": "same-origin",
+              "Host": "localhost:5620",
+              "Content-Length": "153",
+              "Sec-Fetch-Mode": "cors",
+              "Content-Type": "application/json"
+            },
+            "body": "{\"providerType\":\"basic\",\"providerName\":\"basic\",\"currentURL\":\"http://localhost:5620/login?next=%2F\",\"params\":{\"username\":\"elastic\",\"password\":\"changeme\"}}",
+            "statusCode": 200
+          },
+          "spanCount": 3
+        }
+      ]
+    }
+  ]
+}

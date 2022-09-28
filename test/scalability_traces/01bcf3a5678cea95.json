@@ -1,0 +1,66 @@
+{
+  "journeyName": "GET /api/banners/info",
+  "kibanaVersion": "8.6.0-SNAPSHOT",
+  "scalabilitySetup": {
+    "warmup": [
+      {
+        "action": "constantUsersPerSec",
+        "userCount": 10,
+        "duration": "30s"
+      }
+    ],
+    "test": [
+      {
+        "action": "rampUsersPerSec",
+        "minUsersCount": 10,
+        "maxUsersCount": 700,
+        "duration": "7m"
+      }
+    ],
+    "maxDuration": "10m"
+  },
+  "testData": {
+    "esArchives": [],
+    "kbnArchives": []
+  },
+  "streams": [
+    {
+      "startTime": "2022-09-28T15:29:06.381Z",
+      "endTime": "2022-09-28T15:29:06.382Z",
+      "requests": [
+        {
+          "transactionId": "01bcf3a5678cea95",
+          "name": "GET /api/banners/info",
+          "date": "2022-09-28T15:29:06.381Z",
+          "duration": 1786,
+          "http": {
+            "method": "GET",
+            "path": "/api/banners/info",
+            "headers": {
+              "Sec-Ch-Ua": "",
+              "Accept": "*/*",
+              "Kbn-Version": "8.6.0-SNAPSHOT",
+              "Sec-Ch-Ua-Platform": "",
+              "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/98.0.4695.0 Safari/537.36",
+              "Connection": "keep-alive",
+              "Referer": "http://localhost:5620/login?next=%2F",
+              "Sec-Fetch-Dest": "empty",
+              "Sec-Fetch-Site": "same-origin",
+              "Host": "localhost:5620",
+              "X-Kbn-Context": "%7B%22name%22%3A%22security_login%22%2C%22url%22%3A%22%2Flogin%22%7D",
+              "Pragma": "no-cache",
+              "Accept-Encoding": "gzip, deflate, br",
+              "Traceparent": "00-3afe9e392ea18dc60d23bfa3f6917e22-e4fd5ffd5d753ba5-01",
+              "Sec-Fetch-Mode": "cors",
+              "Cache-Control": "no-cache",
+              "Sec-Ch-Ua-Mobile": "?0",
+              "Content-Type": "application/json"
+            },
+            "statusCode": 200
+          },
+          "spanCount": 0
+        }
+      ]
+    }
+  ]
+}
