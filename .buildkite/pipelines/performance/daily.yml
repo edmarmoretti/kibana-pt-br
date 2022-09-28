@@ -1,3 +1,6 @@
+env:
+  KIBANA_BUILD_ID: 01836400-6cc5-4175-a309-98819ab5bed4
+
 steps:
   - label: ':male-mechanic::skin-tone-2: Pre-Build'
     command: .buildkite/scripts/lifecycle/pre_build.sh
