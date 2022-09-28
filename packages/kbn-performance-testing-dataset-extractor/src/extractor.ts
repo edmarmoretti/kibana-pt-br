@@ -13,7 +13,7 @@ import path from 'path';
 import { ToolingLog } from '@kbn/tooling-log';
 import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
 import { ESClient, Document, TransactionDocument } from './es_client';
-import { getESRequests, getKibanaRequests } from './request';
+import { getESRequests, getKibanaRequests, getUniqueRequests } from './request';
 import { requestsToStreams } from './stream';
 import { CLIParams, Request } from './types';
 import { DATE_FORMAT } from './constants';
@@ -73,6 +73,8 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
   const kibanaVersion = source.service.version;
 
   const kibanaRequests = getKibanaRequests(hits, withoutStaticResources);
+  const uniqueRequests = getUniqueRequests(kibanaRequests);
+  log.info(uniqueRequests.length);
   const esRequests = await getESRequests(esClient, kibanaRequests);
   log.info(
     `Found ${kibanaRequests.length} Kibana server and ${esRequests.length} Elasticsearch requests`
@@ -84,11 +86,26 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
   const fileName = `${journeyName.replace(/ /g, '')}-${buildId}.json`;
 
   if (scalabilitySetup) {
+    for (const request of uniqueRequests) {
+      await saveFile(
+        {
+          journeyName: request.name,
+          kibanaVersion,
+          scalabilitySetup: scalabilitySetup.endpointSimulation,
+          testData,
+          streams: requestsToStreams<Request>([request]),
+        },
+        path.resolve(outputDir, 'server', 'endpoint'),
+        `${request.transactionId}.json`,
+        log
+      );
+    }
+
     await saveFile(
       {
         journeyName,
         kibanaVersion,
-        scalabilitySetup,
+        scalabilitySetup: scalabilitySetup.journeySimulation,
         testData,
         streams: kibanaStreams,
       },

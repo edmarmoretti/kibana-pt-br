@@ -37,9 +37,70 @@ export interface ConstantConcurrentUsersAction {
   userCount: number;
 }
 
-export type ScalabilityAction = RampConcurrentUsersAction | ConstantConcurrentUsersAction;
+export interface AtOnceUsersAction {
+  action: 'atOnceUsers';
+  userCount: number;
+}
 
-export interface ScalabilitySetup {
+export interface RampUsersAction {
+  action: 'rampUsers';
+  /**
+   * Duration strings must be formatted as string that starts with an integer and
+   * ends with either "m" or "s" for minutes and seconds, respectively
+   *
+   * eg: "1m" or "30s"
+   */
+  duration: string;
+  userCount: number;
+}
+
+export interface ConstantUsersPerSecAction {
+  action: 'constantUsersPerSec';
+  /**
+   * Duration strings must be formatted as string that starts with an integer and
+   * ends with either "m" or "s" for minutes and seconds, respectively
+   *
+   * eg: "1m" or "30s"
+   */
+  duration: string;
+  userCount: number;
+}
+
+export interface RampUsersPerSecAction {
+  action: 'rampUsersPerSec';
+  /**
+   * Duration strings must be formatted as string that starts with an integer and
+   * ends with either "m" or "s" for minutes and seconds, respectively
+   *
+   * eg: "1m" or "30s"
+   */
+  duration: string;
+  minUsersCount: number;
+  maxUsersCount: number;
+}
+
+export interface StressPeakUsersAction {
+  action: 'stressPeakUsers';
+  /**
+   * Duration strings must be formatted as string that starts with an integer and
+   * ends with either "m" or "s" for minutes and seconds, respectively
+   *
+   * eg: "1m" or "30s"
+   */
+  duration: string;
+  userCount: number;
+}
+
+export type ScalabilityAction =
+  | RampConcurrentUsersAction
+  | ConstantConcurrentUsersAction
+  | AtOnceUsersAction
+  | RampUsersAction
+  | ConstantUsersPerSecAction
+  | RampUsersPerSecAction
+  | StressPeakUsersAction;
+
+export interface Simulation {
   /**
    * Duration strings must be formatted as string that starts with an integer and
    * ends with either "m" or "s" for minutes and seconds, respectively
@@ -49,6 +110,11 @@ export interface ScalabilitySetup {
   maxDuration: string;
   warmup: ScalabilityAction[];
   test: ScalabilityAction[];
+}
+
+export interface ScalabilitySetup {
+  journeySimulation: Simulation;
+  endpointSimulation: Simulation;
 }
 
 export interface JourneyConfigOptions<CtxExt> {

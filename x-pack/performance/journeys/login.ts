@@ -11,27 +11,47 @@ import { subj } from '@kbn/test-subj-selector';
 export const journey = new Journey({
   skipAutoLogin: true,
   scalabilitySetup: {
-    warmup: [
-      {
-        action: 'constantConcurrentUsers',
-        userCount: 10,
-        duration: '30s',
-      },
-      {
-        action: 'rampConcurrentUsers',
-        minUsersCount: 10,
-        maxUsersCount: 50,
-        duration: '2m',
-      },
-    ],
-    test: [
-      {
-        action: 'constantConcurrentUsers',
-        userCount: 50,
-        duration: '5m',
-      },
-    ],
-    maxDuration: '10m',
+    journeySimulation: {
+      warmup: [
+        {
+          action: 'constantUsersPerSec',
+          userCount: 10,
+          duration: '30s',
+        },
+        {
+          action: 'rampUsersPerSec',
+          minUsersCount: 10,
+          maxUsersCount: 200,
+          duration: '2m',
+        },
+      ],
+      test: [
+        {
+          action: 'constantUsersPerSec',
+          userCount: 200,
+          duration: '5m',
+        },
+      ],
+      maxDuration: '10m',
+    },
+    endpointSimulation: {
+      warmup: [
+        {
+          action: 'constantUsersPerSec',
+          userCount: 10,
+          duration: '30s',
+        },
+      ],
+      test: [
+        {
+          action: 'rampUsersPerSec',
+          minUsersCount: 10,
+          maxUsersCount: 700,
+          duration: '7m',
+        },
+      ],
+      maxDuration: '10m',
+    },
   },
 }).step('Login', async ({ page, kbnUrl, inputDelays }) => {
   await page.goto(kbnUrl.get());

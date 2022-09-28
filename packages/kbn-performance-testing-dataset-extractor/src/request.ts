@@ -105,3 +105,14 @@ export const getESRequests = async (esClient: ESClient, requests: Request[]) => 
   }
   return esRequests;
 };
+
+export const getUniqueRequests = (requests: Request[]) => {
+  const requestSet = new Map<string, Request>();
+  for (const request of requests) {
+    const key = request.http.path;
+    if (!requestSet.has(key)) {
+      requestSet.set(key, request);
+    }
+  }
+  return [...requestSet.values()];
+};
