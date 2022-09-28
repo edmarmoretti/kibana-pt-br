@@ -13,27 +13,29 @@ export const journey = new Journey({
   kbnArchives: ['x-pack/performance/kbn_archives/promotion_tracking_dashboard'],
   esArchives: ['x-pack/performance/es_archives/ecommerce_sample_data'],
   scalabilitySetup: {
-    warmup: [
-      {
-        action: 'constantConcurrentUsers',
-        userCount: 10,
-        duration: '30s',
-      },
-      {
-        action: 'rampConcurrentUsers',
-        minUsersCount: 10,
-        maxUsersCount: 50,
-        duration: '2m',
-      },
-    ],
-    test: [
-      {
-        action: 'constantConcurrentUsers',
-        userCount: 50,
-        duration: '5m',
-      },
-    ],
-    maxDuration: '10m',
+    journeySimulation: {
+      warmup: [
+        {
+          action: 'constantConcurrentUsers',
+          userCount: 10,
+          duration: '30s',
+        },
+        {
+          action: 'rampConcurrentUsers',
+          minUsersCount: 10,
+          maxUsersCount: 50,
+          duration: '2m',
+        },
+      ],
+      test: [
+        {
+          action: 'constantConcurrentUsers',
+          userCount: 50,
+          duration: '5m',
+        },
+      ],
+      maxDuration: '10m',
+    },
   },
 })
   .step('Go to Dashboards Page', async ({ page, kbnUrl }) => {

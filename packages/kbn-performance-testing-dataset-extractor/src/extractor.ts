@@ -73,8 +73,6 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
   const kibanaVersion = source.service.version;
 
   const kibanaRequests = getKibanaRequests(hits, withoutStaticResources);
-  const uniqueRequests = getUniqueRequests(kibanaRequests);
-  log.info(uniqueRequests.length);
   const esRequests = await getESRequests(esClient, kibanaRequests);
   log.info(
     `Found ${kibanaRequests.length} Kibana server and ${esRequests.length} Elasticsearch requests`
@@ -86,19 +84,25 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
   const fileName = `${journeyName.replace(/ /g, '')}-${buildId}.json`;
 
   if (scalabilitySetup) {
-    for (const request of uniqueRequests) {
-      await saveFile(
-        {
-          journeyName: request.name,
-          kibanaVersion,
-          scalabilitySetup: scalabilitySetup.endpointSimulation,
-          testData,
-          streams: requestsToStreams<Request>([request]),
-        },
-        path.resolve(outputDir, 'server', 'endpoint'),
-        `${request.transactionId}.json`,
-        log
-      );
+    if (scalabilitySetup.endpointSimulation) {
+      const uniqueRequests = getUniqueRequests(kibanaRequests);
+      for (const request of uniqueRequests) {
+        const jsonFileName = `${journeyName.replace(/ /g, '')}-${
+          request.transactionId
+        }-${buildId}.json`;
+        await saveFile(
+          {
+            journeyName: request.name,
+            kibanaVersion,
+            scalabilitySetup: scalabilitySetup.endpointSimulation,
+            testData,
+            streams: requestsToStreams<Request>([request]),
+          },
+          path.resolve(outputDir, 'server', 'endpoint'),
+          jsonFileName,
+          log
+        );
+      }
     }
 
     await saveFile(

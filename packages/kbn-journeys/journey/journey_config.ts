@@ -114,7 +114,7 @@ export interface Simulation {
 
 export interface ScalabilitySetup {
   journeySimulation: Simulation;
-  endpointSimulation: Simulation;
+  endpointSimulation?: Simulation;
 }
 
 export interface JourneyConfigOptions<CtxExt> {

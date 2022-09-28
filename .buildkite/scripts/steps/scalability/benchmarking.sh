@@ -112,9 +112,19 @@ curl --retry 120 \
 
 export ELASTIC_APM_ACTIVE=true
 
-for journey in scalability_traces/server/*; do
+#for journey in scalability_traces/server/*; do
+export SCALABILITY_JOURNEY_PATH="$KIBANA_DIR/scalability_traces/server/login"
+echo "--- Run journey scalability file: $SCALABILITY_JOURNEY_PATH"
+node scripts/functional_tests \
+  --config x-pack/test/scalability/config.ts \
+  --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
+  --logToFile \
+  --debug
+#done
+
+for journey in scalability_traces/server/endpoint/*; do
     export SCALABILITY_JOURNEY_PATH="$KIBANA_DIR/$journey"
-    echo "--- Run scalability file: $SCALABILITY_JOURNEY_PATH"
+    echo "--- Run single endpoint scalability file: $SCALABILITY_JOURNEY_PATH"
     node scripts/functional_tests \
       --config x-pack/test/scalability/config.ts \
       --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
