@@ -1,16 +1,21 @@
 /*
  * Copyright Elasticsearch B.V. and/or licensed to Elasticsearch B.V. under one
  * or more contributor license agreements. Licensed under the Elastic License
- * 2.0 and the Server Side Public License, v 1; you may not use this file except
- * in compliance with, at your election, the Elastic License 2.0 or the Server
- * Side Public License, v 1.
+ * 2.0; you may not use this file except in compliance with the Elastic License
+ * 2.0.
  */
 
-import { EsArchiver } from '@kbn/es-archiver';
-import { FtrProviderContext } from './ftr_provider_context';
-import { extendEsArchiver } from './kibana_server';
+import Path from 'path';
 
-export function EsArchiverProvider({ getService }: FtrProviderContext): EsArchiver {
+import { EsArchiver } from '@kbn/es-archiver';
+import { REPO_ROOT } from '@kbn/utils';
+
+import { KibanaServer } from '@kbn/ftr-common-functional-services';
+
+const INTEGRATION_TEST_ROOT =
+  process.env.WORKSPACE || Path.resolve(REPO_ROOT, '../integration-test');
+
+export function EsArchiverProvider({ getService }) {
   const config = getService('config');
   const client = getService('es');
   const log = getService('log');
@@ -18,12 +23,13 @@ export function EsArchiverProvider({ getService }: FtrProviderContext): EsArchiv
   const retry = getService('retry');
 
   const esArchiver = new EsArchiver({
+    baseDir: INTEGRATION_TEST_ROOT,
     client,
     log,
     kbnClient: kibanaServer,
   });
 
-  extendEsArchiver({
+  KibanaServer.extendEsArchiver({
     esArchiver,
     kibanaServer,
     retry,
