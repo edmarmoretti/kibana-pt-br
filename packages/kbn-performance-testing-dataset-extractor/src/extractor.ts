@@ -26,9 +26,20 @@ const calculateTransactionTimeRage = (hit: SearchHit<Document>) => {
   return { startTime, endTime };
 };
 
+const getOutputDirs = async (journeyName: string, buildId: string, version: string) => {
+  const latestRunDir = path.resolve(
+    'target',
+    'scalability-traces',
+    `${journeyName.replace(/ /g, '')}`,
+    version
+  );
+  const outputDir = path.resolve(latestRunDir, buildId);
+
+  return { latestRunDir, outputDir };
+};
+
 const saveFile = async (output: any, outputDir: string, fileName: string, log: ToolingLog) => {
   const filePath = path.resolve(outputDir, fileName);
-
   if (!existsSync(outputDir)) {
     await fs.mkdir(outputDir, { recursive: true });
   }
@@ -78,26 +89,17 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
     `Found ${kibanaRequests.length} Kibana server and ${esRequests.length} Elasticsearch requests`
   );
   const esStreams = requestsToStreams<Request>(esRequests);
-  const kibanaStreams = requestsToStreams<Request>(kibanaRequests);
 
-  const outputDir = path.resolve('target/scalability_traces');
+  const { latestRunDir, outputDir } = await getOutputDirs(
+    journeyName,
+    buildId,
+    kibanaVersion.replace(/[^0-9\.]/g, '')
+  );
+  // Save 'buildId' in 'latest'
+  await saveFile(buildId, latestRunDir, 'latest', log);
   const fileName = `${journeyName.replace(/ /g, '')}-${buildId}.json`;
 
-  if (scalabilitySetup) {
-    await saveFile(
-      {
-        journeyName,
-        kibanaVersion,
-        scalabilitySetup,
-        testData,
-        streams: kibanaStreams,
-      },
-      path.resolve(outputDir, 'server'),
-      fileName,
-      log
-    );
-  }
-
+  // Always save Elasticsearch request streams
   await saveFile(
     {
       journeyName,
@@ -109,4 +111,21 @@ export const extractor = async ({ param, client, log }: CLIParams) => {
     fileName,
     log
   );
+
+  // Save Kibana requests streams only if scalabilitySetup is defined for journey
+  if (scalabilitySetup) {
+    const kibanaStreams = requestsToStreams<Request>(kibanaRequests);
+    await saveFile(
+      {
+        journeyName,
+        kibanaVersion,
+        scalabilitySetup,
+        testData,
+        streams: kibanaStreams,
+      },
+      path.resolve(outputDir, 'kibana'),
+      fileName,
+      log
+    );
+  }
 };

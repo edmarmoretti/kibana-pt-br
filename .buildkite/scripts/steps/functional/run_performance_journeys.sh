@@ -35,6 +35,22 @@ trap 'killall node -q' EXIT
 export TEST_ES_URL=http://elastic:changeme@localhost:9200
 export TEST_ES_DISABLE_STARTUP=true
 
+echo "--- $journey - 🔎 Start es"
+
+node scripts/es snapshot&
+export esPid=$!
+
+# Pings the es server every second for up to 2 minutes until it is green
+curl \
+  --fail \
+  --silent \
+  --retry 120 \
+  --retry-delay 1 \
+  --retry-connrefused \
+  -XGET "${TEST_ES_URL}/_cluster/health?wait_for_nodes=>=1&wait_for_status=yellow" \
+  > /dev/null
+echo "✅ ES is ready and will run in the background"
+
 echo "--- determining which journeys to run"
 
 journeys=$(buildkite-agent meta-data get "failed-journeys" --default '')
@@ -57,67 +73,47 @@ while read -r journey; do
     continue;
   fi
 
-  echo "--- $journey - 🔎 Start es"
-
-  node scripts/es snapshot&
-  export esPid=$!
-
-  # Pings the es server every second for up to 2 minutes until it is green
-  curl \
-    --fail \
-    --silent \
-    --retry 120 \
-    --retry-delay 1 \
-    --retry-connrefused \
-    -XGET "${TEST_ES_URL}/_cluster/health?wait_for_nodes=>=1&wait_for_status=yellow" \
-    > /dev/null
-
-  echo "✅ ES is ready and will run in the background"
-
-  phases=("TEST")
   status=0
-  for phase in "${phases[@]}"; do
-    echo "--- $journey - $phase"
+  echo "--- $journey"
 
-    export TEST_PERFORMANCE_PHASE="$phase"
+  export TEST_PERFORMANCE_PHASE="TEST"
 
-    set +e
-    node scripts/functional_tests \
-      --config "$journey" \
-      --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
-      --debug \
-      --bail
-    status=$?
-    set -e
+  set +e
+  node scripts/functional_tests \
+    --config "$journey" \
+    --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
+    --debug \
+    --bail
+  status=$?
+  set -e
 
-    if [ $status -ne 0 ]; then
-      failedJourneys+=("$journey")
-      echo "^^^ +++"
-      echo "❌ FTR failed with status code: $status"
-      break
-    fi
-  done
-
-  # remove trap, we're manually shutting down
-  trap - EXIT;
-
-  echo "--- $journey - 🔎 Shutdown ES"
-  killall node
-  echo "waiting for $esPid to exit gracefully";
-
-  timeout=30 #seconds
-  dur=0
-  while is_running $esPid; do
-    sleep 1;
-    ((dur=dur+1))
-    if [ $dur -ge $timeout ]; then
-      echo "es still running after $dur seconds, killing ES and node forcefully";
-      killall -SIGKILL java
-      killall -SIGKILL node
-      sleep 5;
-    fi
-  done
+  if [ $status -ne 0 ]; then
+    failedJourneys+=("$journey")
+    echo "^^^ +++"
+    echo "❌ FTR failed with status code: $status"
+    break
+  fi
 done <<< "$journeys"
+
+# remove trap, we're manually shutting down
+trap - EXIT;
+
+echo "--- 🔎 Shutdown ES"
+killall node
+echo "waiting for $esPid to exit gracefully";
+
+timeout=30 #seconds
+dur=0
+while is_running $esPid; do
+  sleep 1;
+  ((dur=dur+1))
+  if [ $dur -ge $timeout ]; then
+    echo "es still running after $dur seconds, killing ES and node forcefully";
+    killall -SIGKILL java
+    killall -SIGKILL node
+    sleep 5;
+  fi
+done
 
 echo "--- report/record failed journeys"
 if [ "${failedJourneys[*]}" != "" ]; then
