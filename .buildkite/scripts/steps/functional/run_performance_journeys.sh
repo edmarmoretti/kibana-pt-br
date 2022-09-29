@@ -35,7 +35,7 @@ trap 'killall node -q' EXIT
 export TEST_ES_URL=http://elastic:changeme@localhost:9200
 export TEST_ES_DISABLE_STARTUP=true
 
-echo "--- $journey - 🔎 Start es"
+echo "--- 🔎 Start es"
 
 node scripts/es snapshot&
 export esPid=$!
