@@ -37,17 +37,7 @@ export TEST_ES_DISABLE_STARTUP=true
 
 echo "--- determining which journeys to run"
 
-journeys=$(buildkite-agent meta-data get "failed-journeys" --default '')
-if [ "$journeys" != "" ]; then
-  echo "re-running failed journeys:${journeys}"
-else
-  paths=()
-  for path in x-pack/performance/journeys/*; do
-    paths+=("$path")
-  done
-  journeys=$(printf "%s\n" "${paths[@]}")
-  echo "running discovered journeys:${journeys}"
-fi
+journeys="x-pack/performance/journeys/data_stress_test_lens.ts"
 
 # track failed journeys here which might get written to metadata
 failedJourneys=()
