@@ -116,8 +116,6 @@ export class Journey<CtxExt extends object> {
     new JourneyFtrHarness(
       getService('log'),
       getService('config'),
-      getService('esArchiver'),
-      getService('kibanaServer'),
       new Auth(getService('config'), getService('log'), getService('kibanaServer')),
       this.config
     ).initMochaSuite(this.#steps);

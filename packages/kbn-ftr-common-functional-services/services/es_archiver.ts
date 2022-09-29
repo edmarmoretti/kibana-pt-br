@@ -16,6 +16,7 @@ export function EsArchiverProvider({ getService }: FtrProviderContext): EsArchiv
   const log = getService('log');
   const kibanaServer = getService('kibanaServer');
   const retry = getService('retry');
+  const lifecycle = getService('lifecycle');
 
   const esArchiver = new EsArchiver({
     baseDir: config.get('esArchiver.baseDirectory'),
@@ -30,6 +31,21 @@ export function EsArchiverProvider({ getService }: FtrProviderContext): EsArchiv
     retry,
     defaults: config.get('uiSettings.defaults'),
   });
+
+  const esArchives: string[] = config.get('testData.esArchives');
+  if (esArchives.length) {
+    lifecycle.beforeTests.add(async () => {
+      for (const archive of esArchives) {
+        await esArchiver.load(archive);
+      }
+    });
+
+    lifecycle.cleanup.add(async () => {
+      for (const archive of esArchives) {
+        await esArchiver.unload(archive);
+      }
+    });
+  }
 
   return esArchiver;
 }

@@ -13,10 +13,9 @@ import { setTimeout } from 'timers/promises';
 import * as Rx from 'rxjs';
 import apmNode from 'elastic-apm-node';
 import playwright, { ChromiumBrowser, Page, BrowserContext, CDPSession, Request } from 'playwright';
-import { asyncMap, asyncForEach } from '@kbn/std';
+import { asyncMap } from '@kbn/std';
 import { ToolingLog } from '@kbn/tooling-log';
 import { Config } from '@kbn/test';
-import { EsArchiver, KibanaServer } from '@kbn/ftr-common-functional-services';
 
 import { Auth } from '../services/auth';
 import { getInputDelays } from '../services/input_delays';
@@ -32,8 +31,6 @@ export class JourneyFtrHarness {
   constructor(
     private readonly log: ToolingLog,
     private readonly config: Config,
-    private readonly esArchiver: EsArchiver,
-    private readonly kibanaServer: KibanaServer,
     private readonly auth: Auth,
     private readonly journeyConfig: JourneyConfig<any>
   ) {
@@ -117,16 +114,8 @@ export class JourneyFtrHarness {
   }
 
   private async onSetup() {
-    await Promise.all([
-      this.setupApm(),
-      this.setupBrowserAndPage(),
-      asyncForEach(this.journeyConfig.getEsArchives(), async (esArchive) => {
-        await this.esArchiver.load(esArchive);
-      }),
-      asyncForEach(this.journeyConfig.getKbnArchives(), async (kbnArchive) => {
-        await this.kibanaServer.importExport.load(kbnArchive);
-      }),
-    ]);
+    await this.setupApm();
+    await this.setupBrowserAndPage();
   }
 
   private async tearDownBrowserAndPage() {
@@ -181,16 +170,8 @@ export class JourneyFtrHarness {
   }
 
   private async onTeardown() {
-    await Promise.all([
-      this.tearDownBrowserAndPage(),
-      this.teardownApm(),
-      asyncForEach(this.journeyConfig.getEsArchives(), async (esArchive) => {
-        await this.esArchiver.unload(esArchive);
-      }),
-      asyncForEach(this.journeyConfig.getKbnArchives(), async (kbnArchive) => {
-        await this.kibanaServer.importExport.unload(kbnArchive);
-      }),
-    ]);
+    await this.tearDownBrowserAndPage();
+    await this.teardownApm();
   }
 
   private async onStepSuccess(step: AnyStep) {

@@ -274,6 +274,17 @@ export const schema = Joi.object()
       })
       .default(),
 
+    /**
+     * Optional settings to list test data archives, that will be loaded during the 'beforeTests'
+     * lifecycle phase and unloaded during the 'cleanup' lifecycle phase.
+     */
+    testData: Joi.object()
+      .keys({
+        kbnArchives: Joi.array().items(Joi.string()).default([]),
+        esArchives: Joi.array().items(Joi.string()).default([]),
+      })
+      .default(),
+
     // settings for the kibanaServer.uiSettings module
     uiSettings: Joi.object()
       .keys({

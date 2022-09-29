@@ -31,5 +31,19 @@ export function KibanaServerProvider({ getService }: FtrProviderContext): KbnCli
     });
   }
 
+  const kbnArchives: string[] = config.get('testData.kbnArchives');
+  if (kbnArchives.length) {
+    lifecycle.beforeTests.add(async () => {
+      for (const archive of kbnArchives) {
+        await kbn.importExport.load(archive);
+      }
+    });
+    lifecycle.cleanup.add(async () => {
+      for (const archive of kbnArchives) {
+        await kbn.importExport.unload(archive);
+      }
+    });
+  }
+
   return kbn;
 }

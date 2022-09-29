@@ -71,6 +71,11 @@ export function makeFtrConfigProvider(
 
       servicesRequiredForTestAnalysis: ['performance', 'journeyConfig'],
 
+      testData: {
+        esArchives: config.getEsArchives(),
+        kbnArchives: config.getKbnArchives(),
+      },
+
       junit: {
         reportName: `Journey: ${config.getName()}`,
         metadata: {
