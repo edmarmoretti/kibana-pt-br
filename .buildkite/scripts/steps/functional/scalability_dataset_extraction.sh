@@ -32,10 +32,6 @@ done
 echo "--- Creating scalability dataset in ${OUTPUT_REL}"
 mkdir -p "${OUTPUT_DIR}"
 
-# echo "--- Archiving scalability trace and uploading as build artifact"
-# tar -czf "${OUTPUT_DIR}/scalability_traces.tar.gz" -C target scalability_traces
-# buildkite-agent artifact upload "${OUTPUT_DIR}/scalability_traces.tar.gz"
-
 echo "--- Downloading Kibana artifacts used in tests"
 download_artifact kibana-default.tar.gz "${OUTPUT_DIR}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
 download_artifact kibana-default-plugins.tar.gz "${OUTPUT_DIR}/" --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
@@ -63,3 +59,7 @@ else
   echo "--- Skipping promotion of dataset to LATEST"
   echo "$BUILDKITE_PIPELINE_SLUG is not 'kibana-single-user-performance', so skipping"
 fi
+
+echo "--- Archiving scalability trace and uploading as build artifact"
+tar -czf "${OUTPUT_DIR}/scalability_traces.tar.gz" -C target scalability_traces
+buildkite-agent artifact upload "${OUTPUT_DIR}/scalability_traces.tar.gz"

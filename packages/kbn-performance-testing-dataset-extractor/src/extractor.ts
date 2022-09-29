@@ -29,7 +29,7 @@ const calculateTransactionTimeRage = (hit: SearchHit<Document>) => {
 const getOutputDirs = async (journeyName: string, buildId: string, version: string) => {
   const latestRunDir = path.resolve(
     'target',
-    'scalability-traces',
+    'scalability_traces',
     `${journeyName.replace(/ /g, '')}`,
     version
   );
