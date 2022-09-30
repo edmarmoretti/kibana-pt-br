@@ -39,6 +39,21 @@ export const DownloadCloudDependencies: Task = {
       return Promise.all(downloads);
     };
 
+    const writeManifest = async (manifestUrl: string, manifestJSON: object) => {
+      const destination = config.resolveFromRepo('.beats/beats_manifest.json');
+      return Fsp.writeFile(
+        destination,
+        JSON.stringify(
+          {
+            manifest_url: manifestUrl,
+            ...manifestJSON,
+          },
+          null,
+          2
+        )
+      );
+    };
+
     let buildId = '';
     let manifestUrl = '';
     let manifestJSON = null;
@@ -48,6 +63,7 @@ export const DownloadCloudDependencies: Task = {
       buildId = latest.data.build_id;
       manifestUrl = latest.data.manifest_url;
       manifestJSON = (await Axios.get(manifestUrl)).data;
+      if (!(manifestUrl && manifestJSON)) throw new Error('Missing manifest.');
     } catch (e) {
       log.error(`Unable to find Beats artifacts for ${config.getBuildVersion()} at ${buildUrl}.`);
       throw e;
@@ -58,23 +74,6 @@ export const DownloadCloudDependencies: Task = {
     await downloadBeat('metricbeat', buildId);
     await downloadBeat('filebeat', buildId);
 
-    if (manifestUrl && manifestJSON) {
-      const manifestDest = config.resolveFromRepo('.beats/beats_manifest.json');
-      await Fsp.writeFile(
-        manifestDest,
-        JSON.stringify(
-          {
-            manifest_url: manifestUrl,
-            ...manifestJSON,
-          },
-          null,
-          2
-        )
-      );
-    } else {
-      throw new Error(
-        `Missing Beats manifest.  Verify ${buildUrl} resolves to a published artifact.`
-      );
-    }
+    await writeManifest(manifestUrl, manifestJSON);
   },
 };
