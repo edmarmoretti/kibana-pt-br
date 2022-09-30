@@ -48,6 +48,12 @@ echo "--- Set artifact permissions"
 chmod -R a+r target/*
 chmod -R a+w target
 
+echo "--- Set bundled Beats manifest URL"
+download_artifact beats_manifest.json . --build "${KIBANA_BUILD_ID:-$BUILDKITE_BUILD_ID}"
+BEATS_MANIFEST_URL=$(jq .manifest_url beats_manifest.json)
+# revert
+echo $BEATS_MANIFEST_URL
+
 echo "--- Pull latest Release Manager CLI"
 echo "$KIBANA_DOCKER_PASSWORD" | docker login -u "$KIBANA_DOCKER_USERNAME" --password-stdin docker.elastic.co
 trap 'docker logout docker.elastic.co' EXIT
@@ -72,6 +78,7 @@ if [[ "$BUILDKITE_BRANCH" == "$KIBANA_BASE_BRANCH" ]]; then
         --workflow "$WORKFLOW" \
         --version "$BASE_VERSION" \
         --qualifier "$VERSION_QUALIFIER" \
+        --dependency "beats:$BEATS_MANIFEST_URL" \
         --artifact-set main
 
   ARTIFACTS_SUBDOMAIN="artifacts-$WORKFLOW"
