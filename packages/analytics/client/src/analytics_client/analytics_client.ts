@@ -134,7 +134,10 @@ export class AnalyticsClient implements IAnalyticsClient {
     };
 
     // debug-logging before checking the opt-in status to help during development
-    if (this.initContext.isDev) {
+    if (
+      this.initContext.isDev ||
+      process.env.BUILDKITE_PIPELINE_SLUG === 'kibana-single-user-performance-debug'
+    ) {
       this.initContext.logger.debug<EventDebugLogMeta>(`Report event "${eventType}"`, {
         ebt_event: event,
       });
