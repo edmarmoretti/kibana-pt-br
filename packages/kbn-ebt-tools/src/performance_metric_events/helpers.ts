@@ -34,5 +34,9 @@ export function reportPerformanceMetricEvent(
   analytics: Pick<AnalyticsClient, 'reportEvent'>,
   eventData: PerformanceMetricEvent
 ) {
+  if (eventData.eventName === 'kibana_started') {
+    // eslint-disable-next-line no-console
+    console.warn(`KIBANA_STARTED is reported at ${new Date().toISOString()}`);
+  }
   analytics.reportEvent(PERFORMANCE_METRIC_EVENT_TYPE, eventData);
 }
