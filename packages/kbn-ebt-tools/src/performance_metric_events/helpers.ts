@@ -36,7 +36,11 @@ export function reportPerformanceMetricEvent(
 ) {
   if (eventData.eventName === 'kibana_started') {
     // eslint-disable-next-line no-console
-    console.warn(`KIBANA_STARTED is reported at ${new Date().toISOString()}`);
+    console.warn(
+      `KIBANA_STARTED is reported at ${new Date().toISOString()}, build id ${
+        process.env.BUILDKITE_BUILD_ID
+      }`
+    );
   }
   analytics.reportEvent(PERFORMANCE_METRIC_EVENT_TYPE, eventData);
 }
