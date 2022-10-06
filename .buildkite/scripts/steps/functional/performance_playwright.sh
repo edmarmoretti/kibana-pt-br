@@ -85,7 +85,7 @@ while read -r journey; do
     node scripts/functional_tests \
       --config "$journey" \
       --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
-      --debug \
+      --verbose \
       --bail
     status=$?
     set -e
