@@ -133,6 +133,13 @@ export class AnalyticsClient implements IAnalyticsClient {
       properties: eventData as unknown as Record<string, unknown>,
     };
 
+    // debug-logging before checking the opt-in status to help during development
+    if (this.initContext.isDev) {
+      this.initContext.logger.debug<EventDebugLogMeta>(`Report event "${eventType}"`, {
+        ebt_event: event,
+      });
+    }
+
     if (event.event_type === 'performance_metric') {
       // eslint-disable-next-line no-console
       console.log(`REPORTED_EVENT: ${JSON.stringify(event)}`);
