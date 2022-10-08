@@ -142,7 +142,7 @@ export class AnalyticsClient implements IAnalyticsClient {
 
     if (event.event_type === 'performance_metric') {
       // eslint-disable-next-line no-console
-      console.log(`REPORTED_EVENT: ${JSON.stringify(event)}`);
+      console.log(`REPORTED_EVENT: ${JSON.stringify(event, null, 4)}`);
     }
 
     const optInConfig = this.optInConfig$.value;
