@@ -154,13 +154,14 @@ export function decorateSnapshotUi({
 function getSnapshotState(file: string, updateSnapshot: SnapshotUpdateState) {
   const dirname = path.dirname(file);
   const filename = path.basename(file);
-
+  const rootDir = path.join(dirname + `/__snapshots__/`);
   const snapshotState = new SnapshotState(
-    path.join(dirname + `/__snapshots__/` + filename.replace(path.extname(filename), '.snap')),
+    path.join(rootDir, filename.replace(path.extname(filename), '.snap')),
     {
       updateSnapshot,
       prettierPath: require.resolve('prettier'),
       snapshotFormat: { escapeString: true, printBasicPrototype: true },
+      rootDir,
     }
   );
 
@@ -203,7 +204,6 @@ export function expectSnapshot(received: any) {
 
 function expectToMatchSnapshot(snapshotContext: SnapshotContext, received: any) {
   const matcher = toMatchSnapshot.bind(snapshotContext as any);
-  // https://github.com/facebook/jest/pull/13240
   const result: any = matcher(received);
 
   if (!result.pass) {
@@ -218,8 +218,6 @@ function expectToMatchInlineSnapshot(
 ) {
   const matcher = toMatchInlineSnapshot.bind(snapshotContext as any);
 
-  // https://github.com/facebook/jest/pull/13240
-  // @ts-expect-error
   const result: any = arguments.length === 2 ? matcher(received) : matcher(received, _actual);
 
   if (!result.pass) {

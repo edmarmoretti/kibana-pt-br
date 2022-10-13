@@ -9,7 +9,6 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import { of, throwError } from 'rxjs';
 import { useMlNotifications, MlNotificationsContextProvider } from './ml_notifications_context';
 import { useStorage } from '../storage';
-import { useMlKibana } from '../kibana';
 
 const mockCountMessages = jest.fn(() => {
   return of({ info: 1, error: 0, warning: 0 });
