@@ -1,0 +1,66 @@
+{
+  "journeyName": "login",
+  "kibanaVersion": "8.6.0-SNAPSHOT",
+  "scalabilitySetup": {
+    "warmup": [
+      {
+        "action": "constantUsersPerSec",
+        "userCount": 20,
+        "duration": "30s"
+      }
+    ],
+    "test": [
+      {
+        "action": "rampUsersPerSec",
+        "minUsersCount": 1,
+        "maxUsersCount": 1000,
+        "duration": "5m"
+      }
+    ],
+    "maxDuration": "10m"
+  },
+  "testData": {
+    "esArchives": [],
+    "kbnArchives": []
+  },
+  "streams": [
+    {
+      "startTime": "2022-09-29T09:31:32.543Z",
+      "endTime": "2022-09-29T09:31:32.545Z",
+      "requests": [
+        {
+          "transactionId": "d844417327ca6d7d",
+          "name": "GET /internal/security/login_state",
+          "date": "2022-09-29T09:31:32.543Z",
+          "duration": 2973,
+          "http": {
+            "method": "GET",
+            "path": "/internal/security/login_state",
+            "headers": {
+              "Sec-Ch-Ua": "",
+              "Accept": "*/*",
+              "Kbn-Version": "8.6.0-SNAPSHOT",
+              "Sec-Ch-Ua-Platform": "",
+              "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/98.0.4695.0 Safari/537.36",
+              "Referer": "http://localhost:5620/login?next=%2F",
+              "Connection": "keep-alive",
+              "Sec-Fetch-Site": "same-origin",
+              "Sec-Fetch-Dest": "empty",
+              "Host": "localhost:5620",
+              "X-Kbn-Context": "%7B%22name%22%3A%22security_login%22%2C%22url%22%3A%22%2Flogin%22%7D",
+              "Pragma": "no-cache",
+              "Accept-Encoding": "gzip, deflate, br",
+              "Traceparent": "00-6c60ec30dea245b2a487500003f80371-38035b317f2e2810-01",
+              "Sec-Fetch-Mode": "cors",
+              "Cache-Control": "no-cache",
+              "Sec-Ch-Ua-Mobile": "?0",
+              "Content-Type": "application/json"
+            },
+            "statusCode": 200
+          },
+          "spanCount": 0
+        }
+      ]
+    }
+  ]
+}

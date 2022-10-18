@@ -34,7 +34,7 @@ download_artifacts() {
 
   cd "$KIBANA_DIR"
   tar -xzf "${LATEST_RUN_ARTIFACTS_DIR}/kibana-default-plugins.tar.gz"
-  tar -xzf "${LATEST_RUN_ARTIFACTS_DIR}/scalability_traces.tar.gz"
+  #tar -xzf "${LATEST_RUN_ARTIFACTS_DIR}/scalability_traces.tar.gz"
 }
 
 checkout_and_compile_load_runner() {

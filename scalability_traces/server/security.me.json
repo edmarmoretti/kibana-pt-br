@@ -1,0 +1,63 @@
+{
+  "journeyName": "login",
+  "kibanaVersion": "8.6.0-SNAPSHOT",
+  "scalabilitySetup": {
+    "warmup": [
+      {
+        "action": "constantUsersPerSec",
+        "userCount": 20,
+        "duration": "30s"
+      }
+    ],
+    "test": [
+      {
+        "action": "rampUsersPerSec",
+        "minUsersCount": 1,
+        "maxUsersCount": 1000,
+        "duration": "5m"
+      }
+    ],
+    "maxDuration": "10m"
+  },
+  "testData": {
+    "esArchives": [],
+    "kbnArchives": []
+  },
+  "streams": [
+    {
+      "transactionId": "71c5c23e91da6e2a",
+      "name": "GET /internal/security/me",
+      "date": "2022-09-29T09:31:49.963Z",
+      "duration": 60051,
+      "http": {
+        "method": "GET",
+        "path": "/internal/security/me",
+        "headers": {
+          "Cookie": "sid=Fe26.2**b4f51707bfe081641d5680f3564a6294e67f8cdf9b17bb543a22603c3e5438c5*ZqvJow9BriNpSrz9HE30xQ*En2Xa60I0w2mq8nkcifbSzcdsUokfWbx1A_TMkzOsFTDOTA5s0RKHsVyMRWvy_tjdWjCP3SAb2zAtLZ7HPJcNpbU90kv4xIjK_m8uc6HEBFkhQ6ijm1-j-uA_wOQdVBC4A7amUguve7lM3pFC7dYLaQ2FrrWH_Bb_H8CjOLa--TaONtvX51IGKXZT4zMOiZNXslnkjeVFZx9jRYVWsfWDPl5RfqJqj0wpDCW7v96ky2hq0C9BAJTnfmoPJDNtVKP**48f28d549b53ae7b586bca0706b669c20d6bcb35a942607e17b847ed4b5963ce*sqUogNXrlfFFWAG_y_U8gRbHQZXOn1KUH2QyBra9RHA",
+          "Sec-Ch-Ua": "",
+          "Accept": "*/*",
+          "Kbn-Version": "8.6.0-SNAPSHOT",
+          "Sec-Ch-Ua-Platform": "",
+          "Kbn-System-Request": "true",
+          "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/98.0.4695.0 Safari/537.36",
+          "Connection": "keep-alive",
+          "Referer": "http://localhost:5620/app/home",
+          "Sec-Fetch-Site": "same-origin",
+          "Sec-Fetch-Dest": "empty",
+          "Host": "localhost:5620",
+          "X-Kbn-Context": "%7B%22url%22%3A%22%2Fapp%2Fhome%22%7D",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Pragma": "no-cache",
+          "Traceparent": "00-18bb4eeb11428623d5ff9d59aa174634-8d7c82b01d5a6b50-01",
+          "Sec-Fetch-Mode": "cors",
+          "Authorization": "[REDACTED]",
+          "Cache-Control": "no-cache",
+          "Sec-Ch-Ua-Mobile": "?0",
+          "Content-Type": "application/json"
+        },
+        "statusCode": 200
+      },
+      "spanCount": 2
+    }
+  ]
+}
