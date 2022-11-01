@@ -113,7 +113,7 @@ export class JourneyScreenshots {
           `${REPO_ROOT}/data/journey_screenshots/`,
           ''
         );
-      process.stdout.write(`\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
+      process.stdout.write(`\\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
     });
   }
 
@@ -142,7 +142,7 @@ export class JourneyScreenshots {
           `${REPO_ROOT}/data/journey_screenshots/`,
           ''
         );
-      process.stdout.write(`\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
+      process.stdout.write(`\\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
     });
   }
 
