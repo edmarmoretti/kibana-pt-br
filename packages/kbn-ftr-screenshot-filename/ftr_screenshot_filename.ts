@@ -9,7 +9,7 @@
 import { createHash } from 'crypto';
 
 export function create(fullTitle: string, opts?: { ext?: boolean }) {
-  const truncatedName = fullTitle.replaceAll(/[^a-zA-Z0-9-]+/g, '').slice(0, 80);
+  const truncatedName = fullTitle.replaceAll(/[^a-zA-Z0-9-]+/g, '').slice(0, 80); // maybe shorter to 20 chars
   const failureNameHash = createHash('sha256').update(fullTitle).digest('hex');
   return `${truncatedName}-${failureNameHash}${opts?.ext === false ? '' : `.png`}`;
 }

@@ -92,7 +92,7 @@ export class JourneyScreenshots {
     await this.lock(async () => {
       const filename = FtrScreenshotFilename.create(`${step.index}-${step.name}-failure`);
       const fullscreenFilename = FtrScreenshotFilename.create(
-        `${step.index}-${step.name}-failure-fullscreen`
+        `${step.index}-${step.name.replace(/\s/g, '-')}-failure-fullscreen`
       );
       this.#manifest.steps.push({
         type: 'failure',
@@ -106,6 +106,10 @@ export class JourneyScreenshots {
         write(Path.resolve(this.#dir, filename), screenshot),
         write(Path.resolve(this.#dir, fullscreenFilename), fullscreenScreenshot),
       ]);
+
+      const artifactPath = Path.resolve(this.#dir, fullscreenFilename).replace(REPO_ROOT, '');
+      // eslint-disable-next-line no-console
+      console.log(`inline_image 'artifact:/${artifactPath}' '${fullscreenFilename}'`);
     });
   }
 
@@ -113,7 +117,7 @@ export class JourneyScreenshots {
     await this.lock(async () => {
       const filename = FtrScreenshotFilename.create(`${step.index}-${step.name}`);
       const fullscreenFilename = FtrScreenshotFilename.create(
-        `${step.index}-${step.name}-fullscreen`
+        `${step.index}-${step.name.replace(/\s/g, '-')}-fullscreen`
       );
       this.#manifest.steps.push({
         type: 'success',
@@ -127,6 +131,10 @@ export class JourneyScreenshots {
         write(Path.resolve(this.#dir, filename), screenshot),
         write(Path.resolve(this.#dir, fullscreenFilename), fullscreenScreenshot),
       ]);
+
+      const artifactPath = Path.resolve(this.#dir, fullscreenFilename).replace(REPO_ROOT, '');
+      // eslint-disable-next-line no-console
+      console.log(`inline_image 'artifact:/${artifactPath}' '${fullscreenFilename}'`);
     });
   }
 
