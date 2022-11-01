@@ -15,6 +15,16 @@ function is_running {
   kill -0 "$1" &>/dev/null
 }
 
+function inline_link {
+  LINK=$(printf "url='%s'" "$1")
+
+  if [ $# -gt 1 ]; then
+    LINK=$(printf "$LINK;content='%s'" "$2")
+  fi
+
+  printf '\033]1339;%s\a\n' "$LINK"
+}
+
 # unset env vars defined in other parts of CI for automatic APM collection of
 # Kibana. We manage APM config in our FTR config and performance service, and
 # APM treats config in the ENV with a very high precedence.
@@ -122,6 +132,7 @@ done <<< "$journeys"
 cd "data/journey_screenshots"
 ls -la
 echo "--- upload journey screenshots"
+inline_link 'https://buildkite.com/'
 buildkite-agent artifact upload "**/*.png"
 
 cd "$KIBANA_DIR"
