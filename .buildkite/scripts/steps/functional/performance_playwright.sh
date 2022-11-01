@@ -119,7 +119,7 @@ while read -r journey; do
   done
 done <<< "$journeys"
 
-buildkite-agent artifact upload data/journey_screenshots/**/*.png
+buildkite-agent artifact upload 'data/journey_screenshots/**/*.png'
 
 echo "--- report/record failed journeys"
 if [ "${failedJourneys[*]}" != "" ]; then
