@@ -145,9 +145,7 @@ export class JourneyScreenshots {
           ''
         );
 
-      const ANSI_URL = `\x1B]1338`;
-      process.stdout.write(ANSI_URL);
-      process.stdout.write(`;url='${artifactPath}'\a\n`);
+      process.stdout.write(`\x1B]1338;url='${artifactPath}'\n`);
       // process.stdout.write(`\\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
     });
   }
