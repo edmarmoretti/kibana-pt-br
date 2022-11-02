@@ -107,13 +107,15 @@ export class JourneyScreenshots {
         write(Path.resolve(this.#dir, fullscreenFilename), fullscreenScreenshot),
       ]);
 
-      const artifactPath =
-        'artifact://' +
-        Path.resolve(this.#dir, fullscreenFilename).replace(
-          `${REPO_ROOT}/data/journey_screenshots/`,
-          ''
-        );
-      process.stdout.write(`\\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
+      // const artifactPath =
+      //   'artifact://' +
+      //   Path.resolve(this.#dir, fullscreenFilename).replace(
+      //     `${REPO_ROOT}/data/journey_screenshots/`,
+      //     ''
+      //   );
+
+      // const CLEAR_LINE_AND_MOVE_LEFT = `\x1B[2K\x1B[0G`;
+      // process.stdout.write(`\\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
     });
   }
 
@@ -142,7 +144,11 @@ export class JourneyScreenshots {
           `${REPO_ROOT}/data/journey_screenshots/`,
           ''
         );
-      process.stdout.write(`\\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
+
+      const ANSI_URL = `\x1B]1338`;
+      process.stdout.write(ANSI_URL);
+      process.stdout.write(`;url='${artifactPath}'\a\n`);
+      // process.stdout.write(`\\033]1338;url='"${artifactPath}"';alt='"no_image"'\a\n`);
     });
   }
 

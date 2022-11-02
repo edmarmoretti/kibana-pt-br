@@ -22,7 +22,7 @@ function inline_link {
     LINK=$(printf "$LINK;content='%s'" "$2")
   fi
 
-  printf '\033]1339;%s\a\n' "$LINK"
+  printf '\x1B]1339;%s\a\n' "$LINK"
 }
 
 # unset env vars defined in other parts of CI for automatic APM collection of
