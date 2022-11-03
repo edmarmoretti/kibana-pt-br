@@ -15,6 +15,9 @@ function is_running {
   kill -0 "$1" &>/dev/null
 }
 
+echo "--- Clear pagecache, dentries, and inodes"
+sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+
 # unset env vars defined in other parts of CI for automatic APM collection of
 # Kibana. We manage APM config in our FTR config and performance service, and
 # APM treats config in the ENV with a very high precedence.
