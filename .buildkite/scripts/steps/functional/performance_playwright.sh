@@ -31,7 +31,7 @@ unset ELASTIC_APM_GLOBAL_LABELS
 
 
 echo "--- Clear pagecache, dentries, and inodes"
-sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
+sync; echo 3 | tee /proc/sys/vm/drop_caches
 
 # `kill $esPid` doesn't work, seems that kbn-es doesn't listen to signals correctly, this does work
 trap 'killall node -q' EXIT
