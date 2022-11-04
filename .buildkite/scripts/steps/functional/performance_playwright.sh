@@ -15,9 +15,6 @@ function is_running {
   kill -0 "$1" &>/dev/null
 }
 
-echo "--- Clear pagecache, dentries, and inodes"
-sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
-
 # unset env vars defined in other parts of CI for automatic APM collection of
 # Kibana. We manage APM config in our FTR config and performance service, and
 # APM treats config in the ENV with a very high precedence.
@@ -31,6 +28,10 @@ unset ELASTIC_APM_ACTIVE
 unset ELASTIC_APM_SERVER_URL
 unset ELASTIC_APM_SECRET_TOKEN
 unset ELASTIC_APM_GLOBAL_LABELS
+
+
+echo "--- Clear pagecache, dentries, and inodes"
+sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
 
 # `kill $esPid` doesn't work, seems that kbn-es doesn't listen to signals correctly, this does work
 trap 'killall node -q' EXIT
