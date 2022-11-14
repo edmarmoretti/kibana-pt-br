@@ -60,7 +60,9 @@ disabled:
   # Scalability testing config that we run in its own pipeline
   - x-pack/test/scalability/config.ts
 
-defaultQueue: 'n2-4-spot'
+  # Warmup for performance
+  - x-pack/performance/journeys/warmup.ts
+
 enabled:
   - test/accessibility/config.ts
   - test/analytics/config.ts

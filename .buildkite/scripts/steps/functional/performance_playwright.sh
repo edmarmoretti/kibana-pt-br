@@ -81,14 +81,20 @@ while read -r journey; do
 
     export TEST_PERFORMANCE_PHASE="$phase"
 
-    set +e
-    node scripts/functional_tests \
-      --config "$journey" \
-      --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
-      --debug \
-      --bail
+    if [ "$phase" == "WARMUP" ]; then
+      node scripts/functional_tests \
+        --config "x-pack/performance/journeys/warmup.ts" \
+        --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
+        --debug \
+        --bail
+    else
+      node scripts/functional_tests \
+        --config "$journey" \
+        --kibana-install-dir "$KIBANA_BUILD_LOCATION" \
+        --debug \
+        --bail
+    fi
     status=$?
-    set -e
 
     if [ $status -ne 0 ]; then
       failedJourneys+=("$journey")
