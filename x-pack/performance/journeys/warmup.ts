@@ -7,7 +7,7 @@
 
 import { Journey } from '@kbn/journeys';
 import { subj } from '@kbn/test-subj-selector';
-import { waitForChrome, waitForVisualizations } from '../utils';
+import { waitForVisualizations } from '../utils';
 
 export const journey = new Journey({
   esArchives: [
@@ -17,12 +17,6 @@ export const journey = new Journey({
     'x-pack/performance/kbn_archives/ecommerce_no_map_dashboard',
   ],
 })
-
-    .step('Go to Discover Page', async ({ page, kbnUrl }) => {
-    await page.goto(kbnUrl.get(`/app/discover`));
-    await waitForChrome(page);
-    await page.waitForSelector(subj('discoverDocTable'));
-    })
   .step('Go to Dashboards Page', async ({ page, kbnUrl }) => {
     await page.goto(kbnUrl.get(`/app/dashboards`));
     await page.waitForSelector('#dashboardListingHeading');
