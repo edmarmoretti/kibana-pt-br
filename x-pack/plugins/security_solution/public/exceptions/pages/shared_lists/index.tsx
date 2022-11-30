@@ -490,20 +490,22 @@ export const SharedLists = React.memo(() => {
               sort={sort}
               sortFields={SORT_FIELDS}
             />
-            {exceptionListsWithRuleRefs.length > 0 && canUserCRUD !== null && canUserREAD !== null && (
-              <div data-test-subj="exceptionsTable">
-                {exceptionListsWithRuleRefs.map((excList) => (
-                  <ExceptionsListCard
-                    key={excList.list_id}
-                    data-test-subj="exceptionsListCard"
-                    readOnly={canUserREAD && !canUserCRUD}
-                    exceptionsList={excList}
-                    handleDelete={handleDelete}
-                    handleExport={handleExport}
-                  />
-                ))}
-              </div>
-            )}
+            {exceptionListsWithRuleRefs.length > 0 &&
+              canUserCRUD !== null &&
+              canUserREAD !== null && (
+                <div data-test-subj="exceptionsTable">
+                  {exceptionListsWithRuleRefs.map((excList) => (
+                    <ExceptionsListCard
+                      key={excList.list_id}
+                      data-test-subj="exceptionsListCard"
+                      readOnly={canUserREAD && !canUserCRUD}
+                      exceptionsList={excList}
+                      handleDelete={handleDelete}
+                      handleExport={handleExport}
+                    />
+                  ))}
+                </div>
+              )}
           </>
         )}
         <EuiFlexGroup>
