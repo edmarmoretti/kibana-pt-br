@@ -85,27 +85,6 @@ List of agent policies that are configured when the {fleet} app starts.
     Unique ID for this policy. The ID may be a number or string.
   `name`::: 
     Policy name.
-=====
-+
-.Optional properties of `xpack.fleet.agentPolicies`
-[%collapsible%open]
-=====
-  `description`::: 
-    Text description of this policy.
-  `namespace`::: 
-    String identifying this policy's namespace.
-  `monitoring_enabled`::: 
-    List of keywords that specify the monitoring data to collect. Valid values include `['logs']`, `['metrics']`, and `['logs', 'metrics']`.
-  `is_managed`::: 
-    If `true`, this policy is not editable by the user and can only be changed by updating the {kib} config.
-  `is_default`::: 
-    If `true`, this policy is the default agent policy.
-  `is_default_fleet_server`::: 
-    If `true`, this policy is the default {fleet-server} agent policy.
-  `data_output_id`::: 
-    ID of the output to send data. (Need to be identical to `monitoring_output_id`)
-  `monitoring_output_id`::: 
-    ID of the output to send monitoring data. (Need to be identical to `data_output_id`)
   `package_policies`::: 
     List of integration policies to add to this policy.
 +
@@ -133,6 +112,27 @@ List of agent policies that are configured when the {fleet} app starts.
   `inputs`:::: 
     Array that overrides any default input settings for this integration. Follows the same schema as integration inputs, with the exception that any object in `vars` can be passed `frozen: true` in order to prevent that specific `var` from being edited by the user.
 =======
+=====
++
+.Optional properties of `xpack.fleet.agentPolicies`
+[%collapsible%open]
+=====
+  `description`::: 
+    Text description of this policy.
+  `namespace`::: 
+    String identifying this policy's namespace.
+  `monitoring_enabled`::: 
+    List of keywords that specify the monitoring data to collect. Valid values include `['logs']`, `['metrics']`, and `['logs', 'metrics']`.
+  `is_managed`::: 
+    If `true`, this policy is not editable by the user and can only be changed by updating the {kib} config.
+  `is_default`::: 
+    If `true`, this policy is the default agent policy.
+  `is_default_fleet_server`::: 
+    If `true`, this policy is the default {fleet-server} agent policy.
+  `data_output_id`::: 
+    ID of the output to send data. (Need to be identical to `monitoring_output_id`)
+  `monitoring_output_id`::: 
+    ID of the output to send monitoring data. (Need to be identical to `data_output_id`)
 =====
 
 `xpack.fleet.outputs`::
