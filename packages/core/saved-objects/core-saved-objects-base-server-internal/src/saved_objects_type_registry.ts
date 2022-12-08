@@ -28,6 +28,10 @@ export class SavedObjectTypeRegistry implements ISavedObjectTypeRegistry {
       throw new Error(`Type '${type.name}' is already registered`);
     }
     validateType(type);
+    const migrations = type.migrations instanceof Function ? type.migrations() : type.migrations;
+    Object.keys(migrations || {}).forEach((version) => {
+      console.log(`migration, ${type.name}, ${version}`);
+    });
     this.types.set(type.name, deepFreeze(type) as SavedObjectsType);
   }
 
