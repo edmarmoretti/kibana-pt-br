@@ -44,7 +44,7 @@ checkout_and_compile_load_runner() {
     git init
     git remote add origin https://github.com/elastic/kibana-load-testing.git
   fi
-  git fetch origin --depth 1 "main"
+  git fetch origin --depth 1 "update-gatling-to-3.9"
   git reset --hard FETCH_HEAD
 
   KIBANA_LOAD_TESTING_GIT_COMMIT="$(git rev-parse HEAD)"
