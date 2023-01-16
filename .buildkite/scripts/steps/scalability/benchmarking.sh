@@ -4,9 +4,9 @@ set -euo pipefail
 
 source .buildkite/scripts/common/util.sh
 
-#.buildkite/scripts/bootstrap.sh
-echo "--- yarn kbn reset && yarn kbn bootstrap"
-yarn kbn reset && yarn kbn bootstrap
+is_test_execution_step
+
+.buildkite/scripts/bootstrap.sh
 
 GCS_BUCKET="gs://kibana-performance/scalability-tests"
 GCS_ARTIFACTS_REL="gcs_artifacts"
