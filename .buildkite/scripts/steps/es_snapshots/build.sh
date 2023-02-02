@@ -13,7 +13,7 @@ mkdir -p "$destination"
 
 mkdir -p elasticsearch && cd elasticsearch
 
-export ELASTICSEARCH_BRANCH="${ELASTICSEARCH_BRANCH:-$BUILDKITE_BRANCH}"
+export ELASTICSEARCH_BRANCH="main"
 
 if [[ ! -d .git ]]; then
   git init
@@ -106,25 +106,25 @@ echo "--- Create checksums for snapshot files"
 cd "$destination"
 find ./* -exec bash -c "shasum -a 512 {} > {}.sha512" \;
 
-cd "$BUILDKITE_BUILD_CHECKOUT_PATH"
-ts-node "$(dirname "${0}")/create_manifest.ts" "$destination"
+# cd "$BUILDKITE_BUILD_CHECKOUT_PATH"
+# ts-node "$(dirname "${0}")/create_manifest.ts" "$destination"
 
-ES_SNAPSHOT_MANIFEST="$(buildkite-agent meta-data get ES_SNAPSHOT_MANIFEST)"
+# ES_SNAPSHOT_MANIFEST="$(buildkite-agent meta-data get ES_SNAPSHOT_MANIFEST)"
 
-cat << EOF | buildkite-agent annotate --style "info"
-  - \`ELASTICSEARCH_BRANCH\` - \`$ELASTICSEARCH_BRANCH\`
-  - \`ELASTICSEARCH_GIT_COMMIT\` - \`$ELASTICSEARCH_GIT_COMMIT\`
-  - \`ES_SNAPSHOT_MANIFEST\` - \`$ES_SNAPSHOT_MANIFEST\`
-  - \`ES_SNAPSHOT_VERSION\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_VERSION)\`
-  - \`ES_SNAPSHOT_ID\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_ID)\`
-EOF
+# cat << EOF | buildkite-agent annotate --style "info"
+#   - \`ELASTICSEARCH_BRANCH\` - \`$ELASTICSEARCH_BRANCH\`
+#   - \`ELASTICSEARCH_GIT_COMMIT\` - \`$ELASTICSEARCH_GIT_COMMIT\`
+#   - \`ES_SNAPSHOT_MANIFEST\` - \`$ES_SNAPSHOT_MANIFEST\`
+#   - \`ES_SNAPSHOT_VERSION\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_VERSION)\`
+#   - \`ES_SNAPSHOT_ID\` - \`$(buildkite-agent meta-data get ES_SNAPSHOT_ID)\`
+# EOF
 
-cat << EOF | buildkite-agent pipeline upload
-steps:
-  - trigger: 'kibana-elasticsearch-snapshot-verify'
-    async: true
-    build:
-      env:
-        ES_SNAPSHOT_MANIFEST: '$ES_SNAPSHOT_MANIFEST'
-      branch: '$BUILDKITE_BRANCH'
-EOF
+# cat << EOF | buildkite-agent pipeline upload
+# steps:
+#   - trigger: 'kibana-elasticsearch-snapshot-verify'
+#     async: true
+#     build:
+#       env:
+#         ES_SNAPSHOT_MANIFEST: '$ES_SNAPSHOT_MANIFEST'
+#       branch: '$BUILDKITE_BRANCH'
+# EOF
