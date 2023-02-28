@@ -16,6 +16,7 @@ export default ({ getService }: FtrProviderContext) => {
   const supertest = getService('supertestWithoutAuth');
   const transform = getService('transform');
 
+  const index = 'iowa*';
 
   const testData = {
       user: USER.TRANSFORM_POWERUSER,
@@ -333,14 +334,14 @@ export default ({ getService }: FtrProviderContext) => {
       },
     };
 
-  describe('/api/transform/field_histograms', function () {
+  describe('Kibana data scenario - transform field_histograms', function () {
     before(async () => {
       await transform.testResources.setKibanaTimeZoneToUTC();
     });
 
     it('should return a field_histograms', async () => {
       const { body, status } = await supertest
-        .post('/api/transform/field_histograms/iowa*')
+        .post(`/api/transform/field_histograms/${index}`)
         .auth(
           USER.TRANSFORM_POWERUSER,
           transform.securityCommon.getPasswordForUser(USER.TRANSFORM_POWERUSER)
