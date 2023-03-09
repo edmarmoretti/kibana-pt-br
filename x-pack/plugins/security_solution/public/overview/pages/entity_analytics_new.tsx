@@ -23,7 +23,7 @@ import { RiskScore } from '../../explore/components/risk_score/severity/common';
 import { StyledBasicTable } from '../components/entity_analytics/common/styled_basic_table';
 import { InputsModelId } from '../../common/store/inputs/constants';
 import { useKibana } from '../../common/lib/kibana';
-import { RISK_SCORES_URL, ALERTS_TABLE_REGISTRY_CONFIG_IDS } from '../../../common/constants';
+import { RISK_SCORES_URL } from '../../../common/constants';
 
 import { AlertsTableComponent } from '../../detections/components/alerts_table';
 import { ModalInspectQuery } from '../../common/components/inspect/modal';
@@ -60,7 +60,7 @@ const EntityAnalyticsPageNewComponent = () => {
       itemIdToExpandedRowMapValues[row.identifierValue] = (
         <div style={{ width: '100%' }}>
           <AlertsTableComponent
-            configId={ALERTS_TABLE_REGISTRY_CONFIG_IDS.CASE}
+            configId={`securitySolution-riskScores`}
             inputFilters={[
               {
                 meta: {
