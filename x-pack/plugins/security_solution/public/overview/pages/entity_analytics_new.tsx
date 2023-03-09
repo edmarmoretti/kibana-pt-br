@@ -125,19 +125,19 @@ const EntityAnalyticsPageNewComponent = () => {
           : null
       );
 
-      console.log(data);
+      console.log('data', data);
     };
 
     try {
       fetchData();
     } catch (error) {
-      console.log('error', error);
+      console.error('error', error);
     }
   }, [range, filters, query, withDebug]);
 
-  console.log('query', query);
-  console.log('filters', filters);
-  console.log('range', range);
+  // console.log('query', query);
+  // console.log('filters', filters);
+  // console.log('range', range);
   const data = [
     {
       '@timestamp': 1,
