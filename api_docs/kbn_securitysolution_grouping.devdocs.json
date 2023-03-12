@@ -133,7 +133,7 @@
         "label": "useGrouping",
         "description": [],
         "signature": [
-          "<T>({ defaultGroupingOptions, fields, groupingId, }: GroupingArgs) => Grouping<T>"
+          "<T>({ defaultGroupingOptions, fields, groupingId, onGroupChangeCallback, tracker, }: GroupingArgs) => Grouping<T>"
         ],
         "path": "packages/kbn-securitysolution-grouping/src/hooks/use_grouping.tsx",
         "deprecated": false,
@@ -144,7 +144,7 @@
             "id": "def-common.useGrouping.$1",
             "type": "Object",
             "tags": [],
-            "label": "{\n  defaultGroupingOptions,\n  fields,\n  groupingId,\n}",
+            "label": "{\n  defaultGroupingOptions,\n  fields,\n  groupingId,\n  onGroupChangeCallback,\n  tracker,\n}",
             "description": [],
             "signature": [
               "GroupingArgs"
@@ -207,10 +207,24 @@
           },
           {
             "parentPluginId": "@kbn/securitysolution-grouping",
-            "id": "def-common.GroupingAggregation.groupsCount0",
+            "id": "def-common.GroupingAggregation.groupCount0",
             "type": "Object",
             "tags": [],
-            "label": "groupsCount0",
+            "label": "groupCount0",
+            "description": [],
+            "signature": [
+              "{ value?: number | null | undefined; } | undefined"
+            ],
+            "path": "packages/kbn-securitysolution-grouping/src/components/types.ts",
+            "deprecated": false,
+            "trackAdoption": false
+          },
+          {
+            "parentPluginId": "@kbn/securitysolution-grouping",
+            "id": "def-common.GroupingAggregation.unitCount0",
+            "type": "Object",
+            "tags": [],
+            "label": "unitCount0",
             "description": [],
             "signature": [
               "{ value?: number | null | undefined; } | undefined"
