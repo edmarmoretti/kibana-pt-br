@@ -5,10 +5,6 @@
  * 2.0.
  */
 
-import type { UnallowedValueRequestItem } from '../../types';
-
-export const getUnallowedValueRequestItems = ({
-  indexName,
-}: {
-  indexName: string;
-}): UnallowedValueRequestItem[] => [{ indexName }];
+export { TestQueryRow } from './test_query_row';
+export type { TestQueryRowProps } from './test_query_row';
+export { useTestQuery } from './use_test_query';

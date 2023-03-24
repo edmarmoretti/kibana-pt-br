@@ -5,10 +5,8 @@
  * 2.0.
  */
 
-import type { UnallowedValueRequestItem } from '../../types';
+import { EsQueryRuleParams } from './rule_type_params';
 
-export const getUnallowedValueRequestItems = ({
-  indexName,
-}: {
-  indexName: string;
-}): UnallowedValueRequestItem[] => [{ indexName }];
+export function isEsQueryRule(searchType: EsQueryRuleParams['searchType']) {
+  return searchType !== 'searchSource';
+}

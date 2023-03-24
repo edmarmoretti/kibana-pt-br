@@ -5,10 +5,4 @@
  * 2.0.
  */
 
-import type { UnallowedValueRequestItem } from '../../types';
-
-export const getUnallowedValueRequestItems = ({
-  indexName,
-}: {
-  indexName: string;
-}): UnallowedValueRequestItem[] => [{ indexName }];
+export { RuleCommonExpressions } from './rule_common_expressions';

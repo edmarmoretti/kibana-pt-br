@@ -9,6 +9,7 @@ import {
   MsearchMultisearchHeader,
   MsearchMultisearchBody,
 } from '@elastic/elasticsearch/lib/api/types';
+
 import { AllowedValuesInputs } from '../schemas/get_unallowed_field_values';
 
 export const getMSearchRequestHeader = (indexName: string): MsearchMultisearchHeader => ({

@@ -5,10 +5,6 @@
  * 2.0.
  */
 
-import type { UnallowedValueRequestItem } from '../../types';
-
-export const getUnallowedValueRequestItems = ({
-  indexName,
-}: {
-  indexName: string;
-}): UnallowedValueRequestItem[] => [{ indexName }];
+export const DATA_QUALITY_ID = '.data-quality';
+export const ActionGroupId = 'data quality issue found';
+export const ConditionMetAlertInstanceId = 'data quality issue found';

@@ -5,10 +5,7 @@
  * 2.0.
  */
 
-import type { UnallowedValueRequestItem } from '../../types';
+import { EsQueryRuleTypeExpression } from './expression';
 
-export const getUnallowedValueRequestItems = ({
-  indexName,
-}: {
-  indexName: string;
-}): UnallowedValueRequestItem[] => [{ indexName }];
+// eslint-disable-next-line import/no-default-export
+export default EsQueryRuleTypeExpression;
