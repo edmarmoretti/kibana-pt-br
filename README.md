@@ -23,6 +23,14 @@ Kibana com a interface de painéis traduzido para o português do Brasil
 
 * Correção na inclusão dos labels internos, evitando ultrapassar os limites das margens.
 
+* Alteração no comportamento da opção de "split charts", bloqueando a apresentação de mais de um gráfico quando os dados, para o primeiro gráfico, não estiverem com todas as séries preenchidas.
+
+* Remoção da string "all docs" mostrada em alguns tipos de gráfico.
+
+* Maior espaço para inclusão dos títulos dos quadros.
+
+* Maior espaço para apresentação dos itens da legenda.
+
 
 
 
