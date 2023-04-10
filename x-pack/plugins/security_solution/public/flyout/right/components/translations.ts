@@ -106,6 +106,11 @@ export const ENTITIES_TITLE = i18n.translate(
   { defaultMessage: 'Entities' }
 );
 
+export const THREAT_INTELLIGENCE_TITLE = i18n.translate(
+  'xpack.securitySolution.flyout.documentDetails.threatIntelligenceTitle',
+  { defaultMessage: 'Threat Intelligence' }
+);
+
 export const INSIGHTS_TITLE = i18n.translate(
   'xpack.securitySolution.flyout.documentDetails.insightsTitle',
   { defaultMessage: 'Insights' }
@@ -128,6 +133,13 @@ export const ENTITIES_TEXT = i18n.translate(
   'xpack.securitySolution.flyout.documentDetails.overviewTab.entitiesText',
   {
     defaultMessage: 'entities',
+  }
+);
+
+export const THREAT_INTELLIGENCE_TEXT = i18n.translate(
+  'xpack.securitySolution.flyout.documentDetails.overviewTab.threatIntelligenceText',
+  {
+    defaultMessage: 'fields of threat intelligence',
   }
 );
 

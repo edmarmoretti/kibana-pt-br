@@ -58,6 +58,12 @@ export const ENTITIES_HEADER_TEST_ID = 'securitySolutionDocumentDetailsFlyoutEnt
 export const ENTITIES_CONTENT_TEST_ID = 'securitySolutionDocumentDetailsFlyoutEntitiesContent';
 export const ENTITIES_VIEW_ALL_BUTTON_TEST_ID =
   'securitySolutionDocumentDetailsFlyoutEntitiesViewAllButton';
+export const THREAT_INTELLIGENCE_HEADER_TEST_ID =
+  'securitySolutionDocumentDetailsFlyoutThreatIntelligenceHeader';
+export const THREAT_INTELLIGENCE_CONTENT_TEST_ID =
+  'securitySolutionDocumentDetailsFlyoutThreatIntelligenceContent';
+export const THREAT_INTELLIGENCE_VIEW_ALL_BUTTON_TEST_ID =
+  'securitySolutionDocumentDetailsFlyoutThreatIntelligenceViewAllButton';
 export const ENTITY_PANEL_TEST_ID = 'securitySolutionDocumentDetailsFlyoutEntityPanel';
 export const ENTITY_PANEL_ICON_TEST_ID = 'securitySolutionDocumentDetailsFlyoutEntityPanelTypeIcon';
 export const ENTITY_PANEL_TOGGLE_BUTTON_TEST_ID =
