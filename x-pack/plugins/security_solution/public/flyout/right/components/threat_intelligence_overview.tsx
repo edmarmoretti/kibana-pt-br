@@ -26,6 +26,7 @@ import {
   THREAT_INTELLIGENCE_HEADER_TEST_ID,
   THREAT_INTELLIGENCE_CONTENT_TEST_ID,
   THREAT_INTELLIGENCE_VIEW_ALL_BUTTON_TEST_ID,
+  INSIGHTS_THREAT_INTELLIGENCE_TEST_ID,
 } from './test_ids';
 import { VIEW_ALL, THREAT_INTELLIGENCE_TITLE, THREAT_INTELLIGENCE_TEXT } from './translations';
 import { LeftPanelKey, LeftPanelInsightsTabPath } from '../../left';
@@ -105,12 +106,14 @@ export const ThreatIntelligenceOverview: React.FC = () => {
   const data: SummaryPanelData[] = [
     {
       icon: 'image',
-      value: '10 threat matches detected',
+      value: 10,
+      text: 'threat matches detected',
       color: 'red',
     },
     {
       icon: 'warning',
-      value: '18 fields enriched with threat intelligence',
+      value: 18,
+      text: 'fields enriched with threat intelligence',
       color: 'orange',
     },
   ];
@@ -126,7 +129,7 @@ export const ThreatIntelligenceOverview: React.FC = () => {
         direction="column"
         gutterSize="s"
       >
-        <SummaryPanel data={data} />
+        <SummaryPanel data={data} data-test-subj={INSIGHTS_THREAT_INTELLIGENCE_TEST_ID} />
         <EuiButtonEmpty
           onClick={goToThreatIntelligenceTab}
           iconType="arrowStart"

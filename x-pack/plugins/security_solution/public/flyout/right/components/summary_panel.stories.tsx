@@ -20,20 +20,24 @@ export const Default: Story<void> = () => {
   const data: SummaryPanelData[] = [
     {
       icon: 'image',
-      value: 'This is a test for red',
+      value: 1,
+      text: 'this is a test for red',
       color: 'rgb(189,39,30)',
     },
     {
       icon: 'warning',
-      value: 'This is test for orange',
+      value: 2,
+      text: 'this is test for orange',
       color: 'rgb(255,126,98)',
     },
     {
       icon: 'warning',
-      value: 'This is test for yellow',
+      value: 3,
+      text: 'this is test for yellow',
       color: 'rgb(241,216,11)',
     },
   ];
+
   return (
     <div
       css={css`
@@ -49,10 +53,42 @@ export const InvalidColor: Story<void> = () => {
   const data: SummaryPanelData[] = [
     {
       icon: 'image',
-      value: 'This is a test for an invalid color (abc)',
+      value: 1,
+      text: 'this is a test for an invalid color (abc)',
       color: 'abc',
     },
   ];
+
+  return (
+    <div
+      css={css`
+        width: 500px;
+      `}
+    >
+      <SummaryPanel data={data} />
+    </div>
+  );
+};
+
+export const NoColor: Story<void> = () => {
+  const data: SummaryPanelData[] = [
+    {
+      icon: 'image',
+      value: 1,
+      text: 'this is a test for red',
+    },
+    {
+      icon: 'warning',
+      value: 2,
+      text: 'this is test for orange',
+    },
+    {
+      icon: 'warning',
+      value: 3,
+      text: 'this is test for yellow',
+    },
+  ];
+
   return (
     <div
       css={css`
@@ -68,11 +104,12 @@ export const LongText: Story<void> = () => {
   const data: SummaryPanelData[] = [
     {
       icon: 'image',
-      value:
-        'This is an extremely long text to verify it is properly cut off and there is a tooltip displaying everything',
+      value: 1,
+      text: 'this is an extremely long text to verify it is properly cut off and and we show three dots at the end',
       color: 'abc',
     },
   ];
+
   return (
     <div
       css={css`
@@ -83,8 +120,30 @@ export const LongText: Story<void> = () => {
     </div>
   );
 };
+export const LongNumber: Story<void> = () => {
+  const data: SummaryPanelData[] = [
+    {
+      icon: 'image',
+      value: 160000,
+      text: 'this is an extremely long value to verify it is properly cut off and and we show three dots at the end',
+      color: 'abc',
+    },
+  ];
+
+  return (
+    <div
+      css={css`
+        width: 500px;
+      `}
+    >
+      <SummaryPanel data={data} />
+    </div>
+  );
+};
+
 export const NoData: Story<void> = () => {
   const data: SummaryPanelData[] = [];
+
   return (
     <div
       css={css`

@@ -5,6 +5,7 @@
  * 2.0.
  */
 
+import { COLOR_TEST_ID, ICON_TEST_ID, VALUE_TEST_ID } from './summary_panel';
 import { CONTENT_TEST_ID, HEADER_TEST_ID } from './expandable_section';
 
 /* Header */
@@ -86,3 +87,11 @@ export const ENTITIES_HOST_OVERVIEW_IP_TEST_ID =
   'securitySolutionDocumentDetailsFlyoutEntitiesHostOverviewIP';
 export const ENTITIES_HOST_OVERVIEW_RISK_LEVEL_TEST_ID =
   'securitySolutionDocumentDetailsFlyoutEntitiesHostOverviewRiskLevel';
+export const INSIGHTS_THREAT_INTELLIGENCE_TEST_ID =
+  'securitySolutionDocumentDetailsFlyoutInsightsThreatIntelligence';
+export const INSIGHTS_THREAT_INTELLIGENCE_ICON_TEST_ID =
+  INSIGHTS_THREAT_INTELLIGENCE_TEST_ID + ICON_TEST_ID;
+export const INSIGHTS_THREAT_INTELLIGENCE_VALUE_TEST_ID =
+  INSIGHTS_THREAT_INTELLIGENCE_TEST_ID + VALUE_TEST_ID;
+export const INSIGHTS_THREAT_INTELLIGENCE_COLOR_TEST_ID =
+  INSIGHTS_THREAT_INTELLIGENCE_TEST_ID + COLOR_TEST_ID;
