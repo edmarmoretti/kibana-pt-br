@@ -8,14 +8,13 @@
 import React, { useCallback, useMemo } from 'react';
 import { EuiFlexGroup, EuiSpacer, EuiTitle, EuiButtonEmpty } from '@elastic/eui';
 import { useExpandableFlyoutContext } from '@kbn/expandable-flyout';
-import { get } from 'lodash/fp';
-import type { FieldsData } from '../../../common/components/event_details/types';
+import { groupBy } from 'lodash';
+import { ENRICHMENT_TYPES } from '../../../../common/cti/constants';
 import { useInvestigationTimeEnrichment } from '../../../common/containers/cti/event_enrichment';
 import { useBasicDataFromDetailsData } from '../../../timelines/components/side_panel/event_details/helpers';
 import {
   filterDuplicateEnrichments,
   getEnrichmentFields,
-  getEnrichmentIdentifiers,
   parseExistingEnrichments,
   timelineDataToEnrichment,
 } from '../../../common/components/event_details/cti_details/helpers';
@@ -35,8 +34,7 @@ import { LeftPanelKey, LeftPanelInsightsTabPath } from '../../left';
  * Threat Intelligence section under Insights section, overview tab.
  */
 export const ThreatIntelligenceOverview: React.FC = () => {
-  const { eventId, indexName, browserFields, dataFormattedForFieldBrowser } =
-    useRightPanelContext();
+  const { eventId, indexName, dataFormattedForFieldBrowser } = useRightPanelContext();
   const { openLeftPanel } = useExpandableFlyoutContext();
   const { isAlert } = useBasicDataFromDetailsData(dataFormattedForFieldBrowser);
 
@@ -55,6 +53,7 @@ export const ThreatIntelligenceOverview: React.FC = () => {
     () => getEnrichmentFields(dataFormattedForFieldBrowser || []),
     [dataFormattedForFieldBrowser]
   );
+
   const existingEnrichments = useMemo(
     () =>
       isAlert
@@ -64,8 +63,10 @@ export const ThreatIntelligenceOverview: React.FC = () => {
         : [],
     [dataFormattedForFieldBrowser, isAlert]
   );
+
   const { result: enrichmentsResponse, loading: isEnrichmentsLoading } =
     useInvestigationTimeEnrichment(eventFields);
+
   const allEnrichments = useMemo(() => {
     if (isEnrichmentsLoading || !enrichmentsResponse?.enrichments) {
       return existingEnrichments;
@@ -73,48 +74,28 @@ export const ThreatIntelligenceOverview: React.FC = () => {
     return filterDuplicateEnrichments([...existingEnrichments, ...enrichmentsResponse.enrichments]);
   }, [isEnrichmentsLoading, enrichmentsResponse, existingEnrichments]);
 
-  const parsedEnrichments = allEnrichments.map((enrichment, index) => {
-    const { field, type, feedName, value } = getEnrichmentIdentifiers(enrichment);
-    const eventData = (dataFormattedForFieldBrowser || []).find((item) => item.field === field);
-    const category = eventData?.category ?? '';
-    const browserField = get([category, 'fields', field ?? ''], browserFields);
-
-    const fieldsData: FieldsData = {
-      field: field ?? '',
-      format: browserField?.format ?? '',
-      type: browserField?.type ?? '',
-      isObjectArray: eventData?.isObjectArray ?? false,
-    };
-
-    return {
-      fieldsData,
-      type,
-      feedName,
-      index,
-      field,
-      browserField,
-      value,
-    };
-  });
-
-  console.log('parsedEnrichments', parsedEnrichments);
-
   if (!eventId || !dataFormattedForFieldBrowser) {
     return null;
   }
 
+  const {
+    [ENRICHMENT_TYPES.IndicatorMatchRule]: threatMatches,
+    [ENRICHMENT_TYPES.InvestigationTime]: threatEnrichments,
+  } = groupBy(allEnrichments, 'matched.type');
+
+  const threatMatchesCount = (threatMatches || []).length;
+  const threatEnrichmentsCount = (threatEnrichments || []).length;
+
   const data: SummaryPanelData[] = [
     {
       icon: 'image',
-      value: 10,
-      text: 'threat matches detected',
-      color: 'red',
+      value: threatMatchesCount,
+      text: `threat match${threatMatchesCount <= 1 ? '' : 'es'} detected`,
     },
     {
       icon: 'warning',
-      value: 18,
-      text: 'fields enriched with threat intelligence',
-      color: 'orange',
+      value: threatEnrichmentsCount,
+      text: `field${threatEnrichmentsCount <= 1 ? '' : 's'} enriched with threat intelligence`,
     },
   ];
 
