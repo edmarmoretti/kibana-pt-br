@@ -6,7 +6,14 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { EuiFlexGroup, EuiSpacer, EuiTitle, EuiButtonEmpty } from '@elastic/eui';
+import {
+  EuiFlexGroup,
+  EuiSpacer,
+  EuiTitle,
+  EuiButtonEmpty,
+  EuiLoadingSpinner,
+  EuiFlexItem,
+} from '@elastic/eui';
 import { useExpandableFlyoutContext } from '@kbn/expandable-flyout';
 import { groupBy } from 'lodash';
 import { ENRICHMENT_TYPES } from '../../../../common/cti/constants';
@@ -26,6 +33,7 @@ import {
   THREAT_INTELLIGENCE_CONTENT_TEST_ID,
   THREAT_INTELLIGENCE_VIEW_ALL_BUTTON_TEST_ID,
   INSIGHTS_THREAT_INTELLIGENCE_TEST_ID,
+  INSIGHTS_THREAT_INTELLIGENCE_LOADING_TEST_ID,
 } from './test_ids';
 import { VIEW_ALL, THREAT_INTELLIGENCE_TITLE, THREAT_INTELLIGENCE_TEXT } from './translations';
 import { LeftPanelKey, LeftPanelInsightsTabPath } from '../../left';
@@ -49,11 +57,17 @@ export const ThreatIntelligenceOverview: React.FC = () => {
     });
   }, [eventId, openLeftPanel, indexName]);
 
+  // retrieve the threat enrichement fields with value (see https://github.com/elastic/kibana/blob/main/x-pack/plugins/security_solution/common/cti/constants.ts#L35)
   const eventFields = useMemo(
     () => getEnrichmentFields(dataFormattedForFieldBrowser || []),
     [dataFormattedForFieldBrowser]
   );
 
+  // api call to retrieve all the enrichment documents
+  const { result: enrichmentsResponse, loading: isEnrichmentsLoading } =
+    useInvestigationTimeEnrichment(eventFields);
+
+  // retrieve existing enrichment fields and their value
   const existingEnrichments = useMemo(
     () =>
       isAlert
@@ -64,9 +78,7 @@ export const ThreatIntelligenceOverview: React.FC = () => {
     [dataFormattedForFieldBrowser, isAlert]
   );
 
-  const { result: enrichmentsResponse, loading: isEnrichmentsLoading } =
-    useInvestigationTimeEnrichment(eventFields);
-
+  //  combine existing enrichment and enrichment from the api response
   const allEnrichments = useMemo(() => {
     if (isEnrichmentsLoading || !enrichmentsResponse?.enrichments) {
       return existingEnrichments;
@@ -74,10 +86,7 @@ export const ThreatIntelligenceOverview: React.FC = () => {
     return filterDuplicateEnrichments([...existingEnrichments, ...enrichmentsResponse.enrichments]);
   }, [isEnrichmentsLoading, enrichmentsResponse, existingEnrichments]);
 
-  if (!eventId || !dataFormattedForFieldBrowser) {
-    return null;
-  }
-
+  // separate threat matches from threat enrichments
   const {
     [ENRICHMENT_TYPES.IndicatorMatchRule]: threatMatches,
     [ENRICHMENT_TYPES.InvestigationTime]: threatEnrichments,
@@ -98,6 +107,22 @@ export const ThreatIntelligenceOverview: React.FC = () => {
       text: `field${threatEnrichmentsCount <= 1 ? '' : 's'} enriched with threat intelligence`,
     },
   ];
+
+  // showing the loading in this component instead of SummaryPanel because we're hiding the entire section if no data
+  if (isEnrichmentsLoading) {
+    return (
+      <EuiFlexGroup justifyContent="center">
+        <EuiFlexItem grow={false}>
+          <EuiLoadingSpinner data-test-subj={INSIGHTS_THREAT_INTELLIGENCE_LOADING_TEST_ID} />
+        </EuiFlexItem>
+      </EuiFlexGroup>
+    );
+  }
+
+  // hide everything
+  if (!eventId || !dataFormattedForFieldBrowser || allEnrichments.length === 0) {
+    return null;
+  }
 
   return (
     <>

@@ -89,6 +89,8 @@ export const ENTITIES_HOST_OVERVIEW_RISK_LEVEL_TEST_ID =
   'securitySolutionDocumentDetailsFlyoutEntitiesHostOverviewRiskLevel';
 export const INSIGHTS_THREAT_INTELLIGENCE_TEST_ID =
   'securitySolutionDocumentDetailsFlyoutInsightsThreatIntelligence';
+export const INSIGHTS_THREAT_INTELLIGENCE_LOADING_TEST_ID =
+  'securitySolutionDocumentDetailsFlyoutThreatIntelligenceLoading';
 export const INSIGHTS_THREAT_INTELLIGENCE_ICON_TEST_ID =
   INSIGHTS_THREAT_INTELLIGENCE_TEST_ID + ICON_TEST_ID;
 export const INSIGHTS_THREAT_INTELLIGENCE_VALUE_TEST_ID =
