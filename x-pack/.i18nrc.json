@@ -76,6 +76,7 @@
   "translations": [
     "plugins/translations/translations/zh-CN.json",
     "plugins/translations/translations/ja-JP.json",
-    "plugins/translations/translations/fr-FR.json"
+    "plugins/translations/translations/fr-FR.json",
+    "plugins/translations/translations/pt-BR.json"
   ]
 }
