@@ -125,9 +125,9 @@ const getMetricFormatter = (
   const intlOptions: Intl.NumberFormatOptions = {
     maximumFractionDigits: 2,
   };
-
+  //Edmar Moretti - altera de compact para standard
   if (['number', 'currency', 'percent'].includes(formatId)) {
-    intlOptions.notation = 'compact';
+    intlOptions.notation = 'standard';
   }
 
   if (formatId === 'currency') {

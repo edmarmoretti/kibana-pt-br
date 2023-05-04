@@ -44,12 +44,16 @@ import { EmbeddablePanelError } from './embeddable_panel_error';
 import { RemovePanelAction } from './panel_header/panel_actions';
 import { AddPanelAction } from './panel_header/panel_actions/add_panel/add_panel_action';
 import { CustomizePanelTitleAction } from './panel_header/panel_actions/customize_title/customize_panel_action';
-import { PanelHeader } from './panel_header/panel_header';
+//Edmar Moretti
+import { PanelHeader, PanelNotes } from './panel_header/panel_header';
 import { InspectPanelAction } from './panel_header/panel_actions/inspect_panel_action';
 import { EditPanelAction } from '../actions';
 import { CustomizePanelModal } from './panel_header/panel_actions/customize_title/customize_panel_modal';
 import { EmbeddableStart } from '../../plugin';
 import { EmbeddableStateTransfer, isSelfStyledEmbeddable } from '..';
+
+// Edmar Moretti
+let contadorDeQuadrosRenderizados = 0;
 
 const sortByOrderField = (
   { order: orderA }: { order?: number },
@@ -271,6 +275,9 @@ export class EmbeddablePanel extends React.Component<Props, State> {
     if (this.state.error) contentAttrs['data-error'] = true;
 
     const title = this.props.embeddable.getTitle();
+    //Edmar Moretti - adicionado
+    const titleNotes = this.props.embeddable.getTitleNotes();
+    
     const headerId = this.generateId();
 
     const selfStyledOptions = isSelfStyledEmbeddable(this.props.embeddable)
@@ -329,6 +336,15 @@ export class EmbeddablePanel extends React.Component<Props, State> {
         <div className="embPanel__content" ref={this.embeddableRoot} {...contentAttrs}>
           {this.state.node}
         </div>
+        {!this.props.hideHeader && (
+          <PanelNotes
+            hidePanelTitle={this.state.hidePanelTitle || !!selfStyledOptions?.hideTitle}
+            isViewMode={viewOnlyMode}
+            titleNotes={titleNotes}
+            index={this.props.index}
+            embeddable={this.props.embeddable}
+          />
+        )}
       </EuiPanel>
     );
   }
@@ -352,7 +368,20 @@ export class EmbeddablePanel extends React.Component<Props, State> {
       )
     );
 
+      //
+      //Edmar Moretti - mensagem com o tamanho da página
+      if(contadorDeQuadrosRenderizados == 0 && window.parent){
+        //console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight);
+        window.parent.postMessage(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300, '*');
+        console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300);
+      }
+      contadorDeQuadrosRenderizados++;
+
+      //
+
     const node = this.props.embeddable.render(this.embeddableRoot.current) ?? undefined;
+
+
     if (isPromise(node)) {
       node.then((resolved) => this.setState({ node: resolved }));
     } else {
@@ -387,16 +416,17 @@ export class EmbeddablePanel extends React.Component<Props, State> {
     ) {
       return actions;
     }
+    //Edmar Moretti - titleNotes
     const createGetUserData = (overlays: OverlayStart, theme: ThemeServiceStart) =>
       async function getUserData(context: { embeddable: IEmbeddable }) {
-        return new Promise<{ title: string | undefined; hideTitle?: boolean }>((resolve) => {
+        return new Promise<{ title: string | undefined; hideTitle?: boolean; titleNotes: string | undefined;}>((resolve) => {
           const session = overlays.openModal(
             toMountPoint(
               <CustomizePanelModal
                 embeddable={context.embeddable}
-                updateTitle={(title, hideTitle) => {
+                updateTitle={(title, hideTitle, titleNotes) => {
                   session.close();
-                  resolve({ title, hideTitle });
+                  resolve({ title, hideTitle, titleNotes });
                 }}
                 cancel={() => session.close()}
               />,

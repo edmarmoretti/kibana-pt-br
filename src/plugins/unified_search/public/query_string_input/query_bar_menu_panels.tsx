@@ -5,7 +5,7 @@
  * in compliance with, at your election, the Elastic License 2.0 or the Server
  * Side Public License, v 1.
  */
-
+//Edmar Moretti - tradução
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { i18n } from '@kbn/i18n';
 import { isEqual } from 'lodash';
@@ -236,7 +236,7 @@ export function QueryBarMenuPanels({
   const filtersRelatedPanels = [
     {
       name: i18n.translate('unifiedSearch.filter.options.addFilterButtonLabel', {
-        defaultMessage: 'Add filter',
+        defaultMessage: 'Adicionar filtro',
       }),
       icon: 'plus',
       onClick: () => {
@@ -245,7 +245,7 @@ export function QueryBarMenuPanels({
     },
     {
       name: i18n.translate('unifiedSearch.filter.options.applyAllFiltersButtonLabel', {
-        defaultMessage: 'Apply to all',
+        defaultMessage: 'Aplicar a todos',
       }),
       icon: 'filter',
       panel: 2,
@@ -258,7 +258,7 @@ export function QueryBarMenuPanels({
     {
       name: savedQuery
         ? i18n.translate('unifiedSearch.filter.options.loadOtherFilterSetLabel', {
-            defaultMessage: 'Load other saved query',
+            defaultMessage: 'Carrega outra consulta salva',
           })
         : i18n.translate('unifiedSearch.filter.options.loadCurrentFilterSetLabel', {
             defaultMessage: 'Load saved query',
@@ -296,7 +296,7 @@ export function QueryBarMenuPanels({
     items.push(
       {
         name: i18n.translate('unifiedSearch.filter.options.clearllFiltersButtonLabel', {
-          defaultMessage: 'Clear all',
+          defaultMessage: 'Limpar tudo',
         }),
         disabled: !hasFiltersOrQuery && !Boolean(savedQuery),
         icon: 'crossInACircleFilled',
@@ -421,12 +421,12 @@ export function QueryBarMenuPanels({
       id: 2,
       initialFocusedItemIndex: 1,
       title: i18n.translate('unifiedSearch.filter.options.applyAllFiltersButtonLabel', {
-        defaultMessage: 'Apply to all',
+        defaultMessage: 'Aplicar a todos',
       }),
       items: [
         {
           name: i18n.translate('unifiedSearch.filter.options.enableAllFiltersButtonLabel', {
-            defaultMessage: 'Enable all',
+            defaultMessage: 'Ativar todos',
           }),
           icon: 'eye',
           'data-test-subj': 'filter-sets-enableAllFilters',
@@ -437,7 +437,7 @@ export function QueryBarMenuPanels({
         },
         {
           name: i18n.translate('unifiedSearch.filter.options.disableAllFiltersButtonLabel', {
-            defaultMessage: 'Disable all',
+            defaultMessage: 'Desativar todos',
           }),
           'data-test-subj': 'filter-sets-disableAllFilters',
           icon: 'eyeClosed',
@@ -448,7 +448,7 @@ export function QueryBarMenuPanels({
         },
         {
           name: i18n.translate('unifiedSearch.filter.options.invertNegatedFiltersButtonLabel', {
-            defaultMessage: 'Invert inclusion',
+            defaultMessage: 'Inverter a inclusão',
           }),
           'data-test-subj': 'filter-sets-invertAllFilters',
           icon: 'invert',
@@ -459,7 +459,7 @@ export function QueryBarMenuPanels({
         },
         {
           name: i18n.translate('unifiedSearch.filter.options.pinAllFiltersButtonLabel', {
-            defaultMessage: 'Pin all',
+            defaultMessage: 'Fixar todos',
           }),
           'data-test-subj': 'filter-sets-pinAllFilters',
           icon: 'pin',
@@ -470,7 +470,7 @@ export function QueryBarMenuPanels({
         },
         {
           name: i18n.translate('unifiedSearch.filter.options.unpinAllFiltersButtonLabel', {
-            defaultMessage: 'Unpin all',
+            defaultMessage: 'Desafixar todos',
           }),
           'data-test-subj': 'filter-sets-unpinAllFilters',
           icon: 'pin',
@@ -484,7 +484,7 @@ export function QueryBarMenuPanels({
     {
       id: 3,
       title: i18n.translate('unifiedSearch.filter.options.filterLanguageLabel', {
-        defaultMessage: 'Filter language',
+        defaultMessage: 'Linguagem de filtro',
       }),
       content: (
         <QueryLanguageSwitcher

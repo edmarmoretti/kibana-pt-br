@@ -15,6 +15,7 @@ import { EmbeddableInput } from '../../../common/types';
 export type EmbeddableError = ErrorLike;
 export type { EmbeddableInput };
 
+//Edmar Moretti - inclusão de titleNotes
 export interface EmbeddableOutput {
   // Whether the embeddable is actively loading.
   loading?: boolean;
@@ -29,6 +30,7 @@ export interface EmbeddableOutput {
   title?: string;
   editable?: boolean;
   savedObjectId?: string;
+  titleNotes?: string;
 }
 
 export interface IEmbeddable<
@@ -163,6 +165,8 @@ export interface IEmbeddable<
    * Returns the title of this embeddable.
    */
   getTitle(): string | undefined;
+  //Edmar Moretti - adicionado
+  getTitleNotes(): string | undefined;
 
   /**
    * Returns the top most parent embeddable, or itself if this embeddable

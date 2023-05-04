@@ -35,8 +35,14 @@ export class InspectPanelAction implements Action<ActionContext> {
   }
 
   public async isCompatible({ embeddable }: ActionContext) {
+    //Edmar Moretti - remove a opção caso seja uma visualização do tipo Vega
+    if(embeddable.getInspectorAdapters()?.vega){
+      return false;
+    }
+    //
     return this.inspector.isAvailable(embeddable.getInspectorAdapters());
   }
+
 
   public async execute({ embeddable }: ActionContext) {
     const adapters = embeddable.getInspectorAdapters();

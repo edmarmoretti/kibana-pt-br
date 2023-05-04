@@ -99,7 +99,7 @@ export const DocTableEmbeddable = (props: DocTableEmbeddableProps) => {
     },
     [pageOfItems]
   );
-
+//Edmar Moretti - tradução
   return (
     <EuiFlexGroup style={{ width: '100%' }} direction="column" gutterSize="xs" responsive={false}>
       <EuiFlexItem grow={false}>
@@ -115,7 +115,7 @@ export const DocTableEmbeddable = (props: DocTableEmbeddableProps) => {
               <EuiText grow={false} size="s" color="subdued">
                 <FormattedMessage
                   id="discover.docTable.limitedSearchResultLabel"
-                  defaultMessage="Limited to {resultCount} results. Refine your search."
+                  defaultMessage="Limitado a {resultCount} resultados. Refine sua busca."
                   values={{ resultCount: sampleSize }}
                 />
               </EuiText>

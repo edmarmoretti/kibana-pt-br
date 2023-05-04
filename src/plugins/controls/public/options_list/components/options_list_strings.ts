@@ -16,15 +16,15 @@ export const OptionsListStrings = {
       }),
     getPlaceholder: () =>
       i18n.translate('controls.optionsList.control.placeholder', {
-        defaultMessage: 'Any',
+        defaultMessage: 'Tudo',
       }),
     getNegate: () =>
       i18n.translate('controls.optionsList.control.negate', {
-        defaultMessage: 'NOT',
+        defaultMessage: 'Não',
       }),
     getExcludeExists: () =>
       i18n.translate('controls.optionsList.control.excludeExists', {
-        defaultMessage: 'DOES NOT',
+        defaultMessage: 'Não existe',
       }),
   },
   editor: {
@@ -63,37 +63,37 @@ export const OptionsListStrings = {
       }),
     getLoadingMessage: () =>
       i18n.translate('controls.optionsList.popover.loading', {
-        defaultMessage: 'Loading options',
+        defaultMessage: 'Carregando as opções',
       }),
     getEmptyMessage: () =>
       i18n.translate('controls.optionsList.popover.empty', {
-        defaultMessage: 'No options found',
+        defaultMessage: 'Nenhuma opção encontrada',
       }),
     getSelectionsEmptyMessage: () =>
       i18n.translate('controls.optionsList.popover.selectionsEmpty', {
-        defaultMessage: 'You have no selections',
+        defaultMessage: 'Não há seleções',
       }),
     getAllOptionsButtonTitle: () =>
       i18n.translate('controls.optionsList.popover.allOptionsTitle', {
-        defaultMessage: 'Show all options',
+        defaultMessage: 'Mostrar todas as opções',
       }),
     getSelectedOptionsButtonTitle: () =>
       i18n.translate('controls.optionsList.popover.selectedOptionsTitle', {
-        defaultMessage: 'Show only selected options',
+        defaultMessage: 'Mostar somente as opções selecionadas',
       }),
     getClearAllSelectionsButtonTitle: () =>
       i18n.translate('controls.optionsList.popover.clearAllSelectionsTitle', {
-        defaultMessage: 'Clear selections',
+        defaultMessage: 'Limpar seleções',
       }),
     getTotalCardinalityTooltip: (totalOptions: number) =>
       i18n.translate('controls.optionsList.popover.cardinalityTooltip', {
-        defaultMessage: '{totalOptions} available options.',
+        defaultMessage: '{totalOptions} opções disponíveis.',
         values: { totalOptions },
       }),
     getTotalCardinalityPlaceholder: (totalOptions: number) =>
       i18n.translate('controls.optionsList.popover.cardinalityPlaceholder', {
         defaultMessage:
-          'Search {totalOptions} available {totalOptions, plural, one {option} other {options}}',
+          'Localizar em {totalOptions} disponíveis {totalOptions, plural, one {option} other {options}}',
         values: { totalOptions },
       }),
     getInvalidSelectionsTitle: (invalidSelectionCount: number) =>
@@ -119,11 +119,11 @@ export const OptionsListStrings = {
       }),
     getIncludeLabel: () =>
       i18n.translate('controls.optionsList.popover.includeLabel', {
-        defaultMessage: 'Include',
+        defaultMessage: 'Incluir',
       }),
     getExcludeLabel: () =>
       i18n.translate('controls.optionsList.popover.excludeLabel', {
-        defaultMessage: 'Exclude',
+        defaultMessage: 'Excluir',
       }),
     getIncludeExcludeLegend: () =>
       i18n.translate('controls.optionsList.popover.excludeOptionsLegend', {
@@ -133,7 +133,7 @@ export const OptionsListStrings = {
   controlAndPopover: {
     getExists: (negate: number = +false) =>
       i18n.translate('controls.optionsList.controlAndPopover.exists', {
-        defaultMessage: '{negate, plural, one {Exist} other {Exists}}',
+        defaultMessage: '{negate, plural, one {Existe} other {Existe}}',
         values: { negate },
       }),
   },

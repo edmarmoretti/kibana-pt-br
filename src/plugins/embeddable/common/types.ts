@@ -20,10 +20,11 @@ export enum ViewMode {
   PRINT = 'print',
   VIEW = 'view',
 }
-
+//Edmar Moretti - adicionado titleNotes
 export type EmbeddableInput = {
   viewMode?: ViewMode;
   title?: string;
+  titleNotes?: string;
   /**
    * Note this is not a saved object id. It is used to uniquely identify this
    * Embeddable instance from others (e.g. inside a container).  It's possible to

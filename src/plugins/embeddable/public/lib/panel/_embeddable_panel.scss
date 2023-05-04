@@ -42,15 +42,16 @@
 
 .embPanel__title {
   @include euiTitle('xxxs');
-  overflow: hidden;
-  line-height: 1.5;
+  overflow: auto;
+  line-height: 1.2;
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  height: 50px;
 
   &:not(:empty) {
-    line-height: $euiSizeL;
+    line-height: 20px;
     padding-left: $euiSizeS;
   }
 
@@ -66,8 +67,12 @@
   }
 
   .embPanel__titleText {
-    @include euiTextTruncate;
-    font-weight: $euiFontWeightBold;
+    max-width: 100%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-wrap: normal !important;
+    font-weight: 700;
+    white-space: normal; 
   }
 
   .embPanel__placeholderTitleText {
@@ -158,12 +163,11 @@
 }
 
 .embPanel__error {
-  padding: $euiSizeL;
-
-  & > * {
-    max-height: 100%;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
     overflow: auto;
-  }
+  padding: $euiSizeS;
 }
 
 .embPanel__label {

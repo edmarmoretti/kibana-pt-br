@@ -77,13 +77,19 @@ export class CustomTimeRangeAction implements Action<TimeRangeActionContext> {
   }
 
   public async isCompatible({ embeddable }: TimeRangeActionContext) {
+    //Edmar Moretti
+    //não permite mostrar o botão no menu de opções dos quadros
+    
     const isInputControl =
       isVisualizeEmbeddable(embeddable) &&
       (embeddable as VisualizeEmbeddable).getOutput().visTypeName === 'input_control_vis';
-
+    /*
     const isMarkdown =
       isVisualizeEmbeddable(embeddable) &&
       (embeddable as VisualizeEmbeddable).getOutput().visTypeName === 'markdown';
+    */
+      const isMarkdown = true;
+
     return Boolean(
       embeddable && embeddable.parent && hasTimeRange(embeddable) && !isInputControl && !isMarkdown
     );

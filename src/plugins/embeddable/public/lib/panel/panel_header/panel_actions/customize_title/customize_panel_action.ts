@@ -13,9 +13,11 @@ import { IEmbeddable } from '../../../../embeddables';
 
 export const ACTION_CUSTOMIZE_PANEL = 'ACTION_CUSTOMIZE_PANEL';
 
+//Edmar Moretti - inclusão de titleNotes
+
 type GetUserData = (
   context: ActionContext
-) => Promise<{ title: string | undefined; hideTitle?: boolean }>;
+) => Promise<{ title: string | undefined; hideTitle?: boolean; titleNotes: string | undefined; }>;
 
 interface ActionContext {
   embeddable: IEmbeddable;
@@ -44,7 +46,7 @@ export class CustomizePanelTitleAction implements Action<ActionContext> {
 
   public async execute({ embeddable }: ActionContext) {
     const data = await this.getDataFromUser({ embeddable });
-    const { title, hideTitle } = data;
-    embeddable.updateInput({ title, hidePanelTitles: hideTitle });
+    const { title, hideTitle, titleNotes } = data;
+    embeddable.updateInput({ title, hidePanelTitles: hideTitle, titleNotes });
   }
 }

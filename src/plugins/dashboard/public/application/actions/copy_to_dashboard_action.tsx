@@ -69,12 +69,16 @@ export class CopyToDashboardAction implements Action<CopyToDashboardActionContex
   }
 
   public async isCompatible({ embeddable }: CopyToDashboardActionContext) {
+    //Edmar Moretti - remove a opção do menu.
+    return false;
+    /*
     const { createNew: canCreateNew, showWriteControls: canEditExisting } =
       this.dashboardCapabilities;
 
     return Boolean(
       embeddable.parent && isDashboard(embeddable.parent) && (canCreateNew || canEditExisting)
     );
+    */
   }
 
   public async execute({ embeddable }: CopyToDashboardActionContext) {

@@ -186,6 +186,10 @@ export abstract class Embeddable<
   public getTitle(): string {
     return this.output.title || '';
   }
+  //Edmar Moretti
+  public getTitleNotes(): string {
+    return this.input.titleNotes || '';
+  }
 
   /**
    * Returns the top most parent embeddable, or itself if this embeddable

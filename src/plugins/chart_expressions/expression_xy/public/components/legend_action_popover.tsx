@@ -41,7 +41,7 @@ export const LegendActionPopover: React.FunctionComponent<LegendActionPopoverPro
       items: [
         {
           name: i18n.translate('expressionXY.legend.filterForValueButtonAriaLabel', {
-            defaultMessage: 'Filter for value',
+            defaultMessage: 'Filtrar por valor',
           }),
           'data-test-subj': `legend-${label}-filterIn`,
           icon: <EuiIcon type="plusInCircle" size="m" />,
@@ -52,7 +52,7 @@ export const LegendActionPopover: React.FunctionComponent<LegendActionPopoverPro
         },
         {
           name: i18n.translate('expressionXY.legend.filterOutValueButtonAriaLabel', {
-            defaultMessage: 'Filter out value',
+            defaultMessage: 'Filtrar por não valor',
           }),
           'data-test-subj': `legend-${label}-filterOut`,
           icon: <EuiIcon type="minusInCircle" size="m" />,

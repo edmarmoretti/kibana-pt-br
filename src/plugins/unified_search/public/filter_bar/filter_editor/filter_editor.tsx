@@ -71,18 +71,20 @@ interface State {
   isCustomEditorOpen: boolean;
 }
 
+//Edmar Moretti - tradução
+
 const panelTitleAdd = i18n.translate('unifiedSearch.filter.filterEditor.addFilterPopupTitle', {
-  defaultMessage: 'Add filter',
+  defaultMessage: 'Adicionar filtro',
 });
 const panelTitleEdit = i18n.translate('unifiedSearch.filter.filterEditor.editFilterPopupTitle', {
-  defaultMessage: 'Edit filter',
+  defaultMessage: 'Editar filtro',
 });
 
 const addButtonLabel = i18n.translate('unifiedSearch.filter.filterEditor.addButtonLabel', {
-  defaultMessage: 'Add filter',
+  defaultMessage: 'Adicionar filtro',
 });
 const updateButtonLabel = i18n.translate('unifiedSearch.filter.filterEditor.updateButtonLabel', {
-  defaultMessage: 'Update filter',
+  defaultMessage: 'Atualizar filtro',
 });
 
 class FilterEditorUI extends Component<FilterEditorProps, State> {
@@ -116,12 +118,12 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
                 {this.state.isCustomEditorOpen ? (
                   <FormattedMessage
                     id="unifiedSearch.filter.filterEditor.editFilterValuesButtonLabel"
-                    defaultMessage="Edit filter values"
+                    defaultMessage="Edite os valores do filtro"
                   />
                 ) : (
                   <FormattedMessage
                     id="unifiedSearch.filter.filterEditor.editQueryDslButtonLabel"
-                    defaultMessage="Edit as Query DSL"
+                    defaultMessage="Edite a consulta DSL"
                   />
                 )}
               </EuiButtonEmpty>
@@ -142,7 +144,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
               data-test-subj="createCustomLabel"
               label={this.props.intl.formatMessage({
                 id: 'unifiedSearch.filter.filterEditor.createCustomLabelSwitchLabel',
-                defaultMessage: 'Create custom label?',
+                defaultMessage: 'Cria um rótulo personalizado?',
               })}
               checked={this.state.useCustomLabel}
               onChange={this.onCustomLabelSwitchChange}
@@ -154,7 +156,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
                 <EuiFormRow
                   label={this.props.intl.formatMessage({
                     id: 'unifiedSearch.filter.filterEditor.createCustomLabelInputLabel',
-                    defaultMessage: 'Custom label',
+                    defaultMessage: 'Rótulo personalizado',
                   })}
                   fullWidth
                 >
@@ -194,7 +196,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
                 >
                   <FormattedMessage
                     id="unifiedSearch.filter.filterEditor.cancelButtonLabel"
-                    defaultMessage="Cancel"
+                    defaultMessage="Cancela"
                   />
                 </EuiButtonEmpty>
               </EuiFlexItem>
@@ -234,7 +236,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
             fullWidth
             placeholder={this.props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterBar.indexPatternSelectPlaceholder',
-              defaultMessage: 'Select a data view',
+              defaultMessage: 'Selecione um data view',
             })}
             options={this.props.indexPatterns}
             selectedOptions={selectedIndexPattern ? [selectedIndexPattern] : []}
@@ -274,7 +276,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
         fullWidth
         label={this.props.intl.formatMessage({
           id: 'unifiedSearch.filter.filterEditor.fieldSelectLabel',
-          defaultMessage: 'Field',
+          defaultMessage: 'Coluna',
         })}
       >
         <FieldComboBox
@@ -283,7 +285,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
           isDisabled={!selectedIndexPattern}
           placeholder={this.props.intl.formatMessage({
             id: 'unifiedSearch.filter.filterEditor.fieldSelectPlaceholder',
-            defaultMessage: 'Select a field first',
+            defaultMessage: 'Selecione uma coluna primeiro',
           })}
           options={fields}
           selectedOptions={selectedField ? [selectedField] : []}
@@ -305,7 +307,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
         fullWidth
         label={this.props.intl.formatMessage({
           id: 'unifiedSearch.filter.filterEditor.operatorSelectLabel',
-          defaultMessage: 'Operator',
+          defaultMessage: 'Operador',
         })}
       >
         <OperatorComboBox
@@ -315,11 +317,11 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
             selectedField
               ? this.props.intl.formatMessage({
                   id: 'unifiedSearch.filter.filterEditor.operatorSelectPlaceholderSelect',
-                  defaultMessage: 'Select',
+                  defaultMessage: 'Selecione',
                 })
               : this.props.intl.formatMessage({
                   id: 'unifiedSearch.filter.filterEditor.operatorSelectPlaceholderWaiting',
-                  defaultMessage: 'Waiting',
+                  defaultMessage: 'Aguardando',
                 })
           }
           options={operators}
@@ -339,7 +341,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
       <EuiFormRow
         fullWidth
         label={i18n.translate('unifiedSearch.filter.filterEditor.queryDslLabel', {
-          defaultMessage: 'Elasticsearch Query DSL',
+          defaultMessage: 'Consulta Elasticsearch DSL',
         })}
       >
         <CodeEditor
@@ -350,7 +352,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
           onChange={this.onQueryDslChange}
           data-test-subj="customEditorInput"
           aria-label={i18n.translate('unifiedSearch.filter.filterEditor.queryDslAriaLabel', {
-            defaultMessage: 'Elasticsearch Query DSL editor',
+            defaultMessage: 'Editor DSL',
           })}
         />
       </EuiFormRow>
@@ -377,7 +379,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
             fullWidth
             label={this.props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterEditor.valueInputLabel',
-              defaultMessage: 'Value',
+              defaultMessage: 'Valor',
             })}
             isInvalid={isInvalid}
             error={errorMessage}
@@ -399,7 +401,7 @@ class FilterEditorUI extends Component<FilterEditorProps, State> {
             fullWidth
             label={this.props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterEditor.valuesSelectLabel',
-              defaultMessage: 'Values',
+              defaultMessage: 'Valores',
             })}
           >
             <PhrasesValuesInput

@@ -135,10 +135,11 @@ export type XYChartRenderProps = Omit<XYChartProps, 'canNavigateToLens'> & {
 function getValueLabelsStyling(isHorizontal: boolean): {
   displayValue: RecursivePartial<DisplayValueStyle>;
 } {
-  const VALUE_LABELS_MAX_FONTSIZE = 12;
-  const VALUE_LABELS_MIN_FONTSIZE = 10;
-  const VALUE_LABELS_VERTICAL_OFFSET = -10;
-  const VALUE_LABELS_HORIZONTAL_OFFSET = 10;
+  //Edmar Moretti - altera os tamanhos dos labels
+  const VALUE_LABELS_MAX_FONTSIZE = 12;//12;
+  const VALUE_LABELS_MIN_FONTSIZE = 6; //10;
+  const VALUE_LABELS_VERTICAL_OFFSET = -5; //-10;
+  const VALUE_LABELS_HORIZONTAL_OFFSET = 1; //10;
 
   return {
     displayValue: {
@@ -671,6 +672,7 @@ export function XYChart({
     visible: xAxisConfig?.showGridLines,
     strokeWidth: 1,
   };
+  //Edmar Moretti - alteração na cor dos títulos dos eixos
   const xAxisStyle: RecursivePartial<AxisStyle> = shouldUseNewTimeAxis
     ? {
         ...MULTILAYER_TIME_AXIS_STYLE,
@@ -684,7 +686,7 @@ export function XYChart({
           visible: Boolean(xAxisConfig?.showLabels),
         },
         axisTitle: {
-          visible: xAxisConfig?.showTitle,
+          visible: xAxisConfig?.showTitle
         },
       }
     : {
@@ -692,7 +694,7 @@ export function XYChart({
           visible: xAxisConfig?.showLabels,
           rotation: xAxisConfig?.labelsOrientation,
           padding: linesPaddings.bottom != null ? { inner: linesPaddings.bottom } : undefined,
-          fill: xAxisConfig?.labelColor,
+          fill: 'xAxisConfig?.labelColor',
         },
         axisTitle: {
           visible: xAxisConfig?.showTitle,
@@ -721,6 +723,19 @@ export function XYChart({
     position: uiState ? 'absolute' : 'relative',
   });
 
+  //Edmar Moretti - remove a linha do eixo quando a categoria estiver no eixo y
+  if(getOriginalAxisPosition('bottom', shouldRotate) == 'left'){
+    xAxisStyle.axisLine = {
+      stroke: 'white'
+    };
+  } else {
+    xAxisStyle.tickLine = {
+      visible: true,
+      size: 5
+    };
+  }
+  xAxisStyle.axisTitle = {fill: '#69707d'};
+  //console.log(legend);
   return (
     <div css={chartContainerStyle}>
       {showLegend !== undefined && uiState && (

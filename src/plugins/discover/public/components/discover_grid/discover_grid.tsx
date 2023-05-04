@@ -505,7 +505,7 @@ export const DiscoverGrid = ({
         <EuiText size="xs" color="subdued">
           <EuiLoadingSpinner />
           <EuiSpacer size="s" />
-          <FormattedMessage id="discover.loadingResults" defaultMessage="Loading results" />
+          <FormattedMessage id="discover.loadingResults" defaultMessage="Carregando os resultados" />
         </EuiText>
       </div>
     );
@@ -524,7 +524,7 @@ export const DiscoverGrid = ({
         <EuiText size="xs" color="subdued">
           <EuiIcon type="discoverApp" size="m" color="subdued" />
           <EuiSpacer size="s" />
-          <FormattedMessage id="discover.noResultsFound" defaultMessage="No results found" />
+          <FormattedMessage id="discover.noResultsFound" defaultMessage="Nenhum resultado encontrado" />
         </EuiText>
       </div>
     );
@@ -586,8 +586,7 @@ export const DiscoverGrid = ({
           <p className="dscDiscoverGrid__footer" data-test-subj="discoverTableFooter">
             <FormattedMessage
               id="discover.gridSampleSize.description"
-              defaultMessage="You're viewing the first {sampleSize} documents that match your search. To change this value, go to {advancedSettingsLink}."
-              values={{
+              defaultMessage="Você está visualizando os primeiros documentos {sampleSize} que correspondem à sua pesquisa."              values={{
                 sampleSize,
                 advancedSettingsLink: (
                   <EuiLink

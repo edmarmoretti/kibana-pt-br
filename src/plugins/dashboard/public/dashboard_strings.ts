@@ -194,11 +194,11 @@ export const dashboardReplacePanelAction = {
 export const dashboardFilterNotificationAction = {
   getDisplayName: () =>
     i18n.translate('dashboard.panel.filters', {
-      defaultMessage: 'Panel filters',
+      defaultMessage: 'Filtros aplicados ao quadro',
     }),
   getEditButtonTitle: () =>
     i18n.translate('dashboard.panel.filters.modal.editButton', {
-      defaultMessage: 'Edit filters',
+      defaultMessage: 'Editar filtros',
     }),
   getCloseButtonTitle: () =>
     i18n.translate('dashboard.panel.filters.modal.closeButton', {
@@ -210,7 +210,7 @@ export const dashboardFilterNotificationAction = {
     }),
   getFiltersTitle: () =>
     i18n.translate('dashboard.panel.filters.modal.filtersTitle', {
-      defaultMessage: 'Filters',
+      defaultMessage: 'Filtros',
     }),
 };
 

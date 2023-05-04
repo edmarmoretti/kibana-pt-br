@@ -40,6 +40,15 @@ export interface PanelHeaderProps {
   customizeTitle?: CustomizePanelTitleAction;
 }
 
+//Edmar Moretti - adicionado
+export interface PanelNotesProps {
+  titleNotes?: string;
+  index?: number;
+  isViewMode: boolean;
+  hidePanelTitle: boolean;
+  embeddable: IEmbeddable;
+}
+
 function renderBadges(badges: Array<Action<EmbeddableContext>>, embeddable: IEmbeddable) {
   return badges.map((badge) => (
     <EuiBadge
@@ -136,7 +145,6 @@ export function PanelHeader({
   const placeholderTitle = i18n.translate('embeddableApi.panel.placeholderTitle', {
     defaultMessage: '[No Title]',
   });
-
   const getAriaLabel = () => {
     return (
       <span id={headerId}>
@@ -233,4 +241,42 @@ export function PanelHeader({
       />
     </figcaption>
   );
+
+}
+
+//Edmar Moretti - adicionado
+export function PanelNotes({
+  titleNotes,
+  index,
+  isViewMode,
+  hidePanelTitle,
+  embeddable
+}: PanelNotesProps) {
+  const showTitle = !hidePanelTitle && (!isViewMode || titleNotes);
+  const linkify = (inputText: string) => {
+      var replacedText, replacePattern1;
+      //URLs starting with http://, https://, or ftp://
+      replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+      replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+      //return replacedText;
+      const theObj = {__html:replacedText};
+      return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
+  }  
+  
+  const renderTitle = () => {
+    let titleComponent = '';
+    if (showTitle) {
+      titleComponent = titleNotes||'';
+    }
+    return (
+        linkify(titleComponent)
+    );
+  };
+
+  return (
+    <figcaption className='embPanel__notes'>
+        {renderTitle()}
+    </figcaption>
+  );
+
 }

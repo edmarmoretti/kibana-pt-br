@@ -63,7 +63,7 @@ export const getLegendActions = (
         items: [
           {
             name: i18n.translate('expressionPartitionVis.legend.filterForValueButtonAriaLabel', {
-              defaultMessage: 'Filter for value',
+              defaultMessage: 'Filtrar por valor',
             }),
             'data-test-subj': `legend-${title}-filterIn`,
             icon: <EuiIcon type="plusInCircle" size="m" />,
@@ -74,7 +74,7 @@ export const getLegendActions = (
           },
           {
             name: i18n.translate('expressionPartitionVis.legend.filterOutValueButtonAriaLabel', {
-              defaultMessage: 'Filter out value',
+              defaultMessage: 'Filtrar por não valor',
             }),
             'data-test-subj': `legend-${title}-filterOut`,
             icon: <EuiIcon type="minusInCircle" size="m" />,

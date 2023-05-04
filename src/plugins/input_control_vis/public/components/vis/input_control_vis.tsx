@@ -110,7 +110,7 @@ export class InputControlVis extends Component<InputControlVisProps> {
       );
     });
   }
-
+// Edmar Moretti - tradução
   renderStagingButtons() {
     return (
       <EuiFlexGroup wrap={true}>
@@ -123,7 +123,7 @@ export class InputControlVis extends Component<InputControlVisProps> {
           >
             <FormattedMessage
               id="inputControl.vis.inputControlVis.applyChangesButtonLabel"
-              defaultMessage="Apply changes"
+              defaultMessage="Aplicar"
             />
           </EuiButton>
         </EuiFlexItem>
@@ -135,7 +135,7 @@ export class InputControlVis extends Component<InputControlVisProps> {
           >
             <FormattedMessage
               id="inputControl.vis.inputControlVis.cancelChangesButtonLabel"
-              defaultMessage="Cancel changes"
+              defaultMessage="Cancelar"
             />
           </EuiButtonEmpty>
         </EuiFlexItem>
@@ -147,7 +147,7 @@ export class InputControlVis extends Component<InputControlVisProps> {
           >
             <FormattedMessage
               id="inputControl.vis.inputControlVis.clearFormButtonLabel"
-              defaultMessage="Clear form"
+              defaultMessage="Limpar"
             />
           </EuiButtonEmpty>
         </EuiFlexItem>

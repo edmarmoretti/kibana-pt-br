@@ -155,11 +155,11 @@ export function FilterItem(props: FilterItemProps) {
         name: isFilterPinned(filter)
           ? props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterBar.unpinFilterButtonLabel',
-              defaultMessage: 'Unpin',
+              defaultMessage: 'Desafixar',
             })
           : props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterBar.pinFilterButtonLabel',
-              defaultMessage: 'Pin across all apps',
+              defaultMessage: 'Fixar em todas as aplicações',
             }),
         icon: 'pin',
         onClick: () => {
@@ -171,7 +171,7 @@ export function FilterItem(props: FilterItemProps) {
       {
         name: props.intl.formatMessage({
           id: 'unifiedSearch.filter.filterBar.editFilterButtonLabel',
-          defaultMessage: 'Edit filter',
+          defaultMessage: 'Editar o filtro',
         }),
         icon: 'pencil',
         'data-test-subj': 'editFilter',
@@ -187,7 +187,7 @@ export function FilterItem(props: FilterItemProps) {
             })
           : props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterBar.excludeFilterButtonLabel',
-              defaultMessage: 'Exclude results',
+              defaultMessage: 'Excluir os resultados',
             }),
         icon: negate ? 'plusInCircle' : 'minusInCircle',
         onClick: () => {
@@ -200,11 +200,11 @@ export function FilterItem(props: FilterItemProps) {
         name: disabled
           ? props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterBar.enableFilterButtonLabel',
-              defaultMessage: 'Re-enable',
+              defaultMessage: 'Reativar',
             })
           : props.intl.formatMessage({
               id: 'unifiedSearch.filter.filterBar.disableFilterButtonLabel',
-              defaultMessage: 'Temporarily disable',
+              defaultMessage: 'Desativar temporariamente',
             }),
         icon: `${disabled ? 'eye' : 'eyeClosed'}`,
         onClick: () => {
@@ -216,7 +216,7 @@ export function FilterItem(props: FilterItemProps) {
       {
         name: props.intl.formatMessage({
           id: 'unifiedSearch.filter.filterBar.deleteFilterButtonLabel',
-          defaultMessage: 'Delete',
+          defaultMessage: 'Apagar',
         }),
         icon: 'trash',
         onClick: () => {

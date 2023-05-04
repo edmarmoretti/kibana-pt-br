@@ -30,16 +30,30 @@ export function CustomizeTitleForm({
   return (
     <div className="embPanel__optionsMenuForm" data-test-subj="dashboardPanelTitleInputMenuItem">
       <EuiFormRow
-        label={i18n.translate(
-          'embeddableApi.customizeTitle.optionsMenuForm.panelTitleFormRowLabel',
-          {
-            defaultMessage: 'Panel title',
-          }
-        )}
+        label='Título do painel'
       >
         <EuiFieldText
           id="panelTitleInput"
           data-test-subj="customEmbeddablePanelTitleInput"
+          name="min"
+          type="text"
+          value={title}
+          onChange={onInputChange}
+          aria-label={i18n.translate(
+            'embeddableApi.customizeTitle.optionsMenuForm.panelTitleInputAriaLabel',
+          {
+              defaultMessage: 'Changes to this input are applied immediately. Press enter to exit.',
+          }
+        )}
+        />
+      </EuiFormRow>
+
+      <EuiFormRow
+        label='Nota de rodapé'
+      >
+        <EuiFieldText
+          id="panelNotesInput"
+          data-test-subj="customEmbeddablePanelNotesInput"
           name="min"
           type="text"
           value={title}
