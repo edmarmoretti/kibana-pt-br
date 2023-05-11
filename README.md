@@ -31,6 +31,8 @@ Kibana com a interface de painéis traduzido para o português do Brasil
 
 * Maior espaço para apresentação dos itens da legenda.
 
+* Opção para exportar um gráfico em PNG.
+
 
 
 
