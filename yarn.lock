@@ -1452,9 +1452,9 @@
   dependencies:
     object-hash "^1.3.0"
 
-"@elastic/charts@file:../elastic-charts/packages/charts/elastic-charts-50.2.1.tgz":
-  version "50.2.1"
-  resolved "file:../elastic-charts/packages/charts/elastic-charts-50.2.1.tgz#ca08c0a14f01990425e80d030d46e9156494a249"
+"@elastic/charts@file:../elastic-charts/packages/charts/elastic-charts-50.2.1b.tgz":
+  version "50.2.1-b"
+  resolved "file:../elastic-charts/packages/charts/elastic-charts-50.2.1b.tgz#259a9816be93e03b8d0d5cb83da1c2499286577c"
   dependencies:
     "@popperjs/core" "^2.4.0"
     bezier-easing "^2.1.0"

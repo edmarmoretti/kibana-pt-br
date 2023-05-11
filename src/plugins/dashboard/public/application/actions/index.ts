@@ -10,6 +10,10 @@ import { CONTEXT_MENU_TRIGGER, PANEL_NOTIFICATION_TRIGGER } from '@kbn/embeddabl
 import { CoreStart } from '@kbn/core/public';
 import { getSavedObjectFinder } from '@kbn/saved-objects-plugin/public';
 
+//Edmar Moretti
+//Exportação para PNG
+import { ExportPNGAction } from './export_png_action';
+
 import { ExportCSVAction } from './export_csv_action';
 import { ClonePanelAction } from './clone_panel_action';
 import { DashboardStartDependencies } from '../../plugin';
@@ -56,6 +60,14 @@ export const buildAllDashboardActions = async ({
     const ExportCSVPlugin = new ExportCSVAction();
     uiActions.addTriggerAction(CONTEXT_MENU_TRIGGER, ExportCSVPlugin);
   }
+
+  //Edmar Moretti
+  //Exportação para PNG
+  if (share) {
+    const ExportPNGPlugin = new ExportPNGAction();
+    uiActions.addTriggerAction(CONTEXT_MENU_TRIGGER, ExportPNGPlugin);
+  }
+
 
   if (allowByValueEmbeddables) {
     const addToLibraryAction = new AddToLibraryAction();
