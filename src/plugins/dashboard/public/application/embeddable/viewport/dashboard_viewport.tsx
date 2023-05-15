@@ -6,6 +6,11 @@
  * Side Public License, v 1.
  */
 
+//Edmar Moretti
+import {
+  EuiAccordion, EuiPanel
+} from '@elastic/eui';
+//
 import React from 'react';
 import { Subscription } from 'rxjs';
 
@@ -111,6 +116,8 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
     const controlsEnabled = isProjectEnabledInLabs('labs:dashboard:dashboardControls');
 
     const hideAnnouncements = Boolean(uiSettings.get('hideAnnouncements'));
+    //Edmar Moretti - inclusão de botão para expandir/recolher os filtros
+    const simpleAccordionId = 'simpleAccordionFiltros';
 
     return (
       <>
@@ -128,14 +135,19 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
             ) : null}
 
             {container.getInput().viewMode !== ViewMode.PRINT && (
-              <div
-                className={
-                  controlGroup && controlGroup.getPanelCount() > 0
+
+            <><div>
+                <EuiAccordion buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros">
+                  <EuiPanel color="subdued">
+                  <div
+                  className={controlGroup && controlGroup.getPanelCount() > 0
                     ? 'dshDashboardViewport-controls'
-                    : ''
-                }
-                ref={this.controlsRoot}
-              />
+                    : ''}
+                  ref={this.controlsRoot} />
+                  </EuiPanel>
+                </EuiAccordion>
+              </div></> 
+
             )}
           </>
         ) : null}
