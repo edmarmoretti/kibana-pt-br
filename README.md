@@ -33,6 +33,8 @@ Kibana com a interface de painéis traduzido para o português do Brasil
 
 * Opção para exportar um gráfico em PNG.
 
+* Alteração no layout do quadro com a lista de controles (filtros) para permitir expandir/recolher a lista.
+
 
 
 
