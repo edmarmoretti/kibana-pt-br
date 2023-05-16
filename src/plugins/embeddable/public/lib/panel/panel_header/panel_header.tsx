@@ -7,6 +7,7 @@
  */
 
 import { i18n } from '@kbn/i18n';
+//Edmar Moretti - inclusão de EuiTextColor
 import {
   EuiContextMenuPanelDescriptor,
   EuiBadge,
@@ -15,6 +16,7 @@ import {
   EuiScreenReaderOnly,
   EuiNotificationBadge,
   EuiLink,
+  EuiTextColor
 } from '@elastic/eui';
 import classNames from 'classnames';
 import React from 'react';
@@ -25,7 +27,9 @@ import { IEmbeddable } from '../../embeddables';
 import { EmbeddableContext, panelBadgeTrigger, panelNotificationTrigger } from '../../triggers';
 import { CustomizePanelTitleAction } from '.';
 
+//Edmar Moretti - adicionado titleSummary
 export interface PanelHeaderProps {
+  titleSummary?: string;
   title?: string;
   index?: number;
   isViewMode: boolean;
@@ -40,7 +44,7 @@ export interface PanelHeaderProps {
   customizeTitle?: CustomizePanelTitleAction;
 }
 
-//Edmar Moretti - adicionado
+//Edmar Moretti - adicionado titleNotes
 export interface PanelNotesProps {
   titleNotes?: string;
   index?: number;
@@ -124,6 +128,7 @@ function getViewDescription(embeddable: IEmbeddable | EmbeddableWithDescription)
 
 export function PanelHeader({
   title,
+  titleSummary,
   index,
   isViewMode,
   hidePanelTitle,
@@ -133,7 +138,7 @@ export function PanelHeader({
   notifications,
   embeddable,
   headerId,
-  customizeTitle,
+  customizeTitle
 }: PanelHeaderProps) {
   const description = getViewDescription(embeddable);
   const showTitle = !hidePanelTitle && (!isViewMode || title);
@@ -220,9 +225,9 @@ export function PanelHeader({
       <span className="embPanel__titleInner">{titleComponent}</span>
     );
   };
-
+  //Edmar Moretti - inclusão de texto explicativo
   return (
-    <figcaption
+    <><figcaption
       className={classes}
       data-test-subj={`embeddablePanelHeading-${(title || '').replace(/\s/g, '')}`}
     >
@@ -232,19 +237,24 @@ export function PanelHeader({
         {renderBadges(badges, embeddable)}
       </h2>
       {renderNotifications(notifications, embeddable)}
+      
+
       <PanelOptionsMenu
         isViewMode={isViewMode}
         getActionContextMenuPanel={getActionContextMenuPanel}
         closeContextMenu={closeContextMenu}
         title={title}
-        index={index}
-      />
+        index={index} />
     </figcaption>
+    
+    <EuiTextColor color="subdued" className='embPanel__titleSummary'>{titleSummary}</EuiTextColor>
+    
+    </>
   );
 
 }
 
-//Edmar Moretti - adicionado
+//Edmar Moretti - adicionado titleNotes
 export function PanelNotes({
   titleNotes,
   index,
@@ -263,7 +273,7 @@ export function PanelNotes({
       return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
   }  
   
-  const renderTitle = () => {
+  const renderTitleNotes = () => {
     let titleComponent = '';
     if (showTitle) {
       titleComponent = titleNotes||'';
@@ -275,7 +285,7 @@ export function PanelNotes({
 
   return (
     <figcaption className='embPanel__notes'>
-        {renderTitle()}
+        {renderTitleNotes()}
     </figcaption>
   );
 

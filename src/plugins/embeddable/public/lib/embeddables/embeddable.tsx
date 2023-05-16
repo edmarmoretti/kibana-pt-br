@@ -190,6 +190,9 @@ export abstract class Embeddable<
   public getTitleNotes(): string {
     return this.input.titleNotes || '';
   }
+  public getTitleSummary(): string {
+    return this.input.titleSummary || '';
+  }
 
   /**
    * Returns the top most parent embeddable, or itself if this embeddable

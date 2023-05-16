@@ -277,6 +277,7 @@ export class EmbeddablePanel extends React.Component<Props, State> {
     const title = this.props.embeddable.getTitle();
     //Edmar Moretti - adicionado
     const titleNotes = this.props.embeddable.getTitleNotes();
+    const titleSummary = this.props.embeddable.getTitleSummary();
     
     const headerId = this.generateId();
 
@@ -306,6 +307,7 @@ export class EmbeddablePanel extends React.Component<Props, State> {
             }
             closeContextMenu={this.state.closeContextMenu}
             title={title}
+            titleSummary={titleSummary}
             index={this.props.index}
             badges={this.state.badges}
             notifications={this.state.notifications}
@@ -416,17 +418,17 @@ export class EmbeddablePanel extends React.Component<Props, State> {
     ) {
       return actions;
     }
-    //Edmar Moretti - titleNotes
+    //Edmar Moretti - titleNotes e titleSummary
     const createGetUserData = (overlays: OverlayStart, theme: ThemeServiceStart) =>
       async function getUserData(context: { embeddable: IEmbeddable }) {
-        return new Promise<{ title: string | undefined; hideTitle?: boolean; titleNotes: string | undefined;}>((resolve) => {
+        return new Promise<{ title: string | undefined; hideTitle?: boolean; titleNotes: string | undefined; titleSummary: string | undefined;}>((resolve) => {
           const session = overlays.openModal(
             toMountPoint(
               <CustomizePanelModal
                 embeddable={context.embeddable}
-                updateTitle={(title, hideTitle, titleNotes) => {
+                updateTitle={(title, hideTitle, titleNotes, titleSummary) => {
                   session.close();
-                  resolve({ title, hideTitle, titleNotes });
+                  resolve({ title, hideTitle, titleNotes, titleSummary });
                 }}
                 cancel={() => session.close()}
               />,

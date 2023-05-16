@@ -25,21 +25,22 @@ import { FormattedMessage } from '@kbn/i18n-react';
 import { i18n } from '@kbn/i18n';
 import { IEmbeddable } from '../../../..';
 
-//Edmar Moretti - inclusão de updateTitleNotes
+//Edmar Moretti - inclusão de newTitleNotes e newTitleSummary
 interface CustomizePanelProps {
   embeddable: IEmbeddable;
-  updateTitle: (newTitle: string | undefined, hideTitle: boolean | undefined, newTitleNotes: string | undefined) => void;
+  updateTitle: (newTitle: string | undefined, hideTitle: boolean | undefined, newTitleNotes: string | undefined, newTitleSummary: string | undefined) => void;
   //updateTitleNotes: (newTitleNotes: string | undefined, hideTitle: boolean | undefined) => void;
   cancel: () => void;
 }
-//Edmar Moretti - adicionado titleNotes
+//Edmar Moretti - adicionado titleNotes e titleSummary
 interface State {
   title: string | undefined;
   hideTitle: boolean | undefined;
   titleNotes: string | undefined;
+  titleSummary: string | undefined;
 }
 
-//Edmar Moretti - adicionado titleNotes
+//Edmar Moretti - adicionado titleNotes e titleSummary
 export class CustomizePanelModal extends Component<CustomizePanelProps, State> {
   constructor(props: CustomizePanelProps) {
     super(props);
@@ -47,13 +48,15 @@ export class CustomizePanelModal extends Component<CustomizePanelProps, State> {
       hideTitle: props.embeddable.getInput().hidePanelTitles,
       title: props.embeddable.getInput().title ?? this.props.embeddable.getOutput().defaultTitle,
       titleNotes: props.embeddable.getInput().titleNotes ?? '',
+      titleSummary: props.embeddable.getInput().titleSummary ?? '',
     };
   }
-  //Edmar Moretti - inclusão de titleNotes
+  //Edmar Moretti - inclusão de titleNotes e titleSummary
   private reset = () => {
     this.setState({
       title: this.props.embeddable.getOutput().defaultTitle,
       titleNotes: '',
+      titleSummary: '',
     });
   };
 
@@ -62,7 +65,7 @@ export class CustomizePanelModal extends Component<CustomizePanelProps, State> {
       hideTitle: !prevState.hideTitle,
     }));
   };
- //Edmar Moretti - adicionado newTitleNotes
+ //Edmar Moretti - adicionado newTitleNotes e newTitleSummary
   private save = () => {
     const newTitle =
       this.state.title === this.props.embeddable.getOutput().defaultTitle
@@ -72,8 +75,12 @@ export class CustomizePanelModal extends Component<CustomizePanelProps, State> {
        this.state.titleNotes === ''
           ? undefined
         : this.state.titleNotes;
+        const newTitleSummary =
+           this.state.titleSummary === ''
+              ? undefined
+            : this.state.titleSummary;
     //console.log(newTitleNotes);
-    this.props.updateTitle(newTitle, this.state.hideTitle, newTitleNotes);
+    this.props.updateTitle(newTitle, this.state.hideTitle, newTitleNotes, newTitleSummary);
   };
 
   public render() {
@@ -170,6 +177,39 @@ export class CustomizePanelModal extends Component<CustomizePanelProps, State> {
                     append={
                       <EuiButtonEmpty
                         data-test-subj="resetCustomEmbeddablePanelTitleNotes"
+                        onClick={this.reset}
+                        disabled={this.state.hideTitle}
+                      >
+                        <FormattedMessage
+                          id="embeddableApi.customizePanel.modal.optionsMenuForm.resetCustomDashboardButtonLabel"
+                          defaultMessage="Reset"
+                        />
+                      </EuiButtonEmpty>
+                    }
+                  />
+                </EuiFormRow>
+                
+                <EuiFormRow
+                  label='Resumo'
+                >
+                  <EuiFieldText
+                    id="panelTitleSummaryInput"
+                    className="panelTitleSummaryInputText"
+                    data-test-subj="customEmbeddablePanelTitleSummaryInput"
+                    name="min"
+                    type="text"
+                    disabled={this.state.hideTitle}
+                    value={this.state.titleSummary || ''}
+                    onChange={(e) => this.setState({ titleSummary: e.target.value })}
+                    aria-label={i18n.translate(
+                      'embeddableApi.customizePanel.modal.optionsMenuForm.panelTitleInputAriaLabel',
+                      {
+                        defaultMessage: 'Enter a custom title notes for your panel',
+                      }
+                    )}
+                    append={
+                      <EuiButtonEmpty
+                        data-test-subj="resetCustomEmbeddablePanelTitleSummary"
                         onClick={this.reset}
                         disabled={this.state.hideTitle}
                       >

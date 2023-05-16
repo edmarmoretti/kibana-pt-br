@@ -31,6 +31,7 @@ export interface EmbeddableOutput {
   editable?: boolean;
   savedObjectId?: string;
   titleNotes?: string;
+  titleSummary?: string;
 }
 
 export interface IEmbeddable<
@@ -167,6 +168,7 @@ export interface IEmbeddable<
   getTitle(): string | undefined;
   //Edmar Moretti - adicionado
   getTitleNotes(): string | undefined;
+  getTitleSummary(): string | undefined;
 
   /**
    * Returns the top most parent embeddable, or itself if this embeddable

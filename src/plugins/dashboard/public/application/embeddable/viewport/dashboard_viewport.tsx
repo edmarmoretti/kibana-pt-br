@@ -136,7 +136,10 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
 
             {container.getInput().viewMode !== ViewMode.PRINT && (
 
-            <><div>
+            <>
+              {controlGroup && controlGroup?.getPanelCount() > 0 ? (
+              <div>
+                
                 <EuiAccordion buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros">
                   <EuiPanel color="subdued">
                   <div
@@ -146,7 +149,8 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
                   ref={this.controlsRoot} />
                   </EuiPanel>
                 </EuiAccordion>
-              </div></> 
+              </div> ) : ''}
+            </> 
 
             )}
           </>
