@@ -34,6 +34,15 @@ export const LegendActionPopover: React.FunctionComponent<LegendActionPopoverPro
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [ref, onClose] = useLegendAction<HTMLDivElement>();
+  //Editado por Edmar Moretti - remove as opções de seleção na legenda
+  const panels: EuiContextMenuPanelDescriptor[] = [
+    {
+      id: 'main',
+      title: label,
+      items: [],
+    },
+  ];  
+  /*
   const panels: EuiContextMenuPanelDescriptor[] = [
     {
       id: 'main',
@@ -64,6 +73,7 @@ export const LegendActionPopover: React.FunctionComponent<LegendActionPopoverPro
       ],
     },
   ];
+  */
 
   const Button = (
     <div

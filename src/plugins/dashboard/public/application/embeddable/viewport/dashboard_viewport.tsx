@@ -11,7 +11,7 @@ import {
   EuiAccordion, EuiPanel
 } from '@elastic/eui';
 //
-import React from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Subscription } from 'rxjs';
 
 import {
@@ -43,6 +43,7 @@ interface State {
   description?: string;
   panelCount: number;
   isEmbeddedExternally?: boolean;
+  isAccordionOpen?: boolean;
 }
 
 const ControlsCallout = withSuspense<CalloutProps>(LazyControlsCallout);
@@ -66,7 +67,10 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
       useMargins,
       title,
       isEmbeddedExternally,
+      isAccordionOpen:true,
     };
+
+    this.accordionRef = React.createRef();
   }
 
   public componentDidMount() {
@@ -88,6 +92,19 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
     if (this.props.controlGroup && this.controlsRoot.current) {
       this.props.controlGroup.render(this.controlsRoot.current);
     }
+
+    const handleWindowResize = () => {
+
+      const windowWidth = window.innerWidth;
+      if(windowWidth < 1024){
+        this.accordionRef && this.accordionRef.current && this.accordionRef.current.setState({isOpen:false});
+      }else{
+        this.accordionRef && this.accordionRef.current && this.accordionRef.current.setState({isOpen:true});
+      }
+
+    };
+    window.addEventListener('resize', handleWindowResize);
+    handleWindowResize();
   }
 
   public componentWillUnmount() {
@@ -103,6 +120,7 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
     });
   };
 
+  
   public render() {
     const { container, controlGroup } = this.props;
     const isEditMode = container.getInput().viewMode !== ViewMode.VIEW;
@@ -116,7 +134,9 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
     const controlsEnabled = isProjectEnabledInLabs('labs:dashboard:dashboardControls');
 
     const hideAnnouncements = Boolean(uiSettings.get('hideAnnouncements'));
+
     //Edmar Moretti - inclusão de botão para expandir/recolher os filtros
+    const embed = window.location.href.match(/embed=true/); //leandro
     const simpleAccordionId = 'simpleAccordionFiltros';
 
     return (
@@ -138,16 +158,19 @@ export class DashboardViewport extends React.Component<DashboardViewportProps, S
 
             <>
               {controlGroup && controlGroup?.getPanelCount() > 0 ? (
-              <div>
+              <div id='filtros'>
                 
-                <EuiAccordion buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros">
-                  <EuiPanel color="subdued">
+                <EuiAccordion 
+                ref={this.accordionRef}
+                buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros" initialIsOpen={this.state.isAccordionOpen}>
+                  {/* <EuiPanel color="subdued"> */}
                   <div
                   className={controlGroup && controlGroup.getPanelCount() > 0
                     ? 'dshDashboardViewport-controls'
                     : ''}
-                  ref={this.controlsRoot} />
-                  </EuiPanel>
+                  ref={this.controlsRoot} 
+                  />
+                  {/* </EuiPanel> */}
                 </EuiAccordion>
               </div> ) : ''}
             </> 

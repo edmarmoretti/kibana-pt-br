@@ -55,6 +55,7 @@ import { EmbeddableStateTransfer, isSelfStyledEmbeddable } from '..';
 // Edmar Moretti
 let contadorDeQuadrosRenderizados = 0;
 
+
 const sortByOrderField = (
   { order: orderA }: { order?: number },
   { order: orderB }: { order?: number }
@@ -275,11 +276,12 @@ export class EmbeddablePanel extends React.Component<Props, State> {
     if (this.state.error) contentAttrs['data-error'] = true;
 
     const title = this.props.embeddable.getTitle();
-    //Edmar Moretti - adicionado
+    //Edmar Moretti - adicionado titleNotes e titleSummary
     const titleNotes = this.props.embeddable.getTitleNotes();
     const titleSummary = this.props.embeddable.getTitleSummary();
     
     const headerId = this.generateId();
+
 
     const selfStyledOptions = isSelfStyledEmbeddable(this.props.embeddable)
       ? this.props.embeddable.getSelfStyledOptions()
@@ -294,6 +296,7 @@ export class EmbeddablePanel extends React.Component<Props, State> {
         role="figure"
         aria-labelledby={headerId}
         hasShadow={this.props.showShadow}
+        
       >
         {!this.props.hideHeader && (
           <PanelHeader

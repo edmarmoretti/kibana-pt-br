@@ -178,10 +178,12 @@ export const getXyChartRenderer = ({
 
     handlers.onDestroy(() => ReactDOM.unmountComponentAtNode(domNode));
     const onClickValue = (data: FilterEvent['data']) => {
-      handlers.event({ name: 'filter', data });
+      //editado por Edmar Moretti - remove o filtro de onclick
+      //handlers.event({ name: 'filter', data });
     };
     const onSelectRange = (data: BrushEvent['data']) => {
-      handlers.event({ name: 'brush', data });
+      //editado por Edmar Moretti - remove o filtro de selectrange
+      //handlers.event({ name: 'brush', data });
     };
 
     const renderComplete = () => {

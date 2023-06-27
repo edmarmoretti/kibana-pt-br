@@ -101,7 +101,7 @@
     "@dnd-kit/utilities": "^2.0.0",
     "@elastic/apm-rum": "^5.12.0",
     "@elastic/apm-rum-react": "^1.4.2",
-    "@elastic/charts": "/home/edmar/kibana-custom-dev-863/elastic-charts/packages/charts/elastic-charts-50.2.1b.tgz",
+    "@elastic/charts": "/home/edmar/kibana-custom-dev-863/elastic-charts/packages/charts/elastic-charts-50.2.1c.tgz",
     "@elastic/datemath": "5.0.3",
     "@elastic/elasticsearch": "npm:@elastic/elasticsearch-canary@8.4.0-canary.1",
     "@elastic/ems-client": "8.3.3",

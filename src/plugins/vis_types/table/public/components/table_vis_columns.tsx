@@ -55,7 +55,7 @@ export const createGridColumns = (
       },
     });
   };
-
+  //Editado por Edmar Moretti - tradução do filtro
   return columns.map((col, colIndex): EuiDataGridColumn => {
     const formattedColumn = formattedColumns[col.id];
     const cellActions = formattedColumn.filterable
