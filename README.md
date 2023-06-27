@@ -38,6 +38,9 @@ Kibana com a interface de painéis traduzido para o português do Brasil
 * Remoção da string órfã "string - " nos grandes números quando o título é definido como um espaço em branco.
 
 * Alteração na forma como a remoção de "00" é feita nos tooltips, mantendo o ",00" quando o título da coluna é terminada com "(R$)".
+  
+* Remoção das opções de filtragem existentes nas legendas dos gráficos e das tabelas.
+
 
 
 
