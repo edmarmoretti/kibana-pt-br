@@ -6,7 +6,7 @@
  * Side Public License, v 1.
  */
 
-//Edmar Moretti
+//Edmar Moretti e Leandro Celes
 import {
   EuiAccordion, EuiPanel
 } from '@elastic/eui';

@@ -10,8 +10,7 @@ import { CONTEXT_MENU_TRIGGER, PANEL_NOTIFICATION_TRIGGER } from '@kbn/embeddabl
 import { CoreStart } from '@kbn/core/public';
 import { getSavedObjectFinder } from '@kbn/saved-objects-plugin/public';
 
-//Edmar Moretti
-//Exportação para PNG
+//Edmar Moretti - Exportação para PNG
 import { ExportPNGAction } from './export_png_action';
 
 import { ExportCSVAction } from './export_csv_action';
@@ -61,8 +60,7 @@ export const buildAllDashboardActions = async ({
     uiActions.addTriggerAction(CONTEXT_MENU_TRIGGER, ExportCSVPlugin);
   }
 
-  //Edmar Moretti
-  //Exportação para PNG
+  //Edmar Moretti - Exportação para PNG
   if (share) {
     const ExportPNGPlugin = new ExportPNGAction();
     uiActions.addTriggerAction(CONTEXT_MENU_TRIGGER, ExportPNGPlugin);

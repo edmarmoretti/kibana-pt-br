@@ -145,8 +145,7 @@ export const dashboardExportCsvAction = {
     }),
 };
 
-//Edmar Moretti
-//Inclusão da exportação para PNG
+//Edmar Moretti - Inclusão da exportação para PNG
 export const dashboardExportPngAction = {
   getDisplayName: () => 'Exportar como PNG',
   getUntitledFilename: () => 'untitled'

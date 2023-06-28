@@ -225,7 +225,7 @@ export function PanelHeader({
       <span className="embPanel__titleInner">{titleComponent}</span>
     );
   };
-  //Edmar Moretti - inclusão de texto explicativo
+  //Edmar Moretti - opção para inclusão de texto explicativo no título dos quadros dos painéis
   return (
     <><figcaption
       className={classes}

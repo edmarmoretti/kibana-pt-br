@@ -6,8 +6,7 @@
  * Side Public License, v 1.
  */
 
-//Edmar Moretti
-//Novo arquivo - função de exportação para PNG. É necessário baixar o arquivo html2canvas e armazenar nessa mesma pasta
+//Edmar Moretti - Novo arquivo - função de exportação para PNG. É necessário baixar o arquivo html2canvas e armazenar nessa mesma pasta
 
 import html2canvas from './html2canvas.min';
 import { Action } from '@kbn/ui-actions-plugin/public';

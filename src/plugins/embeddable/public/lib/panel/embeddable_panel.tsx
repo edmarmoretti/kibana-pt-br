@@ -44,7 +44,7 @@ import { EmbeddablePanelError } from './embeddable_panel_error';
 import { RemovePanelAction } from './panel_header/panel_actions';
 import { AddPanelAction } from './panel_header/panel_actions/add_panel/add_panel_action';
 import { CustomizePanelTitleAction } from './panel_header/panel_actions/customize_title/customize_panel_action';
-//Edmar Moretti
+//Edmar Moretti - contador para mensagem de tamanho de página de um painel
 import { PanelHeader, PanelNotes } from './panel_header/panel_header';
 import { InspectPanelAction } from './panel_header/panel_actions/inspect_panel_action';
 import { EditPanelAction } from '../actions';
@@ -52,7 +52,7 @@ import { CustomizePanelModal } from './panel_header/panel_actions/customize_titl
 import { EmbeddableStart } from '../../plugin';
 import { EmbeddableStateTransfer, isSelfStyledEmbeddable } from '..';
 
-// Edmar Moretti
+// Edmar Moretti - contador
 let contadorDeQuadrosRenderizados = 0;
 
 

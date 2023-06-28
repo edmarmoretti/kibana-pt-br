@@ -1452,9 +1452,9 @@
   dependencies:
     object-hash "^1.3.0"
 
-"@elastic/charts@file:../elastic-charts/packages/charts/elastic-charts-50.2.1c.tgz":
-  version "50.2.1-c"
-  resolved "file:../elastic-charts/packages/charts/elastic-charts-50.2.1c.tgz#e73197671f4304fa9f64dbdd7a313c087a2574c3"
+"@elastic/charts@./elastic-charts-50.2.1f.tgz":
+  version "50.2.1-f"
+  resolved "./elastic-charts-50.2.1f.tgz#05df43696e124b9512f38a123f64f464cfd8301f"
   dependencies:
     "@popperjs/core" "^2.4.0"
     bezier-easing "^2.1.0"
@@ -1526,9 +1526,9 @@
   resolved "https://registry.yarnpkg.com/@elastic/eslint-plugin-eui/-/eslint-plugin-eui-0.0.2.tgz#56b9ef03984a05cc213772ae3713ea8ef47b0314"
   integrity sha512-IoxURM5zraoQ7C8f+mJb9HYSENiZGgRVcG4tLQxE61yHNNRDXtGDWTZh8N1KIHcsqN1CEPETjuzBXkJYF/fDiQ==
 
-"@elastic/eui@file:../eui/elastic-eui-67.1.10.tgz":
+"@elastic/eui@./elastic-eui-67.1.10.tgz":
   version "67.1.10"
-  resolved "file:../eui/elastic-eui-67.1.10.tgz#6da553c72438fd3283bf009d1c2bd26166f41bae"
+  resolved "./elastic-eui-67.1.10.tgz#6da553c72438fd3283bf009d1c2bd26166f41bae"
   dependencies:
     "@types/chroma-js" "^2.0.0"
     "@types/lodash" "^4.14.160"
