@@ -16,7 +16,7 @@ export const OptionsListStrings = {
       }),
     getPlaceholder: () =>
       i18n.translate('controls.optionsList.control.placeholder', {
-        defaultMessage: 'Tudo',
+        defaultMessage: 'Selecione...',
       }),
     getNegate: () =>
       i18n.translate('controls.optionsList.control.negate', {

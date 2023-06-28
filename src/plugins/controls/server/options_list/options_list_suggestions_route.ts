@@ -127,7 +127,6 @@ export const setupOptionsListSuggestionsRoute = (
         ...runtimeFieldMap,
       },
     };
-
     /**
      * Run ES query
      */
