@@ -35,7 +35,7 @@ export const createGridCell = (
 
     var content = formatters[columnId]?.convert(rowValue, filterOnClick ? 'text' : 'html');
     //Edmar Moretti - adiciona ,00 em números do tipo moeda
-    if (content.substring(0,2) == "R$" && content.substring(content.length - 3, content.length) !== ",00") {
+    if (content.substring(0,2) == "R$" && !content.split(',')[1]) {
       content = content + ',00';
     }
 
