@@ -40,6 +40,10 @@ Kibana com a interface de painéis traduzido para o português do Brasil
 * Alteração na forma como a remoção de "00" é feita nos tooltips, mantendo o ",00" quando o título da coluna é terminada com "(R$)".
   
 * Remoção das opções de filtragem existentes nas legendas dos gráficos e das tabelas.
+  
+* Posicionamento dos labels dos gráficos de barras mesmo quando estão fora das barras.
+
+* Posicionamento na vertical dos textos em gráficos de barras verticais.
 
 
 
