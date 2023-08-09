@@ -74,9 +74,14 @@ export class CustomizePanelAction implements Action<CustomizePanelActionContext>
       isVisualizeEmbeddable(embeddable) &&
       (embeddable as VisualizeEmbeddable).getOutput().visTypeName === 'input_control_vis';
 
+    //Edmar Moretti -remoção de botão de tempo
+    /*
     const isMarkdown =
       isVisualizeEmbeddable(embeddable) &&
       (embeddable as VisualizeEmbeddable).getOutput().visTypeName === 'markdown';
+    */
+    const isMarkdown = true;
+
 
     const isImage = embeddable.type === 'image';
 

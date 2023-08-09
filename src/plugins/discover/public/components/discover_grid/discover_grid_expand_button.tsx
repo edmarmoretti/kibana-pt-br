@@ -39,8 +39,9 @@ export const ExpandButton = ({ rowIndex, setCellProps }: EuiDataGridCellValueEle
   }, [expanded, current, setCellProps, isDarkMode]);
 
   const isCurrentRowExpanded = current === expanded;
+  //Edmar Moretti - tradução
   const buttonLabel = i18n.translate('discover.grid.viewDoc', {
-    defaultMessage: 'Toggle dialog with details',
+    defaultMessage: 'Mostrar mais detalhes',
   });
 
   const testSubj = current.isAnchor

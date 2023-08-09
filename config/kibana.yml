@@ -1,3 +1,4 @@
+vis_type_vega.enableExternalUrls: true
 # For more configuration options see the configuration guide for Kibana in
 # https://www.elastic.co/guide/index.html
 
@@ -134,6 +135,7 @@
 # Specifies locale to be used for all localizable strings, dates and number formats.
 # Supported languages are the following: English (default) "en", Chinese "zh-CN", Japanese "ja-JP", French "fr-FR".
 #i18n.locale: "en"
+i18n.locale: "pt-BR"
 
 # =================== Frequently used (Optional)===================
 

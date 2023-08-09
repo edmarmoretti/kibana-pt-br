@@ -206,14 +206,15 @@ export const getXyChartRenderer = ({
     ]);
 
     handlers.onDestroy(() => ReactDOM.unmountComponentAtNode(domNode));
+    //Edmar Moretti - remove seleção no clique sobre o gráfico
     const onClickValue = (data: FilterEvent['data']) => {
-      handlers.event({ name: 'filter', data });
+      //handlers.event({ name: 'filter', data });
     };
     const onSelectRange = (data: BrushEvent['data']) => {
-      handlers.event({ name: 'brush', data });
+      //handlers.event({ name: 'brush', data });
     };
     const onClickMultiValue = (data: MultiFilterEvent['data']) => {
-      handlers.event({ name: 'multiFilter', data });
+      //handlers.event({ name: 'multiFilter', data });
     };
 
     const layerCellValueActions = await getLayerCellValueActions(

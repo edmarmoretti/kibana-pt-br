@@ -81,7 +81,7 @@ export class DataTableFormat extends Component<DataTableFormatProps, DataTableFo
                 content={
                   <FormattedMessage
                     id="data.inspector.table.filterForValueButtonTooltip"
-                    defaultMessage="Filter for value"
+                    defaultMessage="Filtrar por valor"
                   />
                 }
               >
@@ -89,7 +89,7 @@ export class DataTableFormat extends Component<DataTableFormatProps, DataTableFo
                   iconType="plusInCircle"
                   color="text"
                   aria-label={i18n.translate('data.inspector.table.filterForValueButtonAriaLabel', {
-                    defaultMessage: 'Filter for value',
+                    defaultMessage: 'Filtrar por valor',
                   })}
                   data-test-subj="filterForInspectorCellValue"
                   className="insDataTableFormat__filter"
@@ -111,7 +111,7 @@ export class DataTableFormat extends Component<DataTableFormatProps, DataTableFo
                   content={
                     <FormattedMessage
                       id="data.inspector.table.filterOutValueButtonTooltip"
-                      defaultMessage="Filter out value"
+                      defaultMessage="Filtrar por não valor"
                     />
                   }
                 >
@@ -121,7 +121,7 @@ export class DataTableFormat extends Component<DataTableFormatProps, DataTableFo
                     aria-label={i18n.translate(
                       'data.inspector.table.filterOutValueButtonAriaLabel',
                       {
-                        defaultMessage: 'Filter out value',
+                        defaultMessage: 'Filtrar por não valor',
                       }
                     )}
                     data-test-subj="filterOutInspectorCellValue"

@@ -64,7 +64,7 @@ export const getLegendActions = (
       panelItems.push(
         {
           name: i18n.translate('expressionPartitionVis.legend.filterForValueButtonAriaLabel', {
-            defaultMessage: 'Filter for value',
+              defaultMessage: 'Filtrar por valor',
           }),
           'data-test-subj': `legend-${title}-filterIn`,
           icon: <EuiIcon type="plusInCircle" size="m" />,
@@ -75,7 +75,7 @@ export const getLegendActions = (
         },
         {
           name: i18n.translate('expressionPartitionVis.legend.filterOutValueButtonAriaLabel', {
-            defaultMessage: 'Filter out value',
+              defaultMessage: 'Filtrar por não valor',
           }),
           'data-test-subj': `legend-${title}-filterOut`,
           icon: <EuiIcon type="minusInCircle" size="m" />,
@@ -132,7 +132,7 @@ export const getLegendActions = (
         onKeyPress={() => setPopoverOpen(!popoverOpen)}
         onClick={() => setPopoverOpen(!popoverOpen)}
         aria-label={i18n.translate('expressionPartitionVis.legend.legendActionsAria', {
-          defaultMessage: 'Legend actions',
+          defaultMessage: 'Ações sobre a legenda',
         })}
       >
         <EuiIcon size="s" type="boxesVertical" />
@@ -150,7 +150,7 @@ export const getLegendActions = (
         panelPaddingSize="none"
         anchorPosition="upLeft"
         title={i18n.translate('expressionPartitionVis.legend.filterOptionsLegend', {
-          defaultMessage: '{legendDataLabel}, filter options',
+          defaultMessage: '{legendDataLabel}, opções de filtro',
           values: { legendDataLabel: title },
         })}
       >

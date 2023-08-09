@@ -57,7 +57,6 @@ export const getMetricVisRenderer = (
     reuseDomNode: true,
     render: async (domNode, { visData, visConfig, overrides }, handlers) => {
       const { core, plugins } = deps.getStartDeps();
-
       handlers.onDestroy(() => {
         unmountComponentAtNode(domNode);
       });

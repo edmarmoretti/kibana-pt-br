@@ -5,6 +5,7 @@
  * in compliance with, at your election, the Elastic License 2.0 or the Server
  * Side Public License, v 1.
  */
+//Edmar Moretti - lembrete - Local onde são definidas algumas configurações dos gráficos que sobrepõem as definições do elastic-charts (testar)
 import {
   AreaSeries,
   BarSeries,

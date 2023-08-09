@@ -202,7 +202,9 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
         splitChartDimension,
         splitChartFormatter
       );
-      props.fireEvent({ name: 'filter', data: { data } });
+      //Edmar Moretti - evita a seleção por clique
+      //props.fireEvent({ name: 'filter', data: { data } });
+      props.fireEvent({name: '', data: {  } });
     },
     [metricColumn.id, originalVisData, props, visParams.dimensions.metrics.length]
   );

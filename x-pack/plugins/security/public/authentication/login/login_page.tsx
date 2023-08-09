@@ -166,7 +166,7 @@ export class LoginPage extends Component<Props, State> {
               <h1>
                 <FormattedMessage
                   id="xpack.security.loginPage.welcomeTitle"
-                  defaultMessage="Welcome to Elastic"
+                  defaultMessage="Bem vindo ao Elastic"
                 />
               </h1>
             </EuiTitle>
@@ -206,13 +206,13 @@ export class LoginPage extends Component<Props, State> {
           title={
             <FormattedMessage
               id="xpack.security.loginPage.noLoginMethodsAvailableTitle"
-              defaultMessage="Login is disabled."
+              defaultMessage="Login está desabilitado."
             />
           }
           message={
             <FormattedMessage
               id="xpack.security.loginPage.noLoginMethodsAvailableMessage"
-              defaultMessage="Contact your system administrator."
+              defaultMessage="Contate o administrador do sistema."
             />
           }
         />
@@ -225,13 +225,13 @@ export class LoginPage extends Component<Props, State> {
           title={
             <FormattedMessage
               id="xpack.security.loginPage.requiresSecureConnectionTitle"
-              defaultMessage="A secure connection is required for log in"
+              defaultMessage="Uma conexão segura é requerida para login"
             />
           }
           message={
             <FormattedMessage
               id="xpack.security.loginPage.requiresSecureConnectionMessage"
-              defaultMessage="Contact your system administrator."
+              defaultMessage="Contate o administrador do sistema."
             />
           }
         />

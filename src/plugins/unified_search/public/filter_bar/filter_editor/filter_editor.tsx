@@ -62,24 +62,24 @@ import {
   filterPreviewLabelStyle,
   filtersBuilderMaxHeightCss,
 } from './filter_editor.styles';
-
+//Edmar Moretti - tradução
 export const strings = {
   getPanelTitleAdd: () =>
     i18n.translate('unifiedSearch.filter.filterEditor.addFilterPopupTitle', {
-      defaultMessage: 'Add filter',
+      defaultMessage: 'Adicionar filtro',
     }),
   getPanelTitleEdit: () =>
     i18n.translate('unifiedSearch.filter.filterEditor.editFilterPopupTitle', {
-      defaultMessage: 'Edit filter',
+      defaultMessage: 'Editar filtro',
     }),
 
   getAddButtonLabel: () =>
     i18n.translate('unifiedSearch.filter.filterEditor.addButtonLabel', {
-      defaultMessage: 'Add filter',
+      defaultMessage: 'Adicionar filtro',
     }),
   getUpdateButtonLabel: () =>
     i18n.translate('unifiedSearch.filter.filterEditor.updateButtonLabel', {
-      defaultMessage: 'Update filter',
+      defaultMessage: 'Atualizar filtro',
     }),
   getSelectDataViewToolTip: () =>
     i18n.translate('unifiedSearch.filter.filterEditor.chooseDataViewFirstToolTip', {
@@ -103,7 +103,7 @@ export const strings = {
     }),
   getQueryDslLabel: () =>
     i18n.translate('unifiedSearch.filter.filterEditor.queryDslLabel', {
-      defaultMessage: 'Elasticsearch Query DSL',
+      defaultMessage: 'Elasticsearch Consulta DSL',
     }),
   getQueryDslDocsLinkLabel: () =>
     i18n.translate('unifiedSearch.filter.filterEditor.queryDslDocsLinkLabel', {

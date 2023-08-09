@@ -43,12 +43,14 @@ import { EmbeddablePanelError } from './embeddable_panel_error';
 import { RemovePanelAction } from './panel_header/panel_actions';
 import { AddPanelAction } from './panel_header/panel_actions/add_panel/add_panel_action';
 import { CustomizePanelAction } from './panel_header/panel_actions/customize_panel/customize_panel_action';
-import { PanelHeader } from './panel_header/panel_header';
+//Edmar Moretti - notas de rodapé
+import { PanelHeader, PanelNotes } from './panel_header/panel_header';
 import { InspectPanelAction } from './panel_header/panel_actions/inspect_panel_action';
 import { EditPanelAction } from '../actions';
 import { EmbeddableStart } from '../../plugin';
 import { EmbeddableStateTransfer, isSelfStyledEmbeddable, CommonlyUsedRange } from '..';
-
+// Edmar Moretti - contador
+let contadorDeQuadrosRenderizados = 0;
 const sortByOrderField = (
   { order: orderA }: { order?: number },
   { order: orderB }: { order?: number }
@@ -284,6 +286,10 @@ export class EmbeddablePanel extends React.Component<Props, State> {
 
     const title = this.props.embeddable.getTitle();
     const description = this.props.embeddable.getDescription();
+
+    //Edmar Moretti - adicionado titleNotes e titleSummary
+    const titleNotes = this.props.embeddable.getTitleNotes();
+    const titleSummary = this.props.embeddable.getTitleSummary();
     const headerId = this.generateId();
 
     const selfStyledOptions = isSelfStyledEmbeddable(this.props.embeddable)
@@ -312,6 +318,7 @@ export class EmbeddablePanel extends React.Component<Props, State> {
             }
             closeContextMenu={this.state.closeContextMenu}
             title={title}
+            titleSummary={titleSummary}
             description={description}
             index={this.props.index}
             badges={this.state.badges}
@@ -343,6 +350,15 @@ export class EmbeddablePanel extends React.Component<Props, State> {
         <div className="embPanel__content" ref={this.embeddableRoot} {...contentAttrs}>
           {this.state.node}
         </div>
+        {!this.props.hideHeader && (
+          <PanelNotes
+            hidePanelTitle={this.state.hidePanelTitle || !!selfStyledOptions?.hideTitle}
+            isViewMode={viewOnlyMode}
+            titleNotes={titleNotes}
+            index={this.props.index}
+            embeddable={this.props.embeddable}
+          />
+        )}
       </EuiPanel>
     );
   }
@@ -369,6 +385,17 @@ export class EmbeddablePanel extends React.Component<Props, State> {
         }
       )
     );
+
+      //
+      //Edmar Moretti - mensagem com o tamanho da página
+      if(contadorDeQuadrosRenderizados == 0 && window.parent){
+        //console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight);
+        window.parent.postMessage(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300, '*');
+        console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300);
+      }
+      contadorDeQuadrosRenderizados++;
+
+      //
 
     const node = this.props.embeddable.render(this.embeddableRoot.current) ?? undefined;
     if (isPromise(node)) {
@@ -409,6 +436,28 @@ export class EmbeddablePanel extends React.Component<Props, State> {
     ) {
       return actions;
     }
+    //Edmar Moretti - titleNotes e titleSummary
+    const createGetUserData = (overlays: OverlayStart, theme: ThemeServiceStart) =>
+      async function getUserData(context: { embeddable: IEmbeddable }) {
+        return new Promise<{ title: string | undefined; hideTitle?: boolean; titleNotes: string | undefined; titleSummary: string | undefined;}>((resolve) => {
+          const session = overlays.openModal(
+            toMountPoint(
+              <CustomizePanelModal
+                embeddable={context.embeddable}
+                updateTitle={(title, hideTitle, titleNotes, titleSummary) => {
+                  session.close();
+                  resolve({ title, hideTitle, titleNotes, titleSummary });
+                }}
+                cancel={() => session.close()}
+              />,
+              { theme$: theme.theme$ }
+            ),
+            {
+              'data-test-subj': 'customizePanel',
+            }
+          );
+        });
+      };
 
     // Universal actions are exposed on the context menu for every embeddable, they bypass the trigger
     // registry.

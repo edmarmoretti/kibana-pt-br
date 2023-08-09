@@ -55,7 +55,7 @@ export const createGridColumns = (
       },
     });
   };
-
+  //Editado por Edmar Moretti - tradução do filtro
   return columns.map((col, colIndex): EuiDataGridColumn => {
     const formattedColumn = formattedColumns[col.id];
     const cellActions = formattedColumn.filterable
@@ -69,13 +69,13 @@ export const createGridColumns = (
             const filterForText = i18n.translate(
               'visTypeTable.tableCellFilter.filterForValueText',
               {
-                defaultMessage: 'Filter for value',
+                defaultMessage: 'Filtrar por valor',
               }
             );
             const filterForAriaLabel = i18n.translate(
               'visTypeTable.tableCellFilter.filterForValueAriaLabel',
               {
-                defaultMessage: 'Filter for value: {cellContent}',
+                defaultMessage: 'Filtrar por valor: {cellContent}',
                 values: {
                   cellContent,
                 },

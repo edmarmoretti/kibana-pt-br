@@ -16,21 +16,21 @@ export const OptionsListStrings = {
       }),
     getPlaceholder: () =>
       i18n.translate('controls.optionsList.control.placeholder', {
-        defaultMessage: 'Any',
+        defaultMessage: 'Selecione...',
       }),
     getNegate: () =>
       i18n.translate('controls.optionsList.control.negate', {
-        defaultMessage: 'NOT',
+        defaultMessage: 'Não',
       }),
     getExcludeExists: () =>
       i18n.translate('controls.optionsList.control.excludeExists', {
-        defaultMessage: 'DOES NOT',
+        defaultMessage: 'Não existe',
       }),
   },
   editor: {
     getSelectionOptionsTitle: () =>
       i18n.translate('controls.optionsList.editor.selectionOptionsTitle', {
-        defaultMessage: 'Selections',
+        defaultMessage: 'Seleções',
       }),
     selectionTypes: {
       multi: {
@@ -96,7 +96,7 @@ export const OptionsListStrings = {
     getSuggestionsAriaLabel: (fieldName: string, optionCount: number) =>
       i18n.translate('controls.optionsList.popover.suggestionsAriaLabel', {
         defaultMessage:
-          'Available {optionCount, plural, one {option} other {options}} for {fieldName}',
+          'Disponível {optionCount, plural, one {option} other {options}} para {fieldName}',
         values: { fieldName, optionCount },
       }),
     getAllowExpensiveQueriesWarning: () =>
@@ -106,7 +106,7 @@ export const OptionsListStrings = {
       }),
     getLoadingMoreMessage: () =>
       i18n.translate('controls.optionsList.popover.loadingMore', {
-        defaultMessage: 'Loading more options...',
+        defaultMessage: 'Carregando mais opções...',
       }),
     getAtEndOfOptionsMessage: () =>
       i18n.translate('controls.optionsList.popover.endOfOptions', {
@@ -115,31 +115,31 @@ export const OptionsListStrings = {
       }),
     getEmptyMessage: () =>
       i18n.translate('controls.optionsList.popover.empty', {
-        defaultMessage: 'No options found',
+        defaultMessage: 'Nenhuma opção encontrada',
       }),
     getSelectionsEmptyMessage: () =>
       i18n.translate('controls.optionsList.popover.selectionsEmpty', {
-        defaultMessage: 'You have no selections',
+        defaultMessage: 'Não há seleções',
       }),
     getAllOptionsButtonTitle: () =>
       i18n.translate('controls.optionsList.popover.allOptionsTitle', {
-        defaultMessage: 'Show all options',
+        defaultMessage: 'Mostrar todas as opções',
       }),
     getSelectedOptionsButtonTitle: () =>
       i18n.translate('controls.optionsList.popover.selectedOptionsTitle', {
-        defaultMessage: 'Show only selected options',
+        defaultMessage: 'Mostrar somente as opções selecionadas',
       }),
     searchPlaceholder: {
       prefix: {
         getPlaceholderText: () =>
           i18n.translate('controls.optionsList.popover.prefixSearchPlaceholder', {
-            defaultMessage: 'Starts with...',
+            defaultMessage: 'Iniciar com...',
           }),
       },
       wildcard: {
         getPlaceholderText: () =>
           i18n.translate('controls.optionsList.popover.wildcardSearchPlaceholder', {
-            defaultMessage: 'Contains...',
+            defaultMessage: 'Contém...',
           }),
       },
     },
@@ -169,27 +169,27 @@ export const OptionsListStrings = {
       }),
     getInvalidSelectionScreenReaderText: () =>
       i18n.translate('controls.optionsList.popover.invalidSelectionScreenReaderText', {
-        defaultMessage: 'Invalid selection.',
+        defaultMessage: 'Seleção inválida.',
       }),
     getIncludeLabel: () =>
       i18n.translate('controls.optionsList.popover.includeLabel', {
-        defaultMessage: 'Include',
+        defaultMessage: 'Incluir',
       }),
     getExcludeLabel: () =>
       i18n.translate('controls.optionsList.popover.excludeLabel', {
-        defaultMessage: 'Exclude',
+        defaultMessage: 'Excluir',
       }),
     getIncludeExcludeLegend: () =>
       i18n.translate('controls.optionsList.popover.excludeOptionsLegend', {
-        defaultMessage: 'Include or exclude selections',
+        defaultMessage: 'Inclui ou exclui seleções',
       }),
     getSortPopoverTitle: () =>
       i18n.translate('controls.optionsList.popover.sortTitle', {
-        defaultMessage: 'Sort',
+        defaultMessage: 'Ordena',
       }),
     getSortPopoverDescription: () =>
       i18n.translate('controls.optionsList.popover.sortDescription', {
-        defaultMessage: 'Define the sort order',
+        defaultMessage: 'Define a ordenação',
       }),
     getSortDisabledTooltip: () =>
       i18n.translate('controls.optionsList.popover.sortDisabledTooltip', {
@@ -211,26 +211,26 @@ export const OptionsListStrings = {
   controlAndPopover: {
     getExists: (negate: number = +false) =>
       i18n.translate('controls.optionsList.controlAndPopover.exists', {
-        defaultMessage: '{negate, plural, one {Exist} other {Exists}}',
+        defaultMessage: '{negate, plural, one {Existe} other {Existe}}',
         values: { negate },
       }),
   },
   editorAndPopover: {
     getSortDirectionLegend: () =>
       i18n.translate('controls.optionsList.popover.sortDirections', {
-        defaultMessage: 'Sort directions',
+        defaultMessage: 'Direção do ordenamento',
       }),
     sortBy: {
       _count: {
         getSortByLabel: () =>
           i18n.translate('controls.optionsList.popover.sortBy.docCount', {
-            defaultMessage: 'By document count',
+            defaultMessage: 'Pela contagem de documentos',
           }),
       },
       _key: {
         getSortByLabel: () =>
           i18n.translate('controls.optionsList.popover.sortBy.alphabetical', {
-            defaultMessage: 'Alphabetically',
+            defaultMessage: 'Alfabética',
           }),
       },
     },
@@ -238,13 +238,13 @@ export const OptionsListStrings = {
       asc: {
         getSortOrderLabel: () =>
           i18n.translate('controls.optionsList.popover.sortOrder.asc', {
-            defaultMessage: 'Ascending',
+            defaultMessage: 'Ascendente',
           }),
       },
       desc: {
         getSortOrderLabel: () =>
           i18n.translate('controls.optionsList.popover.sortOrder.desc', {
-            defaultMessage: 'Descending',
+            defaultMessage: 'Descendente',
           }),
       },
     },

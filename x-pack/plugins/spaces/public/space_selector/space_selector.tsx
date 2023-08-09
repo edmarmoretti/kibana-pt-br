@@ -151,13 +151,13 @@ export class SpaceSelector extends Component<Props, State> {
               >
                 <FormattedMessage
                   id="xpack.spaces.spaceSelector.selectSpacesTitle"
-                  defaultMessage="Select your space"
+              defaultMessage="Selecione sua área de trabalho ('space')"
                 />
               </h1>
               <p>
                 <FormattedMessage
                   id="xpack.spaces.spaceSelector.changeSpaceAnytimeAvailabilityText"
-                  defaultMessage="You can change your space at anytime."
+                defaultMessage="Você pode escolher outro quando quiser"
                 />
               </p>
             </EuiTextColor>
