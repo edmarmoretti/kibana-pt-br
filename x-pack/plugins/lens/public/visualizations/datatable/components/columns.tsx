@@ -74,6 +74,9 @@ export const createGridColumns = (
   };
 
   return visibleColumns.map((field) => {
+    //Edmar Moretti - remove o sinal '›  ' quando a tabela é quebrada por um item (split col)
+    columnsReverseLookup[field].name = columnsReverseLookup[field].name.replace('›  ','');
+
     const { name, index: colIndex } = columnsReverseLookup[field];
     const filterable = columnFilterable?.[colIndex] || false;
 
@@ -208,7 +211,7 @@ export const createGridColumns = (
       onClick: () => onColumnResize({ columnId: originalColumnId || field, width: undefined }),
       iconType: 'empty',
       label: i18n.translate('xpack.lens.table.resize.reset', {
-        defaultMessage: 'Reset width',
+        defaultMessage: 'Restaura a largura',
       }),
       'data-test-subj': 'lensDatatableResetWidth',
       isDisabled: initialWidth == null,
@@ -269,6 +272,7 @@ export const createGridColumns = (
       textAlign: currentAlignment,
     });
     //Editado por Edmar Moretti - tradução
+
     const columnDefinition: EuiDataGridColumn = {
       id: field,
       cellActions,
