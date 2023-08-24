@@ -74,6 +74,9 @@ export const createGridColumns = (
   };
 
   return visibleColumns.map((field) => {
+    //Edmar Moretti - remove o sinal '›  ' quando a tabela é quebrada por um item (split col)
+    columnsReverseLookup[field].name = columnsReverseLookup[field].name.replace('›  ','');
+
     const { name, index: colIndex } = columnsReverseLookup[field];
     const filterable = columnFilterable?.[colIndex] || false;
 
@@ -103,7 +106,9 @@ export const createGridColumns = (
               },
             }
           );
-
+              //Editado por Edmar Moretti - remove o botão de filtro das tabelas Lens
+              return '';
+              /*
           return (
             contentsIsDefined && (
               <Component
@@ -119,6 +124,7 @@ export const createGridColumns = (
               </Component>
             )
           );
+              */
         },
         ({ rowIndex, columnId, Component }: EuiDataGridColumnCellActionProps) => {
           const { rowValue, contentsIsDefined, cellContent } = getContentData({
@@ -141,7 +147,9 @@ export const createGridColumns = (
               },
             }
           );
-
+              //Editado por Edmar Moretti - remove o botão de filtro das tabelas Lens
+              return '';
+              /*
           return (
             contentsIsDefined && (
               <Component
@@ -157,6 +165,7 @@ export const createGridColumns = (
               </Component>
             )
           );
+          */
         }
       );
     }
@@ -202,11 +211,12 @@ export const createGridColumns = (
       onClick: () => onColumnResize({ columnId: originalColumnId || field, width: undefined }),
       iconType: 'empty',
       label: i18n.translate('xpack.lens.table.resize.reset', {
-        defaultMessage: 'Reset width',
+        defaultMessage: 'Restaura a largura',
       }),
       'data-test-subj': 'lensDatatableResetWidth',
       isDisabled: initialWidth == null,
     });
+    //Editado por Edmar Moretti - tradução
     if (!isTransposed && onColumnHide) {
       additionalActions.push({
         color: 'text',
@@ -214,7 +224,7 @@ export const createGridColumns = (
         onClick: () => onColumnHide({ columnId: originalColumnId || field }),
         iconType: 'eyeClosed',
         label: i18n.translate('xpack.lens.table.hide.hideLabel', {
-          defaultMessage: 'Hide',
+          defaultMessage: 'Esconde',
         }),
         'data-test-subj': 'lensDatatableHide',
         isDisabled: !isHidden && visibleColumns.length <= 1,
@@ -261,6 +271,7 @@ export const createGridColumns = (
       }),
       textAlign: currentAlignment,
     });
+    //Editado por Edmar Moretti - tradução
 
     const columnDefinition: EuiDataGridColumn = {
       id: field,
@@ -274,12 +285,12 @@ export const createGridColumns = (
         showMoveRight: false,
         showSortAsc: {
           label: i18n.translate('xpack.lens.table.sort.ascLabel', {
-            defaultMessage: 'Sort ascending',
+            defaultMessage: 'Ordena do menor para o maior',
           }),
         },
         showSortDesc: {
           label: i18n.translate('xpack.lens.table.sort.descLabel', {
-            defaultMessage: 'Sort descending',
+            defaultMessage: 'Ordena do maior para o menor',
           }),
         },
         additional: additionalActions,

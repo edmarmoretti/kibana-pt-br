@@ -194,6 +194,14 @@ export abstract class Embeddable<
     return this.output.title ?? '';
   }
 
+  //Edmar Moretti titleNotes e titleSummary
+  public getTitleNotes(): string {
+    return this.input.titleNotes || '';
+  }
+  public getTitleSummary(): string {
+    return this.input.titleSummary || '';
+  }
+  
   public getDescription(): string {
     return this.output.description ?? '';
   }

@@ -7,6 +7,7 @@
  */
 
 import { i18n } from '@kbn/i18n';
+//Edmar Moretti - inclusão de EuiTextColor
 import {
   EuiContextMenuPanelDescriptor,
   EuiBadge,
@@ -15,6 +16,7 @@ import {
   EuiScreenReaderOnly,
   EuiNotificationBadge,
   EuiLink,
+  EuiTextColor
 } from '@elastic/eui';
 import classNames from 'classnames';
 import React from 'react';
@@ -26,6 +28,7 @@ import { CustomizePanelAction } from '.';
 
 export interface PanelHeaderProps {
   title?: string;
+  titleSummary?: string;
   description?: string;
   index?: number;
   isViewMode: boolean;
@@ -42,7 +45,14 @@ export interface PanelHeaderProps {
   showPlaceholderTitle?: boolean;
   customizePanel?: CustomizePanelAction;
 }
-
+//Edmar Moretti - adicionado titleNotes
+export interface PanelNotesProps {
+  titleNotes?: string;
+  index?: number;
+  isViewMode: boolean;
+  hidePanelTitle: boolean;
+  embeddable: IEmbeddable;
+}
 function renderBadges(badges: Array<Action<EmbeddableContext>>, embeddable: IEmbeddable) {
   return badges.map((badge) => (
     <EuiBadge
@@ -105,6 +115,7 @@ function renderNotifications(
 
 export function PanelHeader({
   title,
+  titleSummary,
   description,
   index,
   isViewMode,
@@ -204,9 +215,10 @@ export function PanelHeader({
   };
 
   const titleClasses = classNames('embPanel__title', { 'embPanel--dragHandle': !isViewMode });
+  //Edmar Moretti - opção para inclusão de texto explicativo no título dos quadros dos painéis
 
   return (
-    <figcaption
+    <><figcaption
       className={classes}
       data-test-subj={`embeddablePanelHeading-${(title || '').replace(/\s/g, '')}`}
     >
@@ -224,5 +236,46 @@ export function PanelHeader({
         index={index}
       />
     </figcaption>
+    <EuiTextColor color="subdued" className='embPanel__titleSummary'>{titleSummary}</EuiTextColor>
+    
+    </>
   );
 }
+
+//Edmar Moretti - adicionado titleNotes
+export function PanelNotes({
+  titleNotes,
+  index,
+  isViewMode,
+  hidePanelTitle,
+  embeddable
+}: PanelNotesProps) {
+  const showTitle = !hidePanelTitle && (!isViewMode || titleNotes);
+  const linkify = (inputText: string) => {
+      var replacedText, replacePattern1;
+      //URLs starting with http://, https://, or ftp://
+      replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+      replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+      //return replacedText;
+      const theObj = {__html:replacedText};
+      return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
+  }  
+  
+  const renderTitleNotes = () => {
+    let titleComponent = '';
+    if (showTitle) {
+      titleComponent = titleNotes||'';
+    }
+    return (
+        linkify(titleComponent)
+    );
+  };
+
+  return (
+    <figcaption className='embPanel__notes'>
+        {renderTitleNotes()}
+    </figcaption>
+  );
+
+}
+

@@ -35,6 +35,10 @@ export const createGridCell = (
     const filterOnClick = oneClickFilter && handleFilterClick;
 
     const content = formatters[columnId]?.convert(rowValue, filterOnClick ? 'text' : 'html');
+    //Edmar Moretti - adiciona ,00 em números do tipo moeda
+    if (content.substring(0,2) == "R$" && !content.split(',')[1]) {
+      content = content + ',00';
+    }
     const currentAlignment = alignments && alignments[columnId];
 
     useEffect(() => {

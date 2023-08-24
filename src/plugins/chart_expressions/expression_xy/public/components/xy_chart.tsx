@@ -5,7 +5,7 @@
  * in compliance with, at your election, the Elastic License 2.0 or the Server
  * Side Public License, v 1.
  */
-
+//Edmar Moretti - define as propriedades que serão utilizadas na renderização de um gráfico
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { i18n } from '@kbn/i18n';
@@ -88,7 +88,8 @@ import {
   getOriginalAxisPosition,
 } from '../helpers';
 import { getXDomain, XyEndzones } from './x_domain';
-import { getLegendAction } from './legend_action';
+//Edmar Moretti - remove as opções de seleção da legenda
+//import { getLegendAction } from './legend_action';
 import {
   ReferenceLines,
   computeChartMargins,
@@ -154,10 +155,11 @@ function nonNullable<T>(v: T): v is NonNullable<T> {
 function getValueLabelsStyling(isHorizontal: boolean): {
   displayValue: RecursivePartial<DisplayValueStyle>;
 } {
-  const VALUE_LABELS_MAX_FONTSIZE = 12;
-  const VALUE_LABELS_MIN_FONTSIZE = 10;
-  const VALUE_LABELS_VERTICAL_OFFSET = -10;
-  const VALUE_LABELS_HORIZONTAL_OFFSET = 10;
+  //Edmar Moretti - altera os tamanhos dos labels
+  const VALUE_LABELS_MAX_FONTSIZE = 12;//12;
+  const VALUE_LABELS_MIN_FONTSIZE = 8; //10;
+  const VALUE_LABELS_VERTICAL_OFFSET = -5; //-10;
+  const VALUE_LABELS_HORIZONTAL_OFFSET = 1; //10;
 
   return {
     displayValue: {
@@ -744,6 +746,7 @@ export function XYChart({
     visible: xAxisConfig?.showGridLines,
     strokeWidth: 1,
   };
+  
   const xAxisStyle: RecursivePartial<AxisStyle> = shouldUseNewTimeAxis
     ? {
         ...MULTILAYER_TIME_AXIS_STYLE,
@@ -794,7 +797,10 @@ export function XYChart({
     position: uiState ? 'absolute' : 'relative',
   });
   // enable the tooltip actions only if there is at least one splitAccessor to the dataLayer
-  const hasTooltipActions = dataLayers.some((dataLayer) => dataLayer.splitAccessors) && interactive;
+  //Edmar Moretti - remove as opções de seleção do tooltip
+  //const hasTooltipActions = dataLayers.some((dataLayer) => dataLayer.splitAccessors) && interactive;
+  const hasTooltipActions = false;
+
 
   const { theme: settingsThemeOverrides = {}, ...settingsOverrides } = getOverridesFor(
     overrides,
@@ -806,6 +812,19 @@ export function XYChart({
     formatFactory
   );
 
+//Edmar Moretti - remove a linha do eixo quando a categoria estiver no eixo y
+if(getOriginalAxisPosition('bottom', shouldRotate) == 'left'){
+  xAxisStyle.axisLine = {
+    stroke: 'white'
+  };
+} else {
+  xAxisStyle.tickLine = {
+    visible: true,
+    size: 5
+  };
+}
+
+xAxisStyle.axisTitle = {fill: '#69707d'};
   return (
     <div css={chartContainerStyle}>
       {showLegend !== undefined && uiState && (
@@ -936,6 +955,7 @@ export function XYChart({
             xDomain={xDomain}
             onBrushEnd={interactive ? (brushHandler as BrushEndListener) : undefined}
             onElementClick={interactive ? clickHandler : undefined}
+            /*
             legendAction={
               interactive
                 ? getLegendAction(
@@ -949,6 +969,7 @@ export function XYChart({
                   )
                 : undefined
             }
+            */
             showLegendExtra={isHistogramViz && valuesInLegend}
             ariaLabel={args.ariaLabel}
             ariaUseDefaultSummary={!args.ariaLabel}

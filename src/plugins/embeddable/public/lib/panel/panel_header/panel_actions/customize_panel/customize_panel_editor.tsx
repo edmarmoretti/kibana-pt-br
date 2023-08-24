@@ -37,6 +37,8 @@ type PanelSettings = {
   hidePanelTitles?: boolean;
   description?: string;
   timeRange?: TimeRange;
+  titleSummary?: string;
+  titleNotes?: string;
 };
 
 interface CustomizePanelProps {
@@ -54,6 +56,16 @@ export const CustomizePanelEditor = (props: CustomizePanelProps) => {
   const [panelDescription, setPanelDescription] = useState(
     embeddable.getInput().description ?? embeddable.getOutput().defaultDescription
   );
+  //Edmar Moretti - funções para resumo e nota de rodapé
+  const [titleSummary, setPanelTitleSummary] = useState(
+    embeddable.getInput().titleSummary ?? embeddable.getOutput().defaultDescription
+  );
+  const [titleNotes, setPanelTitleNotes] = useState(
+    embeddable.getInput().titleNotes ?? embeddable.getOutput().defaultDescription
+  );
+
+
+
   const [panelTitle, setPanelTitle] = useState(
     embeddable.getInput().title ?? embeddable.getOutput().defaultTitle
   );
@@ -82,6 +94,8 @@ export const CustomizePanelEditor = (props: CustomizePanelProps) => {
     const newPanelSettings: PanelSettings = {
       hidePanelTitles: hideTitle,
       title: panelTitle === embeddable.getOutput().defaultTitle ? undefined : panelTitle,
+      titleNotes: titleNotes === embeddable.getOutput().defaultTitle ? undefined : titleNotes,
+      titleSummary: titleSummary === embeddable.getOutput().defaultTitle ? undefined : titleSummary,
       description:
         panelDescription === embeddable.getOutput().defaultDescription
           ? undefined
@@ -209,6 +223,46 @@ export const CustomizePanelEditor = (props: CustomizePanelProps) => {
             )}
           />
         </EuiFormRow>
+        <EuiFormRow
+                  label='Nota de rodapé'
+                >
+                  <EuiTextArea
+                    id="panelTitleNotesInput"
+                    className="panelTitleNotesInputText"
+                    data-test-subj="customEmbeddablePanelTitleNotesInput"
+                    name="panelTitleNotes"
+                    disabled={hideTitle || !editMode}
+                    value={titleNotes ?? ''}
+                    onChange={(e) => setPanelTitleNotes(e.target.value)}
+                    aria-label={i18n.translate(
+                      'embeddableApi.customizePanel.modal.optionsMenuForm.panelTitleInputAriaLabel',
+                      {
+                        defaultMessage: 'Enter a custom title notes for your panel',
+                      }
+                    )}
+                  />
+                </EuiFormRow>
+                
+                <EuiFormRow
+                  label='Resumo'
+                >
+                  <EuiTextArea
+                    id="panelTitleSummaryInput"
+                    className="panelTitleSummaryInputText"
+                    data-test-subj="customEmbeddablePanelTitleSummaryInput"
+                    name="panelTitleSummary"
+                    disabled={hideTitle || !editMode}
+                    value={titleSummary ?? ''}
+                    onChange={(e) => setPanelTitleSummary(e.target.value)}
+                    aria-label={i18n.translate(
+                      'embeddableApi.customizePanel.modal.optionsMenuForm.panelTitleInputAriaLabel',
+                      {
+                        defaultMessage: 'Enter a custom title notes for your panel',
+                      }
+                    )}
+                  />
+                </EuiFormRow>
+
       </>
     );
   };

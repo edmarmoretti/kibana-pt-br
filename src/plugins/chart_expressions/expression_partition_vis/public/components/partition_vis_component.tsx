@@ -52,7 +52,7 @@ import {
   getLayers,
   getLegendActions,
   canFilter,
-  getFilterClickData,
+  //getFilterClickData,
   getFilterEventData,
   getPartitionTheme,
   getColumns,
@@ -192,6 +192,7 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
       splitChartDimension?: DatatableColumn,
       splitChartFormatter?: FieldFormat
     ): void => {
+      /*
       const data = getFilterClickData(
         clickedLayers,
         buckets,
@@ -202,7 +203,10 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
         splitChartDimension,
         splitChartFormatter
       );
-      props.fireEvent({ name: 'filter', data: { data } });
+      */
+      //Edmar Moretti - evita a seleção por clique
+      //props.fireEvent({ name: 'filter', data: { data } });
+      props.fireEvent({name: '', data: {  } });
     },
     [metricColumn.id, originalVisData, props, visParams.dimensions.metrics.length]
   );

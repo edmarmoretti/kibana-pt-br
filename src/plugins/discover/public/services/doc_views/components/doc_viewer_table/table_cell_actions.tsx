@@ -53,18 +53,18 @@ export const TableActions = ({
   // Filters pair
   const filtersPairDisabled = !fieldMapping || !fieldMapping.filterable || ignoredValue;
   const filterAddLabel = i18n.translate('discover.docViews.table.filterForValueButtonTooltip', {
-    defaultMessage: 'Filter for value',
+    defaultMessage: 'Filtrar por valor',
   });
   const filterAddAriaLabel = i18n.translate(
     'discover.docViews.table.filterForValueButtonAriaLabel',
-    { defaultMessage: 'Filter for value' }
+    { defaultMessage: 'Filtrar por valor' }
   );
   const filterOutLabel = i18n.translate('discover.docViews.table.filterOutValueButtonTooltip', {
-    defaultMessage: 'Filter out value',
+    defaultMessage: 'Filtrar por não valor',
   });
   const filterOutAriaLabel = i18n.translate(
     'discover.docViews.table.filterOutValueButtonAriaLabel',
-    { defaultMessage: 'Filter out value' }
+    { defaultMessage: 'Filtrar por não valor' }
   );
   const filtersPairToolTip =
     (filtersPairDisabled &&

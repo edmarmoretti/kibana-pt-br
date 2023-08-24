@@ -25,7 +25,7 @@ export function DocViewTableRowBtnFilterAdd({ onClick, disabled = false }: Props
   ) : (
     <FormattedMessage
       id="discover.docViews.table.filterForValueButtonTooltip"
-      defaultMessage="Filter for value"
+      defaultMessage="Filtrar por valor"
     />
   );
 
@@ -33,7 +33,7 @@ export function DocViewTableRowBtnFilterAdd({ onClick, disabled = false }: Props
     <EuiToolTip content={tooltipContent}>
       <EuiButtonIcon
         aria-label={i18n.translate('discover.docViews.table.filterForValueButtonAriaLabel', {
-          defaultMessage: 'Filter for value',
+          defaultMessage: 'Filtrar por valor',
         })}
         className="kbnDocViewer__actionButton"
         data-test-subj="addInclusiveFilterButton"

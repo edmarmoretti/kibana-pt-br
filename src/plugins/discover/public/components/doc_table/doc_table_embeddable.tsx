@@ -99,7 +99,7 @@ export const DocTableEmbeddable = (props: DocTableEmbeddableProps) => {
     },
     [pageOfItems]
   );
-
+//Edmar Moretti - tradução
   return (
     <SavedSearchEmbeddableBase
       totalHitCount={props.totalHitCount}
@@ -109,7 +109,7 @@ export const DocTableEmbeddable = (props: DocTableEmbeddableProps) => {
           <EuiText grow={false} size="s" color="subdued">
             <FormattedMessage
               id="discover.docTable.limitedSearchResultLabel"
-              defaultMessage="Limited to {resultCount} results. Refine your search."
+                  defaultMessage="Limitado a {resultCount} resultados. Refine sua busca."
               values={{ resultCount: sampleSize }}
             />
           </EuiText>

@@ -14,7 +14,7 @@ import { EuiTokensObject } from '@elastic/eui';
 interface EuiValues {
   [key: string]: any;
 }
-
+//Edmar Moretti - algumas traduções entram aqui Linhas: 406
 export const getEuiContextMapping = (): EuiTokensObject => {
   return {
     'euiAccordion.isLoading': i18n.translate('core.euiAccordion.isLoading', {
@@ -542,7 +542,7 @@ export const getEuiContextMapping = (): EuiTokensObject => {
       }),
     'euiDataGridCell.position': ({ columnId, row, col }: EuiValues) =>
       i18n.translate('core.euiDataGridCell.position', {
-        defaultMessage: '{columnId}, column {col}, row {row}',
+        defaultMessage: '{columnId}, coluna {col}, linha {row}',
         values: { columnId, row, col },
       }),
     'euiDataGridCellActions.expandButtonTitle': i18n.translate(

@@ -57,6 +57,8 @@ export function ToolbarOverlay(props: Props) {
       </EuiFlexItem>
     ) : null;
 
+  //Editado por Edmar Moretti - remove alguns botões dos mapas
+  /*
   return (
     <EuiFlexGroup
       className="mapToolbarOverlay"
@@ -78,4 +80,20 @@ export function ToolbarOverlay(props: Props) {
       {featureDrawControl}
     </EuiFlexGroup>
   );
+  */
+  return (
+    <EuiFlexGroup
+      className="mapToolbarOverlay"
+      responsive={false}
+      direction="column"
+      alignItems="flexStart"
+      gutterSize="s"
+    >
+      <EuiFlexItem>
+        <SetViewControl />
+      </EuiFlexItem>
+      {fitToBoundsButton}
+    </EuiFlexGroup>
+  );
+
 }

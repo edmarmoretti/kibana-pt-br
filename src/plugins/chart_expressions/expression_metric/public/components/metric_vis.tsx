@@ -139,7 +139,9 @@ export const MetricVis = ({
     },
     [renderComplete]
   );
-
+  //Edmar Moretti - impede o filtro no onclick
+  filterable = false;
+  //
   const [scrollChildHeight, setScrollChildHeight] = useState<string>('100%');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollDimensions = useResizeObserver(scrollContainerRef.current);
@@ -173,10 +175,26 @@ export const MetricVis = ({
     breakdownByColumn ? data.rows : data.rows.slice(0, 1)
   ).map((row, rowIdx) => {
     const value: number = row[primaryMetricColumn.id] !== null ? row[primaryMetricColumn.id] : NaN;
+    //Edmar Moretti - quebra o título em subtitulo caso existam 2 níveis de quebra 
+    /*
     const title = breakdownByColumn
       ? formatBreakdownValue(row[breakdownByColumn.id])
       : primaryMetricColumn.name;
+
     const subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
+    */
+    let title = breakdownByColumn
+      ? formatBreakdownValue(row[breakdownByColumn.id])
+      : primaryMetricColumn.name;
+
+    let subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
+    if(title.split(' › ').length == 2 && subtitle?.trim() == ''){
+      subtitle = title.split(' › ')[1];
+      title = title.split(' › ')[0];
+    }
+
+
+
     const secondaryPrefix = config.metric.secondaryPrefix ?? secondaryMetricColumn?.name;
     const baseMetric: MetricWNumber = {
       value,
@@ -270,6 +288,7 @@ export const MetricVis = ({
     'settings'
   ) as Partial<SettingsProps>;
 
+
   const grid: MetricSpec['data'] = [];
   for (let i = 0; i < metricConfigs.length; i += maxCols) {
     grid.push(metricConfigs.slice(i, i + maxCols));
@@ -283,7 +302,8 @@ export const MetricVis = ({
     pixelHeight = grid.length * maxTileSideLength;
     pixelWidth = grid[0]?.length * maxTileSideLength;
   }
-
+  //Edmar Moretti - alteração no width
+  //width: ${pixelWidth ? `${pixelWidth}px` : '100%'};
   return (
     <div
       ref={scrollContainerRef}
