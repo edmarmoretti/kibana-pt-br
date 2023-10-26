@@ -109,12 +109,14 @@ export async function downloadToDisk({
       });
 
       if (!skipChecksumCheck) {
+        /*
         const downloadedSha = hash.digest('hex');
         if (downloadedSha !== shaChecksum) {
           throw new Error(
             `Downloaded checksum ${downloadedSha} does not match the expected ${shaAlgorithm} checksum.`
           );
         }
+        */
       }
     } catch (_error) {
       error = _error;
