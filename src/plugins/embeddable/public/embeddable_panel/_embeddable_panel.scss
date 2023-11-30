@@ -45,15 +45,16 @@
 
 .embPanel__title {
   @include euiTitle('xxxs');
-  overflow: hidden;
-  line-height: 1.5;
+  overflow: auto;
+  line-height: 1.2;
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  height: 50px;
 
   &:not(:empty) {
-    line-height: $euiSizeL;
+    line-height: 20px;
     padding-left: $euiSizeS;
   }
 
@@ -69,8 +70,12 @@
   }
 
   .embPanel__titleText {
-    @include euiTextTruncate;
-    font-weight: $euiFontWeightBold;
+    max-width: 100%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-wrap: normal !important;
+    font-weight: 700;
+    white-space: normal; 
   }
 
   .embPanel__placeholderTitleText {
@@ -91,6 +96,21 @@
   * {
     z-index: $euiZLevel1; // apply high z-index to all children
   }
+}
+
+//Edmar Moretti titleSummary e notes
+.embPanel__titleSummary {
+  font-size: 10px;
+  padding: 8px;
+}
+.embPanel__notes > div {
+  max-height: 20px;
+  font-size: 10px;
+  padding-left: 8px;
+  margin: 2px;
+}
+.embPanel__notes > div:empty {
+  padding: 0px;
 }
 
 // OPTIONS MENU

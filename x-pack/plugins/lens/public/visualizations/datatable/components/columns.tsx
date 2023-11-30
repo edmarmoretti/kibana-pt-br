@@ -76,8 +76,9 @@ export const createGridColumns = (
 
   return visibleColumns.map((field) => {
     const { name, index: colIndex } = columnsReverseLookup[field];
-    const filterable = columnFilterable?.[colIndex] || false;
-
+    //Edmar moretti - remove filtro
+    //const filterable = columnFilterable?.[colIndex] || false;
+    const filterable = false;
     const columnArgs = columnConfig.columns.find(({ columnId }) => columnId === field);
 
     const cellActions: EuiDataGridColumnCellAction[] = [];

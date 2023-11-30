@@ -47,7 +47,7 @@ export const copyValueToClipboard = ({
   }
 
   const toastTitle = i18n.translate('discover.grid.copyValueToClipboard.toastTitle', {
-    defaultMessage: 'Copied to clipboard',
+    defaultMessage: 'Copiado para a memória',
   });
 
   if (result.withFormula) {
@@ -106,7 +106,7 @@ export const copyColumnValuesToClipboard = async ({
   }
 
   const toastTitle = i18n.translate('discover.grid.copyColumnValuesToClipboard.toastTitle', {
-    defaultMessage: 'Values of "{column}" column copied to clipboard',
+    defaultMessage: 'Valores de "{column}" copiado para a memória',
     values: { column: columnDisplayName },
   });
 
@@ -144,7 +144,7 @@ export const copyColumnNameToClipboard = ({
   }
 
   const toastTitle = i18n.translate('discover.grid.copyColumnNameToClipboard.toastTitle', {
-    defaultMessage: 'Copied to clipboard',
+    defaultMessage: 'Copiado para a memória',
   });
 
   if (nameFormattedResult.withFormula) {

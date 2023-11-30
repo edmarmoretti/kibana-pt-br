@@ -45,7 +45,7 @@ function renderExpandButton({
   onClick: () => void;
 }) {
   const expandLabel = i18n.translate('xpack.maps.layerControl.openLayerTOCButtonAriaLabel', {
-    defaultMessage: 'Expand layers panel',
+    defaultMessage: 'Abre o painel de camadas',
   });
 
   return (
@@ -96,6 +96,7 @@ export function LayerControl({
       </EuiToolTip>
     );
   }
+// Edmar Moretti - tradução 
 
   let addLayer;
   if (!isReadOnly) {
@@ -112,7 +113,7 @@ export function LayerControl({
         >
           <FormattedMessage
             id="xpack.maps.layerControl.addLayerButtonLabel"
-            defaultMessage="Add layer"
+            defaultMessage="Adiciona camada"
           />
         </EuiButton>
       </Fragment>
@@ -138,7 +139,7 @@ export function LayerControl({
                 <h2>
                   <FormattedMessage
                     id="xpack.maps.layerControl.layersTitle"
-                    defaultMessage="Layers"
+                    defaultMessage="Camadas"
                   />
                 </h2>
               </EuiTitle>
@@ -147,7 +148,7 @@ export function LayerControl({
               <EuiToolTip
                 delay="long"
                 content={i18n.translate('xpack.maps.layerControl.hideAllLayersButton', {
-                  defaultMessage: 'Hide all layers',
+                  defaultMessage: 'Desliga todas as camadas',
                 })}
               >
                 <EuiButtonIcon
@@ -155,7 +156,7 @@ export function LayerControl({
                   iconType="eyeClosed"
                   color="text"
                   aria-label={i18n.translate('xpack.maps.layerControl.hideAllLayersButton', {
-                    defaultMessage: 'Hide all layers',
+                    defaultMessage: 'Desliga todas as camadas',
                   })}
                 />
               </EuiToolTip>
@@ -164,7 +165,7 @@ export function LayerControl({
               <EuiToolTip
                 delay="long"
                 content={i18n.translate('xpack.maps.layerControl.showAllLayersButton', {
-                  defaultMessage: 'Show all layers',
+                  defaultMessage: 'Liga todos as camadas',
                 })}
               >
                 <EuiButtonIcon
@@ -172,7 +173,7 @@ export function LayerControl({
                   iconType="eye"
                   color="text"
                   aria-label={i18n.translate('xpack.maps.layerControl.showAllLayersButton', {
-                    defaultMessage: 'Show all layers',
+                    defaultMessage: 'Liga todos as camadas',
                   })}
                 />
               </EuiToolTip>
@@ -181,7 +182,7 @@ export function LayerControl({
               <EuiToolTip
                 delay="long"
                 content={i18n.translate('xpack.maps.layerControl.closeLayerTOCButtonAriaLabel', {
-                  defaultMessage: 'Collapse layers panel',
+                  defaultMessage: 'Recolhe o painel de camadas',
                 })}
               >
                 <EuiButtonIcon
@@ -192,7 +193,7 @@ export function LayerControl({
                   aria-label={i18n.translate(
                     'xpack.maps.layerControl.closeLayerTOCButtonAriaLabel',
                     {
-                      defaultMessage: 'Collapse layers panel',
+                      defaultMessage: 'Recolhe o painel de camadas',
                     }
                   )}
                   data-test-subj="mapToggleLegendButton"

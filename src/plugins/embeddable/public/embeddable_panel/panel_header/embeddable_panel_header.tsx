@@ -8,7 +8,7 @@
 
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import { EuiScreenReaderOnly } from '@elastic/eui';
+import { EuiScreenReaderOnly,EuiTextColor } from '@elastic/eui';
 
 import { isSelfStyledEmbeddable, ViewMode } from '../../lib';
 import { EmbeddablePanelTitle } from './embeddable_panel_title';
@@ -45,6 +45,7 @@ export const EmbeddablePanelHeader = ({
 
   const title = embeddable.getTitle();
   const description = embeddable.getDescription();
+  const titleSummary = embeddable.getTitleSummary();
   const viewMode = useSelectFromEmbeddableInput('viewMode', embeddable);
   const hidePanelTitle = useSelectFromEmbeddableInput('hidePanelTitles', embeddable);
   const parentHidePanelTitle = useSelectFromEmbeddableInput('hidePanelTitles', embeddable.parent);
@@ -58,6 +59,7 @@ export const EmbeddablePanelHeader = ({
   const showPanelBar =
     !hideTitle ||
     description ||
+    titleSummary ||
     viewMode !== ViewMode.VIEW ||
     (badgeComponents?.length ?? 0) > 0 ||
     (notificationComponents?.length ?? 0) > 0;
@@ -93,7 +95,7 @@ export const EmbeddablePanelHeader = ({
   }
 
   return (
-    <figcaption
+    <><figcaption
       className={headerClasses}
       data-test-subj={`embeddablePanelHeading-${(title || '').replace(/\s/g, '')}`}
     >
@@ -104,6 +106,7 @@ export const EmbeddablePanelHeader = ({
           hideTitle={hideTitle}
           embeddable={embeddable}
           description={description}
+          titleSummary={titleSummary}
           customizePanelAction={universalActions.customizePanel}
         />
         {showBadges && badgeComponents}
@@ -111,5 +114,9 @@ export const EmbeddablePanelHeader = ({
       {showNotifications && notificationComponents}
       {embeddablePanelContextMenu}
     </figcaption>
+    <EuiTextColor color="subdued" className='embPanel__titleSummary'>{titleSummary}</EuiTextColor>
+    </>
   );
 };
+
+

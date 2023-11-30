@@ -117,6 +117,8 @@ export const getTooltipActions = (
   formatFactory: FormatFactory,
   isEnabled?: boolean
 ) => {
+  //Edmar Moretti - evita a seleção com o tooltip
+  return;
   if (!isEnabled) return;
   const hasSplitAccessors = dataLayers.some((l) => l.splitAccessors?.length);
   const hasXAxis = dataLayers.every((l) => l.xAccessor);

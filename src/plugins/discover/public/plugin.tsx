@@ -255,7 +255,7 @@ export class DiscoverPlugin
     setDocViewsRegistry(this.docViewsRegistry);
     this.docViewsRegistry.addDocView({
       title: i18n.translate('discover.docViews.table.tableTitle', {
-        defaultMessage: 'Table',
+        defaultMessage: 'Tabela',
       }),
       order: 10,
       component: (props) => {

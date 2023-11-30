@@ -608,7 +608,7 @@ export const DiscoverGrid = ({
         <EuiText size="xs" color="subdued">
           <EuiLoadingSpinner />
           <EuiSpacer size="s" />
-          <FormattedMessage id="discover.loadingResults" defaultMessage="Loading results" />
+          <FormattedMessage id="discover.loadingResults" defaultMessage="Carregando os resultados" />
         </EuiText>
       </div>
     );
@@ -627,7 +627,7 @@ export const DiscoverGrid = ({
         <EuiText size="xs" color="subdued">
           <EuiIcon type="discoverApp" size="m" color="subdued" />
           <EuiSpacer size="s" />
-          <FormattedMessage id="discover.noResultsFound" defaultMessage="No results found" />
+          <FormattedMessage id="discover.noResultsFound" defaultMessage="Nenhum resultado encontrado" />
         </EuiText>
       </div>
     );
@@ -686,7 +686,7 @@ export const DiscoverGrid = ({
           <p className="dscDiscoverGrid__footer" data-test-subj="discoverTableFooter">
             <FormattedMessage
               id="discover.gridSampleSize.limitDescription"
-              defaultMessage="Search results are limited to {sampleSize} documents. Add more search terms to narrow your search."
+              defaultMessage="Os resultados são limitados a {sampleSize} documentos. Adicione mais termos à sua busca."
               values={{
                 sampleSize,
               }}

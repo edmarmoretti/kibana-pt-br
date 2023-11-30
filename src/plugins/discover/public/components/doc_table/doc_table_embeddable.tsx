@@ -82,9 +82,9 @@ export const DocTableEmbeddable = (props: DocTableEmbeddableProps) => {
     () => !hasNextPage && props.rows.length < props.totalHitCount,
     [hasNextPage, props.rows.length, props.totalHitCount]
   );
-
+  //Edmar Moretti - aumento do valor default do número de registros
   const sampleSize = useMemo(() => {
-    return services.uiSettings.get(SAMPLE_SIZE_SETTING, 500);
+    return services.uiSettings.get(SAMPLE_SIZE_SETTING, 1500);
   }, [services]);
 
   const renderDocTable = useCallback(
@@ -100,7 +100,7 @@ export const DocTableEmbeddable = (props: DocTableEmbeddableProps) => {
     },
     [pageOfItems]
   );
-
+//Edmar Moretti - tradução
   return (
     <SavedSearchEmbeddableBase
       interceptedWarnings={props.interceptedWarnings}
@@ -111,7 +111,7 @@ export const DocTableEmbeddable = (props: DocTableEmbeddableProps) => {
           <EuiText grow={false} size="s" color="subdued">
             <FormattedMessage
               id="discover.docTable.limitedSearchResultLabel"
-              defaultMessage="Limited to {resultCount} results. Refine your search."
+                  defaultMessage="Limitado a {resultCount} resultados. Refine sua busca."
               values={{ resultCount: sampleSize }}
             />
           </EuiText>

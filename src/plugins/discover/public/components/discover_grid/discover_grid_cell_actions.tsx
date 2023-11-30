@@ -14,7 +14,7 @@ import { DocViewFilterFn } from '../../services/doc_views/doc_views_types';
 import { DiscoverGridContext, GridContext } from './discover_grid_context';
 import { useDiscoverServices } from '../../hooks/use_discover_services';
 import { copyValueToClipboard } from '../../utils/copy_value_to_clipboard';
-
+//Edmar Moretti - tradução
 function onFilterCell(
   context: GridContext,
   rowIndex: EuiDataGridColumnCellActionProps['rowIndex'],
@@ -37,7 +37,7 @@ export const FilterInBtn = ({
 }: EuiDataGridColumnCellActionProps) => {
   const context = useContext(DiscoverGridContext);
   const buttonTitle = i18n.translate('discover.grid.filterForAria', {
-    defaultMessage: 'Filter for this {value}',
+    defaultMessage: 'Filtrar por {value}',
     values: { value: columnId },
   });
 
@@ -52,7 +52,7 @@ export const FilterInBtn = ({
       data-test-subj="filterForButton"
     >
       {i18n.translate('discover.grid.filterFor', {
-        defaultMessage: 'Filter for',
+        defaultMessage: 'Filtrar por',
       })}
     </Component>
   );
@@ -65,7 +65,7 @@ export const FilterOutBtn = ({
 }: EuiDataGridColumnCellActionProps) => {
   const context = useContext(DiscoverGridContext);
   const buttonTitle = i18n.translate('discover.grid.filterOutAria', {
-    defaultMessage: 'Filter out this {value}',
+    defaultMessage: 'Filtrar pelos valores diferentes de {value}',
     values: { value: columnId },
   });
 
@@ -91,7 +91,7 @@ export const CopyBtn = ({ Component, rowIndex, columnId }: EuiDataGridColumnCell
   const { toastNotifications } = useDiscoverServices();
 
   const buttonTitle = i18n.translate('discover.grid.copyClipboardButtonTitle', {
-    defaultMessage: 'Copy value of {column}',
+    defaultMessage: 'Copiar o valor de {column}',
     values: { column: columnId },
   });
 
@@ -111,12 +111,12 @@ export const CopyBtn = ({ Component, rowIndex, columnId }: EuiDataGridColumnCell
       data-test-subj="copyClipboardButton"
     >
       {i18n.translate('discover.grid.copyCellValueButton', {
-        defaultMessage: 'Copy value',
+        defaultMessage: 'Copiar para a memória',
       })}
     </Component>
   );
 };
-
+//Edmar Moretti - remove botão de filtros das tabelas discover
 export function buildCellActions(field: DataViewField, onFilter?: DocViewFilterFn) {
-  return [...(onFilter && field.filterable ? [FilterInBtn, FilterOutBtn] : []), CopyBtn];
+  return [...(onFilter && field.filterable ? [] : []), CopyBtn];
 }

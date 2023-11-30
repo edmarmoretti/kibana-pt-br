@@ -26,7 +26,14 @@ function getPanelDescription(input: EmbeddableInput, output: EmbeddableOutput) {
   if (input.hidePanelTitles) return '';
   return input.description ?? output.defaultDescription;
 }
-
+function getPanelTitleSummary(input: EmbeddableInput, output: EmbeddableOutput) {
+  if (input.hidePanelTitles) return '';
+  return input.titleSummary ?? output.defaultTitleSummary;
+}
+function getPanelTitleNotes(input: EmbeddableInput, output: EmbeddableOutput) {
+  if (input.hidePanelTitles) return '';
+  return input.titleNotes ?? output.defaultTitleNotes;
+}
 export abstract class Embeddable<
   TEmbeddableInput extends EmbeddableInput = EmbeddableInput,
   TEmbeddableOutput extends EmbeddableOutput = EmbeddableOutput,
@@ -68,6 +75,8 @@ export abstract class Embeddable<
     this.output = {
       title: getPanelTitle(input, output),
       description: getPanelDescription(input, output),
+      titleSummary: getPanelTitleSummary(input, output),
+      titleNotes: getPanelTitleNotes(input, output),
       ...(this.reportsEmbeddableLoad()
         ? {}
         : {
@@ -194,6 +203,14 @@ export abstract class Embeddable<
     return this.output.title ?? '';
   }
 
+  //Edmar Moretti titleNotes e titleSummary
+  public getTitleNotes(): string {
+    return this.input.titleNotes || '';
+  }
+  public getTitleSummary(): string {
+    return this.input.titleSummary ?? '';
+  }
+  
   public getDescription(): string {
     return this.output.description ?? '';
   }
@@ -300,6 +317,8 @@ export abstract class Embeddable<
       this.updateOutput({
         title: getPanelTitle(this.input, this.output),
         description: getPanelDescription(this.input, this.output),
+        titleSummary: getPanelTitleSummary(this.input, this.output),
+        titleNotes: getPanelTitleNotes(this.input, this.output),
       } as Partial<TEmbeddableOutput>);
       if (oldLastReloadRequestTime !== newInput.lastReloadRequestTime) {
         this.reload();

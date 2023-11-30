@@ -78,9 +78,14 @@ class MetricVisComponent extends Component<MetricVisComponentProps> {
           }
 
           const formattedValue = formatValue(value, formatter, 'html');
+          //Editado por Edmar Moretti - remove title se for vazio
           if (bucketColumnId) {
             const bucketValue = formatValue(row[bucketColumnId], bucketFormatter);
+            if(title != ' '){
             title = `${bucketValue} - ${title}`;
+            } else {
+              title = `${bucketValue}`;
+            }
           }
 
           const shouldBrush = shouldApplyColor(color ?? '');

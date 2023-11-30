@@ -17,7 +17,8 @@ import { FormRow } from './form_row';
 interface ListControlUiState {
   isLoading: boolean;
 }
-
+//Edmar Moretti
+//Tradução da palavra Select...
 export type ListControlUiProps = InjectedIntlProps & {
   id: string;
   label: string;
@@ -105,17 +106,43 @@ class ListControlUi extends PureComponent<ListControlUiProps, ListControlUiState
         <EuiFieldText
           aria-label={intl.formatMessage({
             id: 'inputControl.vis.listControl.selectTextPlaceholder',
-            defaultMessage: 'Select...',
+            defaultMessage: 'Selecione...',
           })}
           placeholder={intl.formatMessage({
             id: 'inputControl.vis.listControl.selectTextPlaceholder',
-            defaultMessage: 'Select...',
+            defaultMessage: 'Selecione...',
           })}
           disabled={true}
         />
       );
     }
-
+    //Edmar Moretti - corrige o sort numérico e ordenamento de mêses
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const options = this.props.options
+      ?.map((option) => {
+        return {
+          label: this.props.formatOptionLabel(option).toString(),
+          value: option,
+          ['data-test-subj']: `option_${option.toString().replace(' ', '_')}`,
+        };
+      })
+      .sort((a, b) => {
+        //return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+        if(typeof a.label==='number' && typeof b.label==='number'){
+          if(a.label*1 > b.label*1) return 1;
+          if(a.label*1 < b.label*1) return -1;
+          return 0;
+        } else {
+          //compara meses
+          if(meses.includes(a.label.toLowerCase()) && meses.includes(b.label.toLowerCase())){
+            if(meses.indexOf(a.label.toLowerCase()) > meses.indexOf(b.label.toLowerCase())) return 1;
+            if(meses.indexOf(a.label.toLowerCase()) < meses.indexOf(b.label.toLowerCase())) return -1;
+            return 0;
+          }
+          return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+        }
+      });
+    /*   
     const options = this.props.options
       ?.map((option) => {
         return {
@@ -127,6 +154,7 @@ class ListControlUi extends PureComponent<ListControlUiProps, ListControlUiState
       .sort((a, b) => {
         return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
       });
+    */
 
     const selectedOptions = this.props.selectedOptions.map((selectedOption) => {
       return {
@@ -139,7 +167,7 @@ class ListControlUi extends PureComponent<ListControlUiProps, ListControlUiState
       <EuiComboBox
         placeholder={intl.formatMessage({
           id: 'inputControl.vis.listControl.selectPlaceholder',
-          defaultMessage: 'Select...',
+          defaultMessage: 'Selecione...',
         })}
         options={options}
         isLoading={this.state.isLoading}
@@ -163,13 +191,13 @@ class ListControlUi extends PureComponent<ListControlUiProps, ListControlUiState
           'Adjust the autocomplete settings in kibana.yml for complete results.',
       }
     );
-
+//Edmar Moretti - remove a mensagem de demora na busca
     return (
       <EuiThemeProvider colorMode={this.props.isDarkMode ? 'dark' : 'light'}>
         <FormRow
           id={this.props.id}
           label={this.props.label}
-          warningMsg={this.props.partialResults ? partialResultsWarningMessage : undefined}
+          warningMsg={this.props.partialResults ? undefined : undefined}
           controlIndex={this.props.controlIndex}
           disableMsg={this.props.disableMsg}
         >

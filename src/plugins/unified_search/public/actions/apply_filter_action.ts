@@ -67,6 +67,9 @@ export function createFilterAction(
         );
 
         const filterSelectionPromise: Promise<Filter[]> = new Promise((resolve) => {
+          //editado por Edmar Moretti - remove o filtro no onclick sobre o gráfico
+          return;
+
           const overlay = getOverlays().openModal(
             toMountPoint(
               applyFiltersPopover(

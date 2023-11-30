@@ -74,7 +74,7 @@ export class CustomizePanelAction implements Action<CustomizePanelActionContext>
 
   public getDisplayName({ embeddable }: CustomizePanelActionContext): string {
     return i18n.translate('embeddableApi.customizePanel.action.displayName', {
-      defaultMessage: 'Panel settings',
+      defaultMessage: 'Propriedades do quadro',
     });
   }
 

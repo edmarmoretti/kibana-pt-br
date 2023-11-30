@@ -24,11 +24,11 @@ export const EmbeddablePanelTitle = ({
   hideTitle?: boolean;
   viewMode?: ViewMode;
   description?: string;
+  titleSummary?: string,
   embeddable: IEmbeddable;
   customizePanelAction?: CustomizePanelAction;
 }) => {
   const title = embeddable.getTitle();
-
   const titleComponent = useMemo(() => {
     if (hideTitle) return null;
     const titleClassNames = classNames('embPanel__titleText', {
