@@ -139,6 +139,8 @@ const getMetricLayerConfiguration = (
         enableDimensionEditor: true,
         enableFormatSelector: true,
         requiredMinDimensionCount: 1,
+        //Edmar Moretti - inclusão de ajuda sobre o uso de label vazio
+        groupTooltip: 'Deixe o valor de Name vazio para permitir que o label da métrica secundária seja quebrada em linhas separadas para cada coluna escolhida',
       },
       {
         groupId: GROUP_ID.SECONDARY_METRIC,

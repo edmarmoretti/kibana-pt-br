@@ -122,7 +122,7 @@ export const dateHistogramData: Datatable = {
             order: 'desc',
             size: 3,
             otherBucket: false,
-            otherBucketLabel: 'Other',
+            otherBucketLabel: 'Outro',
             missingBucket: false,
             missingBucketLabel: 'Missing',
           },
@@ -131,7 +131,7 @@ export const dateHistogramData: Datatable = {
           id: 'terms',
           params: {
             id: 'string',
-            otherBucketLabel: 'Other',
+            otherBucketLabel: 'Outro',
             missingBucketLabel: 'Missing',
             parsedUrl: {
               origin: 'http://localhost:5601',

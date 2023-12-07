@@ -13,6 +13,7 @@ import {
   euiPaletteCool,
   euiPaletteGray,
   euiPaletteNegative,
+  euiPaletteNegativeR,
   euiPalettePositive,
   euiPaletteWarm,
   euiPaletteForStatus,
@@ -282,6 +283,10 @@ export const buildPalettes: (
     negative: {
       title: i18n.translate('charts.palettes.negativeLabel', { defaultMessage: 'Negative' }),
       ...buildGradient('negative', euiPaletteNegative),
+    },
+    negativeR: {
+      title: i18n.translate('charts.palettes.negativeLabel', { defaultMessage: 'Negative (reverse)' }),
+      ...buildGradient('negativeR', euiPaletteNegativeR),
     },
     positive: {
       title: i18n.translate('charts.palettes.positiveLabel', { defaultMessage: 'Positive' }),

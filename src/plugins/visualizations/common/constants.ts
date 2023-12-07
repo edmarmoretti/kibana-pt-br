@@ -36,16 +36,16 @@ export enum LegendSize {
   LARGE = 'large',
   EXTRA_LARGE = 'xlarge',
 }
-
+//Edmar Moretti - 
 export const LegendSizeToPixels = {
-  [LegendSize.AUTO]: undefined,
+  [LegendSize.AUTO]: 80,
   [LegendSize.SMALL]: 80,
   [LegendSize.MEDIUM]: 130,
   [LegendSize.LARGE]: 180,
   [LegendSize.EXTRA_LARGE]: 230,
 } as const;
 
-export const DEFAULT_LEGEND_SIZE = LegendSize.MEDIUM;
+export const DEFAULT_LEGEND_SIZE = LegendSize.SMALL;
 
 export const SUPPORTED_AGGREGATIONS = [
   ...Object.values(METRIC_TYPES),

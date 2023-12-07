@@ -112,7 +112,7 @@ export function ContextAppContent({
     if (isLegacy && isAnchorLoading) {
       return (
         <EuiText textAlign="center" data-test-subj="contextApp_loadingIndicator">
-          <FormattedMessage id="discover.context.loadingDescription" defaultMessage="Loading..." />
+          <FormattedMessage id="discover.context.loadingDescription" defaultMessage="Carregando..." />
         </EuiText>
       );
     }

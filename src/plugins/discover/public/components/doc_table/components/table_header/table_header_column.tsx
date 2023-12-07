@@ -160,7 +160,7 @@ export function TableHeaderColumn({
       onClick: () => onRemoveColumn && onRemoveColumn(name),
       testSubject: `docTableRemoveHeader-${name}`,
       tooltip: i18n.translate('discover.docTable.tableHeader.removeColumnButtonTooltip', {
-        defaultMessage: 'Remove Column',
+        defaultMessage: 'Remove a coluna',
       }),
     },
     // Move Left Button
@@ -175,7 +175,7 @@ export function TableHeaderColumn({
       onClick: () => onMoveColumn && onMoveColumn(name, colLeftIdx),
       testSubject: `docTableMoveLeftHeader-${name}`,
       tooltip: i18n.translate('discover.docTable.tableHeader.moveColumnLeftButtonTooltip', {
-        defaultMessage: 'Move column to the left',
+        defaultMessage: 'Move a coluna para a esquerda',
       }),
     },
     // Move Right Button

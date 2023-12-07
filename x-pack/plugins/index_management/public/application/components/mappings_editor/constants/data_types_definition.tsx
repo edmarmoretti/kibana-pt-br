@@ -919,7 +919,7 @@ export const TYPE_DEFINITION: { [key in DataType]: DataTypeDefinition } = {
   },
   other: {
     label: i18n.translate('xpack.idxMgmt.mappingsEditor.dataType.otherDescription', {
-      defaultMessage: 'Other',
+      defaultMessage: 'Outro',
     }),
     value: 'other',
     description: () => (

@@ -133,7 +133,7 @@ function buildEuiGridColumn({
           ? false
           : {
               label: i18n.translate('unifiedDataTable.removeColumnLabel', {
-                defaultMessage: 'Remove column',
+                defaultMessage: 'Remove a coluna',
               }),
               iconType: 'cross',
             },

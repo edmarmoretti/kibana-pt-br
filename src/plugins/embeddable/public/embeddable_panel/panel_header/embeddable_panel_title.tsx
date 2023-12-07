@@ -24,6 +24,7 @@ export const EmbeddablePanelTitle = ({
   hideTitle?: boolean;
   viewMode?: ViewMode;
   description?: string;
+  titleSummary?: string,
   embeddable: IEmbeddable;
   customizePanelAction?: CustomizePanelAction;
 }) => {

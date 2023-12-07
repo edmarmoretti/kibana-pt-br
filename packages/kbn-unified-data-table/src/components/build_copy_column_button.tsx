@@ -73,7 +73,7 @@ export function buildCopyColumnValuesButton({
     label: (
       <FormattedMessage
         id="unifiedDataTable.grid.copyColumnValuesToClipBoardButton"
-        defaultMessage="Copy column"
+        defaultMessage="Copia a coluna"
       />
     ),
     onCopy: () =>

@@ -89,6 +89,9 @@ export const getDateHistogramBucketAgg = ({
         output = writeParams(this.params, agg);
       }
 
+      //Edmar Moretti - remoção do texto do label referente à escala de tempo
+      return '';
+      /*
       const field = agg.getFieldDisplayName();
 
       return i18n.translate('data.search.aggs.buckets.dateHistogramLabel', {
@@ -98,6 +101,7 @@ export const getDateHistogramBucketAgg = ({
           intervalDescription: output.metricScaleText || output.bucketInterval.description,
         },
       });
+      */
     },
     createFilter: createFilterDateHistogram,
     decorateAggConfig() {

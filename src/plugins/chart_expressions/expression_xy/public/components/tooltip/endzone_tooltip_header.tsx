@@ -28,7 +28,7 @@ export const EndzoneTooltipHeader: FC<EndzoneTooltipHeaderProps> = ({ value }) =
       <EuiFlexItem>
         {i18n.translate('expressionXY.partialData.bucketTooltipText', {
           defaultMessage:
-            'The selected time range does not include this entire bucket. It might contain partial data.',
+            'O intervalo de tempo selecionado não inclui todo esse intervalo. Pode conter dados parciais.',
         })}
       </EuiFlexItem>
     </EuiFlexGroup>

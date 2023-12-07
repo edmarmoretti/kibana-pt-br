@@ -33,17 +33,22 @@ export const getLegendActions = (
 ): LegendAction => {
   return ({ series: [pieSeries] }) => {
     const [popoverOpen, setPopoverOpen] = useState(false);
-    const [isFilterable, setIsFilterable] = useState(true);
-    const filterData = useMemo(() => getFilterEventData(pieSeries), [pieSeries]);
+    //Edmar Moretti - remove a seleção por meio da legenda
+    //const [isFilterable, setIsFilterable] = useState(true);
+    const isFilterable = false;
+    //const filterData = useMemo(() => getFilterEventData(pieSeries), [pieSeries]);
     const columnIndex = useMemo(
       () => getSeriesValueColumnIndex(pieSeries.key, visData),
       [pieSeries]
     );
     const [ref, onClose] = useLegendAction<HTMLDivElement>();
 
+    /*
     useEffect(() => {
       (async () => setIsFilterable(await canFilter(filterData, actions)))();
     }, [filterData]);
+    */
+    const filterData = false;
 
     if (columnIndex === -1) {
       return null;
@@ -60,32 +65,6 @@ export const getLegendActions = (
 
     const panelItems: EuiContextMenuPanelDescriptor['items'] = [];
 
-    if (isFilterable && filterData) {
-      panelItems.push(
-        {
-          name: i18n.translate('expressionPartitionVis.legend.filterForValueButtonAriaLabel', {
-            defaultMessage: 'Filter for',
-          }),
-          'data-test-subj': `legend-${title}-filterIn`,
-          icon: <EuiIcon type="plusInCircle" size="m" />,
-          onClick: () => {
-            setPopoverOpen(false);
-            onFilter(filterData);
-          },
-        },
-        {
-          name: i18n.translate('expressionPartitionVis.legend.filterOutValueButtonAriaLabel', {
-            defaultMessage: 'Filter out',
-          }),
-          'data-test-subj': `legend-${title}-filterOut`,
-          icon: <EuiIcon type="minusInCircle" size="m" />,
-          onClick: () => {
-            setPopoverOpen(false);
-            onFilter(filterData, true);
-          },
-        }
-      );
-    }
 
     if (columnCellValueActions[columnIndex]) {
       const columnMeta = visData.columns[columnIndex].meta;

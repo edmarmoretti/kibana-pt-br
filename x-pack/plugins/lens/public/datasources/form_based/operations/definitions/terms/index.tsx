@@ -357,7 +357,7 @@ export const termsOperation: OperationDefinition<
         shardSize,
         otherBucket: Boolean(column.params.otherBucket),
         otherBucketLabel: i18n.translate('xpack.lens.indexPattern.terms.otherLabel', {
-          defaultMessage: 'Other',
+          defaultMessage: 'Outro',
         }),
       }).toAst();
     }

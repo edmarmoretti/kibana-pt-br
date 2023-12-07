@@ -33,8 +33,9 @@ import {
 } from './use_select_from_embeddable';
 import { EmbeddablePanelError } from './embeddable_panel_error';
 import { core, embeddableStart, inspector } from '../kibana_services';
-import { ViewMode, EmbeddableErrorHandler, EmbeddableOutput } from '../lib';
+import { ViewMode, EmbeddableErrorHandler, EmbeddableOutput, EmbeddableInput, IEmbeddable } from '../lib';
 import { EmbeddablePanelHeader } from './panel_header/embeddable_panel_header';
+import { MaybePromise } from '@kbn/utility-types';
 
 const getEventStatus = (output: EmbeddableOutput): EmbeddablePhase => {
   if (!isNil(output.error)) {
@@ -47,6 +48,7 @@ const getEventStatus = (output: EmbeddableOutput): EmbeddablePhase => {
     return 'loading';
   }
 };
+let contadorDeQuadrosRenderizados = 0;
 
 export const EmbeddablePanel = (panelProps: UnwrappedEmbeddablePanelProps) => {
   const { hideHeader, showShadow, embeddable, hideInspector, onPanelStatusChange } = panelProps;
@@ -135,6 +137,18 @@ export const EmbeddablePanel = (panelProps: UnwrappedEmbeddablePanelProps) => {
    * Render embeddable into ref, set up error subscription
    */
   useEffect(() => {
+
+      //
+      //Edmar Moretti - mensagem com o tamanho da página
+      if(contadorDeQuadrosRenderizados == 0 && window.parent){
+        //console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight);
+        window.parent.postMessage(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300, '*');
+        console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300);
+      }
+      contadorDeQuadrosRenderizados++;
+
+      //
+
     if (!embeddableRoot.current) return;
     const nextNode = embeddable.render(embeddableRoot.current) ?? undefined;
     if (isPromise(nextNode)) {
@@ -169,6 +183,8 @@ export const EmbeddablePanel = (panelProps: UnwrappedEmbeddablePanelProps) => {
     if (outputError) attrs['data-error'] = true;
     return attrs;
   }, [loading, outputError]);
+
+  const titleNotes = PanelNotes(embeddable);
 
   return (
     <EuiPanel
@@ -210,6 +226,42 @@ export const EmbeddablePanel = (panelProps: UnwrappedEmbeddablePanelProps) => {
       <div className="embPanel__content" ref={embeddableRoot} {...contentAttrs}>
         {node}
       </div>
+      <div>{titleNotes}</div>
+
     </EuiPanel>
   );
+};
+
+
+//Edmar Moretti - adicionado titleNotes
+function PanelNotes(embeddable: 
+  IEmbeddable<EmbeddableInput, EmbeddableOutput, MaybePromise<React.ReactNode>>) {
+  const titleNotes = embeddable.getTitleNotes();
+  const showTitle = true;
+  const linkify = (inputText: string) => {
+      var replacedText, replacePattern1;
+      //URLs starting with http://, https://, or ftp://
+      replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+      replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+      //return replacedText;
+      const theObj = {__html:replacedText};
+      return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
+  }  
+  
+  const renderTitleNotes = () => {
+    let titleComponent = '';
+    if (showTitle) {
+      titleComponent = titleNotes||'';
+    }
+    return (
+        linkify(titleComponent)
+    );
+  };
+
+  return (
+    <figcaption className='embPanel__notes'>
+        {renderTitleNotes()}
+    </figcaption>
+  );
+
 };

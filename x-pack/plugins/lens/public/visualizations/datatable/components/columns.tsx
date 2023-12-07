@@ -76,8 +76,9 @@ export const createGridColumns = (
 
   return visibleColumns.map((field) => {
     const { name, index: colIndex } = columnsReverseLookup[field];
-    const filterable = columnFilterable?.[colIndex] || false;
-
+    //Edmar moretti - remove filtro
+    //const filterable = columnFilterable?.[colIndex] || false;
+    const filterable = false;
     const columnArgs = columnConfig.columns.find(({ columnId }) => columnId === field);
 
     const cellActions: EuiDataGridColumnCellAction[] = [];
@@ -210,7 +211,7 @@ export const createGridColumns = (
       onClick: () => onColumnResize({ columnId: originalColumnId || field, width: undefined }),
       iconType: 'empty',
       label: i18n.translate('xpack.lens.table.resize.reset', {
-        defaultMessage: 'Reset width',
+        defaultMessage: 'Reinicia a largura',
       }),
       'data-test-subj': 'lensDatatableResetWidth',
       isDisabled: initialWidth == null,
@@ -222,7 +223,7 @@ export const createGridColumns = (
         onClick: () => onColumnHide({ columnId: originalColumnId || field }),
         iconType: 'eyeClosed',
         label: i18n.translate('xpack.lens.table.hide.hideLabel', {
-          defaultMessage: 'Hide',
+          defaultMessage: 'Esconde',
         }),
         'data-test-subj': 'lensDatatableHide',
         isDisabled: !isHidden && visibleColumns.length <= 1,
@@ -282,12 +283,12 @@ export const createGridColumns = (
         showMoveRight: false,
         showSortAsc: {
           label: i18n.translate('xpack.lens.table.sort.ascLabel', {
-            defaultMessage: 'Sort ascending',
+            defaultMessage: 'Ordenação ascendente',
           }),
         },
         showSortDesc: {
           label: i18n.translate('xpack.lens.table.sort.descLabel', {
-            defaultMessage: 'Sort descending',
+            defaultMessage: 'Ordenação descendente',
           }),
         },
         additional: additionalActions,

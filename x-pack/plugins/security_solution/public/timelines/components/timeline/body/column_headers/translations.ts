@@ -28,7 +28,7 @@ export const HIDE_COLUMN = i18n.translate('xpack.securitySolution.timeline.hideC
 });
 
 export const SORT_AZ = i18n.translate('xpack.securitySolution.timeline.sortAZLabel', {
-  defaultMessage: 'Sort A-Z',
+  defaultMessage: 'Ordena de A-Z',
 });
 
 export const SORT_ZA = i18n.translate('xpack.securitySolution.timeline.sortZALabel', {
@@ -42,6 +42,6 @@ export const TYPE = i18n.translate('xpack.securitySolution.timeline.typeTooltip'
 export const REMOVE_COLUMN = i18n.translate(
   'xpack.securitySolution.timeline.flyout.pane.removeColumnButtonLabel',
   {
-    defaultMessage: 'Remove column',
+    defaultMessage: 'Remove a coluna',
   }
 );

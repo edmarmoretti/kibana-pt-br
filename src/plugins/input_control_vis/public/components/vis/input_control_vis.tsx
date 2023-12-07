@@ -110,12 +110,13 @@ export class InputControlVis extends Component<InputControlVisProps> {
       );
     });
   }
-
+// Edmar Moretti - tradução
   renderStagingButtons() {
     return (
       <EuiFlexGroup wrap={true}>
         <EuiFlexItem grow={false}>
           <EuiButton
+            size='s'
             fill
             onClick={this.handleSubmit}
             disabled={!this.props.hasChanges()}
@@ -123,7 +124,7 @@ export class InputControlVis extends Component<InputControlVisProps> {
           >
             <FormattedMessage
               id="inputControl.vis.inputControlVis.applyChangesButtonLabel"
-              defaultMessage="Apply changes"
+              defaultMessage="Aplicar"
             />
           </EuiButton>
         </EuiFlexItem>
@@ -135,7 +136,7 @@ export class InputControlVis extends Component<InputControlVisProps> {
           >
             <FormattedMessage
               id="inputControl.vis.inputControlVis.cancelChangesButtonLabel"
-              defaultMessage="Cancel changes"
+              defaultMessage="Cancelar"
             />
           </EuiButtonEmpty>
         </EuiFlexItem>
@@ -147,7 +148,7 @@ export class InputControlVis extends Component<InputControlVisProps> {
           >
             <FormattedMessage
               id="inputControl.vis.inputControlVis.clearFormButtonLabel"
-              defaultMessage="Clear form"
+              defaultMessage="Limpar"
             />
           </EuiButtonEmpty>
         </EuiFlexItem>
@@ -164,8 +165,9 @@ export class InputControlVis extends Component<InputControlVisProps> {
     return (
       <div className="icvContainer__wrapper">
         <div className="icvContainer">
-          <EuiFlexGroup wrap>{this.renderControls()}</EuiFlexGroup>
           {stagingButtons}
+          <EuiFlexGroup wrap>{this.renderControls()}</EuiFlexGroup>
+          
         </div>
       </div>
     );

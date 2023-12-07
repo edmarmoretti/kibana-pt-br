@@ -86,7 +86,8 @@ import {
   getOriginalAxisPosition,
 } from '../helpers';
 import { getXDomain, XyEndzones } from './x_domain';
-import { getLegendAction } from './legend_action';
+//Edmar Moretti - remove as opções de seleção da legenda
+//import { getLegendAction } from './legend_action';
 import {
   ReferenceLines,
   computeChartMargins,
@@ -132,10 +133,10 @@ export type XYChartRenderProps = Omit<XYChartProps, 'canNavigateToLens'> & {
   useLegacyTimeAxis: boolean;
   minInterval: number | undefined;
   interactive?: boolean;
-  onClickValue: (data: FilterEvent['data']) => void;
-  onClickMultiValue: (data: MultiFilterEvent['data']) => void;
+  //onClickValue: (data: FilterEvent['data']) => void;
+  //onClickMultiValue: (data: MultiFilterEvent['data']) => void;
   layerCellValueActions: LayerCellValueActions;
-  onSelectRange: (data: BrushEvent['data']) => void;
+  //onSelectRange: (data: BrushEvent['data']) => void;
   renderMode: RenderMode;
   syncColors: boolean;
   syncTooltips: boolean;
@@ -144,7 +145,7 @@ export type XYChartRenderProps = Omit<XYChartProps, 'canNavigateToLens'> & {
   renderComplete: () => void;
   uiState?: PersistedState;
   timeFormat: string;
-  shouldShowLegendAction?: (actionId: string) => boolean;
+  //shouldShowLegendAction?: (actionId: string) => boolean;
 };
 
 function nonNullable<T>(v: T): v is NonNullable<T> {
@@ -153,10 +154,11 @@ function nonNullable<T>(v: T): v is NonNullable<T> {
 function getValueLabelsStyling(isHorizontal: boolean): {
   displayValue: RecursivePartial<DisplayValueStyle>;
 } {
-  const VALUE_LABELS_MAX_FONTSIZE = 12;
-  const VALUE_LABELS_MIN_FONTSIZE = 10;
-  const VALUE_LABELS_VERTICAL_OFFSET = -10;
-  const VALUE_LABELS_HORIZONTAL_OFFSET = 10;
+  //Edmar Moretti - altera os tamanhos dos labels
+  const VALUE_LABELS_MAX_FONTSIZE = 12;//12;
+  const VALUE_LABELS_MIN_FONTSIZE = 8; //10;
+  const VALUE_LABELS_VERTICAL_OFFSET = -5; //-10;
+  const VALUE_LABELS_HORIZONTAL_OFFSET = 1; //10;
 
   return {
     displayValue: {
@@ -194,10 +196,10 @@ export function XYChart({
   chartsActiveCursorService,
   paletteService,
   minInterval,
-  onClickValue,
-  onClickMultiValue,
+  //onClickValue,
+  //onClickMultiValue,
   layerCellValueActions,
-  onSelectRange,
+  //onSelectRange,
   interactive = true,
   syncColors,
   syncTooltips,
@@ -207,7 +209,7 @@ export function XYChart({
   uiState,
   timeFormat,
   overrides,
-  shouldShowLegendAction,
+  //shouldShowLegendAction,
 }: XYChartRenderProps) {
   const {
     legend,
@@ -535,6 +537,7 @@ export function XYChart({
     valueLabels !== ValueLabelModes.HIDE &&
     getValueLabelsStyling(shouldRotate);
 
+  /*
   const clickHandler: ElementClickListener = ([elementEvent]) => {
     // this cast is safe because we are rendering a cartesian chart
     const [xyGeometry, xySeries] = elementEvent as XYChartElementEvent;
@@ -628,7 +631,7 @@ export function XYChart({
     const context: BrushEvent['data'] = { range: [min, max], table, column: xAxisColumnIndex };
     onSelectRange(context);
   };
-
+*/
   const legendInsideParams: LegendPositionConfig = {
     vAlign: legend.verticalAlignment ?? VerticalAlignment.Top,
     hAlign: legend?.horizontalAlignment ?? HorizontalAlignment.Right,
@@ -746,6 +749,7 @@ export function XYChart({
                   )
                 : undefined
             }
+            /*
             actions={getTooltipActions(
               dataLayers,
               onClickMultiValue,
@@ -755,6 +759,7 @@ export function XYChart({
               formatFactory,
               interactive && !args.detailedTooltip
             )}
+            */
             customTooltip={
               args.detailedTooltip
                 ? ({ header, values }) => (
@@ -829,8 +834,9 @@ export function XYChart({
             allowBrushingLastHistogramBin={isTimeViz}
             rotation={shouldRotate ? 90 : 0}
             xDomain={xDomain}
-            onBrushEnd={interactive ? (brushHandler as BrushEndListener) : undefined}
-            onElementClick={interactive ? clickHandler : undefined}
+            //onBrushEnd={interactive ? (brushHandler as BrushEndListener) : undefined}
+            //onElementClick={interactive ? clickHandler : undefined}
+            /*
             legendAction={
               interactive
                 ? getLegendAction(
@@ -845,6 +851,7 @@ export function XYChart({
                   )
                 : undefined
             }
+            */
             showLegendExtra={isHistogramViz && valuesInLegend}
             ariaLabel={args.ariaLabel}
             ariaUseDefaultSummary={!args.ariaLabel}

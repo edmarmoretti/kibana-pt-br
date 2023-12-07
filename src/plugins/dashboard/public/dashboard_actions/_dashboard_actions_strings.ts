@@ -80,6 +80,14 @@ export const dashboardExportCsvActionStrings = {
     }),
 };
 
+//Edmar Moretti - Inclusão da exportação para PNG
+export const dashboardExportPngActionStrings = {
+  getDisplayName: () => 'Exportar como PNG',
+  getUntitledFilename: () => 'untitled'
+};
+
+
+
 export const dashboardUnlinkFromLibraryActionStrings = {
   getDisplayName: () =>
     i18n.translate('dashboard.panel.unlinkFromLibrary', {

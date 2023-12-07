@@ -14,13 +14,13 @@ import { EuiTokensObject } from '@elastic/eui';
 interface EuiValues {
   [key: string]: any;
 }
-
+//Edmar Moretti - algumas traduções entram aqui
 export const getEuiContextMapping = (): EuiTokensObject => {
   return {
     'euiAccordionChildrenLoading.message': i18n.translate(
       'core.euiAccordionChildrenLoading.message',
       {
-        defaultMessage: 'Loading',
+        defaultMessage: 'Carregando',
       }
     ),
     'euiAutoRefresh.autoRefreshLabel': i18n.translate('core.euiAutoRefresh.autoRefreshLabel', {
@@ -251,15 +251,15 @@ export const getEuiContextMapping = (): EuiTokensObject => {
     'euiColumnActions.sort': ({ schemaLabel }: EuiValues) => (
       <FormattedMessage
         id="core.euiColumnActions.sort"
-        defaultMessage="Sort {schemaLabel}"
+        defaultMessage="Ordena {schemaLabel}"
         values={{ schemaLabel }}
       />
     ),
     'euiColumnActions.moveLeft': i18n.translate('core.euiColumnActions.moveLeft', {
-      defaultMessage: 'Move left',
+      defaultMessage: 'Move para a esquerda',
     }),
     'euiColumnActions.moveRight': i18n.translate('core.euiColumnActions.moveRight', {
-      defaultMessage: 'Move right',
+      defaultMessage: 'Move para a direita',
     }),
     'euiColumnSelector.dragHandleAriaLabel': i18n.translate(
       'core.euiColumnSelector.dragHandleAriaLabel',
@@ -293,18 +293,18 @@ export const getEuiContextMapping = (): EuiTokensObject => {
         values: { numberOfHiddenFields },
       }),
     'euiColumnSorting.clearAll': i18n.translate('core.euiColumnSorting.clearAll', {
-      defaultMessage: 'Clear sorting',
+      defaultMessage: 'Limpa a ordenação',
     }),
     'euiColumnSorting.emptySorting': i18n.translate('core.euiColumnSorting.emptySorting', {
       defaultMessage: 'Currently no fields are sorted',
     }),
     'euiColumnSorting.pickFields': i18n.translate('core.euiColumnSorting.pickFields', {
-      defaultMessage: 'Pick fields to sort by',
+      defaultMessage: 'Escolha o campo para ordenar',
     }),
     'euiColumnSorting.sortFieldAriaLabel': i18n.translate(
       'core.euiColumnSorting.sortFieldAriaLabel',
       {
-        defaultMessage: 'Sort by:',
+        defaultMessage: 'Ordena por:',
       }
     ),
     'euiColumnSorting.button': i18n.translate('core.euiColumnSorting.button', {
@@ -312,7 +312,7 @@ export const getEuiContextMapping = (): EuiTokensObject => {
     }),
     'euiColumnSorting.buttonActive': ({ numberOfSortedFields }: EuiValues) =>
       i18n.translate('core.euiColumnSorting.buttonActive', {
-        defaultMessage: '{numberOfSortedFields, plural, one {# field} other {# fields}} sorted',
+        defaultMessage: '{numberOfSortedFields, plural, one {# coluna} other {# colunas}} ordenada',
         values: { numberOfSortedFields },
       }),
     'euiColumnSortingDraggable.activeSortLabel': ({ display }: EuiValues) =>
@@ -376,7 +376,7 @@ export const getEuiContextMapping = (): EuiTokensObject => {
     'euiComboBoxOptionsList.loadingOptions': i18n.translate(
       'core.euiComboBoxOptionsList.loadingOptions',
       {
-        defaultMessage: 'Loading options',
+        defaultMessage: 'Carregando as opções',
         description: 'Placeholder message while data is asynchronously loaded',
       }
     ),
@@ -574,7 +574,7 @@ export const getEuiContextMapping = (): EuiTokensObject => {
       }),
     'euiDataGridCell.position': ({ columnId, row, col }: EuiValues) =>
       i18n.translate('core.euiDataGridCell.position', {
-        defaultMessage: '{columnId}, column {col}, row {row}',
+        defaultMessage: '{columnId}, coluna {col}, linha {row}',
         values: { columnId, row, col },
       }),
     'euiDataGridCellActions.expandButtonTitle': i18n.translate(
@@ -663,43 +663,43 @@ export const getEuiContextMapping = (): EuiTokensObject => {
     'euiDataGridSchema.currencySortTextDesc': i18n.translate(
       'core.euiDataGridSchema.currencySortTextDesc',
       {
-        defaultMessage: 'High-Low',
+        defaultMessage: 'Alto-Baixo',
         description: 'Descending currency label',
       }
     ),
     'euiDataGridSchema.dateSortTextAsc': i18n.translate('core.euiDataGridSchema.dateSortTextAsc', {
-      defaultMessage: 'Old-New',
+      defaultMessage: 'Velho-Novo',
       description: 'Ascending date label',
     }),
     'euiDataGridSchema.dateSortTextDesc': i18n.translate(
       'core.euiDataGridSchema.dateSortTextDesc',
       {
-        defaultMessage: 'New-Old',
+        defaultMessage: 'Novo-Velho',
         description: 'Descending date label',
       }
     ),
     'euiDataGridSchema.numberSortTextAsc': i18n.translate(
       'core.euiDataGridSchema.numberSortTextAsc',
       {
-        defaultMessage: 'Low-High',
+        defaultMessage: 'Baixo-Alto',
         description: 'Ascending number label',
       }
     ),
     'euiDataGridSchema.numberSortTextDesc': i18n.translate(
       'core.euiDataGridSchema.numberSortTextDesc',
       {
-        defaultMessage: 'High-Low',
+        defaultMessage: 'Alto-Baixo',
         description: 'Descending number label',
       }
     ),
     'euiDataGridSchema.jsonSortTextAsc': i18n.translate('core.euiDataGridSchema.jsonSortTextAsc', {
-      defaultMessage: 'Small-Large',
+      defaultMessage: 'Pequeno-Grande',
       description: 'Ascending size label',
     }),
     'euiDataGridSchema.jsonSortTextDesc': i18n.translate(
       'core.euiDataGridSchema.jsonSortTextDesc',
       {
-        defaultMessage: 'Large-Small',
+        defaultMessage: 'Grande-Pequeno',
         description: 'Descending size label',
       }
     ),
@@ -1786,12 +1786,12 @@ export const getEuiContextMapping = (): EuiTokensObject => {
       description: 'Displayed in a button that toggles a table pagination menu',
     }),
     'euiTablePagination.rowsPerPage': i18n.translate('core.euiTablePagination.rowsPerPage', {
-      defaultMessage: 'Rows per page',
+      defaultMessage: 'Registros por página',
       description: 'Displayed in a button that toggles a table pagination menu',
     }),
     'euiTablePagination.rowsPerPageOption': ({ rowsPerPage }: EuiValues) =>
       i18n.translate('core.euiTablePagination.rowsPerPageOption', {
-        defaultMessage: '{rowsPerPage} rows',
+        defaultMessage: '{rowsPerPage} registros',
         description: 'Displayed in a button that toggles the number of visible rows',
         values: { rowsPerPage },
       }),

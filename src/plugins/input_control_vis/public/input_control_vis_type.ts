@@ -18,7 +18,7 @@ export function createInputControlVisTypeDefinition(
   readOnly: boolean
 ): VisTypeDefinition<InputControlVisParams> {
   const ControlsTab = getControlsTab(deps);
-
+  //Edmar Moretti - habilita a criação de filtros
   return {
     name: 'input_control_vis',
     title: i18n.translate('inputControl.register.controlsTitle', {
@@ -30,7 +30,7 @@ export function createInputControlVisTypeDefinition(
       defaultMessage: 'Input controls are deprecated and will be removed in a future version.',
     }),
     stage: 'experimental',
-    disableCreate: true, // input controls are deprecated and input control creation has been permanently disabled
+    disableCreate: false, // input controls are deprecated and input control creation has been permanently disabled
     disableEdit: readOnly,
     isDeprecated: true,
     visConfig: {
