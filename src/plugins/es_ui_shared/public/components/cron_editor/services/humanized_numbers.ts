@@ -24,7 +24,7 @@ const dayOrdinalToDayNameMap = {
 };
 
 const monthOrdinalToMonthNameMap = {
-  0: i18n.translate('esUi.cronEditor.month.january', { defaultMessage: 'January' }),
+  0: i18n.translate('esUi.cronEditor.month.january', { defaultMessage: 'Janeiro' }),
   1: i18n.translate('esUi.cronEditor.month.february', { defaultMessage: 'February' }),
   2: i18n.translate('esUi.cronEditor.month.march', { defaultMessage: 'March' }),
   3: i18n.translate('esUi.cronEditor.month.april', { defaultMessage: 'April' }),

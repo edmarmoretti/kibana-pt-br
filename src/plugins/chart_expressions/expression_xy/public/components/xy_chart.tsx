@@ -532,11 +532,15 @@ export function XYChart({
 
   const shouldShowValueLabels = !uiState || valueLabels !== ValueLabelModes.HIDE;
 
-  const valueLabelsStyling =
+  let valueLabelsStyling =
     shouldShowValueLabels &&
     valueLabels !== ValueLabelModes.HIDE &&
     getValueLabelsStyling(shouldRotate);
 
+  //Edmar Moretti - ajusta o posicionamento dos labels
+  if(valueLabelsStyling){
+    valueLabelsStyling.displayValue.offsetY = 1;
+  }
   /*
   const clickHandler: ElementClickListener = ([elementEvent]) => {
     // this cast is safe because we are rendering a cartesian chart
@@ -713,6 +717,19 @@ export function XYChart({
     referenceLineLayers,
     formatFactory
   );
+
+  //Edmar Moretti - remove a linha do eixo quando a categoria estiver no eixo y
+  if(getOriginalAxisPosition('bottom', shouldRotate) == 'left'){
+    xAxisStyle.axisLine = {
+      stroke: 'white'
+    };
+  } else {
+    xAxisStyle.tickLine = {
+      visible: true,
+      size: 5
+    };
+  }
+  xAxisStyle.axisTitle = {fill: '#69707d'};
 
   return (
     <div css={chartContainerStyle}>
@@ -917,6 +934,8 @@ export function XYChart({
                   if (axis.truncate && value.length > axis.truncate) {
                     value = `${value.slice(0, axis.truncate)}...`;
                   }
+                  //Edmar Moretti - Formata corretamente os números curtos;
+                  value = value.replace("milhões","mi");
                   return value;
                 }}
                 style={getYAxesStyle(axis)}

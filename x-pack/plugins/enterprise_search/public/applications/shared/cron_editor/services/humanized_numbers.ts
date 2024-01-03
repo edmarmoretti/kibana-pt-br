@@ -51,7 +51,7 @@ const monthOrdinalToMonthNameMap = {
     defaultMessage: 'November',
   }),
   11: i18n.translate('xpack.enterpriseSearch.cronEditor.month.december', {
-    defaultMessage: 'December',
+    defaultMessage: 'Dezembro',
   }),
 };
 

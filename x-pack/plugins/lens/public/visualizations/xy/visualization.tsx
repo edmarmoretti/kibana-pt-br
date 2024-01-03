@@ -1079,14 +1079,14 @@ function getVisualizationInfo(
       layer.accessors.forEach((accessor) => {
         dimensions.push({
           name: i18n.translate('xpack.lens.xyChart.layerReferenceLine', {
-            defaultMessage: 'Reference line',
+            defaultMessage: 'Linha de referência',
           }),
           dimensionType: 'reference_line',
           id: accessor,
         });
       });
       label = i18n.translate('xpack.lens.xyChart.layerReferenceLineLabel', {
-        defaultMessage: 'Reference lines',
+        defaultMessage: 'Linhas de referência',
       });
       icon = IconChartBarReferenceLine;
       if (frame?.datasourceLayers && frame.activeData) {
@@ -1108,14 +1108,14 @@ function getVisualizationInfo(
       layer.annotations.forEach((annotation) => {
         dimensions.push({
           name: i18n.translate('xpack.lens.xyChart.layerAnnotation', {
-            defaultMessage: 'Annotation',
+            defaultMessage: 'Anotação',
           }),
           dimensionType: 'annotation',
           id: annotation.id,
         });
       });
       label = i18n.translate('xpack.lens.xyChart.layerAnnotationsLabel', {
-        defaultMessage: 'Annotations',
+        defaultMessage: 'Anotações',
       });
       icon = IconChartBarAnnotations;
       palette.push(
@@ -1165,7 +1165,7 @@ function getNotifiableFeatures(
       severity: 'info',
       fixableInEditor: false,
       shortMessage: i18n.translate('xpack.lens.xyChart.layerAnnotationsIgnoreTitle', {
-        defaultMessage: 'Layers ignoring global filters',
+        defaultMessage: 'Camadas ignoram filtro global',
       }),
       longMessage: (
         <IgnoredGlobalFiltersEntries

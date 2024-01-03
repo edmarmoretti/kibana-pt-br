@@ -31,7 +31,7 @@ export const EmbeddableFeatureBadge = ({ messages }: { messages: UserMessage[] }
     return null;
   }
   const iconTitle = i18n.translate('xpack.lens.embeddable.featureBadge.iconDescription', {
-    defaultMessage: `{count} visualization {count, plural, one {modifier} other {modifiers}}`,
+    defaultMessage: `{count} visualização {count, plural, one {modificada} other {modificadas}}`,
     values: {
       count: messages.length,
     },
