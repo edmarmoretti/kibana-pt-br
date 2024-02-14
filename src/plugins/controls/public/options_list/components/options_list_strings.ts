@@ -150,11 +150,14 @@ export const OptionsListStrings = {
       },
     },
     getCardinalityLabel: (totalOptions: number) =>
+      //Edmar Moretti - remove a mensagem de número de opções na lista de escolha dos controles (filtros)
+      /*
       i18n.translate('controls.optionsList.popover.cardinalityLabel', {
         defaultMessage:
           '{totalOptions, number} {totalOptions, plural, one {opção} other {opções}}',
         values: { totalOptions },
-      }),
+      })
+      */'',
     getInvalidSelectionsSectionAriaLabel: (fieldName: string, invalidSelectionCount: number) =>
       i18n.translate('controls.optionsList.popover.invalidSelectionsAriaLabel', {
         defaultMessage:

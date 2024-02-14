@@ -36,7 +36,7 @@ export enum LegendSize {
   LARGE = 'large',
   EXTRA_LARGE = 'xlarge',
 }
-//Edmar Moretti - 
+//Edmar Moretti - altera o tamanho default da legenda
 export const LegendSizeToPixels = {
   [LegendSize.AUTO]: 80,
   [LegendSize.SMALL]: 80,

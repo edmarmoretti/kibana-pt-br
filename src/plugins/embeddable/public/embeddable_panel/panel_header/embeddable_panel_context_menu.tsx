@@ -6,6 +6,8 @@
  * Side Public License, v 1.
  */
 
+// Edmar Moretti - feitas várias alterações para não mostrar o menu de opções nos quadros do tipo Markdown
+
 import { i18n } from '@kbn/i18n';
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -25,7 +27,9 @@ import { uiActions } from '../../kibana_services';
 import { EmbeddablePanelProps, PanelUniversalActions } from '../types';
 import { getContextMenuAriaLabel } from '../embeddable_panel_strings';
 import { useSelectFromEmbeddableInput } from '../use_select_from_embeddable';
-import { IEmbeddable, contextMenuTrigger, CONTEXT_MENU_TRIGGER } from '../..';
+import { EmbeddableOutput, IEmbeddable, contextMenuTrigger, CONTEXT_MENU_TRIGGER } from '../..';
+
+type VisualizeEmbeddable = IEmbeddable<{ id: string }, EmbeddableOutput & { visTypeName: string }>;
 
 const sortByOrderField = (
   { order: orderA }: { order?: number },
@@ -127,6 +131,11 @@ export const EmbeddablePanelContextMenu = ({
     'embPanel__optionsMenuPopover-notification': showNotification,
   });
 
+  const isMarkdown = 
+  (embeddable as VisualizeEmbeddable).getOutput().visTypeName === 'markdown';
+  const editor = embeddable.getInput().viewMode == "edit" ? true : false;
+  
+  
   const ContextMenuButton = (
     <EuiButtonIcon
       color="text"
@@ -143,7 +152,7 @@ export const EmbeddablePanelContextMenu = ({
       repositionOnScroll
       panelPaddingSize="none"
       anchorPosition="downRight"
-      button={ContextMenuButton}
+      button={isMarkdown && !editor ? false : ContextMenuButton}
       isOpen={isContextMenuOpen}
       className={contextMenuClasses}
       closePopover={() => setIsContextMenuOpen(false)}

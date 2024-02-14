@@ -36,8 +36,11 @@ export abstract class NumeralFormat extends FieldFormat {
     if (val === -Infinity) return '-∞';
     if (val === +Infinity) return '+∞';
     if (typeof val === 'object') {
+      //Edmar Moretti - log para identificar a formatação
+      //console.log(JSON.stringify(val));
       return JSON.stringify(val);
     } else if (typeof val !== 'number') {
+      //console.log(val);
       val = parseFloat(val);
     }
 
@@ -51,7 +54,10 @@ export abstract class NumeralFormat extends FieldFormat {
     const formatted = numeralInst.set(val).format(this.param('pattern'));
 
     numeral.language(previousLocale);
-
+    //Edmar Moretti - Formata corretamente os números curtos para o português;
+    //formatted = formatted.replace("milhões","mi");
+    //formatted = formatted.replace("b","bi");
+    //formatted = formatted.replace("trilhões","tri");
     return formatted;
   }
 
