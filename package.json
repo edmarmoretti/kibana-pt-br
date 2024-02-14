@@ -105,7 +105,7 @@
     "@elastic/eui": "./elastic-eui-88.5.0-ms-3.tgz",
     "@elastic/filesaver": "1.1.2",
     "@elastic/node-crypto": "1.2.1",
-    "@elastic/numeral": "^2.5.1",
+    "@elastic/numeral": "../numeral-js",
     "@elastic/react-search-ui": "^1.20.2",
     "@elastic/react-search-ui-views": "^1.20.2",
     "@elastic/request-crypto": "2.0.2",
