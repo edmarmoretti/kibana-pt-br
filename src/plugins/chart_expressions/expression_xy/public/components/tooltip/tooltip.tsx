@@ -78,6 +78,7 @@ export const Tooltip: FC<Props> = ({
   const tooltipYAccessor = yAccessors.includes(seriesIdentifier.yAccessor as string)
     ? (seriesIdentifier.yAccessor as string)
     : null;
+
   if (tooltipYAccessor) {
     const yFormatter = formatFactory(layerFormats.yAccessors[tooltipYAccessor]);
     data.push({

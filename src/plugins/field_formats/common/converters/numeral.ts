@@ -36,11 +36,9 @@ export abstract class NumeralFormat extends FieldFormat {
     if (val === -Infinity) return '-∞';
     if (val === +Infinity) return '+∞';
     if (typeof val === 'object') {
-      //Edmar Moretti - log para identificar a formatação
-      //console.log(JSON.stringify(val));
+
       return JSON.stringify(val);
     } else if (typeof val !== 'number') {
-      //console.log(val);
       val = parseFloat(val);
     }
 
