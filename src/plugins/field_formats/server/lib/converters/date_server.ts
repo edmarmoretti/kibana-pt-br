@@ -52,7 +52,6 @@ export class DateFormat extends FieldFormat {
       } else {
         date = moment.utc(val).tz(this.timeZone);
       }
-
       if (date.isValid()) {
         return date.format(this.memoizedPattern);
       } else {

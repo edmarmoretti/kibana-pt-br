@@ -24,7 +24,8 @@ export class RelativeDateFormat extends FieldFormat {
     if (val === null || val === undefined) {
       return '-';
     }
-
+    //console.log(moment.locale());
+    moment.locale('pt-br');
     const date = moment(val);
     if (date.isValid()) {
       return date.fromNow();

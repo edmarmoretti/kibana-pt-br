@@ -231,7 +231,6 @@ const prepareYAxis = (data: ValueAxis, showGridLines?: boolean) => {
     showGridLines,
     ...getLabelArgs(data),
   });
-
   return buildExpression([yAxisConfig]);
 };
 
@@ -292,6 +291,7 @@ export const toExpressionAst: VisToExpressionAst<VisParams> = async (vis, params
     const xAgg = responseAggs[dimensions.x.accessor] as any;
     if (xAgg.type.name === BUCKET_TYPES.DATE_HISTOGRAM) {
       isHistogram = true;
+      //Edmar Moretti - gráfico de histograma
       (dimensions.x.params as DateHistogramParams).date = true;
       const { esUnit, esValue } = xAgg.buckets.getInterval();
       (dimensions.x.params as DateHistogramParams).intervalESUnit = esUnit;
@@ -439,6 +439,5 @@ export const toExpressionAst: VisToExpressionAst<VisParams> = async (vis, params
   });
 
   const ast = buildExpression(mapColumn ? [mapColumn, visTypeXy] : [visTypeXy]);
-
   return ast.toAst();
 };

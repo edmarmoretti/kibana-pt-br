@@ -47,15 +47,13 @@ export abstract class NumeralFormat extends FieldFormat {
     const previousLocale = numeral.language();
     const defaultLocale =
       (this.getConfig && this.getConfig(FORMATS_UI_SETTINGS.FORMAT_NUMBER_DEFAULT_LOCALE)) || 'en';
+    
     numeral.language(defaultLocale);
 
     const formatted = numeralInst.set(val).format(this.param('pattern'));
 
     numeral.language(previousLocale);
-    //Edmar Moretti - Formata corretamente os números curtos para o português;
-    //formatted = formatted.replace("milhões","mi");
-    //formatted = formatted.replace("b","bi");
-    //formatted = formatted.replace("trilhões","tri");
+
     return formatted;
   }
 

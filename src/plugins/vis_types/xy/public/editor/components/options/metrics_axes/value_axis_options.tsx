@@ -54,7 +54,6 @@ export function ValueAxisOptions({
         ...valueAxis.title,
         [paramName]: value,
       };
-
       setParamByIndex('valueAxes', index, 'title', title);
     },
     [valueAxis.title, setParamByIndex, index]
@@ -147,7 +146,7 @@ export function ValueAxisOptions({
               defaultMessage: 'Title',
             })}
             paramName="text"
-            value={axis.title.text}
+            value={axis.title.text}//título para y-axis
             setValue={setValueAxisTitle}
           />
 

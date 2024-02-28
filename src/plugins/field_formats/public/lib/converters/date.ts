@@ -47,8 +47,10 @@ export class DateFormat extends FieldFormat {
         if (value === null || value === undefined) {
           return '-';
         }
-
+        //Edmar Moretti - locale correto para os tooltips
+        moment.locale('pt-br');
         const date = moment(value);
+        //console.log(date)
 
         if (date.isValid()) {
           return date.format(pattern);
