@@ -36,7 +36,7 @@ export const AxisTicksSettings: React.FunctionComponent<AxisTicksSettingsProps> 
     (visible) => updateTicksVisibilityState(visible, axis),
     [axis, updateTicksVisibilityState]
   );
-console.log("oi")
+
   return (
     <>
       <EuiFormRow

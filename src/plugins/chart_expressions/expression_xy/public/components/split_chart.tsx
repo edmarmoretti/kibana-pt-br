@@ -22,10 +22,19 @@ const SPLIT_COLUMN = '__split_column__';
 const SPLIT_ROW = '__split_row__';
 
 export const SplitChart = ({ splitColumnAccessor, splitRowAccessor, columns }: SplitChartProps) => {
+
+  //Edmar Moretti - inclusão de rotina para não mostrar o título da coluna utilizada quando o gráfico é dividido
+  //console.log(columns);
+  const checkSingleFunction = function() {
+    return arguments[0].meta.sourceParams.schema == 'split' && arguments[0].meta.sourceParams.params.size == 1;
+  };
+  const checkSingle = columns.some(checkSingleFunction);
+
   const getData = useCallback(
     (datum: Record<string, any>, accessor: ExpressionValueVisDimension | string) => {
       const splitColumn = getColumnByAccessor(accessor, columns);
-      return datum[splitColumn!.id];
+      //Edmar Moretti - checa se o gráfico é dividido mas em apenas um
+      return checkSingle ? ' ' : datum[splitColumn!.id];
     },
     [columns]
   );
