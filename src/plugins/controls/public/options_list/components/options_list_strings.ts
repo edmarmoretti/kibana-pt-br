@@ -145,7 +145,7 @@ export const OptionsListStrings = {
       wildcard: {
         getPlaceholderText: () =>
           i18n.translate('controls.optionsList.popover.wildcardSearchPlaceholder', {
-            defaultMessage: 'Contains...',
+            defaultMessage: 'Contem...',
           }),
       },
     },
@@ -205,11 +205,12 @@ export const OptionsListStrings = {
         defaultMessage: 'Sorting is ignored when “Show only selected” is true',
       }),
     getDocumentCountTooltip: (documentCount: number) =>
+      /*
       i18n.translate('controls.optionsList.popover.documentCountTooltip', {
         defaultMessage:
           'This value appears in {documentCount, number} {documentCount, plural, one {document} other {documents}}',
         values: { documentCount },
-      }),
+      })*/'',
     getDocumentCountScreenReaderText: (documentCount: number) =>
       i18n.translate('controls.optionsList.popover.documentCountScreenReaderText', {
         defaultMessage:
@@ -220,14 +221,14 @@ export const OptionsListStrings = {
   controlAndPopover: {
     getExists: (negate: number = +false) =>
       i18n.translate('controls.optionsList.controlAndPopover.exists', {
-        defaultMessage: '{negate, plural, one {Exist} other {Exists}}',
+        defaultMessage: '{negate, plural, one {Existe} other {Existem}}',
         values: { negate },
       }),
   },
   editorAndPopover: {
     getSortDirectionLegend: () =>
       i18n.translate('controls.optionsList.popover.sortDirections', {
-        defaultMessage: 'Sort directions',
+        defaultMessage: 'Direção do ordenamento',
       }),
     sortBy: {
       _count: {

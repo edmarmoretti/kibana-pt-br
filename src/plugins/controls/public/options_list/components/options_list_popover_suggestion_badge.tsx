@@ -32,7 +32,7 @@ export const OptionsListPopoverSuggestionBadge = ({ documentCount }: { documentC
             font-weight: ${euiTheme.font.weight.medium} !important;
           `}
         >
-          {`${documentCount.toLocaleString()}`}
+          {/*Edmar Moretti - remove o número que aparece em cada lista `${documentCount.toLocaleString()}`*/}
         </EuiText>
       </EuiToolTip>
       <EuiScreenReaderOnly>

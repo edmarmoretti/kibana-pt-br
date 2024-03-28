@@ -82,6 +82,7 @@ const packages: Package[] = [
   },
 ];
 
+
 async function getInstalledVersion(config: Config, packageName: string) {
   const packageJSONPath = config.resolveFromRepo(
     path.join('node_modules', packageName, 'package.json')
@@ -98,12 +99,15 @@ async function patchModule(
   platform: Platform,
   pkg: Package
 ) {
+  
   const installedVersion = await getInstalledVersion(config, pkg.name);
+  
   if (installedVersion !== pkg.version) {
     throw new Error(
       `Can't patch ${pkg.name}'s native module, we were expecting version ${pkg.version} and found ${installedVersion}`
     );
   }
+  
   const platformName = platform.getNodeArch();
   const archive = pkg.archives[platformName];
   const archiveName = path.basename(archive.url);

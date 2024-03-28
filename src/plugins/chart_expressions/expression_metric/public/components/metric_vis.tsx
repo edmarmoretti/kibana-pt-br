@@ -229,13 +229,13 @@ export const MetricVis = ({
             ) ?? defaultColor
           : config.metric.color ?? defaultColor,
     };
-
+    //Edmar Moretti - muda a linha de tendência para barras
     const trendId = breakdownByColumn ? row[breakdownByColumn.id] : DEFAULT_TRENDLINE_NAME;
     if (config.metric.trends && config.metric.trends[trendId]) {
       const metricWTrend: MetricWTrend = {
         ...baseMetric,
         trend: config.metric.trends[trendId],
-        trendShape: 'area',
+        trendShape: 'bars',
         trendA11yTitle: i18n.translate('expressionMetricVis.trendA11yTitle', {
           defaultMessage: '{dataTitle} over time.',
           values: {

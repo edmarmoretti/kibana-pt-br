@@ -49,7 +49,7 @@ export const Tooltip: FC<Props> = ({
   layers,
 }) => {
   const pickedValue = values.find(({ isHighlighted }) => isHighlighted);
-
+console.log(pickedValue);
   if (!pickedValue) {
     return null;
   }
