@@ -25,6 +25,8 @@ import {
   PublishesWritablePanelTitle,
   PublishesPhaseEvents,
   PublishesSavedObjectId,
+  PublishesWritablePanelTitleNotes,
+  PublishesWritablePanelTitleSummary,
 } from '@kbn/presentation-publishing';
 import { Observable } from 'rxjs';
 import { EmbeddableInput } from '../../../common/types';
@@ -52,6 +54,8 @@ export type LegacyEmbeddableAPI = HasType &
   PublishesLocalUnifiedSearch &
   PublishesDisabledActionIds &
   PublishesWritablePanelTitle &
+  PublishesWritablePanelTitleNotes &
+  PublishesWritablePanelTitleSummary &
   PublishesWritablePanelDescription &
   Partial<CanLinkToLibrary & CanUnlinkFromLibrary> &
   HasParentApi<DefaultPresentationPanelApi['parentApi']> &
@@ -78,7 +82,11 @@ export interface EmbeddableOutput {
   editPath?: string;
   defaultTitle?: string;
   defaultDescription?: string;
+  defaultTitleNotes?: string;
+  defaultTitleSummary?: string;
   title?: string;
+  titleNotes?: string;
+  titleSummary?: string;
   description?: string;
   editable?: boolean;
   // set this to true if the embeddable allows inline editing
@@ -220,6 +228,10 @@ export interface IEmbeddable<
    * Returns the title of this embeddable.
    */
   getTitle(): string | undefined;
+
+  getTitleNotes(): string | undefined;
+
+  getTitleSummary(): string | undefined;
 
   /**
    * Returns the description of this embeddable.

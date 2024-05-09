@@ -84,6 +84,22 @@ export {
   type PublishesWritablePanelTitle,
 } from './interfaces/publishes_panel_title';
 export {
+  apiPublishesPanelTitleNotes,
+  apiPublishesWritablePanelTitleNotes,
+  useDefaultPanelTitleNotes,
+  usePanelTitleNotes,
+  type PublishesPanelTitleNotes,
+  type PublishesWritablePanelTitleNotes,
+} from './interfaces/publishes_panel_title_notes';
+export {
+  apiPublishesPanelTitleSummary,
+  apiPublishesWritablePanelTitleSummary,
+  useDefaultPanelTitleSummary,
+  usePanelTitleSummary,
+  type PublishesPanelTitleSummary,
+  type PublishesWritablePanelTitleSummary,
+} from './interfaces/publishes_panel_title_summary';
+export {
   apiPublishesSavedObjectId,
   useSavedObjectId,
   type PublishesSavedObjectId,

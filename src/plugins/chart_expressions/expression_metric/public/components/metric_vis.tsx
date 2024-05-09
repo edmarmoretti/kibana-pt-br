@@ -161,6 +161,9 @@ export const MetricVis = ({
     },
     [renderComplete]
   );
+//Edmar Moretti - impede o filtro no onclick
+filterable = false;
+//
 
   const onWillRender = useCallback(() => {
     const maxTileSideLength = grid.current.length * grid.current[0].length > 1 ? 200 : 300;
@@ -202,11 +205,25 @@ export const MetricVis = ({
   ).map((row, rowIdx) => {
     const value: number | string =
       row[primaryMetricColumn.id] !== null ? row[primaryMetricColumn.id] : NaN;
+    //Edmar Moretti - quebra o título em subtitulo caso existam 2 níveis de quebra 
+    /*
     const title = breakdownByColumn
       ? formatBreakdownValue(row[breakdownByColumn.id])
       : primaryMetricColumn.name;
-    const subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
 
+    const subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
+    */
+    //O título será quebrado caso contenha dois níveis e o título da métrica for espaço em branco
+    let title = breakdownByColumn
+      ? formatBreakdownValue(row[breakdownByColumn.id])
+      : primaryMetricColumn.name;
+
+    let subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
+
+    if(title.split(' › ').length == 2 && (subtitle == undefined || subtitle?.trim() == '')){
+      subtitle = title.split(' › ')[1];
+      title = title.split(' › ')[0];
+    }
     if (typeof value !== 'number') {
       const nonNumericMetric: MetricWText = {
         value: formatPrimaryMetric(value),
@@ -241,13 +258,13 @@ export const MetricVis = ({
             ) ?? defaultColor
           : config.metric.color ?? defaultColor,
     };
-
+    //Edmar Moretti - muda a linha de tendência para barras
     const trendId = breakdownByColumn ? row[breakdownByColumn.id] : DEFAULT_TRENDLINE_NAME;
     if (config.metric.trends && config.metric.trends[trendId]) {
       const metricWTrend: MetricWTrend = {
         ...baseMetric,
         trend: config.metric.trends[trendId],
-        trendShape: 'area',
+        trendShape: 'bars',
         trendA11yTitle: i18n.translate('expressionMetricVis.trendA11yTitle', {
           defaultMessage: '{dataTitle} over time.',
           values: {

@@ -27,6 +27,7 @@ import {
   CommonLegacyEmbeddable,
   legacyEmbeddableToApi,
 } from './compatibility/legacy_embeddable_to_api';
+import { PublishingSubject } from '@kbn/presentation-publishing';
 
 function getPanelTitle(input: EmbeddableInput, output: EmbeddableOutput) {
   if (input.hidePanelTitles) return '';
@@ -35,6 +36,14 @@ function getPanelTitle(input: EmbeddableInput, output: EmbeddableOutput) {
 function getPanelDescription(input: EmbeddableInput, output: EmbeddableOutput) {
   if (input.hidePanelTitles) return '';
   return input.description ?? output.defaultDescription;
+}
+function getPanelTitleNotes(input: EmbeddableInput, output: EmbeddableOutput) {
+  if (input.hidePanelTitles) return '';
+  return input.titleNotes ?? output.defaultTitleNotes;
+}
+function getPanelTitleSummary(input: EmbeddableInput, output: EmbeddableOutput) {
+  if (input.hidePanelTitles) return '';
+  return input.titleSummary ?? output.defaultTitleSummary;
 }
 
 export abstract class Embeddable<
@@ -80,6 +89,8 @@ export abstract class Embeddable<
     this.output = {
       title: getPanelTitle(input, output),
       description: getPanelDescription(input, output),
+      titleNotes: getPanelTitleNotes(input, output),
+      titleSummary: getPanelTitleSummary(input, output),
       ...(this.reportsEmbeddableLoad()
         ? {}
         : {
@@ -135,6 +146,10 @@ export abstract class Embeddable<
       isEditingEnabled: this.isEditingEnabled,
       panelDescription: this.panelDescription,
       defaultPanelDescription: this.defaultPanelDescription,
+      panelTitleNotes: this.panelTitleNotes,
+      defaultPanelTitleNotes: this.defaultPanelTitleNotes,
+      panelTitleSummary: this.panelTitleSummary,
+      defaultPanelTitleSummary: this.defaultPanelTitleSummary,
       canLinkToLibrary: this.canLinkToLibrary,
       disabledActionIds: this.disabledActionIds,
       unlinkFromLibrary: this.unlinkFromLibrary,
@@ -143,6 +158,8 @@ export abstract class Embeddable<
       setLocalTimeRange: this.setLocalTimeRange,
       getTypeDisplayName: this.getTypeDisplayName,
       setPanelDescription: this.setPanelDescription,
+      setPanelTitleNotes: this.setPanelTitleNotes,
+      setPanelTitleSummary: this.setPanelTitleSummary,
       getFallbackTimeRange: this.getFallbackTimeRange,
       canUnlinkFromLibrary: this.canUnlinkFromLibrary,
       isCompatibleWithLocalUnifiedSearch: this.isCompatibleWithLocalUnifiedSearch,
@@ -154,6 +171,15 @@ export abstract class Embeddable<
       if (!this.deferEmbeddableLoad) this.initializationFinished.complete();
     }, 0);
   }
+  getTitleNotes(): string | undefined {
+    throw new Error('Method not implemented.');
+  }
+  getTitleSummary(): string | undefined {
+    throw new Error('Method not implemented.');
+  }
+  enhancements?: object | undefined;
+  getTypeDisplayNameLowerCase?: (() => string) | undefined;
+  getAllTriggersDisabled?: (() => boolean) | undefined;
 
   /**
    * Assign compatibility API directly to the Embeddable instance.
@@ -186,6 +212,12 @@ export abstract class Embeddable<
   public setHidePanelTitle: LegacyEmbeddableAPI['setHidePanelTitle'];
   public getTypeDisplayName: LegacyEmbeddableAPI['getTypeDisplayName'];
   public setPanelDescription: LegacyEmbeddableAPI['setPanelDescription'];
+  public panelTitleNotes: LegacyEmbeddableAPI['panelTitleNotes'];
+  public defaultPanelTitleNotes: LegacyEmbeddableAPI['defaultPanelTitleNotes'];
+  public setPanelTitleNotes: LegacyEmbeddableAPI['setPanelTitleNotes'];
+  public panelTitleSummary: LegacyEmbeddableAPI['panelTitleSummary'];
+  public defaultPanelTitleSummary: LegacyEmbeddableAPI['defaultPanelTitleSummary'];
+  public setPanelTitleSummary: LegacyEmbeddableAPI['setPanelTitleSummary'];
   public canUnlinkFromLibrary: LegacyEmbeddableAPI['canUnlinkFromLibrary'];
   public getFallbackTimeRange: LegacyEmbeddableAPI['getFallbackTimeRange'];
   public isCompatibleWithLocalUnifiedSearch: LegacyEmbeddableAPI['isCompatibleWithLocalUnifiedSearch'];
@@ -409,6 +441,8 @@ export abstract class Embeddable<
       this.updateOutput({
         title: getPanelTitle(this.input, this.output),
         description: getPanelDescription(this.input, this.output),
+        titleNotes: getPanelTitleNotes(this.input, this.output),
+        titleSummary: getPanelTitleSummary(this.input, this.output),
       } as Partial<TEmbeddableOutput>);
       if (oldLastReloadRequestTime !== newInput.lastReloadRequestTime) {
         this.reload();

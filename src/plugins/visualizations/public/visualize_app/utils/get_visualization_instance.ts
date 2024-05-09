@@ -108,6 +108,8 @@ export const getVisualizationInstanceFromInput = async (
     savedSearch,
     panelTitle: input?.title ?? '',
     panelDescription: input?.description ?? '',
+    panelTitleNotes: input?.titleNotes ?? '',
+    panelTitleSummary: input?.titleSummary ?? '',
     panelTimeRange: input?.timeRange ?? undefined,
   };
 };

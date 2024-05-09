@@ -85,7 +85,7 @@ export const ContextApp = ({ dataView, anchorId, referrer }: ContextAppProps) =>
       services,
       rootBreadcrumbPath: referrer,
       titleBreadcrumbText: i18n.translate('discover.context.breadcrumb', {
-        defaultMessage: 'Surrounding documents',
+        defaultMessage: 'Documentos ao redor',
       }),
     });
   }, [locator, referrer, services]);

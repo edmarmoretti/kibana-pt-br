@@ -9,18 +9,22 @@
 import {
   PublishesWritablePanelDescription,
   PublishesWritablePanelTitle,
+  PublishesWritablePanelTitleNotes,
+  PublishesWritablePanelTitleSummary,
 } from '@kbn/presentation-publishing';
 import { BehaviorSubject } from 'rxjs';
 import { EmbeddableStateComparators } from './types';
 
 export interface SerializedReactEmbeddableTitles {
   title?: string;
+  titleNotes?: string;
+  titleSummary?: string;
   description?: string;
   hidePanelTitles?: boolean;
 }
 
 export type ReactEmbeddableTitlesApi = PublishesWritablePanelTitle &
-  PublishesWritablePanelDescription;
+  PublishesWritablePanelDescription & PublishesWritablePanelTitleNotes & PublishesWritablePanelTitleSummary;
 
 export const initializeReactEmbeddableTitles = (
   rawState: SerializedReactEmbeddableTitles
@@ -31,15 +35,21 @@ export const initializeReactEmbeddableTitles = (
 } => {
   const panelTitle = new BehaviorSubject<string | undefined>(rawState.title);
   const panelDescription = new BehaviorSubject<string | undefined>(rawState.description);
+  const panelTitleNotes = new BehaviorSubject<string | undefined>(rawState.titleNotes);
+  const panelTitleSummary = new BehaviorSubject<string | undefined>(rawState.titleSummary);
   const hidePanelTitle = new BehaviorSubject<boolean | undefined>(rawState.hidePanelTitles);
 
   const setPanelTitle = (value: string | undefined) => panelTitle.next(value);
   const setHidePanelTitle = (value: boolean | undefined) => hidePanelTitle.next(value);
   const setPanelDescription = (value: string | undefined) => panelDescription.next(value);
+  const setPanelTitleNotes = (value: string | undefined) => panelTitleNotes.next(value);
+  const setPanelTitleSummary = (value: string | undefined) => panelTitleSummary.next(value);
 
   const titleComparators: EmbeddableStateComparators<SerializedReactEmbeddableTitles> = {
     title: [panelTitle, setPanelTitle],
     description: [panelDescription, setPanelDescription],
+    titleNotes: [panelTitleNotes, setPanelTitleNotes],
+    titleSummary: [panelTitleSummary, setPanelTitleSummary],
     hidePanelTitles: [hidePanelTitle, setHidePanelTitle, (a, b) => Boolean(a) === Boolean(b)],
   };
 
@@ -50,6 +60,10 @@ export const initializeReactEmbeddableTitles = (
     setHidePanelTitle,
     panelDescription,
     setPanelDescription,
+    panelTitleNotes,
+    setPanelTitleNotes,
+    panelTitleSummary,
+    setPanelTitleSummary,
   };
 
   return {
@@ -66,5 +80,7 @@ export const serializeReactEmbeddableTitles = (
     title: titlesApi.panelTitle.value,
     hidePanelTitles: titlesApi.hidePanelTitle.value,
     description: titlesApi.panelDescription.value,
+    titleNotes: titlesApi.panelTitleNotes.value,
+    titleSummary: titlesApi.panelTitleSummary.value,
   };
 };

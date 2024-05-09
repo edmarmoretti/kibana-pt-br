@@ -13,6 +13,9 @@ import {
   SavedObjectFinderProps,
 } from '@kbn/saved-objects-finder-plugin/public';
 
+//Edmar Moretti - Exportação para PNG
+import { ExportPNGAction } from './export_png_action';
+
 import { DashboardStartDependencies } from '../plugin';
 import { AddToLibraryAction } from './add_to_library_action';
 import { ClonePanelAction } from './clone_panel_action';
@@ -63,6 +66,12 @@ export const buildAllDashboardActions = async ({
   if (share) {
     const ExportCSVPlugin = new ExportCSVAction();
     uiActions.addTriggerAction(CONTEXT_MENU_TRIGGER, ExportCSVPlugin);
+  }
+
+  //Edmar Moretti - Exportação para PNG
+  if (share) {
+    const ExportPNGPlugin = new ExportPNGAction();
+    uiActions.addTriggerAction(CONTEXT_MENU_TRIGGER, ExportPNGPlugin);
   }
 
   if (allowByValueEmbeddables) {

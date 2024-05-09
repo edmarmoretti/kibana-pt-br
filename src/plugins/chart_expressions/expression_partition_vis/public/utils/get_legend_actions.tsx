@@ -6,7 +6,7 @@
  * Side Public License, v 1.
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import { i18n } from '@kbn/i18n';
 import { EuiContextMenuPanelDescriptor, EuiIcon, EuiPopover, EuiContextMenu } from '@elastic/eui';
@@ -38,17 +38,22 @@ export const getLegendActions = (
 ): LegendAction => {
   return ({ series: [pieSeries] }) => {
     const [popoverOpen, setPopoverOpen] = useState(false);
-    const [isFilterable, setIsFilterable] = useState(true);
-    const filterData = useMemo(() => getFilterEventData(pieSeries), [pieSeries]);
+    //Edmar Moretti - remove a seleção por meio da legenda
+    //const [isFilterable, setIsFilterable] = useState(true);
+    const isFilterable = false;
+    //const filterData = useMemo(() => getFilterEventData(pieSeries), [pieSeries]);
     const columnIndex = useMemo(
       () => getSeriesValueColumnIndex(pieSeries.key, visData),
       [pieSeries]
     );
     const [ref, onClose] = useLegendAction<HTMLDivElement>();
 
+    /*
     useEffect(() => {
       (async () => setIsFilterable(await canFilter(filterData, actions)))();
     }, [filterData]);
+    */
+    const filterData = false;
 
     if (columnIndex === -1) {
       return null;

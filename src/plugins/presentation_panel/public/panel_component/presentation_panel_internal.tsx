@@ -53,8 +53,12 @@ export const PresentationPanelInternal = <
     panelTitle,
     hidePanelTitle,
     panelDescription,
+    panelTitleNotes,
+    panelTitleSummary,
     defaultPanelTitle,
     defaultPanelDescription,
+    defaultPanelTitleNotes,
+    defaultPanelTitleSummary,
     rawViewMode,
     parentHidePanelTitle,
   ] = useBatchedPublishingSubjects(
@@ -63,8 +67,12 @@ export const PresentationPanelInternal = <
     api?.panelTitle,
     api?.hidePanelTitle,
     api?.panelDescription,
+    api?.panelTitleNotes,
+    api?.panelTitleSummary,
     api?.defaultPanelTitle,
     api?.defaultPanelDescription,
+    api?.defaultPanelTitleNotes,
+    api?.defaultPanelTitleSummary,
     viewModeSubject,
     api?.parentApi?.hidePanelTitle
   );
@@ -122,6 +130,8 @@ export const PresentationPanelInternal = <
           showNotifications={showNotifications}
           panelTitle={panelTitle ?? defaultPanelTitle}
           panelDescription={panelDescription ?? defaultPanelDescription}
+          panelTitleNotes={panelTitleNotes ?? defaultPanelTitleNotes}
+          panelTitleSummary={panelTitleSummary ?? defaultPanelTitleSummary}
         />
       )}
       {blockingError && api && (
@@ -144,6 +154,7 @@ export const PresentationPanelInternal = <
           }}
         />
       </div>
+      {panelTitleNotes}
     </EuiPanel>
   );
 };

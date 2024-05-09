@@ -10,8 +10,8 @@ import { debounce } from 'lodash';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-
-import { EuiPortal } from '@elastic/eui';
+//Edmar Moretti e Leandro Celes inclusão do acordion no bloco de filtros
+import { EuiPortal, EuiAccordion } from '@elastic/eui';
 import { ViewMode } from '@kbn/embeddable-plugin/public';
 import { ExitFullScreenButton } from '@kbn/shared-ux-button-exit-full-screen';
 
@@ -47,9 +47,7 @@ export const DashboardViewportComponent = () => {
   }, [controlGroup]);
 
   const panelCount = Object.keys(dashboard.select((state) => state.explicitInput.panels)).length;
-  const controlCount = Object.keys(
-    controlGroup?.select((state) => state.explicitInput.panels) ?? {}
-  ).length;
+
 
   const viewMode = dashboard.select((state) => state.explicitInput.viewMode);
   const dashboardTitle = dashboard.select((state) => state.explicitInput.title);
@@ -64,13 +62,30 @@ export const DashboardViewportComponent = () => {
     'dshDashboardViewport--panelExpanded': Boolean(expandedPanelId),
   });
 
+    //Edmar Moretti - inclusão de botão para expandir/recolher os filtros
+    //const embed = window.location.href.match(/embed=true/); //leandro
+    const simpleAccordionId = 'simpleAccordionFiltros';
+    let aberto = true;
+    const windowWidth = window.innerWidth;
+    if(windowWidth < 1024){
+      aberto = false
+    }
   return (
     <div className={'dshDashboardViewportWrapper'}>
       {controlGroup && viewMode !== ViewMode.PRINT ? (
-        <div
-          className={controlCount > 0 ? 'dshDashboardViewport-controls' : ''}
-          ref={controlsRoot}
-        />
+              <div id='filtros'>
+                <EuiAccordion 
+                buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros" initialIsOpen={aberto}  >
+                  {/* <EuiPanel color="subdued"> */}
+                  <div
+                  className={controlGroup && controlGroup.getPanelCount() > 0
+                    ? 'dshDashboardViewport-controls'
+                    : ''}
+                  ref={controlsRoot} 
+                  />
+                  {/* </EuiPanel> */}
+                </EuiAccordion>
+              </div>
       ) : null}
       {panelCount === 0 && <DashboardEmptyScreen />}
       <div

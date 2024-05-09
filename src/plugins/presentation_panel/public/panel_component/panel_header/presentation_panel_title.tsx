@@ -23,11 +23,15 @@ export const PresentationPanelTitle = ({
   viewMode,
   hideTitle,
   panelTitle,
+  panelTitleNotes,
+  panelTitleSummary,
   panelDescription,
 }: {
   api: unknown;
   hideTitle?: boolean;
   panelTitle?: string;
+  panelTitleNotes?: string;
+  panelTitleSummary?: string;
   panelDescription?: string;
   viewMode?: ViewMode;
 }) => {

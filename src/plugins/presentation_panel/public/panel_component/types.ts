@@ -15,6 +15,8 @@ import {
   HasUniqueId,
   PublishesPanelDescription,
   PublishesPanelTitle,
+  PublishesPanelTitleNotes,
+  PublishesPanelTitleSummary,
   HasParentApi,
   PublishesViewMode,
 } from '@kbn/presentation-publishing';
@@ -66,6 +68,8 @@ export type DefaultPresentationPanelApi = Partial<
     PublishesDataLoading &
     PublishesBlockingError &
     PublishesPanelDescription &
+    PublishesPanelTitleNotes &
+    PublishesPanelTitleSummary &
     PublishesDisabledActionIds &
     HasParentApi<
       PresentationContainer &

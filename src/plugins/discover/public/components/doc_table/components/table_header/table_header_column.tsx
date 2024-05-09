@@ -160,7 +160,7 @@ export function TableHeaderColumn({
       onClick: () => onRemoveColumn && onRemoveColumn(name),
       testSubject: `docTableRemoveHeader-${name}`,
       tooltip: i18n.translate('discover.docTable.tableHeader.removeColumnButtonTooltip', {
-        defaultMessage: 'Remove Column',
+        defaultMessage: 'Remove a coluna',
       }),
     },
     // Move Left Button
@@ -175,14 +175,14 @@ export function TableHeaderColumn({
       onClick: () => onMoveColumn && onMoveColumn(name, colLeftIdx),
       testSubject: `docTableMoveLeftHeader-${name}`,
       tooltip: i18n.translate('discover.docTable.tableHeader.moveColumnLeftButtonTooltip', {
-        defaultMessage: 'Move column to the left',
+        defaultMessage: 'Move a coluna para a esquerda',
       }),
     },
     // Move Right Button
     {
       active: colRightIdx >= 0 && typeof onMoveColumn === 'function',
       ariaLabel: i18n.translate('discover.docTable.tableHeader.moveColumnRightButtonAriaLabel', {
-        defaultMessage: 'Move {columnName} column to the right',
+        defaultMessage: 'Move a coluna {columnName} para a direita',
         values: { columnName: name },
       }),
       className: 'kbnDocTableHeader__move',

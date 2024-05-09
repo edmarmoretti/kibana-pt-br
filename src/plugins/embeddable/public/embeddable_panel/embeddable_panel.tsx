@@ -14,6 +14,7 @@ import React, { ReactNode, useEffect, useImperativeHandle, useMemo, useState, us
 import { untilPluginStartServicesReady } from '../kibana_services';
 import { EmbeddablePanelProps } from './types';
 
+let contadorDeQuadrosRenderizados = 0;
 const getComponentFromEmbeddable = async (
   embeddable: EmbeddablePanelProps['embeddable'],
   isMounted: () => boolean
@@ -35,6 +36,17 @@ const getComponentFromEmbeddable = async (
 
     // Render legacy embeddable into ref, and destroy on unmount.
     useEffect(() => {
+
+      //
+      //Edmar Moretti - mensagem com o tamanho da página
+      if(contadorDeQuadrosRenderizados == 0 && window.parent){
+        //console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight);
+        window.parent.postMessage(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300, '*');
+        console.log(document.body.getElementsByClassName("dashboardViewport")[0].clientHeight + 300);
+      }
+      contadorDeQuadrosRenderizados++;
+
+      //
       if (!embeddableRoot.current) return;
       const nextNode = unwrappedEmbeddable.render(embeddableRoot.current) ?? undefined;
       if (isPromise(nextNode)) {
@@ -48,7 +60,7 @@ const getComponentFromEmbeddable = async (
     }, [embeddableRoot]);
 
     useImperativeHandle(apiRef, () => unwrappedEmbeddable);
-
+    
     return (
       <div css={css(`width: 100%; height: 100%; display:flex`)} ref={embeddableRoot}>
         {node}

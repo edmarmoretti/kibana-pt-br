@@ -181,7 +181,9 @@ export class DashboardContainer
       {
         ...initialInput,
       },
-      { embeddableLoaded: {} },
+      {
+        embeddableLoaded: {}
+      },
       getEmbeddableFactory,
       parent
     );
