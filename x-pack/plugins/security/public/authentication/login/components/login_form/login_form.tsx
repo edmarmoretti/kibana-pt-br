@@ -205,7 +205,7 @@ export class LoginForm extends Component<LoginFormProps, State> {
         >
           <FormattedMessage
             id="xpack.security.loginPage.loginSelectorLinkText"
-            defaultMessage="More login options"
+            defaultMessage="Mais opções de login"
           />
         </EuiButtonEmpty>
       </EuiFlexItem>
@@ -218,7 +218,7 @@ export class LoginForm extends Component<LoginFormProps, State> {
             label={
               <FormattedMessage
                 id="xpack.security.login.basicLoginForm.usernameFormRowLabel"
-                defaultMessage="Username"
+                defaultMessage="Usuário"
               />
             }
             {...this.validator.validateUsername(this.state.username)}
@@ -241,7 +241,7 @@ export class LoginForm extends Component<LoginFormProps, State> {
             label={
               <FormattedMessage
                 id="xpack.security.login.basicLoginForm.passwordFormRowLabel"
-                defaultMessage="Password"
+                defaultMessage="Senha"
               />
             }
             {...this.validator.validatePassword(this.state.password)}
@@ -275,7 +275,7 @@ export class LoginForm extends Component<LoginFormProps, State> {
               >
                 <FormattedMessage
                   id="xpack.security.login.basicLoginForm.logInButtonLabel"
-                  defaultMessage="Log in"
+                  defaultMessage="Entrar"
                 />
               </EuiButton>
             </EuiFlexItem>
@@ -361,7 +361,7 @@ export class LoginForm extends Component<LoginFormProps, State> {
             >
               <FormattedMessage
                 id="xpack.security.loginPage.goBackToLoginLink"
-                defaultMessage="Take me back to Login"
+                defaultMessage="Volta ao login"
               />
             </EuiLink>
           </EuiText>
@@ -380,7 +380,7 @@ export class LoginForm extends Component<LoginFormProps, State> {
             >
               <FormattedMessage
                 id="xpack.security.loginPage.loginHelpLinkText"
-                defaultMessage="Need help?"
+                defaultMessage="Precisa de ajuda?"
               />
             </EuiLink>
           </EuiText>
@@ -407,7 +407,7 @@ export class LoginForm extends Component<LoginFormProps, State> {
           <EuiText size="m" className="eui-textCenter">
             <FormattedMessage
               id="xpack.security.loginPage.autoLoginAuthenticatingLabel"
-              defaultMessage="Authenticating…"
+              defaultMessage="Autenticando..."
             />
           </EuiText>
         </EuiFlexItem>

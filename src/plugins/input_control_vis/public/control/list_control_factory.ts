@@ -87,7 +87,7 @@ export class ListControl extends Control<PhraseFilterManager> {
     this.timefilter = deps.data.query.timefilter.timefilter;
     this.searchSource = searchSource;
   }
-
+//Edmar Moretti - tradução de defaultMessage: "Disabled until '{label}' is set.",
   fetch = async (query?: string) => {
     // Abort any in-progress fetch
     if (this.abortController) {
@@ -106,7 +106,7 @@ export class ListControl extends Control<PhraseFilterManager> {
       if (this.hasUnsetAncestor()) {
         this.disable(
           i18n.translate('inputControl.listControl.disableTooltip', {
-            defaultMessage: "Disabled until '{label}' is set.",
+            defaultMessage: "Desativado até '{label}' ser escolhido.",
             values: { label: this.ancestors[0].label },
           })
         );

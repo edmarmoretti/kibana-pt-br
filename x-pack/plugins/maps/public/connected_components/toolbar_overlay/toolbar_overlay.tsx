@@ -10,7 +10,7 @@ import { EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
 import { Filter } from '@kbn/es-query';
 import { ActionExecutionContext, Action } from '@kbn/ui-actions-plugin/public';
 import { SetViewControl } from './set_view_control';
-import { ToolsControl } from './tools_control';
+//import { ToolsControl } from './tools_control';
 import { FeatureEditTools } from './feature_draw_controls/feature_edit_tools';
 import { FitToData } from './fit_to_data';
 import { TimesliderToggleButton } from './timeslider_toggle_button';
@@ -25,18 +25,10 @@ export interface Props {
   showFitToBoundsButton: boolean;
   showTimesliderButton: boolean;
 }
-
+//Edmar Moretti - remove os botões de filtros dos mapas
 export function ToolbarOverlay(props: Props) {
   const toolsButton =
-    props.addFilters && props.showToolsControl ? (
-      <EuiFlexItem>
-        <ToolsControl
-          getFilterActions={props.getFilterActions}
-          getActionContext={props.getActionContext}
-          disableToolsControl={props.pointDrawModeActive || props.shapeDrawModeActive}
-        />
-      </EuiFlexItem>
-    ) : null;
+    props.addFilters && props.showToolsControl ? null : null;
 
   const fitToBoundsButton = props.showFitToBoundsButton ? (
     <EuiFlexItem>

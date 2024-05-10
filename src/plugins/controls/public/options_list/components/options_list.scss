@@ -46,6 +46,7 @@
 .optionsList__existsFilter {
   font-style: italic;
   font-weight: $euiFontWeightMedium;
+  display: none; // Edmar Moretti - remove Existem da lista de opções dos filtros
 }
 
 .optionsList__popoverOverride {

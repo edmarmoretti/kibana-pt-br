@@ -367,6 +367,13 @@
     "xpack.security.login.basicLoginForm.usernameFormRowLabel": "Usuário",
     "expressionPartitionVis.legend.filterForValueButtonAriaLabel": "Filtrar por não valor",
     "core.application.appNotFound.title": "Aplicação não encontrada",
-    "core.application.appNotFound.pageDescription":"No application was found at this URL. Try going back or choosing an app from the menu."
+    "core.application.appNotFound.pageDescription":"No application was found at this URL. Try going back or choosing an app from the menu.",
+    "xpack.lens.config.applyFlyoutAriaLabel": "Aplicar mudanças",
+    "xpack.lens.config.applyFlyoutLabel": "Aplicar e fechar",
+    "xpack.lens.config.cancelFlyoutAriaLabel": "Desfazer alterações aplicadas",
+    "xpack.lens.config.cancelFlyoutLabel": "Cancelar",
+    "xpack.lens.config.configFlyoutCallout": "Exibição de uma parte limitada dos campos disponíveis. Adicione mais no Painel de Controle.",
+    "xpack.lens.configure.emptyConfig": "Adicione ou arraste e solte um campo",
+    "xpack.lens.editorFrame.suggestionPanelTitle": "Sugestões"
    }
 }

@@ -357,7 +357,7 @@ export const termsOperation: OperationDefinition<
         shardSize,
         otherBucket: Boolean(column.params.otherBucket),
         otherBucketLabel: i18n.translate('xpack.lens.indexPattern.terms.otherLabel', {
-          defaultMessage: 'Other',
+          defaultMessage: 'Outro',
         }),
       }).toAst();
     }
@@ -378,11 +378,11 @@ export const termsOperation: OperationDefinition<
       excludeIsRegex: Boolean(column.params.excludeIsRegex),
       otherBucket: Boolean(column.params.otherBucket),
       otherBucketLabel: i18n.translate('xpack.lens.indexPattern.terms.otherLabel', {
-        defaultMessage: 'Other',
+        defaultMessage: 'Outro',
       }),
       missingBucket: column.params.otherBucket && column.params.missingBucket,
       missingBucketLabel: i18n.translate('xpack.lens.indexPattern.terms.missingLabel', {
-        defaultMessage: '(missing value)',
+        defaultMessage: '(sem valor)',
       }),
     }).toAst();
   },

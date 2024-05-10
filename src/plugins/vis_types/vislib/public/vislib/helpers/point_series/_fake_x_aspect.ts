@@ -13,10 +13,10 @@ export function makeFakeXAspect() {
   return {
     accessor: -1,
     title: i18n.translate('visTypeVislib.aggResponse.allDocsTitle', {
-      defaultMessage: 'All docs',
+      defaultMessage: ' ',
     }),
     params: {
-      defaultValue: '_all',
+      defaultValue: ' ',
     },
     format: {},
   } as Aspect;
