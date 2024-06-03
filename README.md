@@ -1,6 +1,8 @@
 # kibana-pt-br
 Kibana com a interface de painéis traduzido para o português do Brasil
 
+Código fonte: https://github.com/edmarmoretti/kibana
+
 ## Principais alterações feitas no código original
 
 * Tradução para pt-BR da interface pública dos painéis.
