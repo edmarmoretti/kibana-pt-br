@@ -152,7 +152,6 @@ export const MetricVis = ({
   overrides,
 }: MetricVisComponentProps) => {
   const grid = useRef<MetricSpec['data']>([[]]);
-
   const onRenderChange = useCallback<RenderChangeListener>(
     (isRendered) => {
       if (isRendered) {
@@ -183,7 +182,6 @@ filterable = false;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollDimensions = useResizeObserver(scrollContainerRef.current);
   const chartBaseTheme = getThemeService().useChartsBaseTheme();
-
   const primaryMetricColumn = getColumnByAccessor(config.dimensions.metric, data.columns)!;
   const formatPrimaryMetric = getMetricFormatter(config.dimensions.metric, data.columns);
 
@@ -213,17 +211,19 @@ filterable = false;
 
     const subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
     */
-    //O título será quebrado caso contenha dois níveis e o título da métrica for espaço em branco
+    //O título será quebrado caso contenha mais de um nível e o título da métrica for espaço em branco
     let title = breakdownByColumn
       ? formatBreakdownValue(row[breakdownByColumn.id])
       : primaryMetricColumn.name;
 
     let subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
 
-    if(title.split(' › ').length == 2 && (subtitle == undefined || subtitle?.trim() == '')){
-      subtitle = title.split(' › ')[1];
-      title = title.split(' › ')[0];
+    if(title.split(' › ').length > 1 && (subtitle == undefined || subtitle?.trim() == '')){
+      let splitvar = title.split(' › ');
+      title = splitvar[0];
+      subtitle = splitvar.splice(1).join(' › ');
     }
+
     if (typeof value !== 'number') {
       const nonNumericMetric: MetricWText = {
         value: formatPrimaryMetric(value),
@@ -325,13 +325,14 @@ filterable = false;
   }
 
   grid.current = newGrid;
-
   return (
     <div
       ref={scrollContainerRef}
       css={css`
         height: 100%;
         width: 100%;
+        max-height: 100%;
+        max-width: 100%;
         overflow-y: auto;
         ${useEuiScrollBar()}
       `}

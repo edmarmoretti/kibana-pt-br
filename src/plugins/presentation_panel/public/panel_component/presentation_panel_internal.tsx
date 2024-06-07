@@ -154,7 +154,25 @@ export const PresentationPanelInternal = <
           }}
         />
       </div>
-      {panelTitleNotes}
+      {formatPanelNotes(panelTitleNotes)}
     </EuiPanel>
   );
 };
+
+//Edmar Moretti - adicionado titleNotes
+function formatPanelNotes(panelTitleNotes: string | undefined) {
+  const linkify = (inputText: string) => {
+      var replacedText, replacePattern1;
+      //URLs starting with http://, https://, or ftp://
+      replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+      replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+      //return replacedText;
+      const theObj = {__html:replacedText};
+      return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
+  }  
+  return (
+    <figcaption className='embPanel__notes'>
+        {panelTitleNotes?linkify(panelTitleNotes):''}
+    </figcaption>
+  );
+}

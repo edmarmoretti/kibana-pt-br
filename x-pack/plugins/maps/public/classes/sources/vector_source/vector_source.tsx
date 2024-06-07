@@ -275,7 +275,10 @@ export class AbstractVectorSource extends AbstractSource implements IVectorSourc
       return [];
     }
 
-    const geojsonGeometry = getGeojsonGeometry();
+    //const geojsonGeometry = getGeojsonGeometry();
+    //Edmar Moretti - remove a opção de filtrar pela geometria nos mapas
+    return [];
+    /*
     return geojsonGeometry
       ? [
           {
@@ -296,6 +299,7 @@ export class AbstractVectorSource extends AbstractSource implements IVectorSourc
           },
         ]
       : [];
+    */
   }
 
   getInspectorRequestIds(): string[] {
