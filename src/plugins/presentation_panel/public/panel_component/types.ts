@@ -16,6 +16,8 @@ import {
   PublishesDisabledActionIds,
   PublishesPanelDescription,
   PublishesPanelTitle,
+  PublishesPanelTitleNotes,
+  PublishesPanelTitleSummary,
   PublishesViewMode,
 } from '@kbn/presentation-publishing';
 import { UiActionsService } from '@kbn/ui-actions-plugin/public';
@@ -61,19 +63,20 @@ export interface PresentationPanelInternalProps<
  * The API that any component passed to the `Component` prop of `PresentationPanel` should implement.
  * Everything in this API is Partial because it is valid for a component to implement none of these methods.
  */
-export interface DefaultPresentationPanelApi
-  extends HasUniqueId,
-    Partial<
-      PublishesPanelTitle &
-        PublishesDataLoading &
-        PublishesBlockingError &
-        PublishesPanelDescription &
-        PublishesDisabledActionIds &
-        HasParentApi<
-          PresentationContainer &
-            Partial<Pick<PublishesPanelTitle, 'hidePanelTitle'> & PublishesViewMode>
-        >
-    > {}
+export type DefaultPresentationPanelApi = Partial<
+  HasUniqueId &
+    PublishesPanelTitle &
+    PublishesDataLoading &
+    PublishesBlockingError &
+    PublishesPanelDescription &
+    PublishesPanelTitleNotes &
+    PublishesPanelTitleSummary &
+    PublishesDisabledActionIds &
+    HasParentApi<
+      PresentationContainer &
+        Partial<Pick<PublishesPanelTitle, 'hidePanelTitle'> & PublishesViewMode>
+    >
+>;
 
 export type PresentationPanelProps<
   ApiType extends DefaultPresentationPanelApi = DefaultPresentationPanelApi,

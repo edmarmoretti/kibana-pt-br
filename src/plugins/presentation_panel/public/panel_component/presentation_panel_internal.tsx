@@ -54,8 +54,12 @@ export const PresentationPanelInternal = <
     panelTitle,
     hidePanelTitle,
     panelDescription,
+    panelTitleNotes,
+    panelTitleSummary,
     defaultPanelTitle,
     defaultPanelDescription,
+    defaultPanelTitleNotes,
+    defaultPanelTitleSummary,
     rawViewMode,
     parentHidePanelTitle,
   ] = useBatchedOptionalPublishingSubjects(
@@ -64,8 +68,12 @@ export const PresentationPanelInternal = <
     api?.panelTitle,
     api?.hidePanelTitle,
     api?.panelDescription,
+    api?.panelTitleNotes,
+    api?.panelTitleSummary,
     api?.defaultPanelTitle,
     api?.defaultPanelDescription,
+    api?.defaultPanelTitleNotes,
+    api?.defaultPanelTitleSummary,
     viewModeSubject,
     api?.parentApi?.hidePanelTitle
   );
@@ -129,6 +137,8 @@ export const PresentationPanelInternal = <
           showNotifications={showNotifications}
           panelTitle={panelTitle ?? defaultPanelTitle}
           panelDescription={panelDescription ?? defaultPanelDescription}
+          panelTitleNotes={panelTitleNotes ?? defaultPanelTitleNotes}
+          panelTitleSummary={panelTitleSummary ?? defaultPanelTitleSummary}
         />
       )}
       {blockingError && api && (
@@ -152,6 +162,25 @@ export const PresentationPanelInternal = <
           />
         </EuiErrorBoundary>
       </div>
+      {formatPanelNotes(panelTitleNotes)}
     </EuiPanel>
   );
 };
+
+//Edmar Moretti - adicionado titleNotes
+function formatPanelNotes(panelTitleNotes: string | undefined) {
+  const linkify = (inputText: string) => {
+      var replacedText, replacePattern1;
+      //URLs starting with http://, https://, or ftp://
+      replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+      replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+      //return replacedText;
+      const theObj = {__html:replacedText};
+      return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
+  }  
+  return (
+    <figcaption className='embPanel__notes'>
+        {panelTitleNotes?linkify(panelTitleNotes):''}
+    </figcaption>
+  );
+}

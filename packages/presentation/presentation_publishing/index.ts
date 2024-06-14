@@ -110,6 +110,22 @@ export {
   type PublishesPanelTitle,
   type PublishesWritablePanelTitle,
 } from './interfaces/titles/publishes_panel_title';
+
+export {
+  apiPublishesPanelTitleNotes,
+  apiPublishesWritablePanelTitleNotes,
+  type PublishesPanelTitleNotes,
+  type PublishesWritablePanelTitleNotes,
+} from './interfaces/titles/publishes_panel_title_notes';
+
+export {
+  apiPublishesPanelTitleSummary,
+  apiPublishesWritablePanelTitleSummary,
+  type PublishesPanelTitleSummary,
+  type PublishesWritablePanelTitleSummary,
+} from './interfaces/titles/publishes_panel_title_summary';
+
+
 export { initializeTitles, type SerializedTitles } from './interfaces/titles/titles_api';
 export {
   useBatchedOptionalPublishingSubjects,

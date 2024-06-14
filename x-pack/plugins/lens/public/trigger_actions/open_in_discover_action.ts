@@ -5,6 +5,8 @@
  * 2.0.
  */
 
+//Edmar Moretti - Tradução
+
 import { i18n } from '@kbn/i18n';
 import { createAction } from '@kbn/ui-actions-plugin/public';
 import { EmbeddableApiContext } from '@kbn/presentation-publishing';
@@ -27,7 +29,7 @@ export const createOpenInDiscoverAction = (
     getIconType: () => 'popout',
     getDisplayName: () =>
       i18n.translate('xpack.lens.action.exploreInDiscover', {
-        defaultMessage: 'Explore in Discover',
+        defaultMessage: 'Explore os dados no Discover',
       }),
     getHref: async (context: EmbeddableApiContext) => {
       const { getHref } = await getDiscoverHelpersAsync();

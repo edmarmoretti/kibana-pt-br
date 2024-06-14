@@ -409,9 +409,10 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
     ? getColumnByAccessor(splitRow[0], visData.columns)
     : undefined;
 
-  const hasTooltipActions =
-    interactive && bucketAccessors.filter((a) => a !== 'metric-name').length > 0;
-
+  //Edmar Moretti - remove as ações adicionais em tooltips
+  //const hasTooltipActions = interactive && bucketAccessors.filter((a) => a !== 'metric-name').length > 0;
+  const hasTooltipActions = false;
+  
   const tooltip: TooltipProps = {
     ...(fixedViewPort ? { boundary: fixedViewPort } : {}),
     type: visParams.addTooltip ? TooltipType.Follow : TooltipType.None,
@@ -564,6 +565,8 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
                 flatLegend={flatLegend}
                 legendSort={customLegendSort}
                 showLegendExtra={visParams.showValuesInLegend}
+                //Edmar Moretti - desativa a seleção por click
+                /*
                 onElementClick={([elementEvent]) => {
                   // this cast is safe because we are rendering a partition chart
                   const [layerValues] = elementEvent as PartitionElementEvent;
@@ -575,6 +578,7 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
                     splitChartFormatter
                   );
                 }}
+                */
                 legendAction={legendActions}
                 theme={[
                   // Chart background should be transparent for the usage at Canvas.

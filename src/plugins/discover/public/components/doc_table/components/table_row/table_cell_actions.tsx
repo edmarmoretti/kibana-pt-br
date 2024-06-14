@@ -41,14 +41,14 @@ export const TableCellActions = ({ handleFilterFor, handleFilterOut }: TableCell
         className="kbnDocTableCell__filterButton"
         position="bottom"
         content={i18n.translate('discover.docTable.tableRow.filterOutValueButtonTooltip', {
-          defaultMessage: 'Filter out value',
+          defaultMessage: 'Filtrar por não valor',
         })}
       >
         <button
           className="kbnDocTableRowFilterButton"
           data-test-subj="docTableCellFilterNegate"
           aria-label={i18n.translate('discover.docTable.tableRow.filterOutValueButtonAriaLabel', {
-            defaultMessage: 'Filter out value',
+            defaultMessage: 'Filtrar por não valor',
           })}
           onClick={handleFilterOut}
         >

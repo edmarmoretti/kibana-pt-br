@@ -56,7 +56,7 @@ export function ContextAppRoute() {
         title={
           <FormattedMessage
             id="discover.contextViewRoute.errorTitle"
-            defaultMessage="An error occurred"
+            defaultMessage="Ocorreu um erro"
           />
         }
         body={

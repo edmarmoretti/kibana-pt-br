@@ -66,6 +66,15 @@ export const CustomizePanelEditor = ({
     api.panelDescription?.value ?? api.defaultPanelDescription?.value
   );
   const [panelTitle, setPanelTitle] = useState(getPanelTitle(api));
+
+  const [panelTitleNotes, setPanelTitleNotes] = useState(
+    api.panelTitleNotes?.value ?? api.defaultPanelTitleNotes?.value
+  );
+
+  const [panelTitleSummary, setPanelTitleSummary] = useState(
+    api.panelTitleSummary?.value ?? api.defaultPanelTitleSummary?.value
+  );
+  
   const [timeRange, setTimeRange] = useState(
     api.timeRange$?.value ?? api.parentApi?.timeRange$?.value
   );
@@ -103,7 +112,13 @@ export const CustomizePanelEditor = ({
     if (hideTitle !== api.hidePanelTitle?.value) api.setHidePanelTitle?.(hideTitle);
     if (panelDescription !== api.panelDescription?.value)
       api.setPanelDescription?.(panelDescription);
+    if (panelTitleNotes !== api.panelTitleNotes?.value){
+      api.setPanelTitleNotes?.(panelTitleNotes);
+    }
 
+    if (panelTitleSummary !== api.panelTitleSummary?.value){
+      api.setPanelTitleSummary?.(panelTitleSummary);
+    }
     const newTimeRange = hasOwnTimeRange ? timeRange : undefined;
     if (newTimeRange !== api.timeRange$?.value) {
       api.setTimeRange?.(newTimeRange);
@@ -125,7 +140,7 @@ export const CustomizePanelEditor = ({
             id="hideTitle"
             label={
               <FormattedMessage
-                defaultMessage="Show title"
+                defaultMessage="Mostra o título"
                 id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.showTitle"
               />
             }
@@ -136,7 +151,7 @@ export const CustomizePanelEditor = ({
           label={
             <FormattedMessage
               id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelTitleFormRowLabel"
-              defaultMessage="Title"
+              defaultMessage="Título"
             />
           }
           labelAppend={
@@ -148,13 +163,13 @@ export const CustomizePanelEditor = ({
               aria-label={i18n.translate(
                 'presentationPanel.action.customizePanel.flyout.optionsMenuForm.resetCustomTitleButtonAriaLabel',
                 {
-                  defaultMessage: 'Reset title',
+                  defaultMessage: 'Reinicia o título',
                 }
               )}
             >
               <FormattedMessage
                 id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.resetCustomTitleButtonLabel"
-                defaultMessage="Reset"
+                defaultMessage="Reinicia"
               />
             </EuiButtonEmpty>
           }
@@ -172,7 +187,98 @@ export const CustomizePanelEditor = ({
             aria-label={i18n.translate(
               'presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelTitleInputAriaLabel',
               {
-                defaultMessage: 'Enter a custom title for your panel',
+                defaultMessage: 'Entre com o título do quadro',
+              }
+            )}
+          />
+        </EuiFormRow>
+
+        <EuiFormRow
+          label={
+            <FormattedMessage
+              id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelTitleNotesFormRowLabel"
+              defaultMessage="Notas de rodapé"
+            />
+          }
+          labelAppend={
+            <EuiButtonEmpty
+              size="xs"
+              data-test-subj="resetCustomEmbeddablePanelTitleNotesButton"
+              onClick={() => setPanelTitleNotes(api.defaultPanelTitleNotes?.value)}
+              disabled={
+                hideTitle || !editMode || api.defaultPanelTitleNotes?.value === panelTitleNotes
+              }
+              aria-label={i18n.translate(
+                'presentationPanel.action.customizePanel.flyout.optionsMenuForm.resetCustomTityleNotesButtonAriaLabel',
+                {
+                  defaultMessage: 'Reinicia a nota de rodapé',
+                }
+              )}
+            >
+              <FormattedMessage
+                id="presentationPanel.action.customizePanel.modal.optionsMenuForm.resetCustomTitleNotesButtonLabel"
+                defaultMessage="Reinicia"
+              />
+            </EuiButtonEmpty>
+          }
+        >
+          <EuiTextArea
+            id="panelTitleNotesInput"
+            className="panelTitleNotesInputText"
+            data-test-subj="customEmbeddablePanelTitleNotesInput"
+            disabled={hideTitle || !editMode}
+            name="titleNotes"
+            value={panelTitleNotes ?? ''}
+            onChange={(e) => setPanelTitleNotes(e.target.value)}
+            aria-label={i18n.translate(
+              'presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelTitleNotesAriaLabel',
+              {
+                defaultMessage: 'Entre com a nota de rorapé',
+              }
+            )}
+          />
+        </EuiFormRow>
+        <EuiFormRow
+          label={
+            <FormattedMessage
+              id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelTitleSummaryFormRowLabel"
+              defaultMessage="Resumo"
+            />
+          }
+          labelAppend={
+            <EuiButtonEmpty
+              size="xs"
+              data-test-subj="resetCustomEmbeddablePanelTitleSummaryButton"
+              onClick={() => setPanelTitleSummary(api.defaultPanelTitleSummary?.value)}
+              disabled={
+                hideTitle || !editMode || api.defaultPanelTitleSummary?.value === panelTitleSummary
+              }
+              aria-label={i18n.translate(
+                'presentationPanel.action.customizePanel.flyout.optionsMenuForm.resetCustomTityleSummaryButtonAriaLabel',
+                {
+                  defaultMessage: 'Reinicia o resumo',
+                }
+              )}
+            >
+              <FormattedMessage
+                id="presentationPanel.action.customizePanel.modal.optionsMenuForm.resetCustomTitleSummaryButtonLabel"
+                defaultMessage="Reinicia"
+              />
+            </EuiButtonEmpty>
+          }
+        >
+          <EuiTextArea
+            id="panelTitleSummaryInput"
+            className="panelTitleSummaryInputText"
+            data-test-subj="customEmbeddablePanelTitleSummaryInput"
+            disabled={hideTitle || !editMode}
+            name="titleSummary"
+            value={panelTitleSummary ?? ''}
+            onChange={(e) => setPanelTitleSummary(e.target.value)}
+            aria-label={i18n.translate(
+              'presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelTitleSummaryAriaLabel',
+              {
+                defaultMessage: 'Entre com o resumo',
               }
             )}
           />
@@ -181,7 +287,7 @@ export const CustomizePanelEditor = ({
           label={
             <FormattedMessage
               id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelDescriptionFormRowLabel"
-              defaultMessage="Description"
+              defaultMessage="Descrição que será mostrada no (i)"
             />
           }
           labelAppend={
@@ -193,13 +299,13 @@ export const CustomizePanelEditor = ({
               aria-label={i18n.translate(
                 'presentationPanel.action.customizePanel.flyout.optionsMenuForm.resetCustomDescriptionButtonAriaLabel',
                 {
-                  defaultMessage: 'Reset description',
+                  defaultMessage: 'Reinicia a descrição',
                 }
               )}
             >
               <FormattedMessage
                 id="presentationPanel.action.customizePanel.modal.optionsMenuForm.resetCustomDescriptionButtonLabel"
-                defaultMessage="Reset"
+                defaultMessage="Reinicia"
               />
             </EuiButtonEmpty>
           }
@@ -215,7 +321,7 @@ export const CustomizePanelEditor = ({
             aria-label={i18n.translate(
               'presentationPanel.action.customizePanel.flyout.optionsMenuForm.panelDescriptionAriaLabel',
               {
-                defaultMessage: 'Enter a custom description for your panel',
+                defaultMessage: 'Entre com a descrição',
               }
             )}
           />

@@ -38,13 +38,24 @@ const LegendToggleComponent = ({ onClick, showLegend, legendPosition }: LegendTo
     `,
     [euiTheme.colors.lightestShade]
   );
-
+//Edmar Moretti - altera a posição default do ícone da legenda para não sobrepor
+  /*
   const positionStyle = useMemo(
     () => css`
       left: auto;
       bottom: auto;
       right: 0;
       top: 0;
+    `,
+    []
+  );
+  */
+  const positionStyle = useMemo(
+    () => css`
+      left: auto;
+      bottom: 0;
+      right: 0;
+      top: auto;
     `,
     []
   );

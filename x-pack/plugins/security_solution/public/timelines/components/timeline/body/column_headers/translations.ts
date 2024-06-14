@@ -8,40 +8,40 @@
 import { i18n } from '@kbn/i18n';
 
 export const CATEGORY = i18n.translate('xpack.securitySolution.timeline.categoryTooltip', {
-  defaultMessage: 'Category',
+  defaultMessage: 'Categoria',
 });
 
 export const DESCRIPTION = i18n.translate('xpack.securitySolution.timeline.descriptionTooltip', {
-  defaultMessage: 'Description',
+  defaultMessage: 'Descrição',
 });
 
 export const FIELD = i18n.translate('xpack.securitySolution.timeline.fieldTooltip', {
-  defaultMessage: 'Field',
+  defaultMessage: 'Coluna',
 });
 
 export const FULL_SCREEN = i18n.translate('xpack.securitySolution.timeline.fullScreenButton', {
-  defaultMessage: 'Full screen',
+  defaultMessage: 'Tela cheia',
 });
 
 export const HIDE_COLUMN = i18n.translate('xpack.securitySolution.timeline.hideColumnLabel', {
-  defaultMessage: 'Hide column',
+  defaultMessage: 'Esconde a coluna',
 });
 
 export const SORT_AZ = i18n.translate('xpack.securitySolution.timeline.sortAZLabel', {
-  defaultMessage: 'Sort A-Z',
+  defaultMessage: 'Ordena de A-Z',
 });
 
 export const SORT_ZA = i18n.translate('xpack.securitySolution.timeline.sortZALabel', {
-  defaultMessage: 'Sort Z-A',
+  defaultMessage: 'Ordena de Z-A',
 });
 
 export const TYPE = i18n.translate('xpack.securitySolution.timeline.typeTooltip', {
-  defaultMessage: 'Type',
+  defaultMessage: 'Tipo',
 });
 
 export const REMOVE_COLUMN = i18n.translate(
   'xpack.securitySolution.timeline.flyout.pane.removeColumnButtonLabel',
   {
-    defaultMessage: 'Remove column',
+    defaultMessage: 'Remove a coluna',
   }
 );

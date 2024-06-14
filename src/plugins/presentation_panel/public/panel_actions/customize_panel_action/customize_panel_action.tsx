@@ -13,6 +13,8 @@ import {
   apiPublishesDataViews,
   apiPublishesUnifiedSearch,
   apiPublishesPanelTitle,
+  apiPublishesPanelTitleNotes,
+  apiPublishesPanelTitleSummary,
   CanAccessViewMode,
   EmbeddableApiContext,
   getInheritedViewMode,
@@ -22,6 +24,8 @@ import {
   PublishesWritablePanelDescription,
   PublishesWritablePanelTitle,
   PublishesUnifiedSearch,
+  PublishesWritablePanelTitleNotes,
+  PublishesWritablePanelTitleSummary,
 } from '@kbn/presentation-publishing';
 import { Action, IncompatibleActionError } from '@kbn/ui-actions-plugin/public';
 import { openCustomizePanelFlyout } from './open_customize_panel';
@@ -34,6 +38,8 @@ export type CustomizePanelActionApi = CanAccessViewMode &
       PublishesWritableUnifiedSearch &
       PublishesWritablePanelDescription &
       PublishesWritablePanelTitle &
+      PublishesWritablePanelTitleNotes &
+      PublishesWritablePanelTitleSummary &
       HasParentApi<Partial<PublishesUnifiedSearch & TracksOverlays>>
   >;
 
@@ -51,7 +57,7 @@ export class CustomizePanelAction implements Action<EmbeddableApiContext> {
 
   public getDisplayName({ embeddable }: EmbeddableApiContext): string {
     return i18n.translate('presentationPanel.action.customizePanel.displayName', {
-      defaultMessage: 'Settings',
+      defaultMessage: 'Propriedades do quadro',
     });
   }
 

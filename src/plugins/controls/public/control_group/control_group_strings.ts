@@ -355,7 +355,7 @@ export const ControlGroupStrings = {
 
     getClearButtonTitle: () =>
       i18n.translate('controls.controlGroup.floatingActions.clearTitle', {
-        defaultMessage: 'Clear',
+        defaultMessage: 'Limpar',
       }),
   },
   ariaActions: {
