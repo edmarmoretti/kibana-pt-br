@@ -100,7 +100,7 @@
     "@dnd-kit/utilities": "^2.0.0",
     "@elastic/apm-rum": "^5.16.0",
     "@elastic/apm-rum-react": "^2.0.2",
-    "@elastic/charts": "./elastic-charts-64.0.2-ms-1.tgz",
+    "@elastic/charts": "./elastic-charts-64.0.2-ms-2.tgz",
     "@elastic/datemath": "5.0.3",
     "@elastic/ecs": "^8.11.1",
     "@elastic/elasticsearch": "^8.13.0",
