@@ -9,11 +9,13 @@ Código fonte: https://github.com/edmarmoretti/kibana
 
 * Opção para definir notas de rodapé, inclusive com links, nos quadros dos painéis.
 
+* Opção para definir resumos nos quadros dos painéis.
+
 * Ordenamento da lista de opções nos filtros que utilizem siglas de meses do ano.
 
 * Ordenamento da lista de opções nos filtros que utilizam números.
 
-* Remoção de ',00' nas tabelas e tooltips.
+* Remoção de ',00' nas tabelas, labels internos dos gráficos e tooltips.
 
 * Cálculo da altura da página do painel e envio ao cliente web via postmessage.
 
@@ -23,7 +25,7 @@ Código fonte: https://github.com/edmarmoretti/kibana
 
 * Remoção da linha dos eixos verticais em gráficos do tipo barras horizontais.
 
-* Correção na inclusão dos labels internos, evitando ultrapassar os limites das margens.
+* Correção na inclusão dos labels internos, evitando ultrapassar os limites das margens e a sobreposição.
 
 * Alteração no comportamento da opção de "split charts", bloqueando a apresentação de mais de um gráfico quando os dados, para o primeiro gráfico, não estiverem com todas as séries preenchidas.
 
@@ -42,10 +44,6 @@ Código fonte: https://github.com/edmarmoretti/kibana
 * Alteração na forma como a remoção de "00" é feita nos tooltips, mantendo o ",00" quando o título da coluna é terminada com "(R$)".
   
 * Remoção das opções de filtragem existentes nas legendas dos gráficos e das tabelas.
-  
-* Posicionamento dos labels dos gráficos de barras mesmo quando estão fora das barras.
-
-* Posicionamento na vertical dos textos em gráficos de barras verticais.
 
 
 
