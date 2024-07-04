@@ -25,6 +25,8 @@ Código fonte: https://github.com/edmarmoretti/kibana
 
 * Remoção da linha dos eixos verticais em gráficos do tipo barras horizontais.
 
+* Alteração do componente de tabelas do pacote Lens para abrir um link dentro de um elemento do tipo flyout (o link deve conter o parâmetro flyout).
+
 * Correção na inclusão dos labels internos, evitando ultrapassar os limites das margens e a sobreposição.
 
 * Alteração no comportamento da opção de "split charts", bloqueando a apresentação de mais de um gráfico quando os dados, para o primeiro gráfico, não estiverem com todas as séries preenchidas.
