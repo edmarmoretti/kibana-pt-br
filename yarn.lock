@@ -1650,9 +1650,9 @@
   dependencies:
     object-hash "^1.3.0"
 
-"@elastic/charts@./elastic-charts-64.0.2-ms-1.tgz":
-  version "64.0.2-ms-1"
-  resolved "./elastic-charts-64.0.2-ms-1.tgz#a68eafac20e1e73b3a4bf47fb534798ec7e9a9ce"
+"@elastic/charts@./elastic-charts-64.0.2-ms-2.tgz":
+  version "64.0.2-ms-2"
+  resolved "./elastic-charts-64.0.2-ms-2.tgz#8e97529cde09a7dd18998d3d58bd327256ee2ac1"
   dependencies:
     "@popperjs/core" "^2.11.8"
     bezier-easing "^2.1.0"

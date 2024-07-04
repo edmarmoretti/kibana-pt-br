@@ -178,7 +178,7 @@ export const ControlGroupStrings = {
             defaultMessage: 'Apply selections',
           })
         : i18n.translate('controls.controlGroup.management.applyButtonTooltip.disabled', {
-            defaultMessage: 'No new selections to apply',
+            defaultMessage: 'Nenhuma seleção nova para aplicar',
           }),
     getFlyoutTitle: () =>
       i18n.translate('controls.controlGroup.management.flyoutTitle', {
