@@ -242,7 +242,7 @@ export const ControlGroup = () => {
   let panelBg: 'transparent' | 'plain' | 'success' = 'transparent';
   if (emptyState) panelBg = 'plain';
   if (draggingId) panelBg = 'success';
-
+//Edmar Moretti - ajusta o estilo do botão aplicar, dos filtros
   return (
     <>
       {idsInOrder.length > 0 || showAddButton ? (
@@ -259,7 +259,7 @@ export const ControlGroup = () => {
           <EuiFlexGroup
             wrap={false}
             gutterSize="s"
-            direction="row"
+            direction="column"
             responsive={false}
             alignItems="stretch"
             justifyContent="center"
