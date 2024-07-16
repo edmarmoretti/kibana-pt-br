@@ -47,6 +47,8 @@ Código fonte: https://github.com/edmarmoretti/kibana
   
 * Remoção das opções de filtragem existentes nas legendas dos gráficos e das tabelas.
 
+* Colunas do tipo link, criadas nos dataviews, podem abrir o link em uma janela flutuante no próprio painel. Na definição da URL do link deve constar a palavra "flyout", por exemplo "http://google.com.br?flyout"
+
 
 
 
