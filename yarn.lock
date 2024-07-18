@@ -1734,9 +1734,9 @@
   resolved "https://registry.yarnpkg.com/@elastic/eslint-plugin-eui/-/eslint-plugin-eui-0.0.2.tgz#56b9ef03984a05cc213772ae3713ea8ef47b0314"
   integrity sha512-IoxURM5zraoQ7C8f+mJb9HYSENiZGgRVcG4tLQxE61yHNNRDXtGDWTZh8N1KIHcsqN1CEPETjuzBXkJYF/fDiQ==
 
-"@elastic/eui@./elastic-eui-93.6.0-backport.0-ms-1.tgz":
-  version "93.6.0-backport.0-ms-1"
-  resolved "./elastic-eui-93.6.0-backport.0-ms-1.tgz#960895b8362ece5d3fbfd81e204fc574aefb43e7"
+"@elastic/eui@./elastic-eui-93.6.0-backport.0-ms-2.tgz":
+  version "93.6.0-backport.0-ms-2"
+  resolved "./elastic-eui-93.6.0-backport.0-ms-2.tgz#b09d4954b4ea37d1cbc934f9904c7c4930bcfd1f"
   dependencies:
     "@hello-pangea/dnd" "^16.3.0"
     "@types/lodash" "^4.14.202"
@@ -1800,8 +1800,9 @@
   resolved "https://registry.yarnpkg.com/@elastic/node-crypto/-/node-crypto-1.2.1.tgz#dfd9218f9b5729fa519762e6a6968aaf61b86eb0"
   integrity sha512-RlZg+poLA2SwZZUM5RMJDJiKojlSB1mJkumIvLgXvvTCcCliC6rM0lUaNecV9pbQLIHrGlX2BrbwiuPWhv0czQ==
 
-"@elastic/numeral@./numeral-js":
-  version "2.5.1"
+"@elastic/numeral@./numeral-js-2.5.0-ms.tar.gz":
+  version "2.5.0"
+  resolved "./numeral-js-2.5.0-ms.tar.gz#8db30c85028a8db4dcda0c09a56ca04f44b9e547"
 
 "@elastic/react-search-ui-views@1.20.2", "@elastic/react-search-ui-views@^1.20.2":
   version "1.20.2"

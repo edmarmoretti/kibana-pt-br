@@ -16,7 +16,7 @@ import type { ColumnConfig } from '../../../../common/expressions';
 import type { DataContextType } from './types';
 import { getContrastColor, getNumericValue } from '../../../shared_components/coloring/utils';
 
-//
+//Edmar Moretti - componentes para poder abrir link em janela interna
 import {
   EuiFlyout,
   EuiFlyoutBody,
@@ -53,6 +53,16 @@ export const createGridCell = (
       content = '';
     }
     const currentAlignment = alignments && alignments[columnId];
+    //Edmar Moretti - corrige os nomes dos meses
+    //Feb,Apr,May,Aug,Sep,Oct,Dec
+    content = content.replace('Feb/','Fev/');
+    content = content.replace('Apr/','Abr/');
+    content = content.replace('May/','Mai/');
+    content = content.replace('Aug/','Ago/');
+    content = content.replace('Sep/','Set/');
+    content = content.replace('Oct/','Out/');
+    content = content.replace('Dec/','Dez/');
+    //content = content.replace('July/','Julho/');
 
     useEffect(() => {
       const originalId = getOriginalId(columnId);
