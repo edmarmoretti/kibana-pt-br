@@ -32,10 +32,10 @@ export class InspectPanelAction implements Action<EmbeddableApiContext> {
   public order = 20;
 
   constructor() {}
-
+  //Edmar Moretti - tradução de inspect
   public getDisplayName() {
     return i18n.translate('presentationPanel.action.inspectPanel.displayName', {
-      defaultMessage: 'Inspect',
+      defaultMessage: 'Visualize os dados',
     });
   }
 

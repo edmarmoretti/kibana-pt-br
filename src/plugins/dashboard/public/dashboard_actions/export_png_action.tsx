@@ -55,8 +55,12 @@ export class ExportPNGAction implements Action<ExportContext> {
     dashboardExportPngActionStrings.getDisplayName();
 
   public async isCompatible(context: ExportContext): Promise<boolean> {
-    return true;
+    if(context.embeddable.domNode){
+      return true;
+    }
+    return false;
   }
+
   private exportPNG = async (context: ExportContext) => {
     let quadro = (context.embeddable.domNode || context.embeddable._domNode).parentNode.parentNode;
 
