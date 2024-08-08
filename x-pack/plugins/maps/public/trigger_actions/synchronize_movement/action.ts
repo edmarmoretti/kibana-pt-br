@@ -34,9 +34,13 @@ export const synchronizeMovementAction = createAction<EmbeddableApiContext>({
     return 'crosshairs';
   },
   isCompatible: async ({ embeddable }: EmbeddableApiContext) => {
+    //Edmar Moretti - remove a opção de sincronização entre mapas
+    return false;
+    /*
     if (!isApiCompatible(embeddable)) return false;
     const { isCompatible } = await import('./is_compatible');
     return isCompatible(embeddable);
+    */
   },
   execute: async () => {
     const { openModal } = await import('./modal');

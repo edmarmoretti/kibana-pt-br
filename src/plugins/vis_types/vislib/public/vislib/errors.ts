@@ -32,12 +32,12 @@ export class ContainerTooSmall extends VislibError {
     super('This container is too small to render the visualization');
   }
 }
-
+//Edmar Moretti - tradução Nenhum resultado encontrado
 export class NoResults extends VislibError {
   constructor() {
     super(
       i18n.translate('visTypeVislib.vislib.errors.noResultsFoundTitle', {
-        defaultMessage: 'No results found',
+        defaultMessage: 'Nenhum resultado encontrado',
       })
     );
   }

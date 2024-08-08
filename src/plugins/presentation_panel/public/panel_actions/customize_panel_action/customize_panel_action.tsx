@@ -64,14 +64,19 @@ export class CustomizePanelAction implements Action<EmbeddableApiContext> {
   public getIconType() {
     return 'gear';
   }
-
+  //Edmar Moretti - remove a opção "propriedades do quadro" no modo de visualização
   public async isCompatible({ embeddable }: EmbeddableApiContext) {
     if (!isApiCompatibleWithCustomizePanelAction(embeddable)) return false;
     // It should be possible to customize just the time range in View mode
+    /*
     return (
       getInheritedViewMode(embeddable) === 'edit' ||
       (apiPublishesUnifiedSearch(embeddable) &&
         (embeddable.isCompatibleWithUnifiedSearch?.() ?? true))
+    );
+    */
+    return (
+      getInheritedViewMode(embeddable) === 'edit'
     );
   }
 

@@ -13,7 +13,7 @@ import React from 'react';
 interface VisualizationNoResultsProps {
   onInit?: () => void;
 }
-
+//Edmar Moretti - tradução Nenhum resultado encontrado
 export class VisualizationNoResults extends React.Component<VisualizationNoResultsProps> {
   public render() {
     return (
@@ -25,7 +25,7 @@ export class VisualizationNoResults extends React.Component<VisualizationNoResul
           body={
             <EuiText size="xs" className="visualization-error-text">
               {i18n.translate('visualizations.noResultsFoundTitle', {
-                defaultMessage: 'No results found',
+                defaultMessage: 'Nenhum resultado encontrado',
               })}
             </EuiText>
           }

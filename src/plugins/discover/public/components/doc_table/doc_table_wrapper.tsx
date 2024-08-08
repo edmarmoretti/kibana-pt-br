@@ -205,7 +205,7 @@ export const DocTableWrapper = forwardRef(
         rows,
       ]
     );
-
+//Edmar Moretti - tradução Nenhum resultado encontrado
     return (
       <div
         className="kbnDocTableWrapper eui-yScroll eui-xScroll"
@@ -239,7 +239,7 @@ export const DocTableWrapper = forwardRef(
                   <EuiSpacer size="m" />
                   <FormattedMessage
                     id="discover.docTable.noResultsTitle"
-                    defaultMessage="No results found"
+                    defaultMessage="Nenhum resultado encontrado"
                   />
                 </>
               )}

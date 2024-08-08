@@ -46,17 +46,20 @@
   justify-content: flex-end;
 }
 
+//Edmar Moretti - ajusta a altura do texto do título dos quadros
 .embPanel__title {
   @include euiTitle('xxxs');
-  overflow: hidden;
-  line-height: 1.5;
+  overflow: auto;
+  line-height: 1.2;
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-
+  height: 50px;
+  
+  //Edmar Moretti - ajusta a altura do texto do título dos quadros
   &:not(:empty) {
-    line-height: $euiSizeL;
+    line-height: 20px;
     padding-left: $euiSizeS;
   }
 
@@ -70,10 +73,11 @@
   .embPanel__titleTooltipAnchor {
     max-width: 100%;
   }
-
+  //Edmar Moretti - ajusta a altura do texto do título dos quadros
   .embPanel__titleText {
     @include euiTextTruncate;
     font-weight: $euiFontWeightBold;
+    white-space: normal !Important;
   }
 
   .embPanel__placeholderTitleText {

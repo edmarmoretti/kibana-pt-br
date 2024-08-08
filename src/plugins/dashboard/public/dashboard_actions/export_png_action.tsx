@@ -55,7 +55,8 @@ export class ExportPNGAction implements Action<ExportContext> {
     dashboardExportPngActionStrings.getDisplayName();
 
   public async isCompatible(context: ExportContext): Promise<boolean> {
-    if(context.embeddable.domNode){
+    
+    if(context.embeddable.domNode && !context.embeddable?.activeVisualizationState?.columns){
       return true;
     }
     return false;
@@ -63,7 +64,6 @@ export class ExportPNGAction implements Action<ExportContext> {
 
   private exportPNG = async (context: ExportContext) => {
     let quadro = (context.embeddable.domNode || context.embeddable._domNode).parentNode.parentNode;
-
     html2canvas(quadro).then(function(canvas: { toDataURL: (arg0: string) => string | URL; }) {
       let xhr = new XMLHttpRequest();
       xhr.responseType = 'blob';
