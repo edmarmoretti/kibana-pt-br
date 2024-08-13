@@ -11,10 +11,11 @@
 .dshDashboardViewport--panelExpanded {
   flex: 1;
 }
-
+//Edmar Moretti - ajusta para caber os ícones de edição
 .dshDashboardViewport-controls {
   margin: 0 $euiSizeS 0 $euiSizeS;
-  padding-top: $euiSizeS;
+  //padding-top: $euiSizeS;
+  padding-top: 28px;
   padding-bottom: $euiSizeXS;
 }
 
