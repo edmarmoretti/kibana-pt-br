@@ -199,11 +199,14 @@ export const OptionsListStrings = {
       }
     },
     getCardinalityLabel: (totalOptions: number) =>
+      //Edmar Moretti - remove a mensagem de número de opções na lista de escolha dos controles (filtros)
+      /*
       i18n.translate('controls.optionsList.popover.cardinalityLabel', {
         defaultMessage:
           '{totalOptions, number} {totalOptions, plural, one {option} other {options}}',
         values: { totalOptions },
-      }),
+      })
+      */'',
     getInvalidSelectionsSectionAriaLabel: (fieldName: string, invalidSelectionCount: number) =>
       i18n.translate('controls.optionsList.popover.invalidSelectionsAriaLabel', {
         defaultMessage:
@@ -251,11 +254,12 @@ export const OptionsListStrings = {
         defaultMessage: 'Sorting is ignored when “Show only selected” is true',
       }),
     getDocumentCountTooltip: (documentCount: number) =>
+      /*
       i18n.translate('controls.optionsList.popover.documentCountTooltip', {
         defaultMessage:
           'This value appears in {documentCount, number} {documentCount, plural, one {document} other {documents}}',
         values: { documentCount },
-      }),
+      })*/'',
     getDocumentCountScreenReaderText: (documentCount: number) =>
       i18n.translate('controls.optionsList.popover.documentCountScreenReaderText', {
         defaultMessage:

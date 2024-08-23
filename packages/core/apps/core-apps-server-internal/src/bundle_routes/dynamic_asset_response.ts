@@ -72,11 +72,11 @@ export const createDynamicAssetHandler = ({
         req.headers['accept-encoding'] as string,
         path
       ));
-
+      //Edmar Moretti - alterar o tempo de cache
       let headers: Record<string, string>;
       if (isDist) {
         headers = {
-          'cache-control': `public, max-age=${365 * DAY}, immutable`,
+          'cache-control': `public, max-age=${1 * DAY}, immutable`,
         };
       } else {
         const stat = await fstat(fd);

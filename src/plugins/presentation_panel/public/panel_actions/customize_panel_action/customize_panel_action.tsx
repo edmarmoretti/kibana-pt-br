@@ -11,7 +11,7 @@ import { TracksOverlays } from '@kbn/presentation-containers';
 import {
   apiCanAccessViewMode,
   apiPublishesDataViews,
-  apiPublishesUnifiedSearch,
+  //apiPublishesUnifiedSearch,
   apiPublishesPanelTitle,
   CanAccessViewMode,
   EmbeddableApiContext,
@@ -51,7 +51,7 @@ export class CustomizePanelAction implements Action<EmbeddableApiContext> {
 
   public getDisplayName({ embeddable }: EmbeddableApiContext): string {
     return i18n.translate('presentationPanel.action.customizePanel.displayName', {
-      defaultMessage: 'Settings',
+      defaultMessage: 'Propriedades',
     });
   }
 
@@ -62,10 +62,16 @@ export class CustomizePanelAction implements Action<EmbeddableApiContext> {
   public async isCompatible({ embeddable }: EmbeddableApiContext) {
     if (!isApiCompatibleWithCustomizePanelAction(embeddable)) return false;
     // It should be possible to customize just the time range in View mode
+    /*
     return (
       getInheritedViewMode(embeddable) === 'edit' ||
       (apiPublishesUnifiedSearch(embeddable) &&
         (embeddable.isCompatibleWithUnifiedSearch?.() ?? true))
+    );
+    */
+   //Edmar Moretti - mostra a opção 'settings' apenas no modo de edição
+    return (
+      getInheritedViewMode(embeddable) === 'edit'
     );
   }
 

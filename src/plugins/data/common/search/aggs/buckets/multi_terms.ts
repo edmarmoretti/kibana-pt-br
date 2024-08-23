@@ -151,7 +151,7 @@ export const getMultiTermsBucketAgg = () => {
         name: 'otherBucketLabel',
         type: 'string',
         default: i18n.translate('data.search.aggs.buckets.terms.otherBucketLabel', {
-          defaultMessage: 'Other',
+          defaultMessage: 'Outro',
         }),
         displayName: i18n.translate('data.search.aggs.otherBucket.labelForOtherBucketLabel', {
           defaultMessage: 'Label for other bucket',

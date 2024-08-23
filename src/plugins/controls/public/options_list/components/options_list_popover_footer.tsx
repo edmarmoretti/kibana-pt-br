@@ -6,6 +6,8 @@
  * Side Public License, v 1.
  */
 
+// Edmar Moretti - remove os botões Incluir Excluir dos filtros
+
 import React from 'react';
 
 import {
@@ -13,7 +15,7 @@ import {
   EuiFlexItem,
   EuiProgress,
   EuiFlexGroup,
-  EuiButtonGroup,
+  //EuiButtonGroup,
   EuiPopoverFooter,
   useEuiPaddingSize,
   useEuiBackgroundColor,
@@ -22,7 +24,7 @@ import { css } from '@emotion/react';
 
 import { OptionsListStrings } from './options_list_strings';
 import { useOptionsList } from '../embeddable/options_list_embeddable';
-
+/*
 const aggregationToggleButtons = [
   {
     id: 'optionsList__includeResults',
@@ -35,15 +37,15 @@ const aggregationToggleButtons = [
     label: OptionsListStrings.popover.getExcludeLabel(),
   },
 ];
-
+*/
 export const OptionsListPopoverFooter = ({ isLoading }: { isLoading: boolean }) => {
   const optionsList = useOptionsList();
 
-  const exclude = optionsList.select((state) => state.explicitInput.exclude);
+  //const exclude = optionsList.select((state) => state.explicitInput.exclude);
   const allowExpensiveQueries = optionsList.select(
     (state) => state.componentState.allowExpensiveQueries
   );
-
+/*
   return (
     <>
       <EuiPopoverFooter
@@ -97,4 +99,49 @@ export const OptionsListPopoverFooter = ({ isLoading }: { isLoading: boolean }) 
       </EuiPopoverFooter>
     </>
   );
+*/
+return (
+  <>
+    <EuiPopoverFooter
+      paddingSize="none"
+      css={css`
+        background-color: ${useEuiBackgroundColor('subdued')};
+      `}
+    >
+      {isLoading && (
+        <div style={{ position: 'absolute', width: '100%' }}>
+          <EuiProgress
+            data-test-subj="optionsList-control-popover-loading"
+            size="xs"
+            color="accent"
+          />
+        </div>
+      )}
+
+      <EuiFlexGroup
+        gutterSize="xs"
+        responsive={false}
+        alignItems="center"
+        css={css`
+          padding: ${useEuiPaddingSize('s')};
+        `}
+        justifyContent={'spaceBetween'}
+      >
+
+        {!allowExpensiveQueries && (
+          <EuiFlexItem data-test-subj="optionsList-allow-expensive-queries-warning" grow={false}>
+            <EuiIconTip
+              type="warning"
+              color="warning"
+              content={OptionsListStrings.popover.getAllowExpensiveQueriesWarning()}
+              aria-label={OptionsListStrings.popover.getAllowExpensiveQueriesWarning()}
+            />
+          </EuiFlexItem>
+        )}
+      </EuiFlexGroup>
+    </EuiPopoverFooter>
+  </>
+);
+
 };
+

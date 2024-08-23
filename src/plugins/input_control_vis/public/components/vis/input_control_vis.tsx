@@ -110,12 +110,13 @@ export class InputControlVis extends Component<InputControlVisProps> {
       );
     });
   }
-
+// Edmar Moretti - altera o tamanho do botão aplicar dos filtros
   renderStagingButtons() {
     return (
       <EuiFlexGroup wrap={true}>
         <EuiFlexItem grow={false}>
           <EuiButton
+            size='s'
             fill
             onClick={this.handleSubmit}
             disabled={!this.props.hasChanges()}

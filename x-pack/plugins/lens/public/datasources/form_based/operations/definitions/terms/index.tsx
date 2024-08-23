@@ -343,6 +343,7 @@ export const termsOperation: OperationDefinition<
         ];
       }
     }
+    //Edmar Moretti - tradução de 'Outro'
     if (column.params?.secondaryFields?.length) {
       return buildExpressionFunction<AggFunctionsMapping['aggMultiTerms']>('aggMultiTerms', {
         id: columnId,

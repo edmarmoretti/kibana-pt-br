@@ -35,7 +35,8 @@ export class ESAggTooltipProperty extends ESTooltipProperty {
       : super.getHtmlDisplayValue();
   }
 
+  //Edmar Moretti - impede o filtro no tooltip
   isFilterable(): boolean {
-    return this._aggType === AGG_TYPE.TERMS ? super.isFilterable() : false;
+    return false;//this._aggType === AGG_TYPE.TERMS ? super.isFilterable() : false;
   }
 }

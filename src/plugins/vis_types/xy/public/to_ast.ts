@@ -368,9 +368,9 @@ export const toExpressionAst: VisToExpressionAst<VisParams> = async (vis, params
   if (!dimensions.x) {
     mapColumn = buildExpressionFunction('mapColumn', {
       id: 'all',
-      expression: '_all',
+      expression: ' ',
       name: i18n.translate('visTypeXy.allDocsTitle', {
-        defaultMessage: 'All docs',
+        defaultMessage: ' ',
       }),
     });
   }

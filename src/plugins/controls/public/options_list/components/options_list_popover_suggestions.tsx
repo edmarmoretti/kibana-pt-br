@@ -81,8 +81,9 @@ export const OptionsListPopoverSuggestions = ({
   }, [availableOptions, selectedOptions, showOnlySelected]);
 
   const existsSelectableOption = useMemo<EuiSelectableOption | undefined>(() => {
-    if (hideExists || (!existsSelected && (showOnlySelected || suggestions?.length === 0))) return;
-
+    //Edmar Moretti - remove a opção 'Exists' da lista de itens dos filtros
+    //if (hideExists || (!existsSelected && (showOnlySelected || suggestions?.length === 0))) return;
+    if (true || (!existsSelected && (showOnlySelected || suggestions?.length === 0))) return;
     return {
       key: 'exists-option',
       checked: existsSelected ? 'on' : undefined,

@@ -197,8 +197,12 @@ export class UrlFormat extends FieldFormat {
         }
 
         const linkTarget = this.param('openLinkInCurrentTab') ? '_self' : '_blank';
-
-        return `<a href="${prefix}${url}" target="${linkTarget}" rel="noopener noreferrer">${linkLabel}</a>`;
-    }
+        //Edmar Moretti - retorna apenas a url quando contiver a palavra flyout
+        if (url.indexOf('flyout') > 0) {
+          return `${linkLabel}`
+        } else {
+          return `<a href="${prefix}${url}" target="${linkTarget}" rel="noopener noreferrer">${linkLabel}</a>`;
+        }
+      }
   };
 }

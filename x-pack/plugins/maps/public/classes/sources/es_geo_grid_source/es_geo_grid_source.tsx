@@ -620,7 +620,9 @@ export class ESGeoGridSource extends AbstractESAggSource implements IMvtVectorSo
     if (geoFieldNames.length === 0 || addFilters === null) {
       return [];
     }
-
+    //Edmar Moretti - remove a opção de filtro pelo cluster nos mapas
+    return [];
+    /*
     return [
       {
         label: i18n.translate('xpack.maps.tooltip.action.filterByClusterLabel', {
@@ -638,5 +640,6 @@ export class ESGeoGridSource extends AbstractESAggSource implements IMvtVectorSo
         },
       },
     ];
+    */
   }
 }

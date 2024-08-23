@@ -120,6 +120,8 @@ export const LegendActionPopover: React.FunctionComponent<LegendActionPopoverPro
       <EuiIcon size="s" type="boxesVertical" />
     </div>
   );
+  //Edmar Moretti - alterado para não permitir filtros na legenda
+  return null;
   return (
     <EuiPopover
       button={Button}

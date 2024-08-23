@@ -17,7 +17,8 @@ import { FormRow } from './form_row';
 interface ListControlUiState {
   isLoading: boolean;
 }
-
+//Edmar Moretti
+//Tradução da palavra Select... e ordenamento dos meses
 export type ListControlUiProps = WrappedComponentProps & {
   id: string;
   label: string;

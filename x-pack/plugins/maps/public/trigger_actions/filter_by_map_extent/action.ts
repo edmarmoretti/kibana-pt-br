@@ -8,7 +8,7 @@
 import { i18n } from '@kbn/i18n';
 import {
   type EmbeddableApiContext,
-  apiHasType,
+  //apiHasType,
   apiIsOfType,
   areTriggersDisabled,
 } from '@kbn/presentation-publishing';
@@ -20,8 +20,14 @@ import { isLegacyMapApi } from '../../legacy_visualizations/is_legacy_map';
 
 export const FILTER_BY_MAP_EXTENT = 'FILTER_BY_MAP_EXTENT';
 
-export const isApiCompatible = (api: unknown | null): api is FilterByMapExtentActionApi =>
-  Boolean(apiHasType(api));
+//Edmar Moretti - remove a opção de filtrar o painel conforme o mapa é deslocado
+
+//export const isApiCompatible = (api: unknown | null): api is FilterByMapExtentActionApi =>
+//  Boolean(apiHasType(api));
+
+export const isApiCompatible = (api: unknown | null): api is FilterByMapExtentActionApi => {
+  return false;
+}
 
 function getContainerLabel(api: FilterByMapExtentActionApi | unknown) {
   return isApiCompatible(api) && api.parentApi?.type === 'dashboard'

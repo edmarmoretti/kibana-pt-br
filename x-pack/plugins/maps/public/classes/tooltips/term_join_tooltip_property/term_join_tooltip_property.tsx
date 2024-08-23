@@ -65,7 +65,8 @@ export class TermJoinTooltipProperty implements ITooltipProperty {
         console.error('Cannot create joined filter', e);
       }
     }
-
-    return esFilters;
+    //Edmar Moretti - impede o filtro no tooltip dos mapas
+    //return esFilters;
+    return [];
   }
 }

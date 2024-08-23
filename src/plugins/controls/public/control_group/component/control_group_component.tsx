@@ -6,6 +6,8 @@
  * Side Public License, v 1.
  */
 
+//Edmar Moretti - altera o botão de aplicar para mostrar um texto ao invés de um ícone
+
 import '../control_group.scss';
 
 import classNames from 'classnames';
@@ -31,6 +33,7 @@ import {
 import {
   EuiButtonEmpty,
   EuiButtonIcon,
+  EuiButton,
   EuiCheckbox,
   EuiFlexGroup,
   EuiFlexItem,
@@ -116,11 +119,11 @@ export const ControlGroup = () => {
 
   const ApplyButtonComponent = useMemo(() => {
     return (
-      <EuiButtonIcon
+      <EuiButton
         size="m"
         disabled={!applyButtonEnabled}
         iconSize="m"
-        display="fill"
+        //display="fill"
         color={'success'}
         iconType={'check'}
         data-test-subj="controlGroup--applyFiltersButton"
@@ -128,7 +131,8 @@ export const ControlGroup = () => {
         onClick={() => {
           if (unpublishedFilters) controlGroup.publishFilters(unpublishedFilters);
         }}
-      />
+      >Aplicar
+      </EuiButton>
     );
   }, [applyButtonEnabled, unpublishedFilters, controlGroup]);
 
@@ -238,7 +242,7 @@ export const ControlGroup = () => {
   let panelBg: 'transparent' | 'plain' | 'success' = 'transparent';
   if (emptyState) panelBg = 'plain';
   if (draggingId) panelBg = 'success';
-
+//Edmar Moretti - ajusta o estilo do botão aplicar, dos filtros
   return (
     <>
       {idsInOrder.length > 0 || showAddButton ? (
@@ -255,7 +259,7 @@ export const ControlGroup = () => {
           <EuiFlexGroup
             wrap={false}
             gutterSize="s"
-            direction="row"
+            direction="column"
             responsive={false}
             alignItems="stretch"
             justifyContent="center"

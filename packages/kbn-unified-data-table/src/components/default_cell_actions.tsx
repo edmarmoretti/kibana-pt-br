@@ -123,20 +123,10 @@ export function buildCellActions(
   valueToStringConverter: ValueToStringConverter,
   onFilter?: DocViewFilterFn
 ) {
+  //Edmar Moretti - desativa o botão de filtro em tabelas no discover
   return [
     ...(onFilter && field.filterable
-      ? [
-          ({ Component, rowIndex, columnId }: EuiDataGridColumnCellActionProps) =>
-            FilterInBtn(
-              { Component, rowIndex, columnId } as EuiDataGridColumnCellActionProps,
-              field
-            ),
-          ({ Component, rowIndex, columnId }: EuiDataGridColumnCellActionProps) =>
-            FilterOutBtn(
-              { Component, rowIndex, columnId } as EuiDataGridColumnCellActionProps,
-              field
-            ),
-        ]
+      ? []
       : []),
     ({ Component, rowIndex, columnId }: EuiDataGridColumnCellActionProps) =>
       buildCopyValueButton(

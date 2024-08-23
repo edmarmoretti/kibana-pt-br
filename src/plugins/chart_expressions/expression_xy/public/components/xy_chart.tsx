@@ -5,7 +5,7 @@
  * in compliance with, at your election, the Elastic License 2.0 or the Server
  * Side Public License, v 1.
  */
-
+//Edmar Moretti - define as propriedades que serão utilizadas na renderização de um gráfico
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import {
@@ -16,9 +16,9 @@ import {
   VerticalAlignment,
   HorizontalAlignment,
   LayoutDirection,
-  ElementClickListener,
-  BrushEndListener,
-  XYBrushEvent,
+  //ElementClickListener,
+  //BrushEndListener,
+  //XYBrushEvent,
   LegendPositionConfig,
   DisplayValueStyle,
   RecursivePartial,
@@ -26,7 +26,7 @@ import {
   TooltipType,
   Placement,
   Direction,
-  XYChartElementEvent,
+  //XYChartElementEvent,
   Tooltip,
   XYChartSeriesIdentifier,
   SettingsProps,
@@ -89,7 +89,7 @@ import {
   getOriginalAxisPosition,
 } from '../helpers';
 import { getXDomain, XyEndzones } from './x_domain';
-import { getLegendAction } from './legend_action';
+//import { getLegendAction } from './legend_action';
 import {
   ReferenceLines,
   computeChartMargins,
@@ -114,7 +114,7 @@ import { XYCurrentTime } from './xy_current_time';
 import './xy_chart.scss';
 import { TooltipHeader } from './tooltip';
 import { LegendColorPickerWrapperContext, LegendColorPickerWrapper } from './legend_color_picker';
-import { createSplitPoint, getTooltipActions, getXSeriesPoint } from './tooltip/tooltip_actions';
+//import { createSplitPoint, getTooltipActions, getXSeriesPoint } from './tooltip/tooltip_actions';
 
 declare global {
   interface Window {
@@ -157,10 +157,11 @@ function nonNullable<T>(v: T): v is NonNullable<T> {
 function getValueLabelsStyling(isHorizontal: boolean): {
   displayValue: RecursivePartial<DisplayValueStyle>;
 } {
-  const VALUE_LABELS_MAX_FONTSIZE = 12;
-  const VALUE_LABELS_MIN_FONTSIZE = 10;
-  const VALUE_LABELS_VERTICAL_OFFSET = -10;
-  const VALUE_LABELS_HORIZONTAL_OFFSET = 10;
+  //Edmar Moretti - altera os tamanhos dos labels
+  const VALUE_LABELS_MAX_FONTSIZE = 12;//12;
+  const VALUE_LABELS_MIN_FONTSIZE = 8; //10;
+  const VALUE_LABELS_VERTICAL_OFFSET = -5; //-10;
+  const VALUE_LABELS_HORIZONTAL_OFFSET = 1; //10;
 
   return {
     displayValue: {
@@ -198,10 +199,10 @@ export function XYChart({
   chartsActiveCursorService,
   paletteService,
   minInterval,
-  onClickValue,
-  onClickMultiValue,
+  //onClickValue,
+  //onClickMultiValue,
   layerCellValueActions,
-  onSelectRange,
+  //onSelectRange,
   setChartSize,
   interactive = true,
   syncColors,
@@ -557,11 +558,16 @@ export function XYChart({
 
   const shouldShowValueLabels = !uiState || valueLabels !== ValueLabelModes.HIDE;
 
-  const valueLabelsStyling =
+  let valueLabelsStyling =
     shouldShowValueLabels &&
     valueLabels !== ValueLabelModes.HIDE &&
     getValueLabelsStyling(shouldRotate);
 
+  //Edmar Moretti - ajusta o posicionamento dos labels
+  if(valueLabelsStyling){
+    valueLabelsStyling.displayValue.offsetY = 1;
+  }
+  /*
   const clickHandler: ElementClickListener = ([elementEvent]) => {
     // this cast is safe because we are rendering a cartesian chart
     const [xyGeometry, xySeries] = elementEvent as XYChartElementEvent;
@@ -660,7 +666,7 @@ export function XYChart({
     };
     onSelectRange(context);
   };
-
+*/
   const legendInsideParams: LegendPositionConfig = {
     vAlign: legend.verticalAlignment ?? VerticalAlignment.Top,
     hAlign: legend?.horizontalAlignment ?? HorizontalAlignment.Right,
@@ -743,6 +749,19 @@ export function XYChart({
     formatFactory
   );
 
+  //Edmar Moretti - remove a linha do eixo quando a categoria estiver no eixo y
+  if(getOriginalAxisPosition('bottom', shouldRotate) == 'left'){
+    xAxisStyle.axisLine = {
+      stroke: 'white'
+    };
+  } else {
+    xAxisStyle.tickLine = {
+      visible: true,
+      size: 5
+    };
+  }
+  xAxisStyle.axisTitle = {fill: '#69707d'};
+
   return (
     <div css={chartContainerStyle}>
       {showLegend !== undefined && uiState && (
@@ -778,6 +797,7 @@ export function XYChart({
                   )
                 : undefined
             }
+            /*
             actions={getTooltipActions(
               dataLayers,
               onClickMultiValue,
@@ -787,6 +807,7 @@ export function XYChart({
               formatFactory,
               interactive && !args.detailedTooltip && !isEsqlMode
             )}
+*/
             customTooltip={
               args.detailedTooltip
                 ? ({ header, values }) => (
@@ -864,6 +885,7 @@ export function XYChart({
             rotation={shouldRotate ? 90 : 0}
             xDomain={xDomain}
             // enable brushing only for time charts, for both ES|QL and DSL queries
+/*
             onBrushEnd={interactive ? (brushHandler as BrushEndListener) : undefined}
             onElementClick={interactive ? clickHandler : undefined}
             legendAction={
@@ -879,6 +901,7 @@ export function XYChart({
                   )
                 : undefined
             }
+*/
             ariaLabel={args.ariaLabel}
             ariaUseDefaultSummary={!args.ariaLabel}
             orderOrdinalBinsBy={
@@ -944,6 +967,8 @@ export function XYChart({
                   if (axis.truncate && value.length > axis.truncate) {
                     value = `${value.slice(0, axis.truncate)}...`;
                   }
+                  //Edmar Moretti - Formata corretamente os números curtos;
+                  value = value.replace("milhões","mi");
                   return value;
                 }}
                 style={getYAxesStyle(axis)}

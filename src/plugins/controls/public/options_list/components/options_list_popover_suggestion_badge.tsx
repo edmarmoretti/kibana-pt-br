@@ -15,7 +15,7 @@ import { OptionsListStrings } from './options_list_strings';
 
 export const OptionsListPopoverSuggestionBadge = ({ documentCount }: { documentCount: number }) => {
   const { euiTheme } = useEuiTheme();
-
+// Edmar Moretti - remove o número que aparece em cada item da listagem de opções dos filtros
   return (
     <>
       <EuiToolTip
@@ -32,7 +32,7 @@ export const OptionsListPopoverSuggestionBadge = ({ documentCount }: { documentC
             font-weight: ${euiTheme.font.weight.medium} !important;
           `}
         >
-          {`${documentCount.toLocaleString()}`}
+          {/*Edmar Moretti `${documentCount.toLocaleString()}`*/}
         </EuiText>
       </EuiToolTip>
       <EuiScreenReaderOnly>
