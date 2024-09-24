@@ -22,6 +22,7 @@ export async function initTargets({ log, sourceDir, buildDir }: TaskContext) {
   });
 
   log.debug(`creating build output dir [${buildDir}]`);
+
   await asyncMkdir(buildDir, { recursive: true });
 }
 

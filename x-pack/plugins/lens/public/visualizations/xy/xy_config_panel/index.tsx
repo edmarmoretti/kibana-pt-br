@@ -117,7 +117,7 @@ const axisKeyToTitleMapping: Record<keyof AxesSettingsConfig, 'xTitle' | 'yTitle
     yLeft: 'yTitle',
     yRight: 'yRightTitle',
   };
-
+//Edmar Moretti - tradução
 const xyLegendValues: Array<{
   value: XYLegendValue;
   label: string;
@@ -180,10 +180,10 @@ const xyLegendValues: Array<{
   {
     value: LegendValue.LastNonNullValue,
     label: i18n.translate('xpack.lens.shared.legendValues.lastNonNullValue', {
-      defaultMessage: 'Last non-null value',
+      defaultMessage: 'Último valor não nulo',
     }),
     toolTipContent: i18n.translate('xpack.lens.shared.legendValues.lastNonNullValueDesc', {
-      defaultMessage: 'Last non-null value in the series.',
+      defaultMessage: 'Último valor não nulo da série.',
     }),
   },
   {
@@ -261,7 +261,7 @@ const xyLegendValues: Array<{
   {
     value: LegendValue.StdDeviation,
     label: i18n.translate('xpack.lens.shared.legendValues.stdDev', {
-      defaultMessage: 'Std deviation',
+      defaultMessage: 'Desvio padrão',
     }),
     toolTipContent: i18n.translate('xpack.lens.shared.legendValues.stdDevDesc', {
       defaultMessage: 'Standard deviation of all the values in the series.',

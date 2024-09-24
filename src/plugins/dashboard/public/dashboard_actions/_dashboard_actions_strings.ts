@@ -51,7 +51,7 @@ export const dashboardAddToLibraryActionStrings = {
 export const dashboardClonePanelActionStrings = {
   getDisplayName: () =>
     i18n.translate('dashboard.panel.clonePanel', {
-      defaultMessage: 'Duplicate',
+      defaultMessage: 'Duplicar',
     }),
   getClonedTag: () =>
     i18n.translate('dashboard.panel.title.clonedTag', {

@@ -111,7 +111,7 @@ export const createGridCell = (
     //Edmar Moretti - cria o botão que abre o link em um iframe quando a url possuir a palavra flyout
     const regex = /<a[^>]*>(.*?)<\/a>/;
     let match = content.match(regex);
-    const label = match ? match[1] : null;
+    const label = match ? match[1] : "";
     if (content.indexOf('flyout') > 0) {
       // @ts-ignore
       if(typeof window.abreFichaIndicador === 'function'){

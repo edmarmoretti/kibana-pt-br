@@ -45,7 +45,7 @@ export const getUnlinkLayerAction = ({
 
       toasts.addSuccess(
         i18n.translate('xpack.lens.xyChart.annotations.notificationUnlinked', {
-          defaultMessage: `Unlinked "{title}"`,
+          defaultMessage: `Desvincular "{title}"`,
           values: { title: getAnnotationLayerTitle(layer) },
         })
       );
@@ -54,7 +54,7 @@ export const getUnlinkLayerAction = ({
       defaultMessage: 'Saves the annotation group as a part of the Lens Saved Object',
     }),
     displayName: i18n.translate('xpack.lens.xyChart.annotations.unlinkFromLibrary', {
-      defaultMessage: 'Unlink from library',
+      defaultMessage: 'Desvincular da biblioteca',
     }),
     isCompatible: true,
     icon: 'unlink',
