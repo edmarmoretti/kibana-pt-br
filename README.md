@@ -5,11 +5,13 @@ Código fonte: https://github.com/edmarmoretti/kibana
 
 ## Principais alterações feitas no código original
 
-* Tradução para pt-BR da interface pública dos painéis.
+* Tradução para pt-BR.
+
+* Configurado para pt-BR.
 
 * Opção para definir notas de rodapé, inclusive com links, nos quadros dos painéis.
 
-* Opção para definir resumos nos quadros dos painéis.
+* Opção para definir resumos nos quadros dos painéis, que são inseridos abaixo do título.
 
 * Ordenamento da lista de opções nos filtros que utilizem siglas de meses do ano.
 
@@ -47,7 +49,9 @@ Código fonte: https://github.com/edmarmoretti/kibana
   
 * Remoção das opções de filtragem existentes nas legendas dos gráficos e das tabelas.
 
-* Colunas do tipo link, criadas nos dataviews, podem abrir o link em uma janela flutuante no próprio painel. Na definição da URL do link deve constar a palavra "flyout", por exemplo "http://google.com.br?flyout"
+* Colunas do tipo link, criadas nos dataviews, podem abrir o link em uma janela flutuante no próprio painel. Na definição da URL do link deve constar a palavra "flyout", por exemplo "http://google.com.br?flyout".
+
+* Camadas do tipo ponto nos mapas não mostram pontos com valores zero.
 
 
 
