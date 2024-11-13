@@ -258,7 +258,7 @@ export function App({
           e.preventDefault();
         },
         text: i18n.translate('xpack.lens.breadcrumbsTitle', {
-          defaultMessage: 'Visualize Library',
+          defaultMessage: 'Biblioteca de visualizações',
         }),
       });
     }

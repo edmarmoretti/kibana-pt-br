@@ -81,7 +81,7 @@ export const useBreadcrumbs = (pageDeepLink: MaintenanceWindowDeepLinkIds) => {
     const breadcrumbs = [
       {
         text: i18n.translate('xpack.alerting.breadcrumbs.stackManagementLinkText', {
-          defaultMessage: 'Stack Management',
+          defaultMessage: 'Gerenciamento da Suite',
         }),
         href: getAppUrl(),
       },

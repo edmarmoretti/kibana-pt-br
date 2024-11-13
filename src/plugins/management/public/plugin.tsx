@@ -93,7 +93,7 @@ export class ManagementPlugin
       home.featureCatalogue.register({
         id: 'stack-management',
         title: kbnI18n.translate('management.stackManagement.managementLabel', {
-          defaultMessage: 'Stack Management',
+          defaultMessage: 'Gerenciamento da Suite',
         }),
         description: kbnI18n.translate('management.stackManagement.managementDescription', {
           defaultMessage: 'Your center console for managing the Elastic Stack.',
@@ -109,7 +109,7 @@ export class ManagementPlugin
     core.application.register({
       id: MANAGEMENT_APP_ID,
       title: kbnI18n.translate('management.stackManagement.title', {
-        defaultMessage: 'Stack Management',
+        defaultMessage: 'Gerenciamento da Suite',
       }),
       order: 9040,
       euiIconType: 'logoElastic',

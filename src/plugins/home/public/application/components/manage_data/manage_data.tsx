@@ -95,7 +95,7 @@ export const ManageData: FC<Props> = ({ addBasePath, application, features }) =>
                       >
                         <FormattedMessage
                           id="home.manageData.stackManagementButtonLabel"
-                          defaultMessage="Stack Management"
+                          defaultMessage="Gerenciamento da Suite"
                         />
                       </EuiButtonEmpty>
                     </RedirectAppLinks>

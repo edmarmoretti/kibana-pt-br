@@ -9,7 +9,7 @@
 import { i18n } from '@kbn/i18n';
 
 const managementBreadcrumbText = i18n.translate('management.breadcrumb', {
-  defaultMessage: 'Stack Management',
+  defaultMessage: 'Gerenciamento da Suite',
 });
 
 export const MANAGEMENT_BREADCRUMB_NO_HREF = {

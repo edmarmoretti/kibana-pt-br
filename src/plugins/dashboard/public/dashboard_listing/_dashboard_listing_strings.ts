@@ -39,7 +39,7 @@ export const dashboardListingTableStrings = {
     }),
   getTableListTitle: () =>
     i18n.translate('dashboard.listing.tableListTitle', {
-      defaultMessage: 'Dashboards',
+      defaultMessage: 'Painéis',
     }),
 };
 

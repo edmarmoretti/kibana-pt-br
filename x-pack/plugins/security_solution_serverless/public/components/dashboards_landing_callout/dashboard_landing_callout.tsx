@@ -39,7 +39,7 @@ export const DashboardsLandingCalloutComponent: React.FC = () => {
                 <LinkAnchor id={ExternalPageName.visualize} css={linkAnchorCss}>
                   <FormattedMessage
                     id="xpack.securitySolutionServerless.dashboardsLandingCallout.visualizeLibrary"
-                    defaultMessage="Visualize library"
+                    defaultMessage="Biblioteca de visualizações"
                   />
                 </LinkAnchor>
               ),

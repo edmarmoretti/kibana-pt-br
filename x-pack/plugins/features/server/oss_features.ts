@@ -118,7 +118,7 @@ export const buildOSSFeatures = ({
     {
       id: 'visualize',
       name: i18n.translate('xpack.features.visualizeFeatureName', {
-        defaultMessage: 'Visualize Library',
+        defaultMessage: 'Biblioteca de visualizações',
       }),
       management: {
         ...(includeReporting ? { insightsAndAlerting: ['reporting'] } : {}),
