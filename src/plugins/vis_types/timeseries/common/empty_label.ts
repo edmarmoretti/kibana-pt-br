@@ -8,9 +8,9 @@
  */
 
 import { i18n } from '@kbn/i18n';
-
+//Edmar Moretti - substituição de (empty) por ''
 export const emptyLabel = i18n.translate('visTypeTimeseries.emptyTextValue', {
-  defaultMessage: '(empty)',
+  defaultMessage: ' ',
 });
 
 export const getValueOrEmpty = (value: unknown) => {

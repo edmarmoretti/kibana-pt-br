@@ -28,7 +28,7 @@ import { i18n } from '@kbn/i18n';
 import React, { FC, PropsWithChildren, ReactNode, useState } from 'react';
 import { FormattedMessage } from '@kbn/i18n-react';
 import type { DocumentDiffMode } from './types';
-
+//Edmar Moretti - tradução
 export interface ComparisonControlsProps {
   isPlainRecord?: boolean;
   selectedDocIds: string[];
@@ -72,13 +72,13 @@ export const ComparisonControls = ({
             {isPlainRecord ? (
               <FormattedMessage
                 id="unifiedDataTable.comparingResults"
-                defaultMessage="Comparing {documentCount} results"
+                defaultMessage="Comparando {documentCount} resultados"
                 values={{ documentCount: selectedDocIds.length }}
               />
             ) : (
               <FormattedMessage
                 id="unifiedDataTable.comparingDocuments"
-                defaultMessage="Comparing {documentCount} documents"
+                defaultMessage="Comparando {documentCount} documentos"
                 values={{ documentCount: selectedDocIds.length }}
               />
             )}
@@ -113,7 +113,7 @@ export const ComparisonControls = ({
           >
             <FormattedMessage
               id="unifiedDataTable.exitDocumentComparison"
-              defaultMessage="Exit comparison mode"
+              defaultMessage="Sair do modo de comparação"
             />
           </EuiDataGridToolbarControl>
         </div>
@@ -123,7 +123,7 @@ export const ComparisonControls = ({
 };
 
 const showDiffLabel = i18n.translate('unifiedDataTable.showDiff', {
-  defaultMessage: 'Show diff',
+  defaultMessage: 'Mostrar diferenças',
 });
 
 const ComparisonSettings = ({
@@ -167,7 +167,7 @@ const ComparisonSettings = ({
           >
             <FormattedMessage
               id="unifiedDataTable.comparisonSettings"
-              defaultMessage="Comparison settings"
+              defaultMessage="Parâmetros de comparação"
             />
           </EuiDataGridToolbarControl>
         </div>
@@ -205,7 +205,7 @@ const ComparisonSettings = ({
         />
 
         <SectionHeader
-          title={<FormattedMessage id="unifiedDataTable.diffModesBasic" defaultMessage="Basic" />}
+          title={<FormattedMessage id="unifiedDataTable.diffModesBasic" defaultMessage="Básico" />}
           type="subsection"
         />
 
@@ -215,17 +215,17 @@ const ComparisonSettings = ({
           setDiffMode={setDiffMode}
           disabled={!showDiff}
         >
-          <FormattedMessage id="unifiedDataTable.diffModeFullValue" defaultMessage="Full value" />
+          <FormattedMessage id="unifiedDataTable.diffModeFullValue" defaultMessage="Completo" />
         </DiffModeEntry>
 
         <SectionHeader
           title={
-            <FormattedMessage id="unifiedDataTable.diffModesAdvanced" defaultMessage="Advanced" />
+            <FormattedMessage id="unifiedDataTable.diffModesAdvanced" defaultMessage="Avançado" />
           }
           description={
             <FormattedMessage
               id="unifiedDataTable.advancedDiffModesTooltip"
-              defaultMessage="Advanced modes offer enhanced diffing capabilities, but operate on raw documents and therefore do not support field formatting."
+              defaultMessage="Os modos avançados oferecem capacidades aprimoradas de diferenciação, mas operam em documentos brutos e, portanto, não suportam formatação de campos."
             />
           }
           type="subsection"
@@ -238,7 +238,7 @@ const ComparisonSettings = ({
           setDiffMode={setDiffMode}
           disabled={!showDiff}
         >
-          <FormattedMessage id="unifiedDataTable.diffModeChars" defaultMessage="By character" />
+          <FormattedMessage id="unifiedDataTable.diffModeChars" defaultMessage="Por caractere" />
         </DiffModeEntry>
 
         <DiffModeEntry
@@ -247,7 +247,7 @@ const ComparisonSettings = ({
           setDiffMode={setDiffMode}
           disabled={!showDiff}
         >
-          <FormattedMessage id="unifiedDataTable.diffModeWords" defaultMessage="By word" />
+          <FormattedMessage id="unifiedDataTable.diffModeWords" defaultMessage="Por palavra" />
         </DiffModeEntry>
 
         <DiffModeEntry
@@ -256,13 +256,13 @@ const ComparisonSettings = ({
           setDiffMode={setDiffMode}
           disabled={!showDiff}
         >
-          <FormattedMessage id="unifiedDataTable.diffModeLines" defaultMessage="By line" />
+          <FormattedMessage id="unifiedDataTable.diffModeLines" defaultMessage="Por linha" />
         </DiffModeEntry>
 
         <EuiHorizontalRule margin="none" />
 
         <SectionHeader
-          title={<FormattedMessage id="unifiedDataTable.diffOptions" defaultMessage="Options" />}
+          title={<FormattedMessage id="unifiedDataTable.diffOptions" defaultMessage="Opções" />}
         />
 
         {!forceShowAllFields && (
@@ -272,7 +272,7 @@ const ComparisonSettings = ({
             })}
             description={i18n.translate('unifiedDataTable.showAllFieldsDescription', {
               defaultMessage:
-                'Show all available fields if enabled, otherwise only fields with columns in the main table.',
+                'Exiba todos os campos disponíveis se habilitado, caso contrário, apenas os campos com colunas na tabela principal',
             })}
             checked={showAllFields ?? false}
             onChange={(e) => {
@@ -285,11 +285,11 @@ const ComparisonSettings = ({
 
         <DiffOptionSwitch
           label={i18n.translate('unifiedDataTable.showMatchingValues', {
-            defaultMessage: 'Show matching fields',
+            defaultMessage: 'Mostrar campos correspondentes',
           })}
           description={i18n.translate('unifiedDataTable.showMatchingValuesDescription', {
             defaultMessage:
-              'Show fields where all values are equal if enabled, otherwise only fields with differences.',
+              'Mostrar campos onde todos os valores são iguais se habilitado, caso contrário, apenas campos com diferenças.',
           })}
           checked={showMatchingValues ?? true}
           onChange={(e) => {
@@ -301,11 +301,11 @@ const ComparisonSettings = ({
 
         <DiffOptionSwitch
           label={i18n.translate('unifiedDataTable.showDiffDecorations', {
-            defaultMessage: 'Show diff decorations',
+            defaultMessage: 'Mostrar decorações diferentes',
           })}
           description={i18n.translate('unifiedDataTable.showDiffDecorationsDescription', {
             defaultMessage:
-              'Show text decorations in diffs if enabled, otherwise only use highlighting.',
+              'Mostrar decorações de texto nas diferenças, se habilitado, caso contrário, use apenas realce.',
           })}
           checked={showDiffDecorations ?? true}
           disabled={!showDiff}

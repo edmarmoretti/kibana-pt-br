@@ -17,7 +17,7 @@ export const getStateSettings = (): Record<string, UiSettingsParams> => {
       name: i18n.translate('core.ui_settings.params.storeUrlTitle', {
         defaultMessage: 'Store URLs in session storage',
       }),
-      value: false,
+      value: true,
       description: i18n.translate('core.ui_settings.params.storeUrlText', {
         defaultMessage:
           'The URL can sometimes grow to be too large for some browsers to handle. ' +

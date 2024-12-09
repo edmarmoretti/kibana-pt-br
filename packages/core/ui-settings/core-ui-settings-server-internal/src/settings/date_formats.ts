@@ -11,7 +11,7 @@ import moment from 'moment-timezone';
 import { schema } from '@kbn/config-schema';
 import { i18n } from '@kbn/i18n';
 import { UiSettingsParams, TIMEZONE_OPTIONS } from '@kbn/core-ui-settings-common';
-
+//Edmar Moretti - definição de formatos padrão
 export const getDateFormatSettings = (): Record<string, UiSettingsParams> => {
   const weekdays = moment.weekdays().slice();
   const [defaultWeekday] = weekdays;
@@ -23,7 +23,7 @@ export const getDateFormatSettings = (): Record<string, UiSettingsParams> => {
       name: i18n.translate('core.ui_settings.params.dateFormatTitle', {
         defaultMessage: 'Date format',
       }),
-      value: 'MMM D, YYYY @ HH:mm:ss.SSS',
+      value: 'D/MMM/YYYY @ HH:mm:ss.SSS',
       description: i18n.translate('core.ui_settings.params.dateFormatText', {
         defaultMessage: 'The {formatLink} for pretty formatted dates.',
         description:
@@ -76,8 +76,9 @@ export const getDateFormatSettings = (): Record<string, UiSettingsParams> => {
   ["", "HH:mm:ss.SSS"],
   ["PT1S", "HH:mm:ss"],
   ["PT1M", "HH:mm"],
-  ["PT1H", "YYYY-MM-DD HH:mm"],
-  ["P1DT", "YYYY-MM-DD"],
+  ["PT1H", "DD/MM/YYYY HH:mm"],
+  ["P1DT", "DD/MM/YYYY"],
+  ["P1MT", "MM/YYYY"],
   ["P1YT", "YYYY"]
 ]`,
       description: i18n.translate('core.ui_settings.params.dateFormat.scaledText', {
@@ -129,7 +130,7 @@ export const getDateFormatSettings = (): Record<string, UiSettingsParams> => {
       name: i18n.translate('core.ui_settings.params.dateNanosFormatTitle', {
         defaultMessage: 'Date with nanoseconds format',
       }),
-      value: 'MMM D, YYYY @ HH:mm:ss.SSSSSSSSS',
+      value: 'D/MMM/YYYY @ HH:mm:ss.SSSSSSSSS',
       description: i18n.translate('core.ui_settings.params.dateNanosFormatText', {
         defaultMessage: 'The format for {dateNanosLink} data.',
         values: {

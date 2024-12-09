@@ -30,8 +30,9 @@ import { getPartitionFillColor } from '../colors/color_mapping_accessors';
 
 // This is particularly useful in case of a text based languages where
 // it's no possible to use a missingBucketLabel
+//Edmar Moretti - substituição de (empty) por ''
 const emptySliceLabel = i18n.translate('expressionPartitionVis.emptySlice', {
-  defaultMessage: '(empty)',
+  defaultMessage: ' ',
 });
 
 export const getLayers = (

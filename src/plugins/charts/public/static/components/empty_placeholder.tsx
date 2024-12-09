@@ -28,11 +28,11 @@ const style = css`
   align-items: center;
   justify-content: center;
 `;
-
+//Edmar Moretti - tradução Nenhum resultado encontrado
 export const EmptyPlaceholder = ({
   icon,
   iconColor = 'subdued',
-  message = <FormattedMessage id="charts.noDataLabel" defaultMessage="No results found" />,
+  message = <FormattedMessage id="charts.noDataLabel" defaultMessage="Nenhum resultado encontrado" />,
   dataTestSubj = 'emptyPlaceholder',
   className,
   renderComplete,

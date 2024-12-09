@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - tradução
 import {
   EuiDataGridColumn,
   EuiFlexGroup,
@@ -72,7 +72,7 @@ export const useComparisonColumns = ({
         additional.push({
           iconType: 'pin',
           label: i18n.translate('unifiedDataTable.pinForComparison', {
-            defaultMessage: 'Pin for comparison',
+            defaultMessage: 'Fixar para comparação',
           }),
           size: 'xs',
           onClick: () => {
@@ -92,7 +92,7 @@ export const useComparisonColumns = ({
         additional.push({
           iconType: 'cross',
           label: i18n.translate('unifiedDataTable.removeFromComparison', {
-            defaultMessage: 'Remove from comparison',
+            defaultMessage: 'Remover da comparação',
           }),
           size: 'xs',
           onClick: () => {
@@ -104,7 +104,7 @@ export const useComparisonColumns = ({
       const resultNumber = isPlainRecord ? Number(docId || 0) + 1 : undefined;
       const columnTitle = isPlainRecord
         ? i18n.translate('unifiedDataTable.comparisonColumnResultDisplay', {
-            defaultMessage: 'Result {resultNumber}',
+            defaultMessage: 'Resultado {resultNumber}',
             values: { resultNumber },
           })
         : doc.raw._id;
@@ -125,20 +125,20 @@ export const useComparisonColumns = ({
         docIndex === 0
           ? isPlainRecord
             ? i18n.translate('unifiedDataTable.comparisonColumnResultPinnedTooltip', {
-                defaultMessage: 'Pinned result: {resultNumber}',
+                defaultMessage: 'Resultado fixado: {resultNumber}',
                 values: { resultNumber },
               })
             : i18n.translate('unifiedDataTable.comparisonColumnPinnedTooltip', {
-                defaultMessage: 'Pinned document: {documentId}',
+                defaultMessage: 'Documento fixado: {documentId}',
                 values: { documentId: doc.raw._id },
               })
           : isPlainRecord
           ? i18n.translate('unifiedDataTable.comparisonColumnResultTooltip', {
-              defaultMessage: 'Comparison result: {resultNumber}',
+              defaultMessage: 'Resultado da comparação: {resultNumber}',
               values: { resultNumber },
             })
           : i18n.translate('unifiedDataTable.comparisonColumnTooltip', {
-              defaultMessage: 'Comparison document: {documentId}',
+              defaultMessage: 'Documento comparado: {documentId}',
               values: { documentId: doc.raw._id },
             });
 
