@@ -15,7 +15,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   kibana: {
     id: 'kibana',
     label: i18n.translate('core.ui.kibanaNavList.label', {
-      defaultMessage: 'Analytics',
+      defaultMessage: 'Análise',
     }),
     euiIconType: 'logoKibana',
     order: 1000,
@@ -23,7 +23,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   enterpriseSearch: {
     id: 'enterpriseSearch',
     label: i18n.translate('core.ui.searchNavList.label', {
-      defaultMessage: 'Elasticsearch',
+      defaultMessage: 'Busca',
     }),
     order: 2000,
     euiIconType: 'logoEnterpriseSearch',
@@ -31,7 +31,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   observability: {
     id: 'observability',
     label: i18n.translate('core.ui.observabilityNavList.label', {
-      defaultMessage: 'Observability',
+      defaultMessage: 'Observabilidade',
     }),
     euiIconType: 'logoObservability',
     order: 3000,
@@ -39,7 +39,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   security: {
     id: 'securitySolution',
     label: i18n.translate('core.ui.securityNavList.label', {
-      defaultMessage: 'Security',
+      defaultMessage: 'Segurança',
     }),
     order: 4000,
     euiIconType: 'logoSecurity',
@@ -47,7 +47,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   management: {
     id: 'management',
     label: i18n.translate('core.ui.managementNavList.label', {
-      defaultMessage: 'Management',
+      defaultMessage: 'Gerenciamento',
     }),
     order: 5000,
     euiIconType: 'managementApp',

@@ -10,4 +10,4 @@
 /**
  * List of all locales that are officially supported.
  */
-export const supportedLocale = ['en', 'fr-FR', 'ja-JP', 'zh-CN'];
+export const supportedLocale = ['en', 'fr-FR', 'ja-JP', 'zh-CN','pt-BR'];
