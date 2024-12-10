@@ -1,5 +1,18 @@
 # Tradução do Kibana para PT-BR
 
+![image](https://github.com/user-attachments/assets/931337db-6a9e-4d8b-bfdb-77181b20c40b)
+
+![image](https://github.com/user-attachments/assets/63580f50-5d29-4b45-9660-15fe90e42d63)
+
+![image](https://github.com/user-attachments/assets/c09427d7-e5a5-41b7-afff-55fbac986757)
+
+![image](https://github.com/user-attachments/assets/592c7ca7-27c3-465b-8bd5-5bf9bd6c0ed8)
+
+
+
+
+
+
 # Kibana
 
 Kibana is your window into the [Elastic Stack](https://www.elastic.co/products). Specifically, it's a browser-based analytics and search dashboard for Elasticsearch.
