@@ -93,7 +93,7 @@ export const DemoEnvironmentPanel = ({ demoUrl, onClick: onClickProp = () => {} 
               target="_blank"
               data-test-subj={DATA_TEST_SUBJ_DEMO_ENV_BUTTON}
             >
-              Start exploring
+              Comece a explorar
             </EuiButton>
           </EuiText>
         </EuiFlexItem>

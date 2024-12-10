@@ -160,10 +160,14 @@ export function initializeEditApi(
   };
 
   // this will force the embeddable to toggle the inline editing feature
+  /*
   const canEditInline = apiPublishesInlineEditingCapabilities(parentApi)
     ? parentApi.canEditInline
     : true;
-
+  */
+  //Edmar Moretti - marcado como false uma vez que apresenta erro quando é feita a tradução para pt-br
+  const canEditInline = false;
+  
   return {
     comparators: { disabledActionIds: disabledActionIdsComparator },
     serialize: emptySerializer,
