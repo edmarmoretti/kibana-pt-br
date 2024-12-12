@@ -2,6 +2,9 @@
 
 Ver o branch 8.x-pt-br
 
+![image](https://github.com/user-attachments/assets/3b553c72-ed30-4e87-b4b1-59e9010540a0)
+
+
 # Kibana
 
 Kibana is your window into the [Elastic Stack](https://www.elastic.co/products). Specifically, it's a browser-based analytics and search dashboard for Elasticsearch.
