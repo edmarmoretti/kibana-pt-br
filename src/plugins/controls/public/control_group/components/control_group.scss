@@ -5,4 +5,28 @@
   .controlGroup--endButtonGroup {
     align-self: end;
   }
+
+// Leandro Celes - Adicionando animação para o popover dos filtros
+.show-popover-filter-animation{
+  animation: show-fade-right-left 1s ease-in-out !important;
 }
+@keyframes show-fade-right-left {
+  0%{
+    opacity: 0;
+    margin-left: 100px;
+
+  }
+  20%{
+    opacity: 0;
+    margin-left: 100px;
+
+  }
+  100%{
+    opacity: 1;
+    margin-left: 0px;
+  }
+}
+
+}
+
+

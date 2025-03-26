@@ -278,10 +278,11 @@ export const getControlGroupEmbeddableFactory = () => {
               saveNotificationSubscription?.unsubscribe();
             };
           }, []);
-
+          // Leandro celes - adicionando cancel selection
           return (
             <ControlGroup
               applySelections={selectionsManager.applySelections}
+              cancelSelections={selectionsManager.cancelSelections}
               controlGroupApi={api}
               controlsManager={controlsManager}
               hasUnappliedSelections={hasUnappliedSelections}

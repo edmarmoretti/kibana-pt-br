@@ -7,7 +7,7 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BehaviorSubject } from 'rxjs';
 
 import {
@@ -26,7 +26,18 @@ import {
   rectSortingStrategy,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
-import { EuiButton, EuiFlexGroup, EuiFlexItem, EuiPanel, EuiToolTip } from '@elastic/eui';
+// Leandro Celes - Adicionando o popover para os filtros
+import {
+  EuiButton,
+  EuiButtonEmpty,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiPanel,
+  EuiToolTip,
+  EuiPopover,
+  EuiButtonIcon,
+  EuiIcon
+} from '@elastic/eui';
 import { css } from '@emotion/react';
 import { useBatchedPublishingSubjects } from '@kbn/presentation-publishing';
 
@@ -42,6 +53,7 @@ import './control_group.scss';
 
 interface Props {
   applySelections: () => void;
+  cancelSelections: () => void;
   controlGroupApi: ControlGroupApi;
   controlsManager: {
     controlsInOrder$: BehaviorSubject<ControlsInOrder>;
@@ -54,11 +66,13 @@ interface Props {
 
 export function ControlGroup({
   applySelections,
+  cancelSelections,
   controlGroupApi,
   controlsManager,
   labelPosition,
   hasUnappliedSelections,
 }: Props) {
+
   const [isInitialized, setIsInitialized] = useState(false);
   const [autoApplySelections, controlsInOrder] = useBatchedPublishingSubjects(
     controlGroupApi.autoApplySelections$,
@@ -96,22 +110,198 @@ export function ControlGroup({
       ignore = true;
     };
   }, [controlGroupApi]);
-  //Edmar Moretti - altera o ícone de aplicar os filtros para um botão
+
+
+    // Leandro Celes - Adicionando animação e popover para evidenciar aplicação dos filtros
+  //--------------------------------------------------
+
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isPopoverManualClosed, setIsPopoverManualClosed] = useState(false);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    if (isInitialized) {
+      if (!hasUnappliedSelections) {
+        setIsPopoverOpen(false);
+      }
+    }
+  }, [hasUnappliedSelections, isInitialized, applySelections]);
+
+  // Criar uma ref para armazenar o valor atual de hasUnappliedSelections, pois o useEffect com timeout nnao acessa o ultimo valor
+  const hasUnappliedSelectionsRef = useRef(hasUnappliedSelections);
+  useEffect(() => {
+    hasUnappliedSelectionsRef.current = hasUnappliedSelections;
+  }, [hasUnappliedSelections]);
+
+  // Animação para verificar quando clicar em uma opção
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.tagName.toLowerCase() === 'li' || target.closest('li[role="option"]') !== null) {
+        const liElement = target.closest('li[role="option"]') as HTMLElement;
+        const portalElement = target.closest('[data-euiportal="true"]') as HTMLElement;
+        const portalElementContainer = target.closest('.euiPopover__panel') as HTMLElement;
+        const elementRectInitial = portalElementContainer?.getBoundingClientRect();
+        if (liElement && portalElement) {
+          createFilterAnimation(liElement);
+
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              mutation.removedNodes.forEach((node) => {
+                if (node === portalElement) {
+                  // createFilterAnimation(portalElement, elementRectInitial);
+                  setTimeout(() => {
+                    const currentHasUnappliedSelections = hasUnappliedSelectionsRef.current;
+                    if (currentHasUnappliedSelections && !isPopoverManualClosed) {
+                      setIsPopoverOpen(true);
+                    }
+                  }, 0);
+                  observer.disconnect();
+                }
+              });
+            });
+          });
+          if (portalElement.parentElement) {
+            observer.observe(portalElement.parentElement, {
+              childList: true,
+              subtree: false,
+            });
+          }
+        }
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [isPopoverManualClosed]); 
+
+  const manualClosePopover = () => {
+    setIsPopoverManualClosed(true);
+    setIsPopoverOpen(false);
+  };
+
+  // Leandro Celes - Função para criar animação de elemento opcao para o botão de filtro
+  const createFilterAnimation = useCallback((element: HTMLElement, elementRectInitial: DOMRect) => {
+    if (!element) return;
+
+    // Obter o botão de filtro
+    const filterButton = document.querySelector(
+      '[data-test-subj="controlGroup--applyFiltersButton"]'
+    );
+    if (!filterButton) return;
+
+    // Obter as dimensões e posição do elemento original
+    const elementRect =  elementRectInitial ? elementRectInitial : element.getBoundingClientRect();
+
+    // Obter as dimensões e posição do botão de filtro
+    const buttonRect = filterButton.getBoundingClientRect();
+
+    // Criar div para animação
+    const animationDiv = document.createElement('div');
+    animationDiv.style.position = 'fixed';
+    animationDiv.style.left = `${elementRect.left}px`;
+    animationDiv.style.top = `${elementRect.top}px`;
+    animationDiv.style.width = `${elementRect.width}px`;
+    animationDiv.style.height = `${elementRect.height}px`;
+    animationDiv.style.backgroundColor = '#3a73cf';
+    animationDiv.style.opacity = '0.7';
+    animationDiv.style.borderRadius = '4px';
+    animationDiv.style.zIndex = '91000';
+    animationDiv.style.pointerEvents = 'none';
+
+    // Adicionar ao corpo do documento
+    document.body.appendChild(animationDiv);
+
+    // Configurar a animação
+    animationDiv.animate(
+      [
+        {
+          left: `${elementRect.left}px`,
+          top: `${elementRect.top}px`,
+          width: `${elementRect.width}px`,
+          height: `${elementRect.height}px`,
+          opacity: 0.7,
+        },
+        {
+          left: `${buttonRect.left}px`,
+          top: `${buttonRect.top}px`,
+          width: `${buttonRect.width}px`,
+          height: `${buttonRect.height}px`,
+          opacity: 0,
+        },
+      ],
+      {
+        duration: 500,
+        easing: 'ease-out',
+        fill: 'forwards',
+      }
+    ).onfinish = () => {
+      // Remover o elemento após a animação
+      document.body.removeChild(animationDiv);
+    };
+  }, []);
+// fim logica de animação e destaque dos filtros
+
+  // Edmar Moretti - altera o ícone de aplicar os filtros para um botão
+  // Leandro Celes - Adicionando o botão de resetar filtros e popover para os filtros
   const ApplyButtonComponent = useMemo(() => {
     return (
-      <EuiButton
-        size="m"
-        disabled={!hasUnappliedSelections}
-        iconSize="m"
-        color={'success'}
-        iconType={'check'}
-        data-test-subj="controlGroup--applyFiltersButton"
-        aria-label={ControlGroupStrings.management.getApplyButtonTitle(hasUnappliedSelections)}
-        onClick={applySelections}
-      >Aplicar
-      </EuiButton>
+      <div style={{ display: 'flex', gap: '0px', alignItems: 'center' }}>
+        <EuiButtonEmpty
+          size="s"
+          style={{ marginRight: '10px' }}
+          iconSize="m"
+          color={'text'}
+          data-test-subj="controlGroup--resetFiltersButton"
+          aria-label={ControlGroupStrings.management.getApplyButtonTitle(hasUnappliedSelections)}
+          onClick={cancelSelections}
+        >
+          <EuiIcon type="eraser" /> Limpar
+        </EuiButtonEmpty>
+
+        <EuiButton
+          buttonRef={buttonRef}
+          size="m"
+          disabled={!hasUnappliedSelections}
+          iconSize="m"
+          color={'success'}
+          iconType={'check'}
+          data-test-subj="controlGroup--applyFiltersButton"
+          aria-label={ControlGroupStrings.management.getApplyButtonTitle(hasUnappliedSelections)}
+          onClick={applySelections}
+          className={hasUnappliedSelections ? 'animate-filter-button' : ''}
+        >
+          Filtrar
+        </EuiButton>
+
+        {isPopoverOpen ? (
+          <EuiPopover
+            button={<></>}
+            isOpen={true}
+            closePopover={() => {}}
+            anchorRef={buttonRef}
+            anchorPosition="rightDown"
+            repositionOnScroll={true}
+            panelStyle={{ '--euiPopoverBackgroundColor': '#4D84DC', color: 'white' }}
+            panelClassName='essentialAnimation show-popover-filter-animation'
+          >
+            <p>
+              Aplique os filtros para ver os resultados&emsp;&emsp;
+              <EuiButtonIcon
+                style={{ color: 'white', position: 'absolute', right: '5px', top: '1px' }}
+                iconType="cross"
+                onClick={() => manualClosePopover()}
+              />
+            </p>
+          </EuiPopover>
+        ) : (
+          <></>
+        )}
+      </div>
     );
-  }, [hasUnappliedSelections, applySelections]);
+  }, [hasUnappliedSelections, applySelections, cancelSelections, isPopoverOpen, isPopoverManualClosed]);
   /*
   const ApplyButtonComponent = useMemo(() => {
     return (

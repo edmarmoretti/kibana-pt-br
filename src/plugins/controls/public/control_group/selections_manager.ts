@@ -27,6 +27,11 @@ export function initSelectionsManager(
   const timeslice$ = new BehaviorSubject<[number, number] | undefined>(undefined);
   const unpublishedTimeslice$ = new BehaviorSubject<[number, number] | undefined>(undefined);
   const hasUnappliedSelections$ = new BehaviorSubject(false);
+  
+  // Leandro Celes - Adicionando variaveis para salvar o ultimo filtro aplicado
+  // TODO - Fix temporario é resetar, e nao voltar o ultimo filtro aplicado
+  const lastAppliedFilters$ = new BehaviorSubject<Filter[] | undefined>([]);
+  const lastAppliedTimeslice$ = new BehaviorSubject<[number, number] | undefined>(undefined);
 
   const subscriptions: Subscription[] = [];
   controlGroupApi.untilInitialized().then(() => {
@@ -100,11 +105,34 @@ export function initSelectionsManager(
 
   function applySelections() {
     if (!deepEqual(filters$.value, unpublishedFilters$.value)) {
+      lastAppliedFilters$.next(unpublishedFilters$.value);
       filters$.next(unpublishedFilters$.value);
     }
     if (!deepEqual(timeslice$.value, unpublishedTimeslice$.value)) {
+      lastAppliedTimeslice$.next(unpublishedTimeslice$.value);
       timeslice$.next(unpublishedTimeslice$.value);
     }
+  }
+
+  // Leandro Celes - Adicionando função para cancelar os filtros
+  function cancelSelections() {
+    Object.values(controlGroupApi.children$.value).forEach((controlApi: any) => {
+      if (controlApi.resetUnsavedChanges) {
+        // TODO - Fix temporario é resetar, e nao voltar o ultimo filtro aplicado
+        controlApi.resetUnsavedChanges();
+      }
+    });
+
+    // TODO - TODO - Ver opção reverter a alterações desde a ultima aplicação dos filtros
+    // Reverter para o último estado salvo
+    // filters$.next(lastAppliedFilters$.value);
+    // unpublishedFilters$.next(lastAppliedFilters$.value);
+    // timeslice$.next(lastAppliedTimeslice$.value);
+    // unpublishedTimeslice$.next(lastAppliedTimeslice$.value);
+    
+    setTimeout(() => {
+      applySelections();
+    }, 200);
   }
 
   return {
@@ -113,6 +141,8 @@ export function initSelectionsManager(
       timeslice$,
     },
     applySelections,
+    // Leandro Celes - Adicionando função para selecionar o estado atual
+    cancelSelections,
     cleanup: () => {
       subscriptions.forEach((subscription) => subscription.unsubscribe());
     },
