@@ -1,5 +1,7 @@
 # Alterações feitas no código original do Kibana
 
+- Aumenta o limite de pontos destino em camadas de ligação entre origem-destino (mapas).
+
 - Inclusão de botão "limpar" filtros de um painel, reiniciando os controles para o estado de inicializaçẽo do painel.
 
 - Mudança no cache de persistência do código do Kibana de 360 para 1 dia
