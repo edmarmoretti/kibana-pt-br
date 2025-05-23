@@ -1,4 +1,8 @@
-# Alterações feitas no código original
+# Alterações feitas no código original do Kibana
+
+- Aumenta o limite de pontos destino em camadas de ligação entre origem-destino (mapas).
+
+- Inclusão de botão "limpar" filtros de um painel, reiniciando os controles para o estado de inicializaçẽo do painel.
 
 - Mudança no cache de persistência do código do Kibana de 360 para 1 dia
 
@@ -52,7 +56,7 @@
 
 - Adição de novas cores na paleta de cores que podem ser escolhidas nos gráficos legados.
 
-Alterações no Elastic Charts:
+# Alterações no Elastic Charts:
 
 - Aumenta o número de linhas que é utilizado para quebrar os textos e incluir "...".
 
@@ -70,7 +74,7 @@ Alterações no Elastic Charts:
 
 - Altera o estilo do sumário das colunas nas tabelas feitas com Lens, colocando o label e o valor em linhas separadas.
 
-Alterações no Plugin Enhanced Table
+# Alterações no Plugin Enhanced Table
 
 - Remove a opção de exportação dos dados no formato RAW.
 
@@ -78,7 +82,7 @@ Alterações no Plugin Enhanced Table
 
 - Remove a opção de filtro por valores, que afeta os filtros globais do painel.
 
-Altera a ordem de apresentação dos títulos das tabelas
+- Altera a ordem de apresentação dos títulos das tabelas
 
 # Tradução do Kibana para PT-BR
 

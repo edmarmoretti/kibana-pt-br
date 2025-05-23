@@ -125,9 +125,9 @@ export const createGridCell = (
           window.abreFichaIndicador(indicador); // eslint-disable-line react/no-danger
         };
 
-        match = content.match(/\/([A-Z0-9]+)-/i);
+        match = content.match((/\/indicador\/([^\/]+)-headless/));
         const codigo = match ? match[1] : '';
-        //console.log("codigo: " + codigo);
+        console.log(codigo);
         return (
           <div>
           <EuiButtonEmpty iconType="lensApp" size="xs" color='primary' onClick={() => abreFicha(codigo)}>
