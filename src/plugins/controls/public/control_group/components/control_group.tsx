@@ -36,7 +36,7 @@ import {
   EuiToolTip,
   EuiPopover,
   EuiButtonIcon,
-  EuiIcon
+  EuiIcon,
 } from '@elastic/eui';
 import { css } from '@emotion/react';
 import { useBatchedPublishingSubjects } from '@kbn/presentation-publishing';
@@ -72,7 +72,6 @@ export function ControlGroup({
   labelPosition,
   hasUnappliedSelections,
 }: Props) {
-
   const [isInitialized, setIsInitialized] = useState(false);
   const [autoApplySelections, controlsInOrder] = useBatchedPublishingSubjects(
     controlGroupApi.autoApplySelections$,
@@ -111,9 +110,8 @@ export function ControlGroup({
     };
   }, [controlGroupApi]);
 
-
-    // Leandro Celes - Adicionando animação e popover para evidenciar aplicação dos filtros
-  //--------------------------------------------------
+  // Leandro Celes - Adicionando animação e popover para evidenciar aplicação dos filtros
+  // --------------------------------------------------
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isPopoverManualClosed, setIsPopoverManualClosed] = useState(false);
@@ -175,7 +173,7 @@ export function ControlGroup({
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [isPopoverManualClosed]); 
+  }, [isPopoverManualClosed]);
 
   const manualClosePopover = () => {
     setIsPopoverManualClosed(true);
@@ -193,7 +191,7 @@ export function ControlGroup({
     if (!filterButton) return;
 
     // Obter as dimensões e posição do elemento original
-    const elementRect =  elementRectInitial ? elementRectInitial : element.getBoundingClientRect();
+    const elementRect = elementRectInitial ? elementRectInitial : element.getBoundingClientRect();
 
     // Obter as dimensões e posição do botão de filtro
     const buttonRect = filterButton.getBoundingClientRect();
@@ -242,11 +240,30 @@ export function ControlGroup({
       document.body.removeChild(animationDiv);
     };
   }, []);
-// fim logica de animação e destaque dos filtros
+  // fim logica de animação e destaque dos filtros
+
+  // Leandro Celes - Adicionando para aplicar os filtros automaticamente no inicio do render, mesmo que o autoApplySelections seja falso
+  const [firstRender, setFirstRender] = useState(true);
+  useEffect(() => {
+    if (firstRender && hasUnappliedSelections) {
+      applySelections();
+      // do um tempo ate o hasUnappliedSelections mudar para não da flicker no botao de filtro
+      setTimeout(() => {
+        setFirstRender(false);
+      }, 1000);
+    }
+  }, [hasUnappliedSelections, applySelections, firstRender]);
+
+  // Tb depois de um tempo, falo que renderizou, pois o hasUnappliedSelections pode ser false sempre se nnao tem nenhum control/filtro salvo no painel
+  setTimeout(() => {
+    setFirstRender(false);
+  }, 2000);
 
   // Edmar Moretti - altera o ícone de aplicar os filtros para um botão
   // Leandro Celes - Adicionando o botão de resetar filtros e popover para os filtros
   const ApplyButtonComponent = useMemo(() => {
+
+ 
     return (
       <div style={{ display: 'flex', gap: '0px', alignItems: 'center' }}>
         <EuiButtonEmpty
@@ -264,14 +281,14 @@ export function ControlGroup({
         <EuiButton
           buttonRef={buttonRef}
           size="m"
-          disabled={!hasUnappliedSelections}
+          disabled={firstRender || (!hasUnappliedSelections && !firstRender)}  // Leandro Celes - Efito o flicker do botao ativo desativo
           iconSize="m"
           color={'success'}
           iconType={'check'}
           data-test-subj="controlGroup--applyFiltersButton"
           aria-label={ControlGroupStrings.management.getApplyButtonTitle(hasUnappliedSelections)}
           onClick={applySelections}
-          className={hasUnappliedSelections ? 'animate-filter-button' : ''}
+          // className={hasUnappliedSelections ? 'animate-filter-button' : ''}
         >
           Filtrar
         </EuiButton>
@@ -285,7 +302,7 @@ export function ControlGroup({
             anchorPosition="rightDown"
             repositionOnScroll={true}
             panelStyle={{ '--euiPopoverBackgroundColor': '#4D84DC', color: 'white' }}
-            panelClassName='essentialAnimation show-popover-filter-animation'
+            panelClassName="essentialAnimation show-popover-filter-animation"
           >
             <p>
               Aplique os filtros para ver os resultados&emsp;&emsp;
@@ -301,7 +318,8 @@ export function ControlGroup({
         )}
       </div>
     );
-  }, [hasUnappliedSelections, applySelections, cancelSelections, isPopoverOpen, isPopoverManualClosed]);
+  }, [hasUnappliedSelections, applySelections, cancelSelections, isPopoverOpen, firstRender]);
+
   /*
   const ApplyButtonComponent = useMemo(() => {
     return (
