@@ -84,6 +84,13 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
         defaultMessage: 'The alignment of the Title and Subtitle.',
       }),
     },
+    //Edmar Moretti - firstTermPosition
+    firstTermPosition: {
+      types: ['string'],
+      help: i18n.translate('expressionMetricVis.function.firstTermPosition.help', {
+        defaultMessage: 'Posiciona o primeiro termo da lista no rodapé.',
+      }),
+    },
     valuesTextAlign: {
       types: ['string'],
       help: i18n.translate('expressionMetricVis.function.valuesTextAlign.help', {
@@ -199,7 +206,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
         );
       }
     }
-
+    //Edmar Moretti - firstTermPosition
     return {
       type: 'render',
       as: EXPRESSION_METRIC_NAME,
@@ -215,6 +222,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
             palette: args.palette?.params,
             progressDirection: args.progressDirection,
             titlesTextAlign: args.titlesTextAlign,
+            firstTermPosition: args.firstTermPosition,
             valuesTextAlign: args.valuesTextAlign,
             iconAlign: args.iconAlign,
             valueFontSize: args.valueFontSize,

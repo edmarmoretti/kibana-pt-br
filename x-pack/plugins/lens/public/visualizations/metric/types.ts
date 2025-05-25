@@ -27,6 +27,9 @@ export interface MetricVisualizationState {
   progressDirection?: LayoutDirection;
   showBar?: boolean;
   titlesTextAlign?: MetricStyle['titlesTextAlign'];
+  //Edmar Moretti - firstTermPosition
+  firstTermPosition?: MetricStyle['firstTermPosition'];
+  //
   valuesTextAlign?: MetricStyle['valuesTextAlign'];
   iconAlign?: MetricStyle['iconAlign'];
   valueFontMode?: ValueFontMode;

@@ -60,6 +60,7 @@ describe('dimension editor', () => {
     icon: 'tag',
     showBar: true,
     titlesTextAlign: 'left',
+    firstTermPosition: 'default',  // Edmar Moretti - firstTermPosition
     valuesTextAlign: 'right',
     iconAlign: 'left',
     valueFontMode: 'default',

@@ -31,8 +31,9 @@ import {
 } from '../constants';
 
 export type AvailableMetricIcon = $Values<typeof AvailableMetricIcons>;
-
+//Edmar Moretti - firstTermPosition
 export interface MetricArguments {
+  firstTermPosition: MetricStyle['firstTermPosition'];
   metric: ExpressionValueVisDimension | string;
   secondaryMetric?: ExpressionValueVisDimension | string;
   max?: ExpressionValueVisDimension | string;

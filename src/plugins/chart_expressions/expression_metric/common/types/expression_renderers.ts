@@ -22,12 +22,14 @@ export interface DimensionsVisParam {
 }
 
 export interface MetricVisParam {
+  titulo: string;
   subtitle?: string;
   secondaryPrefix?: string;
   color?: string;
   icon?: string;
   palette?: CustomPaletteState;
   progressDirection?: LayoutDirection;
+  firstTermPosition: MetricStyle['firstTermPosition'];  // Edmar Moretti - firstTermPosition
   titlesTextAlign: MetricStyle['titlesTextAlign'];
   valuesTextAlign: MetricStyle['valuesTextAlign'];
   iconAlign: MetricStyle['iconAlign'];

@@ -21,7 +21,7 @@ export interface TitlesAndTextPopoverProps {
   setState: (newState: MetricVisualizationState) => void;
   groupPosition?: ToolbarPopoverProps['groupPosition'];
 }
-
+//Edmar Moretti - firstTermPosition
 export const TitlesAndTextPopover: FC<TitlesAndTextPopoverProps> = ({
   state,
   setState,
@@ -74,6 +74,14 @@ export const TitlesAndTextPopover: FC<TitlesAndTextPopoverProps> = ({
           setState({ ...state, valueFontMode: value });
         }}
       />
+
+      <FirstTermPositionOption
+        value={state.firstTermPosition ?? metricStateDefaults.firstTermPosition}
+        onChange={(firstTermPosition) => {
+          setState({ ...state, firstTermPosition });
+        }}
+      />
+
     </ToolbarPopover>
   );
 };
@@ -288,6 +296,72 @@ function ValuesAlignmentOption({
         idSelected={value}
         onChange={(alignment) => {
           onChange(alignment as MetricStyle['valuesTextAlign']);
+        }}
+      />
+    </EuiFormRow>
+  );
+}
+
+//Edmar Moretti - FirstTermPosition
+
+const firstTermPositionModes: Array<{
+  id: 'default' | 'bottom';
+  label: string;
+}> = [
+  {
+    id: 'default',
+    label: i18n.translate('xpack.lens.metric.toolbarTitlesText.default', {
+      defaultMessage: 'Default',
+    }),
+  },
+  {
+    id: 'bottom',
+    label: i18n.translate('xpack.lens.metric.toolbarTitlesText.rodape', {
+      defaultMessage: 'Rodapé',
+    }),
+  },
+];
+function FirstTermPositionOption({
+  value,
+  onChange,
+}: {
+  value: MetricStyle['firstTermPosition'];
+  onChange: (alignment: MetricStyle['firstTermPosition']) => void;
+}) {
+  const label = i18n.translate('xpack.lens.metric.toolbarTitlesText.firstTermPosition', {
+    defaultMessage: 'Posição do primeiro termo',
+  });
+
+  return (
+    <EuiFormRow
+      display="columnCompressed"
+      label={
+        <span>
+          {label}{' '}
+          <EuiIconTip
+            content={i18n.translate('xpack.lens.metric.toolbarTitlesText.firstTermPositionTip', {
+              defaultMessage: 'Posicionamento do primeiro termo',
+            })}
+            iconProps={{
+              className: 'eui-alignTop',
+            }}
+            color="subdued"
+            position="top"
+            size="s"
+            type="questionInCircle"
+          />
+        </span>
+      }
+    >
+      <EuiButtonGroup
+        isFullWidth
+        legend={label}
+        data-test-subj="lens-titles-alignment-btn"
+        buttonSize="compressed"
+        options={firstTermPositionModes}
+        idSelected={value}
+        onChange={(alignment) => {
+          onChange(alignment as MetricStyle['firstTermPosition']);
         }}
       />
     </EuiFormRow>

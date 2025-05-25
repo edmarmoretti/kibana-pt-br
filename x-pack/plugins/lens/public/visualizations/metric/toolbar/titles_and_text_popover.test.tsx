@@ -47,6 +47,7 @@ describe('TitlesAndTextPopover', () => {
     valuesTextAlign: 'right',
     iconAlign: 'left',
     valueFontMode: 'default',
+    firstTermPosition: 'default',
   };
 
   const mockSetState = jest.fn();

@@ -79,12 +79,19 @@ const renderSecondaryMetric = (
     formatSecondaryMetric = getMetricFormatter(config.dimensions.secondaryMetric, columns);
   }
   const secondaryPrefix = config.metric.secondaryPrefix ?? secondaryMetricColumn?.name;
+  //Edmar Moretti - data-big-number está no plugin sageIntegration
   return (
     <span>
       {secondaryPrefix}
       {secondaryMetricColumn
         ? `${secondaryPrefix ? ' ' : ''}${formatSecondaryMetric!(row[secondaryMetricColumn.id])}`
         : undefined}
+      {config.metric.firstTermPosition == 'bottom' && (
+        <>
+          <br />
+          <span className='data-big-number'>{config.metric.titulo}</span>
+        </>
+      )}
     </span>
   );
 };
@@ -132,8 +139,8 @@ const buildFilterEvent = (rowIdx: number, columnIdx: number, table: Datatable) =
 
 const getIcon =
   (type: string) =>
-  ({ width, height, color }: { width: number; height: number; color: string }) =>
-    <EuiIcon type={type} width={width} height={height} fill={color} style={{ width, height }} />;
+    ({ width, height, color }: { width: number; height: number; color: string }) =>
+      <EuiIcon type={type} width={width} height={height} fill={color} style={{ width, height }} />;
 
 export interface MetricVisComponentProps {
   data: Datatable;
@@ -205,6 +212,9 @@ export const MetricVis = ({
     data.rows.length ? data.rows : [{ [primaryMetricColumn.id]: null }]
   ).slice(0, 1);
 
+  // Declare firstTitleOriginal outside the map so it can be used in the render
+  let firstTitleOriginal = '';
+
   const metricConfigs: MetricSpec['data'][number] = (
     breakdownByColumn ? data.rows : firstRowForNonBreakdown
   ).map((row, rowIdx) => {
@@ -223,11 +233,21 @@ export const MetricVis = ({
       : primaryMetricColumn.name;
 
     let subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
-
-    if(title.split(' › ').length > 1 && (subtitle == undefined || subtitle?.trim() == '')){
+    let titleOriginal = '';
+    if (title.split(' › ').length > 1 && (subtitle == undefined || subtitle?.trim() == '')) {
       let splitvar = title.split(' › ');
       title = splitvar[0];
+      titleOriginal = title;
+      //Se for para incluir o texto no rodapé, como no caso de datas, deixa o título vazio
+      if (config.metric.firstTermPosition == 'bottom') {
+        title = '';
+      }
       subtitle = splitvar.splice(1).join(' › ');
+      // Salva o primeiro titleOriginal
+      if (firstTitleOriginal === '') {
+        firstTitleOriginal = titleOriginal;
+        config.metric.titulo = firstTitleOriginal;
+      }
     }
 
     if (typeof value !== 'number') {
@@ -253,16 +273,16 @@ export const MetricVis = ({
       color:
         config.metric.palette && value != null
           ? getColor(
-              value,
-              config.metric.palette,
-              {
-                metric: primaryMetricColumn.id,
-                max: maxColId,
-                breakdownBy: breakdownByColumn?.id,
-              },
-              data,
-              rowIdx
-            ) ?? defaultColor
+            value,
+            config.metric.palette,
+            {
+              metric: primaryMetricColumn.id,
+              max: maxColId,
+              breakdownBy: breakdownByColumn?.id,
+            },
+            data,
+            rowIdx
+          ) ?? defaultColor
           : config.metric.color ?? defaultColor,
     };
 
@@ -332,8 +352,9 @@ export const MetricVis = ({
   }
 
   grid.current = newGrid;
-//Edmar Moretti - remove a opção de seleção em visualizações do tipo grande número
+  //Edmar Moretti - remove a opção de seleção em visualizações do tipo grande número
   return (
+
     <div
       ref={scrollContainerRef}
       css={css`

@@ -52,6 +52,32 @@
   border-bottom-left-radius: $euiBorderRadius;
   border-bottom-right-radius: $euiBorderRadius;
 }
+
+//Edmar Moretti - estilos do mouse over sobre visualizações do tipo métrica
+
+.data-big-number * {
+    font-size: 10px !important;
+    text-align: right;
+    font-weight: 400;
+    color: var(--cor-text);
+    margin-top: 0.1em;
+
+    span {
+        text-align: right;
+    }
+}
+
+.data-big-number {
+    opacity: 0;
+    transition: all 0.3s ease-in-out 100ms !important;
+}
+
+.echMetricText:hover {
+    .data-big-number {
+        opacity: 0.7;
+    }
+}
+
 //Edmar Moretti - ajusta a altura do texto do título dos quadros
 
 .embPanel__title {

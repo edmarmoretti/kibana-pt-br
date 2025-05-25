@@ -29,14 +29,16 @@ type MetricVisualizationStateOptionals = Pick<
 /**
  * Defaults for select optional Metric vis state options
  */
+//Edmar Moretti - firstTermPosition
 export const metricStateDefaults: Required<
   Pick<
     MetricVisualizationStateOptionals,
-    'titlesTextAlign' | 'valuesTextAlign' | 'iconAlign' | 'valueFontMode'
+    'titlesTextAlign' | 'valuesTextAlign' | 'iconAlign' | 'valueFontMode' | 'firstTermPosition'
   >
 > = {
   titlesTextAlign: 'left',
   valuesTextAlign: 'right',
   iconAlign: 'left',
   valueFontMode: 'default',
+  firstTermPosition: 'default',
 };

@@ -81,6 +81,7 @@ describe('metric visualization', () => {
     valuesTextAlign: 'right',
     iconAlign: 'left',
     valueFontMode: 'default',
+    firstTermPosition: 'default',
   };
 
   const fullStateWTrend: Required<MetricVisualizationState> = {

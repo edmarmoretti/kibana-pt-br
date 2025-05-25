@@ -144,8 +144,7 @@ export const toExpression = (
     secondaryMetric: state.secondaryMetricAccessor,
     secondaryPrefix: state.secondaryPrefix,
     max: state.maxAccessor,
-    breakdownBy:
-      state.breakdownByAccessor && !state.collapseFn ? state.breakdownByAccessor : undefined,
+    breakdownBy: state.breakdownByAccessor && !state.collapseFn ? state.breakdownByAccessor : undefined,
     trendline: trendlineExpression ? [trendlineExpression] : [],
     subtitle: state.subtitle ?? undefined,
     progressDirection: showingBar(state)
@@ -157,17 +156,17 @@ export const toExpression = (
     valueFontSize: state.valueFontMode ?? metricStateDefaults.valueFontMode,
     color: state.color || getDefaultColor(state, isMetricNumeric),
     icon: hasIcon(state.icon) ? state.icon : undefined,
-    palette:
-      isMetricNumeric && state.palette?.params
-        ? [
-            paletteService
-              .get(CUSTOM_PALETTE)
-              .toExpression(computePaletteParams(state.palette.params as CustomPaletteParams)),
-          ]
-        : [],
+    palette: isMetricNumeric && state.palette?.params
+      ? [
+        paletteService
+          .get(CUSTOM_PALETTE)
+          .toExpression(computePaletteParams(state.palette.params as CustomPaletteParams)),
+      ]
+      : [],
     maxCols: state.maxCols ?? DEFAULT_MAX_COLUMNS,
     minTiles: maxPossibleTiles ?? undefined,
     inspectorTableId: state.layerId,
+    firstTermPosition: state.firstTermPosition ?? metricStateDefaults.firstTermPosition, // Edmar Moretti - firstTermPosition
   });
 
   return {

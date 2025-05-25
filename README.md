@@ -1,5 +1,7 @@
 # Alterações feitas no código original do Kibana
 
+- Adiciona opção nas configurações de visualizações do tipo "métricas" que permite deslocar o primeiro termo, mostrado na tela, quando se utiliza multi termos, para o rodapé da métrica, com efeito "hover"
+
 - Aumenta o limite de pontos destino em camadas de ligação entre origem-destino (mapas).
 
 - Inclusão de botão "limpar" filtros de um painel, reiniciando os controles para o estado de inicializaçẽo do painel.
