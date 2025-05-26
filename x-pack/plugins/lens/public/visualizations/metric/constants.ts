@@ -40,5 +40,5 @@ export const metricStateDefaults: Required<
   valuesTextAlign: 'right',
   iconAlign: 'left',
   valueFontMode: 'default',
-  firstTermPosition: 'default',
+  firstTermPosition: 'bottom',
 };
