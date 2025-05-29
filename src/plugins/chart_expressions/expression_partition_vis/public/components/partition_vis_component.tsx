@@ -510,7 +510,7 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
       return lookup[a.key] - lookup[b.key];
     };
   }, [bucketColumns, flatLegend, showLegend, visData.rows]);
-
+//Edmar Moretti - remove as interações sobre a legenda e o gráfico
   return (
     <div css={chartContainerStyle} data-test-subj="partitionVisChart">
       {!canShowPieChart ? (
@@ -560,18 +560,8 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
                 flatLegend={flatLegend}
                 legendSort={customLegendSort}
                 legendValues={visParams.legendStats}
-                onElementClick={([elementEvent]) => {
-                  // this cast is safe because we are rendering a partition chart
-                  const [layerValues] = elementEvent as PartitionElementEvent;
-                  handleSliceClick(
-                    layerValues,
-                    bucketColumns,
-                    visData,
-                    splitChartDimension,
-                    splitChartFormatter
-                  );
-                }}
-                legendAction={legendActions}
+                onElementClick={undefined}
+                legendAction={undefined}
                 theme={[
                   // Chart background should be transparent for the usage at Canvas.
                   { background: { color: 'transparent' } },

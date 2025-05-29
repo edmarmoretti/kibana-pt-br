@@ -15,16 +15,17 @@ import { getFormatByAccessor } from '@kbn/visualizations-plugin/common/utils';
 import type { FieldFormat, FormatFactory } from '@kbn/field-formats-plugin/common';
 import { BucketColumns, PartitionVisParams, Dimensions } from '../../common/types';
 import { FilterEvent } from '../types';
-
+//Edmar Moretti - define canfilter como falso
 export const canFilter = async (
   event: FilterEvent | null,
   actions: DataPublicPluginStart['actions']
 ): Promise<boolean> => {
+  //console.log("canFilter");
   if (!event) {
     return false;
   }
-  const filters = await actions.createFiltersFromValueClickAction(event.data);
-  return Boolean(filters.length);
+  //const filters = await actions.createFiltersFromValueClickAction(event.data);
+  return false; //Boolean(filters.length);
 };
 
 export const getMultiFilterCells = (

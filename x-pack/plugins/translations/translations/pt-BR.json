@@ -44311,6 +44311,11 @@
     "contentManagement.contentEditor.viewsStats.viewsLastNDaysLabel": "Visaualizações (últimos {n} dias)",
     "contentManagement.contentEditor.viewsStats.weekOfLabel": "Semana de {date}",
     "controls.controlGroup.management.applyButtonTooltip.enabled": "Aplicar as seleções",
-    "controls.controlGroup.management.applyButtonTooltip.disabled": "Nada para aplicar"
+    "controls.controlGroup.management.applyButtonTooltip.disabled": "Nada para aplicar",
+    "xpack.lens.metric.toolbarTitlesText.default": "default",
+    "xpack.lens.metric.toolbarTitlesText.valuesAlignmentTip": "Alinhamento da métrica primária e secundária",
+    "xpack.lens.metric.toolbarTitlesText.valuesAlignment": "Alinhamento dos valores",
+    "xpack.lens.metric.toolbarTitlesText.titlesAlignment": "Alinhamento dos títulos",
+    "xpack.lens.metric.toolbarTitlesText.valueFontSize": "Tamanho da fonte"
   }
 }

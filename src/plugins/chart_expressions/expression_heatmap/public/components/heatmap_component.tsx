@@ -647,7 +647,7 @@ export const HeatmapComponent: FC<HeatmapRenderProps> = memo(
         });
       }
     };
-
+//Edmar Moretti - remove as interações sobre a legenda e o gráfico
     return (
       <>
         {showLegend !== undefined && (
@@ -703,7 +703,7 @@ export const HeatmapComponent: FC<HeatmapRenderProps> = memo(
               externalPointerEvents={{
                 tooltip: { visible: syncTooltips },
               }}
-              onElementClick={interactive ? (onElementClick as ElementClickListener) : undefined}
+              onElementClick={undefined}
               showLegend={showLegend ?? args.legend.isVisible}
               legendPosition={args.legend.position}
               legendSize={LegendSizeToPixels[args.legend.legendSize ?? DEFAULT_LEGEND_SIZE]}
@@ -726,7 +726,7 @@ export const HeatmapComponent: FC<HeatmapRenderProps> = memo(
                     ? new Date(dateHistogramMeta.timeRange.to).getTime()
                     : NaN,
               }}
-              onBrushEnd={interactive ? (onBrushEnd as BrushEndListener) : undefined}
+              onBrushEnd={undefined}
               ariaLabel={args.ariaLabel}
               ariaUseDefaultSummary={!args.ariaLabel}
               locale={i18n.getLocale()}
