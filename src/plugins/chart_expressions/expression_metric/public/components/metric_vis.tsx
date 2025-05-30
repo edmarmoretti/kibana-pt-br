@@ -79,7 +79,7 @@ const renderSecondaryMetric = (
     formatSecondaryMetric = getMetricFormatter(config.dimensions.secondaryMetric, columns);
   }
   const secondaryPrefix = config.metric.secondaryPrefix ?? secondaryMetricColumn?.name;
-  //Edmar Moretti - data-big-number está no plugin sageIntegration
+  //Edmar Moretti - posiciona o primeiro termo no rodapé
   return (
     <span>
       {secondaryPrefix}
@@ -213,7 +213,7 @@ export const MetricVis = ({
   ).slice(0, 1);
 
   // Declare firstTitleOriginal outside the map so it can be used in the render
-  let firstTitleOriginal = '';
+  //let firstTitleOriginal = '';
 
   const metricConfigs: MetricSpec['data'][number] = (
     breakdownByColumn ? data.rows : firstRowForNonBreakdown
@@ -234,7 +234,7 @@ export const MetricVis = ({
 
     let subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
     let titleOriginal = '';
-    if (title.split(' › ').length > 1 && (subtitle == undefined || subtitle?.trim() == '')) {
+    if (title.split(' › ').length > 1) {
       let splitvar = title.split(' › ');
       title = splitvar[0];
       titleOriginal = title;
@@ -242,12 +242,25 @@ export const MetricVis = ({
       if (config.metric.firstTermPosition == 'bottom') {
         title = '';
       }
-      subtitle = splitvar.splice(1).join(' › ');
-      // Salva o primeiro titleOriginal
-      if (firstTitleOriginal === '') {
-        firstTitleOriginal = titleOriginal;
-        config.metric.titulo = firstTitleOriginal;
+      if(subtitle == ' ' || subtitle == undefined) {
+        subtitle = splitvar.splice(1).join(' › ');
+      } else {
+        subtitle = splitvar.splice(1).join(' › ') + ' › ' + subtitle;
       }
+      // Salva o primeiro titleOriginal
+      //if (firstTitleOriginal === '') {
+      //  firstTitleOriginal = titleOriginal;
+      //  config.metric.titulo = firstTitleOriginal;
+      //}
+      config.metric.titulo = titleOriginal
+    } else if (title.split(' › ').length == 1 && config.metric.firstTermPosition == 'bottom') {
+      titleOriginal = title;
+      title = '';
+      //if (firstTitleOriginal === '') {
+      //  firstTitleOriginal = titleOriginal;
+      //  config.metric.titulo = firstTitleOriginal;
+      //}
+      config.metric.titulo = titleOriginal
     }
 
     if (typeof value !== 'number') {

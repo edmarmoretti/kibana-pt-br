@@ -74,8 +74,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
       types: ['string'],
       options: [LayoutDirection.Vertical, LayoutDirection.Horizontal],
       help: i18n.translate('expressionMetricVis.function.progressDirection.help', {
-        defaultMessage:
-          'The direction the progress bar should grow. Must be provided to render a progress bar.',
+        defaultMessage: 'The direction the progress bar should grow. Must be provided to render a progress bar.',
       }),
     },
     titlesTextAlign: {
@@ -137,8 +136,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
     minTiles: {
       types: ['number'],
       help: i18n.translate('expressionMetricVis.function.minTiles.help', {
-        defaultMessage:
-          'Specifies the minimum number of tiles in the metric grid regardless of the input data.',
+        defaultMessage: 'Specifies the minimum number of tiles in the metric grid regardless of the input data.',
       }),
     },
     inspectorTableId: {
@@ -149,6 +147,12 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
       multi: false,
       default: 'default',
     },
+    titulo: {
+      types: ['string'],
+      help: i18n.translate('expressionMetricVis.function.titulo.help', {
+        defaultMessage: 'O título para o metric vis.',
+      }),
+    }
   },
   fn(input, args, handlers) {
     validateAccessor(args.metric, input.columns);
@@ -215,6 +219,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
         visType,
         visConfig: {
           metric: {
+            titulo: args.titulo, // Add this line to provide the required 'titulo' property
             subtitle: args.subtitle,
             secondaryPrefix: args.secondaryPrefix,
             color: args.color,
