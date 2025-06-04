@@ -63,13 +63,7 @@ export const createGridCell = (
 
 
     let content = formatters[columnId]?.convert(rowValue, filterOnClick ? 'text' : 'html');
-    //Edmar Moretti - ajusta os valores decimais removendo ,00 quando necessário
-    if (content.substring(0,2) == "R$" && !content.split(',')[1]) {
-      content = content + ',00';
-    }
-    if(content.substring(0,2) !== "R$" && content.split("%").length == 1 && content.split(",00").length == 2){
-      content = content.split(",00")[0];
-    }
+
     if(content == '(empty)'){
       content = '';
     }
