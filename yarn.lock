@@ -2197,9 +2197,9 @@
   dependencies:
     object-hash "^1.3.0"
 
-"@elastic/charts@https://github.com/edmarmoretti/elastic-charts-pt-br/raw/refs/heads/v68.0.2-pt-br-ms/packages/charts/elastic-charts-68.0.4-ms-2.tgz":
-  version "68.0.4-ms-2"
-  resolved "https://github.com/edmarmoretti/elastic-charts-pt-br/raw/refs/heads/v68.0.2-pt-br-ms/packages/charts/elastic-charts-68.0.4-ms-2.tgz#419b72ff778f7aba073db664c3f108d1278d5cc8"
+"@elastic/charts@file:./elastic-charts-68.0.4-ms-3.tgz":
+  version "68.0.4-ms-3"
+  resolved "file:./elastic-charts-68.0.4-ms-3.tgz#68def695793778c0dcc6e05c8085784fdd37f7df"
   dependencies:
     "@popperjs/core" "^2.11.8"
     bezier-easing "^2.1.0"
