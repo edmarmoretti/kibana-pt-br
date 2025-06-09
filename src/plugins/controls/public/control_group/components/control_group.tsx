@@ -245,19 +245,13 @@ export function ControlGroup({
   // Leandro Celes - Adicionando para aplicar os filtros automaticamente no inicio do render, mesmo que o autoApplySelections seja falso
   const [firstRender, setFirstRender] = useState(true);
   useEffect(() => {
-    if (firstRender && hasUnappliedSelections) {
-      applySelections();
-      // do um tempo ate o hasUnappliedSelections mudar para não da flicker no botao de filtro
-      setTimeout(() => {
-        setFirstRender(false);
-      }, 1000);
-    }
-  }, [hasUnappliedSelections, applySelections, firstRender]);
-
-  // Tb depois de um tempo, falo que renderizou, pois o hasUnappliedSelections pode ser false sempre se nnao tem nenhum control/filtro salvo no painel
-  setTimeout(() => {
+  if (isInitialized && firstRender && hasUnappliedSelections) {
+    applySelections();
     setFirstRender(false);
-  }, 2000);
+  }
+}, [isInitialized, hasUnappliedSelections, applySelections, firstRender]);
+
+
 
   // Edmar Moretti - altera o ícone de aplicar os filtros para um botão
   // Leandro Celes - Adicionando o botão de resetar filtros e popover para os filtros
