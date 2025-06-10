@@ -37,22 +37,6 @@
   }
 }
 
-// HEADER
-
-.embPanel__header {
-  flex: 0 0 auto;
-  display: flex;
-  // ensure menu button is on the right even if the title doesn't exist
-  justify-content: flex-end;
-  height: $euiSizeL;
-}
-
-.embPanel__header + .embPanel__content {
-  border-radius: 0;
-  border-bottom-left-radius: $euiBorderRadius;
-  border-bottom-right-radius: $euiBorderRadius;
-}
-
 //Edmar Moretti - estilos do mouse over sobre visualizações do tipo métrica
 
 .data-big-number * {
@@ -78,22 +62,38 @@
     }
 }
 
+// HEADER
+
+//Edmar Moretti - ajusta a identação do título dos quadros
+.embPanel__header {
+  flex: 0 0 auto;
+  display: flex;
+  // ensure menu button is on the right even if the title doesn't exist
+  justify-content: flex-end;
+height: 60px;
+text-wrap: balance;
+}
+
+.embPanel__header + .embPanel__content {
+  border-radius: 0;
+  border-bottom-left-radius: $euiBorderRadius;
+  border-bottom-right-radius: $euiBorderRadius;
+}
+
 //Edmar Moretti - ajusta a altura do texto do título dos quadros
 
 .embPanel__title {
   @include euiTitle('xxxs');
   overflow: auto;
-  line-height: 1.2;
+  line-height: 1;
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  height: 50px;
-
-  //Edmar Moretti - ajusta a altura do texto do título dos quadros
+  height: 60px;
 
   &:not(:empty) {
-    line-height: 20px;
+    line-height: 18px;
     padding-left: $euiSizeS;
   }
 
@@ -107,7 +107,7 @@
   .embPanel__titleTooltipAnchor {
     max-width: 100%;
   }
-  //Edmar Moretti - ajusta a altura do texto do título dos quadros
+
   .embPanel__titleText {
     @include euiTextTruncate;
     font-weight: $euiFontWeightBold;
