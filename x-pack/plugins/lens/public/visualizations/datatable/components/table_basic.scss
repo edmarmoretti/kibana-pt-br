@@ -18,12 +18,17 @@
   text-align: center;
 }
 
-//Edmar Moretti - ajusta o tamanho dos textos no rodapé das tabelas
-.lnsTableCellSummaryLabel {
-  font-size: 0.7rem;
-  line-height: 0.8rem;
-  font-weight: normal;
+
+//Edmar Moretti - ajuste na fonte de textos da tabela e padding
+.euiDataGridRowCell, .euiDataGridHeaderCell {
+  font-size: 0.8rem !Important;
+  line-height: 1.6rem !Important;
 }
+.euiDataGridRowCell__content {
+    padding: 2px ! Important;
+}
+
+
 
 .lnsTableCellSummaryValue {
   font-size: 0.7rem;
