@@ -255,7 +255,7 @@ export function ShowShareModal({
       title:
         dashboardTitle ||
         i18n.translate('dashboard.share.defaultDashboardTitle', {
-          defaultMessage: 'Dashboard [{date}]',
+          defaultMessage: 'Painel [{date}]',
           values: { date: moment().toISOString(true) },
         }),
       locatorParams: {

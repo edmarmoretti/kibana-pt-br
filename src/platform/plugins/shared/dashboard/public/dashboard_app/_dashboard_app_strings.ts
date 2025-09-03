@@ -240,7 +240,7 @@ export const topNavStrings = {
   },
   viewModeInteractiveSave: {
     label: i18n.translate('dashboard.topNave.viewModeInteractiveSaveButtonAriaLabel', {
-      defaultMessage: 'duplicate',
+      defaultMessage: 'Duplicar',
     }),
     description: i18n.translate('dashboard.topNave.viewModeInteractiveSaveConfigDescription', {
       defaultMessage: 'Create a copy of your dashboard',

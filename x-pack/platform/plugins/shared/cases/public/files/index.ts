@@ -18,15 +18,15 @@ import type { Owner } from '../../common/constants/types';
 import { constructFileKindIdByOwner } from '../../common/files';
 import type { CaseFileKinds, FilesConfig } from './types';
 import * as i18n from './translations';
-
+// Edmar Moretti - tradução de títulos do menu lateral
 const getOwnerUIName = (owner: Owner) => {
   switch (owner) {
     case SECURITY_SOLUTION_OWNER:
-      return 'Security';
+      return 'Segurança';
     case OBSERVABILITY_OWNER:
-      return 'Observability';
+      return 'Observabilidade';
     case GENERAL_CASES_OWNER:
-      return 'Stack Management';
+      return 'Gerenciamento da Suíte';
     default:
       return owner;
   }

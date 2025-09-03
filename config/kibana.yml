@@ -40,7 +40,7 @@
 
 # =================== System: Elasticsearch ===================
 # The URLs of the Elasticsearch instances to use for all your queries.
-#elasticsearch.hosts: ["http://localhost:9200"]
+elasticsearch.hosts: ["http://localhost:9200"]
 
 # If your Elasticsearch is protected with basic authentication, these settings provide
 # the username and password that the Kibana server uses to perform maintenance on the Kibana
@@ -150,7 +150,7 @@
 
 # Specifies locale to be used for all localizable strings, dates and number formats.
 # Supported languages are the following: English (default) "en", Chinese "zh-CN", Japanese "ja-JP", French "fr-FR".
-#i18n.locale: "en"
+i18n.locale: "pt-BR"
 
 # =================== Frequently used (Optional)===================
 
@@ -181,3 +181,5 @@
 # Maximum number of documents loaded by each shard to generate autocomplete suggestions.
 # This value must be a whole number greater than zero. Defaults to 100_000
 #unifiedSearch.autocomplete.valueSuggestions.terminateAfter: 100000
+csp.strict: false
+xpack.fleet.enabled: false
