@@ -278,13 +278,15 @@ export const createGridColumns = (
       }),
       textAlign: currentAlignment,
     });
+    //Edmar Moretti - corrige o nome da coluna quando do tipo multitermos
+    const nname = name.trim().replace(/\s*›\s*$/, '');
 
     const columnDefinition: EuiDataGridColumn = {
       id: field,
       cellActions,
       visibleCellActions: 5,
-      display: <div css={columnStyle}>{name}</div>,
-      displayAsText: name,
+      display: <div css={columnStyle}>{nname}</div>,
+      displayAsText: nname,
       schema: field,
       actions: {
         showHide: false,

@@ -180,12 +180,20 @@ export function getAggsFormats(getFieldFormat: GetFieldFormat): FieldFormatInsta
 
         const joinTemplate = `${params.separator ?? ' › '}`;
 
-        return (
-          (val as MultiFieldKey)?.keys
-            ?.map((valPart, i) => formats[i].convert(valPart, type))
-            .join(joinTemplate) ?? ''
-        );
+        if (val instanceof MultiFieldKey) {
+          return val.keys
+            .map((key, i) => {
+              const format = formats[i] || formats[formats.length - 1];
+              return format.convert(key, type);
+            })
+            .join(joinTemplate);
+        }
+        //Edmar Moretti - resolve a divisão da string de multitermos
+        var texto = String(val).replace(', ','!#').split(',').join(joinTemplate).replace('!#',', ');
+
+        return texto.trim().replace(/\s*›\s*$/, '');
       };
+      
       getConverterFor = (type: FieldFormatsContentType) => (val: string) => this.convert(val, type);
     },
   ];

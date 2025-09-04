@@ -61,7 +61,6 @@ export const createGridCell = (
     } = columnConfig.columns[colIndex] ?? {};
     const filterOnClick = oneClickFilter && handleFilterClick;
 
-
     let content = formatters[columnId]?.convert(rowValue, filterOnClick ? 'text' : 'html');
 
     if(content == '(empty)'){
@@ -121,7 +120,6 @@ export const createGridCell = (
 
         match = content.match((/\/indicador\/([^\/]+)-headless/));
         const codigo = match ? match[1] : '';
-        console.log(codigo);
         return (
           <div>
           <EuiButtonEmpty iconType="lensApp" size="xs" color='primary' onClick={() => abreFicha(codigo)}>
@@ -175,7 +173,6 @@ export const createGridCell = (
         </div>
       );
     }
-
     return (
       <div
         /*
