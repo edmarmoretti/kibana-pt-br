@@ -15,7 +15,7 @@ import Handlebars, {
   compileFnName,
 } from '@kbn/handlebars';
 import { i18n } from '@kbn/i18n';
-import { emptyLabel } from '../../../../common/empty_label';
+//import { emptyLabel } from '../../../../common/empty_label';
 
 const handlebars = Handlebars.create();
 

@@ -617,7 +617,7 @@ export const getDatatableVisualization = ({
           if (isTextBasedLanguage) {
             isTransposable = Boolean(column?.isMetric || inMetricDimension);
           }
-
+          //Edmar Moretti - define a densidade da tabela como compact por defualt
           const datatableColumnFn = buildExpressionFunction<DatatableColumnFn>(
             'lens_datatable_column',
             {
@@ -653,7 +653,7 @@ export const getDatatableVisualization = ({
       rowHeightLines: state.rowHeightLines ?? DEFAULT_ROW_HEIGHT_LINES,
       headerRowHeightLines: state.headerRowHeightLines ?? DEFAULT_HEADER_ROW_HEIGHT_LINES,
       pageSize: state.paging?.enabled ? state.paging.size : undefined,
-      density: state.density ?? DataGridDensity.NORMAL,
+      density: state.density ?? DataGridDensity.COMPACT,
     }).toAst();
 
     return {

@@ -6,40 +6,59 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
+//Edmar Moretti - tradução
+import { i18n } from '@kbn/i18n';
+import type { AppCategory } from './app_category';
 
-/**
- * A category definition for nav links to know where to sort them in the left hand nav
- * @public
- */
-export interface AppCategory {
-  /**
-   * Unique identifier for the categories
-   */
-  id: string;
+/** @public */
+export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze({
+  kibana: {
+    id: 'kibana',
+    label: i18n.translate('core.ui.kibanaNavList.label', {
+      defaultMessage: 'Análise',
+    }),
+    euiIconType: 'logoKibana',
+    order: 1000,
+  },
+  enterpriseSearch: {
+    id: 'enterpriseSearch',
+    label: i18n.translate('core.ui.searchNavList.label', {
+      defaultMessage: 'Elasticsearch',
+    }),
+    order: 2000,
+    euiIconType: 'logoElasticsearch',
+  },
+  observability: {
+    id: 'observability',
+    label: i18n.translate('core.ui.observabilityNavList.label', {
+      defaultMessage: 'Observabilidade',
+    }),
+    euiIconType: 'logoObservability',
+    order: 3000,
+  },
+  security: {
+    id: 'securitySolution',
+    label: i18n.translate('core.ui.securityNavList.label', {
+      defaultMessage: 'Segurança',
+    }),
+    order: 4000,
+    euiIconType: 'logoSecurity',
+  },
+  chat: {
+    id: 'chat',
+    label: i18n.translate('core.ui.chatNavList.label', {
+      defaultMessage: 'Workchat',
+    }),
+    order: 4500,
+    euiIconType: 'logoElasticsearch',
+  },
+  management: {
+    id: 'management',
+    label: i18n.translate('core.ui.managementNavList.label', {
+      defaultMessage: 'Gerenciamento',
+    }),
+    order: 5000,
+    euiIconType: 'managementApp',
+  },
+});
 
-  /**
-   * Label used for category name.
-   * Also used as aria-label if one isn't set.
-   */
-  label: string;
-
-  /**
-   * If the visual label isn't appropriate for screen readers,
-   * can override it here
-   */
-  ariaLabel?: string;
-
-  /**
-   * The order that categories will be sorted in
-   * Prefer large steps between categories to allow for further editing
-   * (Default categories are in steps of 1000)
-   */
-  order?: number;
-
-  /**
-   * Define an icon to be used for the category
-   * If the category is only 1 item, and no icon is defined, will default to the product icon
-   * Defaults to initials if no icon is defined
-   */
-  euiIconType?: string;
-}

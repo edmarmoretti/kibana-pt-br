@@ -4,8 +4,8 @@
  * 2.0; you may not use this file except in compliance with the Elastic License
  * 2.0.
  */
-
-import React, { useContext, useEffect } from 'react';
+//incluido useState
+import React, { useState, useContext, useEffect } from 'react';
 import { EuiDataGridCellValueElementProps, EuiLink } from '@elastic/eui';
 import classNames from 'classnames';
 import { PaletteOutput } from '@kbn/coloring';
@@ -16,7 +16,12 @@ import type { DatatableColumnConfig } from '../../../../common/expressions';
 import type { DataContextType } from './types';
 import { getContrastColor } from '../../../shared_components/coloring/utils';
 import { CellColorFn } from '../../../shared_components/coloring/get_cell_color_fn';
-
+//Edmar Moretti - componentes para poder abrir link em janela interna
+import {
+  EuiFlyout,
+  EuiFlyoutBody,
+  EuiButtonEmpty
+} from '@elastic/eui';
 export const createGridCell = (
   formatters: Record<string, ReturnType<FormatFactory>>,
   columnConfig: DatatableColumnConfig,
@@ -41,9 +46,21 @@ export const createGridCell = (
       colorMapping,
     } = columnConfig.columns[colIndex] ?? {};
     const filterOnClick = oneClickFilter && handleFilterClick;
-    const content = formatter?.convert(rawValue, filterOnClick ? 'text' : 'html');
+    let content = formatter?.convert(rawValue, filterOnClick ? 'text' : 'html');
+    if(content == '(empty)'){
+      content = '';
+    }
     const currentAlignment = alignments?.get(columnId);
-
+    //Edmar Moretti - corrige os nomes dos meses
+    //Feb,Apr,May,Aug,Sep,Oct,Dec
+    content = content.replace('Feb/','Fev/');
+    content = content.replace('Apr/','Abr/');
+    content = content.replace('May/','Mai/');
+    content = content.replace('Aug/','Ago/');
+    content = content.replace('Sep/','Set/');
+    content = content.replace('Oct/','Out/');
+    content = content.replace('Dec/','Dez/');
+    //content = content.replace('July/','Julho/');
     useEffect(() => {
       let colorSet = false;
       if (colorMode !== 'none' && (palette || colorMapping)) {
@@ -72,6 +89,53 @@ export const createGridCell = (
         };
       }
     }, [rawValue, columnId, setCellProps, colorMode, palette, colorMapping, isExpanded]);
+    //Edmar Moretti - cria o botão que abre o link em um iframe quando a url possuir a palavra flyout
+    const regex = /<a[^>]*>(.*?)<\/a>/;
+    let match = content.match(regex);
+    const label = match ? match[1] : "";
+    if (content.indexOf('flyout') > 0) {
+      // @ts-ignore
+      if(typeof window.abreFichaIndicador === 'function'){
+        const abreFicha = function(indicador: string){
+          // @ts-ignore
+          window.abreFichaIndicador(indicador); // eslint-disable-line react/no-danger
+        };
+
+        match = content.match((/\/indicador\/([^\/]+)-headless/));
+        const codigo = match ? match[1] : '';
+        return (
+          <div>
+          <EuiButtonEmpty iconType="lensApp" size="xs" color='primary' onClick={() => abreFicha(codigo)}>
+            {label != "" ? label : "Abrir"}
+          </EuiButtonEmpty>
+        </div>
+        );
+      }
+      const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
+      let iframe = '<iframe class="flyoutIframe" style="position: fixed; height: 100vh; width: 45vw;" src="' + content + '"></iframe>';
+      function Iframe(props: { iframe: string; }) {
+        return (<div dangerouslySetInnerHTML={ {__html:  props.iframe?props.iframe:""}} />);
+      };
+      let flyout;
+      if (isFlyoutVisible) {
+        flyout = (
+          <EuiFlyout onClose={() => setIsFlyoutVisible(false)}>
+            <EuiFlyoutBody>
+              <Iframe iframe={iframe} />
+            </EuiFlyoutBody>
+          </EuiFlyout>
+        );
+      }
+      
+      return (
+        <div>
+        <EuiButtonEmpty iconType="lensApp" size="xs" color='primary' onClick={() => setIsFlyoutVisible(true)}>
+        {label != "" ? label : "Abrir"}
+        </EuiButtonEmpty>
+        {flyout}
+      </div>
+      );
+    }
 
     if (filterOnClick) {
       return (

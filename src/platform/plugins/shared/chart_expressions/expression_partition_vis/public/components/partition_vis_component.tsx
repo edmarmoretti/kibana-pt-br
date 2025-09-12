@@ -113,10 +113,12 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
     visType,
     services,
     syncColors,
-    interactive,
+    interactive: _interactive,
     overrides,
     hasOpenedOnAggBasedEditor,
   } = props;
+  //Edmar Moretti: desativa a seleção por clique nos gráficos de pizza
+  const interactive = false;
   const visParams = useMemo(() => filterOutConfig(visType, preVisParams), [preVisParams, visType]);
   const chartBaseTheme = props.chartsThemeService.useChartsBaseTheme();
   const palettes = useKbnPalettes();
@@ -564,17 +566,7 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
                 flatLegend={flatLegend}
                 legendSort={customLegendSort}
                 legendValues={visParams.legendStats}
-                onElementClick={([elementEvent]) => {
-                  // this cast is safe because we are rendering a partition chart
-                  const [layerValues] = elementEvent as PartitionElementEvent;
-                  handleSliceClick(
-                    layerValues,
-                    bucketColumns,
-                    visData,
-                    splitChartDimension,
-                    splitChartFormatter
-                  );
-                }}
+                onElementClick={undefined}
                 legendAction={legendActions}
                 theme={[
                   // Chart background should be transparent for the usage at Canvas.

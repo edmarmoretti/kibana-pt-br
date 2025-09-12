@@ -6,13 +6,13 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - tradução de 'Painéis'
 import { i18n } from '@kbn/i18n';
 import { ViewMode } from '@kbn/presentation-publishing';
 
 export const getDashboardPageTitle = () =>
   i18n.translate('dashboard.dashboardPageTitle', {
-    defaultMessage: 'Dashboards',
+    defaultMessage: 'Painéis',
   });
 
 export const dashboardReadonlyBadge = {
@@ -153,7 +153,7 @@ export const shareModalStrings = {
 */
 export const getDashboardBreadcrumb = () =>
   i18n.translate('dashboard.dashboardAppBreadcrumbsTitle', {
-    defaultMessage: 'Dashboards',
+    defaultMessage: 'Painéis',
   });
 
 export const topNavStrings = {

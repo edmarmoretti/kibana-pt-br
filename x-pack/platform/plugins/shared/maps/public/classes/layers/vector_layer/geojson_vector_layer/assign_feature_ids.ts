@@ -38,6 +38,15 @@ export function assignFeatureIds(featureCollection: FeatureCollection): FeatureC
   for (let i = 0; i < featureCollection.features.length; i++) {
     const numericId = randomizedIds[i];
     const feature = featureCollection.features[i];
+
+    //Edmar Moretti - não adiciona ao mapa de pontos círculos com valor zero
+    if(feature.geometry.type == "Point" && feature.properties){
+      let p = Object.keys(feature.properties)[0];
+      if(feature.properties[p] == 0){
+        continue;
+      };
+    }
+
     features.push({
       type: 'Feature',
       geometry: feature.geometry, // do not copy geometry, this object can be massive

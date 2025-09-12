@@ -96,7 +96,7 @@ export function DataTableToolbar(props: VisualizationToolbarProps<DatatableVisua
     },
     [setState, state]
   );
-
+  //Edmar Moretti - marca corretamente a opção de definição da densidade da tabela quando ainda não tiver sido escolhida
   return (
     <EuiFlexGroup alignItems="center" gutterSize="none" responsive={false}>
       <ToolbarPopover
@@ -109,7 +109,7 @@ export function DataTableToolbar(props: VisualizationToolbarProps<DatatableVisua
         data-test-subj="lnsVisualOptionsPopover"
       >
         <DensitySettings
-          dataGridDensity={state.density ?? DataGridDensity.NORMAL}
+          dataGridDensity={state.density ?? DataGridDensity.COMPACT}
           onChange={onChangeDensity}
         />
         <RowHeightSettings

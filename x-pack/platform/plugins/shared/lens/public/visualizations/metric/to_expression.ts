@@ -177,23 +177,19 @@ export const toExpression = (
   const metricFn = buildExpressionFunction<MetricVisExpressionFunctionDefinition>('metricVis', {
     metric: state.metricAccessor,
     secondaryMetric: state.secondaryMetricAccessor,
-    secondaryPrefix:
-      secondaryPrefixConfig.mode === 'custom' ? secondaryPrefixConfig.label : state.secondaryPrefix,
+    secondaryPrefix: secondaryPrefixConfig.mode === 'custom' ? secondaryPrefixConfig.label : state.secondaryPrefix,
     secondaryColor: secondaryTrendConfig.type === 'static' ? secondaryTrendConfig.color : undefined,
-    secondaryTrendVisuals:
-      secondaryTrendConfig.type === 'dynamic' ? secondaryTrendConfig.visuals : undefined,
-    secondaryTrendBaseline:
-      secondaryTrendConfig.type === 'dynamic'
-        ? getSecondaryDynamicTrendBaselineValue(isMetricNumeric, secondaryTrendConfig.baselineValue)
-        : undefined,
+    secondaryTrendVisuals: secondaryTrendConfig.type === 'dynamic' ? secondaryTrendConfig.visuals : undefined,
+    secondaryTrendBaseline: secondaryTrendConfig.type === 'dynamic'
+      ? getSecondaryDynamicTrendBaselineValue(isMetricNumeric, secondaryTrendConfig.baselineValue)
+      : undefined,
     secondaryTrendPalette: getTrendPalette(
       secondaryDynamicColorMode,
       secondaryTrendConfig,
       theme.getTheme()
     ),
     max: state.maxAccessor,
-    breakdownBy:
-      state.breakdownByAccessor && !canCollapseBy ? state.breakdownByAccessor : undefined,
+    breakdownBy: state.breakdownByAccessor && !canCollapseBy ? state.breakdownByAccessor : undefined,
     trendline: trendlineExpression ? [trendlineExpression] : [],
     subtitle: state.subtitle ?? undefined,
     progressDirection: showingBar(state)
@@ -205,17 +201,18 @@ export const toExpression = (
     valueFontSize: state.valueFontMode ?? metricStateDefaults.valueFontMode,
     color: state.color ?? getDefaultColor(state, isMetricNumeric),
     icon: hasIcon(state.icon) ? state.icon : undefined,
-    palette:
-      isMetricNumeric && state.palette?.params
-        ? [
-            paletteService
-              .get(CUSTOM_PALETTE)
-              .toExpression(computePaletteParams(paletteService, state.palette)),
-          ]
-        : [],
+    palette: isMetricNumeric && state.palette?.params
+      ? [
+        paletteService
+          .get(CUSTOM_PALETTE)
+          .toExpression(computePaletteParams(paletteService, state.palette)),
+      ]
+      : [],
     maxCols: state.maxCols ?? DEFAULT_MAX_COLUMNS,
     minTiles: maxPossibleTiles ?? undefined,
     inspectorTableId: state.layerId,
+    firstTermPosition: state.firstTermPosition ?? metricStateDefaults.firstTermPosition,
+    titulo: ''
   });
 
   return {

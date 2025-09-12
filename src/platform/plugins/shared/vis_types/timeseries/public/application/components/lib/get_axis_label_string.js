@@ -17,6 +17,10 @@ export function getAxisLabelString(interval) {
 
   const convertedValue = convertIntervalIntoUnit(interval);
 
+  //Edmar Moretti - remove o texto do gráfico feito com TSVB que indica a escala de tempo
+  return '';
+
+  /*
   if (convertedValue) {
     return i18n.translate('visTypeTimeseries.axisLabelOptions.axisLabel', {
       defaultMessage: 'per {unitValue} {unitString}',
@@ -26,4 +30,5 @@ export function getAxisLabelString(interval) {
       },
     });
   }
+  */
 }

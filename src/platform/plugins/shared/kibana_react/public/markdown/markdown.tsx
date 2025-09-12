@@ -36,8 +36,8 @@ export const markdownFactory = memoize(
     } else {
       markdownIt = new MarkdownIt({ html: false, linkify: true });
     }
-
-    if (openLinksInNewTab) {
+    //Edmar Moretti - Quando a opção de abrir em nova aba for false o link será aberto em um modal, definido no plugin sageIntegration
+    if (openLinksInNewTab == true) {
       // All links should open in new browser tab.
       // Define custom renderer to add 'target' attribute
       // https://github.com/markdown-it/markdown-it/blob/master/docs/architecture.md#renderer
@@ -56,6 +56,34 @@ export const markdownFactory = memoize(
         if (rel) {
           tokens[idx].attrPush(['rel', rel]);
         }
+        return originalLinkRender(tokens, idx, options, env, self);
+      };
+    } else {
+      //
+      const originalLinkRender =
+        markdownIt.renderer.rules.link_open ||
+        function (tokens, idx, options, env, self) {
+          return self.renderToken(tokens, idx, options);
+        };
+
+      //Edmar Moretti Adiciona nos elementos <a> um atributo data-href-link-open
+      //Esse atributo permite atribuir um evento onclick no link
+      //Veja timeseries_vis_renderer.tsx
+      markdownIt.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+        const href = tokens[idx].attrGet('href');
+        tokens[idx].attrPush(['data-href-link-open', href || '']);
+        if (href && href.indexOf('flyout') > 0) {
+          // Adiciona um token de texto manualmente para alterar o conteúdo do link
+          const textToken = {
+            type: 'text',
+            content: 'Ficha do indicador',
+            level: tokens[idx].level + 1,
+          };
+          // Insere o texto após o token de abertura do link
+          // @ts-ignore
+          tokens.splice(idx + 1, 1, textToken);
+        }
+        tokens[idx].attrSet('href', '#');
         return originalLinkRender(tokens, idx, options, env, self);
       };
     }

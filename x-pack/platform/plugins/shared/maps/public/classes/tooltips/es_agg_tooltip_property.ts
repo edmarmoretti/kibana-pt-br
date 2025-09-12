@@ -13,7 +13,7 @@ import { ITooltipProperty } from './tooltip_property';
 import { IESAggField } from '../fields/agg';
 
 export class ESAggTooltipProperty extends ESTooltipProperty {
-  private readonly _aggType: AGG_TYPE;
+  //private readonly _aggType: AGG_TYPE;
   private readonly _aggField: IESAggField;
 
   constructor(
@@ -24,7 +24,7 @@ export class ESAggTooltipProperty extends ESTooltipProperty {
     applyGlobalQuery: boolean
   ) {
     super(tooltipProperty, indexPattern, field, applyGlobalQuery);
-    this._aggType = aggType;
+    //this._aggType = aggType;
     this._aggField = field;
   }
 
@@ -35,7 +35,8 @@ export class ESAggTooltipProperty extends ESTooltipProperty {
       : super.getHtmlDisplayValue();
   }
 
+  //Edmar Moretti - impede o filtro no tooltip
   isFilterable(): boolean {
-    return this._aggType === AGG_TYPE.TERMS ? super.isFilterable() : false;
+    return false;//this._aggType === AGG_TYPE.TERMS ? super.isFilterable() : false;
   }
 }

@@ -8,9 +8,10 @@
  */
 
 import classNames from 'classnames';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+//Edmar Moretti e Leandro Celes inclusão do acordion no bloco de filtros
 
-import { EuiPortal, UseEuiTheme } from '@elastic/eui';
+import { EuiPortal, UseEuiTheme, EuiAccordion } from '@elastic/eui';
 import { EmbeddableRenderer } from '@kbn/embeddable-plugin/public';
 import { ExitFullScreenButton } from '@kbn/shared-ux-button-exit-full-screen';
 
@@ -73,6 +74,16 @@ export const DashboardViewport = ({
     'dshDashboardViewport--panelExpanded': Boolean(expandedPanelId),
   });
 
+  //Edmar Moretti - inclusão de botão para expandir/recolher os filtros
+  //const embed = window.location.href.match(/embed=true/); //leandro
+  const controlsRoot = useRef(null);
+  const simpleAccordionId = 'simpleAccordionFiltros';
+  let aberto = true;
+  const windowWidth = window.innerWidth;
+  if (windowWidth < 1024) {
+    aberto = false
+  }
+
   useEffect(() => {
     if (!controlGroupApi) {
       return;
@@ -114,21 +125,27 @@ export const DashboardViewport = ({
       css={styles.wrapper}
     >
       {viewMode !== 'print' ? (
-        <div className={hasControls ? 'dshDashboardViewport-controls' : ''}>
-          <EmbeddableRenderer<object, ControlGroupApi>
-            key={dashboardApi.uuid}
-            hidePanelChrome={true}
-            panelProps={{ hideLoader: true }}
-            type={CONTROL_GROUP_TYPE}
-            maybeId={CONTROL_GROUP_EMBEDDABLE_ID}
-            getParentApi={() => {
-              return {
-                ...dashboardApi,
-                reload$: dashboardInternalApi.controlGroupReload$,
-              };
-            }}
-            onApiAvailable={(api) => dashboardInternalApi.setControlGroupApi(api)}
-          />
+        <div id='filtros'>
+          <EuiAccordion
+            buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros" initialIsOpen={aberto}  >
+
+            <div ref={controlsRoot} className={hasControls ? 'dshDashboardViewport-controls' : ''}>
+              <EmbeddableRenderer<object, ControlGroupApi>
+                key={dashboardApi.uuid}
+                hidePanelChrome={true}
+                panelProps={{ hideLoader: true }}
+                type={CONTROL_GROUP_TYPE}
+                maybeId={CONTROL_GROUP_EMBEDDABLE_ID}
+                getParentApi={() => {
+                  return {
+                    ...dashboardApi,
+                    reload$: dashboardInternalApi.controlGroupReload$,
+                  };
+                }}
+                onApiAvailable={(api) => dashboardInternalApi.setControlGroupApi(api)}
+              />
+            </div>
+          </EuiAccordion>
         </div>
       ) : null}
       {fullScreenMode && (

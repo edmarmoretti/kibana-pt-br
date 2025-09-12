@@ -267,6 +267,12 @@ export function SecondaryMetric({
           formatter={metricFormatter}
         />
       </span>
+      {config.metric.firstTermPosition == 'bottom' && (
+        <>
+          <br />
+          <span className='data-big-number'>{config.metric.titulo}</span>
+        </>
+      )}
     </span>
   );
 }

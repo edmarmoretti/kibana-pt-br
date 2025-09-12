@@ -15,12 +15,12 @@ interface Args {
   file: File;
   fileName?: string;
 }
-
+//Edmar Moretti - alterar o tempo de cache
 export function getDownloadHeadersForFile({ file, fileName }: Args): ResponseHeaders {
   return {
     'content-type':
       (fileName && mime.getType(fileName)) ?? file.data.mimeType ?? 'application/octet-stream',
-    'cache-control': 'max-age=31536000, immutable',
+    'cache-control': 'max-age=86400, immutable',
   };
 }
 

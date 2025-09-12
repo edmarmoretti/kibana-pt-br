@@ -76,8 +76,10 @@ export const getOptionsListControlFactory = (): DataControlFactory<
       /** Serializable state - i.e. the state that is saved with the control */
       const editorStateManager = initializeEditorStateManager(initialState);
 
+      //Edmar Moretti - aplica a ordenação sempre conforme o default
+ 
       const sort$ = new BehaviorSubject<OptionsListSortingType | undefined>(
-        initialState.sort ?? OPTIONS_LIST_DEFAULT_SORT
+        OPTIONS_LIST_DEFAULT_SORT ?? OPTIONS_LIST_DEFAULT_SORT
       );
 
       const placeholder = initialState.placeholder;

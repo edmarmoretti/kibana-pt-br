@@ -13,7 +13,7 @@ import { css } from '@emotion/react';
 import { EuiScreenReaderOnly, EuiText, EuiToolTip, UseEuiTheme } from '@elastic/eui';
 
 import { OptionsListStrings } from '../options_list_strings';
-
+// Edmar Moretti - remove o número que aparece em cada item da listagem de opções dos filtros
 export const OptionsListPopoverSuggestionBadge = ({ documentCount }: { documentCount: number }) => {
   return (
     <>
@@ -28,7 +28,7 @@ export const OptionsListPopoverSuggestionBadge = ({ documentCount }: { documentC
           data-test-subj="optionsList-document-count-badge"
           css={styles.documentCountBadge}
         >
-          {`${documentCount.toLocaleString()}`}
+          {/*Edmar Moretti `${documentCount.toLocaleString()}`*/}
         </EuiText>
       </EuiToolTip>
       <EuiScreenReaderOnly>

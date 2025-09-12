@@ -52,13 +52,7 @@ export const filterByMapExtentAction = createAction<EmbeddableApiContext>({
       values: { containerLabel: getContainerLabel(embeddable) },
     }),
   getIconType: () => 'filter',
-  isCompatible: async ({ embeddable }: EmbeddableApiContext) => {
-    return (
-      !areTriggersDisabled(embeddable) &&
-      (apiIsOfType(embeddable, MAP_SAVED_OBJECT_TYPE) ||
-        (apiHasVisualizeConfig(embeddable) && isLegacyMapApi(embeddable)))
-    );
-  },
+  isCompatible: async () => false,
   execute: async ({ embeddable }: EmbeddableApiContext) => {
     const core = getCore();
     const LazyModal = lazy(async () => {
