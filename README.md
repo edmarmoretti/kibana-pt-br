@@ -1,3 +1,94 @@
+# Alterações feitas no código original do Kibana
+
+- Adiciona opção nas configurações de visualizações do tipo "métricas" que permite deslocar o primeiro termo, mostrado na tela, quando se utiliza multi termos, para o rodapé da métrica, com efeito "hover"
+
+- Aumenta o limite de pontos destino em camadas de ligação entre origem-destino (mapas).
+
+- Inclusão de botão "limpar" filtros de um painel, reiniciando os controles para o estado de inicializaçẽo do painel.
+
+- Mudança no cache de persistência do código do Kibana de 360 para 1 dia
+
+- Nos grandes números (legado) não mostra o caractere "-" quando o título estiver em branco.
+
+- Impede que o painel seja filtrado nas interações com as visualizações.
+
+- Adiciona um número extra de cores para uso nas visualizações antigas.
+
+- Substitui o ícone de aplicar dos filtros por um botão com texto.
+
+- Apresenta a lista de itens em ordem alfabética nos controles.
+
+- Nos controles, exclui as opções "Incluir" e "excluir", o número de opções e o valor de número de registros de cada opção da lista..
+
+- Altera o parâmetro de configuração 'Store URLs in session storage' para true.
+
+- Altera a configuração default para português e números com duas casas decimais.
+
+- Ativa 'defer loading' como o padrão nas opções de configuração.
+
+- Substituição da string '(empty)' por '' nas visualizações do tipo tabela.
+
+- Remove os botões 'Incluir' e 'Excluir' e a opção 'Existe' dos filtros (controles).
+
+- Opção para exportar visualizações no formato PNG.
+
+- Inclusão de botão para expandir ou recolher os filtros.
+
+- Remove o subtítulo dos gráficos de histograma de data que indica o agrupamento utilizado ('por mês', 'por ano', etc).
+
+- Inclusão de notas de rodapé e sumário nos quadros dos painéis.
+
+- Abre uma url em janela 'flyout' quando estiver presente o parâmetro 'flyout'.
+
+- Diminui o tempo de armazenamento do código do Kibana em cache do navegador.
+
+- Ordena corretamente os meses abreviados nas opções dos filtros.
+
+- Altera o estilo dos títulos dos quadros dos painéis para permitir mais de uma linha.
+
+- Nos mapas, as camadas do tipo ponto não apresentam os símbolos quando a métrica for zero.
+
+- Remoção de filtros ativados a partir de interações com os mapas.
+
+- Remoção de filtros ativados a partir dos tooltips.
+
+- Nas visualizações do tipo grandes números, quebra o título quando forem utilizados mais de um termo na agregação.
+
+- Remove a linha do eixo Y nos gráficos de barras horizontais.
+
+- Adição de novas cores na paleta de cores que podem ser escolhidas nos gráficos legados.
+
+# Alterações no Elastic Charts:
+
+- Aumenta o número de linhas que é utilizado para quebrar os textos e incluir "...".
+
+- Nos grandes números, posiciona a métrica secundária abaixo da métrica principal.
+
+- Remove ",00" dos labels dos eixos e interior do gráfico.
+
+- Posiciona os títulos dos eixos no ínicio  da linha.
+
+- Não mostra labels dentro dos gráficos quando forem zero.
+
+- Muda o padrão de arredondamento dos valores nos labels dos eixos, mostrando o último valor superior.
+
+- Mostra a legenda apenas se houver mais de um item.
+
+- Altera o estilo do sumário das colunas nas tabelas feitas com Lens, colocando o label e o valor em linhas separadas.
+
+# Alterações no Plugin Enhanced Table
+
+- Remove a opção de exportação dos dados no formato RAW.
+
+- Remove ',00' dos números.
+
+- Remove a opção de filtro por valores, que afeta os filtros globais do painel.
+
+- Altera a ordem de apresentação dos títulos das tabelas
+
+
+
+
 # Kibana
 
 Kibana is your window into the [Elastic Stack](https://www.elastic.co/products). Specifically, it's a browser-based analytics and search dashboard for Elasticsearch.
