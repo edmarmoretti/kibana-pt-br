@@ -74,12 +74,12 @@ export const PresentationPanelInternal = <
     api?.title$,
     api?.hideTitle$,
     api?.description$,
-    api?.panelTitleNotes$,
-    api?.panelTitleSummary$,
+    api?.titleNotes$,
+    api?.titleSummary$,
     api?.defaultTitle$,
     api?.defaultDescription$,
-    api?.defaultPanelTitleNotes$,
-    api?.defaultPanelTitleSummary$,
+    api?.defaultTitleNotes$,
+    api?.defaultTitleSummary$,
     viewModeSubject,
     (api?.parentApi as Partial<PublishesTitle>)?.hideTitle$
   );
@@ -154,7 +154,7 @@ export const PresentationPanelInternal = <
             panelTitleSummary={panelTitleSummary ?? defaultPanelTitleSummary}
             panelTitleNotes={panelTitleNotes ?? defaultPanelTitleNotes}
 
-            />
+          />
         )}
         {blockingError && api && (
           <EuiFlexGroup
@@ -213,37 +213,33 @@ const styles = {
     '&.embPanel__content--hidden, &[data-error]': {
       display: 'none',
     },
-  }),
+  })
 };
 //Edmar Moretti - adicionado titleNotes
 function formatPanelNotes(panelTitleNotes: string | undefined) {
   const linkify = (inputText: string) => {
-      var replacedText, replacePattern1;
-      //URLs starting with http://, https://, or ftp://
-      replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-      replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
-      //return replacedText;
-      const theObj = {__html:replacedText};
-      return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
+    var replacedText, replacePattern1;
+    //URLs starting with http://, https://, or ftp://
+    replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+    //return replacedText;
+    const theObj = { __html: replacedText };
+    return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
   };
-  const titleNotesStyles = useMemo(() => {
-    return {
-      captionStyles: css`
-        > div {
-          max-height: 20px;
-          font-size: 10px;
-          padding-left: 8px;
-          margin: 2px;
-        }
-        > div:empty {
-          padding: 0px;
-        }
-      `
-    }}
-  );
+  const titleNotesStyles = css`
+  > div {
+    max-height: 20px;
+    font-size: 10px;
+    padding-left: 8px;
+    margin: 2px;
+  }
+  > div:empty {
+    padding: 0px;
+  }
+`;
   return (
     <figcaption css={titleNotesStyles} className='embPanel__notes'>
-        {panelTitleNotes?linkify(panelTitleNotes):''}
+      {panelTitleNotes ? linkify(panelTitleNotes) : ''}
     </figcaption>
   );
 }

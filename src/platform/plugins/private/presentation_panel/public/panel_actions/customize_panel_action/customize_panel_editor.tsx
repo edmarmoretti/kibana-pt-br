@@ -38,8 +38,8 @@ import {
   getInheritedViewMode,
   getDescription,
   getTitle,
-  getPanelTitleNotes,
-  getPanelTitleSummary,
+  getTitleNotes,
+  getTitleSummary,
   PublishesUnifiedSearch,
 } from '@kbn/presentation-publishing';
 
@@ -70,8 +70,8 @@ export const CustomizePanelEditor = ({
   const [hideTitle, setHideTitle] = useState(api.hideTitle$?.value);
   const [panelTitle, setPanelTitle] = useState(getTitle(api));
   const [panelDescription, setPanelDescription] = useState(getDescription(api));
-  const [panelTitleSummary, setPanelTitleSummary] = useState(getPanelTitleSummary(api));
-  const [panelTitleNotes, setPanelTitleNotes] = useState(getPanelTitleNotes(api));
+  const [panelTitleSummary, setPanelTitleSummary] = useState(getTitleSummary(api));
+  const [panelTitleNotes, setPanelTitleNotes] = useState(getTitleNotes(api));
 
   const [timeRange, setTimeRange] = useState(
     api.timeRange$?.value ?? api.parentApi?.timeRange$?.value
@@ -115,13 +115,8 @@ export const CustomizePanelEditor = ({
     }
     if (hideTitle !== api.hideTitle$?.value) api.setHideTitle?.(hideTitle);
     if (panelDescription !== api.description$?.value) api.setDescription?.(panelDescription);
-    if (panelTitleNotes !== api.panelTitleNotes?.value){
-      api.setPanelTitleNotes?.(panelTitleNotes);
-    }
-
-    if (panelTitleSummary !== api.panelTitleSummary?.value){
-      api.setPanelTitleSummary?.(panelTitleSummary);
-    }
+    if (panelTitleNotes !== api.titleNotes$?.value) api.setTitleNotes?.(panelTitleNotes);
+    if (panelTitleSummary !== api.titleSummary$?.value) api.setTitleSummary?.(panelTitleSummary);
     const newTimeRange = hasOwnTimeRange ? timeRange : undefined;
     if (newTimeRange !== api.timeRange$?.value) {
       api.setTimeRange?.(newTimeRange);
@@ -207,10 +202,8 @@ export const CustomizePanelEditor = ({
             <EuiButtonEmpty
               size="xs"
               data-test-subj="resetCustomEmbeddablePanelTitleNotesButton"
-              onClick={() => setPanelTitleNotes(api.defaultPanelTitleNotes?.value)}
-              disabled={
-                hideTitle || !editMode || api.defaultPanelTitleNotes?.value === panelTitleNotes
-              }
+              onClick={() => setPanelTitleNotes(api.defaultTitleNotes$?.value)}
+              disabled={api.defaultTitleNotes$?.value === panelTitleNotes}
               aria-label={i18n.translate(
                 'presentationPanel.action.customizePanel.flyout.optionsMenuForm.resetCustomTityleNotesButtonAriaLabel',
                 {
@@ -229,7 +222,7 @@ export const CustomizePanelEditor = ({
             id="panelTitleNotesInput"
             className="panelTitleNotesInputText"
             data-test-subj="customEmbeddablePanelTitleNotesInput"
-            disabled={hideTitle || !editMode}
+            disabled={!editMode}
             name="titleNotes"
             value={panelTitleNotes ?? ''}
             onChange={(e) => setPanelTitleNotes(e.target.value)}
@@ -252,9 +245,9 @@ export const CustomizePanelEditor = ({
             <EuiButtonEmpty
               size="xs"
               data-test-subj="resetCustomEmbeddablePanelTitleSummaryButton"
-              onClick={() => setPanelTitleSummary(api.defaultPanelTitleSummary?.value)}
+              onClick={() => setPanelTitleSummary(api.defaultTitleSummary$?.value)}
               disabled={
-                hideTitle || !editMode || api.defaultPanelTitleSummary?.value === panelTitleSummary
+                hideTitle || !editMode || api.defaultTitleSummary$?.value === panelTitleSummary
               }
               aria-label={i18n.translate(
                 'presentationPanel.action.customizePanel.flyout.optionsMenuForm.resetCustomTityleSummaryButtonAriaLabel',

@@ -3,16 +3,16 @@
 import { PublishingSubject } from '../../publishing_subject';
 
 export interface PublishesPanelTitleNotes {
-  panelTitleNotes$: PublishingSubject<string | undefined>;
-  defaultPanelTitleNotes$?: PublishingSubject<string | undefined>;
+  titleNotes$: PublishingSubject<string | undefined>;
+  defaultTitleNotes$?: PublishingSubject<string | undefined>;
 }
 
-export function getPanelTitleNotes(api: Partial<PublishesPanelTitleNotes>): string | undefined {
-  return api.panelTitleNotes$?.value ?? api.defaultPanelTitleNotes$?.value;
+export function getTitleNotes(api: Partial<PublishesPanelTitleNotes>): string | undefined {
+  return api.titleNotes$?.value ?? api.defaultTitleNotes$?.value;
 }
 
 export type PublishesWritablePanelTitleNotes = PublishesPanelTitleNotes & {
-  setPanelTitleNotes: (newTitle: string | undefined) => void;
+  setTitleNotes: (newTitle: string | undefined) => void;
 };
 
 export const apiPublishesPanelTitleNotes = (
@@ -20,7 +20,7 @@ export const apiPublishesPanelTitleNotes = (
 ): unknownApi is PublishesPanelTitleNotes => {
   return Boolean(
     unknownApi &&
-      (unknownApi as PublishesPanelTitleNotes)?.panelTitleNotes$ !== undefined
+      (unknownApi as PublishesPanelTitleNotes)?.titleNotes$ !== undefined
   );
 };
 
@@ -29,7 +29,7 @@ export const apiPublishesWritablePanelTitleNotes = (
 ): unknownApi is PublishesWritablePanelTitleNotes => {
   return (
     apiPublishesPanelTitleNotes(unknownApi) &&
-    (unknownApi as PublishesWritablePanelTitleNotes).setPanelTitleNotes !== undefined &&
-    typeof (unknownApi as PublishesWritablePanelTitleNotes).setPanelTitleNotes === 'function' 
+    (unknownApi as PublishesWritablePanelTitleNotes).setTitleNotes !== undefined &&
+    typeof (unknownApi as PublishesWritablePanelTitleNotes).setTitleNotes === 'function' 
   );
 };

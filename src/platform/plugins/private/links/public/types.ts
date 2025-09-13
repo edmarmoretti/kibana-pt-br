@@ -12,6 +12,8 @@ import {
   HasLibraryTransforms,
   HasType,
   PublishesDescription,
+  PublishesPanelTitleNotes,
+  PublishesPanelTitleSummary,
   PublishesTitle,
   PublishesSavedObjectId,
   PublishesUnifiedSearch,
@@ -33,6 +35,8 @@ export type LinksParentApi = PresentationContainer &
   PublishesSavedObjectId &
   PublishesTitle &
   PublishesDescription &
+  PublishesPanelTitleNotes &
+  PublishesPanelTitleSummary &
   PublishesUnifiedSearch & {
     locator?: Pick<LocatorPublic<DashboardLocatorParams>, 'navigate' | 'getRedirectUrl'>;
   };
@@ -60,12 +64,17 @@ export interface LinksRuntimeState
   layout?: LinksLayoutType;
   defaultTitle?: string;
   defaultDescription?: string;
+  defaultTitleNotes?: string;
+  defaultTitleSummary?: string;
 }
 
 export type ResolvedLink = Link & {
   title: string;
   label?: string;
   description?: string;
+  titleNotes?: string;
+  titleSummary?: string;
+  isMissing?: boolean;
   error?: Error;
 };
 

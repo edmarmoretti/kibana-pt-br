@@ -141,14 +141,14 @@ export {
 export {
   apiPublishesPanelTitleNotes,
   apiPublishesWritablePanelTitleNotes,
-  getPanelTitleNotes,
+  getTitleNotes,
   type PublishesPanelTitleNotes,
   type PublishesWritablePanelTitleNotes,
 } from './interfaces/titles/publishes_panel_title_notes';
 export {
   apiPublishesPanelTitleSummary,
   apiPublishesWritablePanelTitleSummary,
-  getPanelTitleSummary,
+  getTitleSummary,
   type PublishesPanelTitleSummary,
   type PublishesWritablePanelTitleSummary,
 } from './interfaces/titles/publishes_panel_title_summary';

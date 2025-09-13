@@ -86,7 +86,7 @@ const PresentationPanelHeader = <
         }
       `,
       titleSummaryStyles: css`
-        font-size: 10px;
+        font-size: 12px;
         padding: 8px;
       `,
 
