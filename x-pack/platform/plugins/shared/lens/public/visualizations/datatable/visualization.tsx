@@ -617,7 +617,7 @@ export const getDatatableVisualization = ({
           if (isTextBasedLanguage) {
             isTransposable = Boolean(column?.isMetric || inMetricDimension);
           }
-          //Edmar Moretti - define a densidade da tabela como compact por defualt
+          //Edmar Moretti - define a densidade da tabela como compact por defualt e inclui o parametro size
           const datatableColumnFn = buildExpressionFunction<DatatableColumnFn>(
             'lens_datatable_column',
             {

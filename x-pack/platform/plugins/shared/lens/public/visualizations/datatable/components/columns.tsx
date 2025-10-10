@@ -286,14 +286,14 @@ export const createGridColumns = (
         }),
         textAlign: currentAlignment,
       });
-    //Edmar Moretti - corrige o nome da coluna quando do tipo multitermos
+    //Edmar Moretti - corrige o nome da coluna quando do tipo multitermos e adiciona uma classe para permitir a aplicação de estilos no plugin sageIntegration
     const nname = name.trim().replace(/\s*›\s*$/, '');
 
       const columnDefinition: EuiDataGridColumn = {
         id: field,
         cellActions,
         visibleCellActions: 5,
-        display: <div css={columnStyle}>{nname}</div>,
+        display: <div className='nomeDaColuna' css={columnStyle}>{nname}</div>,
         displayAsText: nname,
         schema: field,
         actions: {

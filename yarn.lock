@@ -2043,9 +2043,9 @@
   dependencies:
     object-hash "^1.3.0"
 
-"@elastic/charts@file:./elastic-charts-70.1.2-pt-br-ms-3.tgz":
-  version "70.1.2-pt-br-ms-3"
-  resolved "file:./elastic-charts-70.1.2-pt-br-ms-3.tgz#f3fdd439a6a76e9699ec53b26e36e7144463431b"
+"@elastic/charts@file:./elastic-charts-70.1.2-pt-br-ms-7.tgz":
+  version "70.1.2-pt-br-ms-7"
+  resolved "file:./elastic-charts-70.1.2-pt-br-ms-7.tgz#944e0db28d8b73f19c092bb2b738e8f2f997ca86"
   dependencies:
     "@popperjs/core" "^2.11.8"
     "@reduxjs/toolkit" "1.9.7"

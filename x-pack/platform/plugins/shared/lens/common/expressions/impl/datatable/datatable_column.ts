@@ -64,7 +64,7 @@ export type DatatableColumnFn = ExpressionFunctionDefinition<
   DatatableColumnArgs,
   DatatableColumnResult
 >;
-
+//Edmar Moretti - inclusão do parametro size
 export const datatableColumn: DatatableColumnFn = {
   name: LENS_DATATABLE_COLUMN,
   aliases: [],

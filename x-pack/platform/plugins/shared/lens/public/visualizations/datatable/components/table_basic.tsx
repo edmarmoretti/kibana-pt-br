@@ -25,6 +25,7 @@ import {
   EuiDataGridColumn,
   EuiDataGridSorting,
   EuiDataGridStyle,
+  EuiText,
 } from '@elastic/eui';
 import { CustomPaletteState, EmptyPlaceholder } from '@kbn/charts-plugin/public';
 import { ClickTriggerEvent } from '@kbn/charts-plugin/public';
@@ -80,6 +81,26 @@ export const DEFAULT_PAGE_SIZE = 10;
 const PAGE_SIZE_OPTIONS = [DEFAULT_PAGE_SIZE, 20, 30, 50, 100];
 
 export const DatatableComponent = (props: DatatableRenderProps) => {
+  //Edmar Moretti - mostra apenas um elemento na primeira coluna quando o size for 1, evitando mostrar mais de um nos casos em que ocorre divisão de colunas por determinado campo
+  const params = props.data.columns?.[0]?.meta?.sourceParams?.params;
+  const size =
+    params && typeof params === 'object' && 'size' in params
+      ? (params as { size?: unknown }).size
+      : undefined;
+
+  if(size === 1) {
+    const firstTermName = props.data.rows?.[0]?.[props.data.columns?.[0]?.id];
+    props.data.rows = props.data.rows?.filter((row) => row[props.data.columns?.[0]?.id] === firstTermName);
+    //Edmar Moretti - inclusão do título
+    // Verifica se a primeira coluna está visível antes de alterar o título
+    const firstColumnConfig = props.args.columns?.find(
+      (col) => col.columnId === props.data.columns?.[0]?.id
+    );
+    if (firstColumnConfig?.hidden) {
+      props.args.title = firstTermName ?? props.args.title;
+    }
+  }
+
   const dataGridRef = useRef<EuiDataGridRefProps>(null);
 
   const isInteractive = props.interactive;
@@ -430,20 +451,22 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
 
       return colorFn;
     };
-
+    //Edmar Moretti - retorna o valor de density
     return createGridCell(
       formatters,
       columnConfig,
       DataContext,
       isDarkMode,
       getCellColor,
-      props.args.fitRowToContent
+      props.args.fitRowToContent,
+      props.args.density
     );
   }, [
     formatters,
     columnConfig,
     isDarkMode,
     props.args.fitRowToContent,
+    props.args.density,
     props.paletteService,
     palettes,
     firstLocalTable,
@@ -479,7 +502,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
         ...getFinalSummaryConfiguration(config.columnId, config, props.data),
       }))
       .filter(({ summaryRow }) => summaryRow !== 'none');
-    //Edmar Moretti - altera o estilo do sumário por colunas. Ver também o scss
+    //Edmar Moretti - altera o estilo do sumário dividindo em linhas. Ver também o scss
     if (columnsWithSummary.length) {
       const summaryLookup = Object.fromEntries(
         columnsWithSummary.map(({ summaryRowValue, summaryLabel, columnId }) => [
@@ -540,7 +563,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     i18n.translate('xpack.lens.table.defaultAriaLabel', {
       defaultMessage: 'Data table visualization',
     });
-
+  //Edmar Moretti - inclusão do título
   return (
     <div
       css={datatableContainerStyles}
@@ -556,6 +579,9 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
           handleFilterClick,
         }}
       >
+      <EuiText>
+        <div className='tituloDaTabela'>{props.args.title}</div> 
+      </EuiText>
         <EuiDataGrid
           aria-label={dataGridAriaLabel}
           data-test-subj="lnsDataTable"

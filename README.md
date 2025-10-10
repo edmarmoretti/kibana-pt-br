@@ -1,5 +1,7 @@
 # Alterações feitas no código original do Kibana
 
+- Nas tabelas com Lens, quando a primeira coluna for definida para apresentar apenas uma linha e marcada como não visível, o valor da primeira célua é utilizada como título da tabela.
+
 - Adiciona opção nas configurações de visualizações do tipo "métricas" que permite deslocar o primeiro termo, mostrado na tela, quando se utiliza multi termos, para o rodapé da métrica, com efeito "hover"
 
 - Aumenta o limite de pontos destino em camadas de ligação entre origem-destino (mapas).

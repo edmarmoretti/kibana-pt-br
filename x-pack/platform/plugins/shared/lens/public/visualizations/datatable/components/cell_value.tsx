@@ -32,7 +32,8 @@ export const createGridCell = (
     palette?: PaletteOutput<CustomPaletteState>,
     colorMapping?: string
   ) => CellColorFn,
-  fitRowToContent?: boolean
+  fitRowToContent?: boolean,
+  density?: string
 ) => {
   return ({ rowIndex, columnId, setCellProps, isExpanded }: EuiDataGridCellValueElementProps) => {
     const { table, alignments, handleFilterClick } = useContext(DataContext);
@@ -156,7 +157,7 @@ export const createGridCell = (
         </div>
       );
     }
-
+    //Edmar Moretti - adiciona a classe com o valor de density
     return (
       <div
         /*
@@ -169,6 +170,7 @@ export const createGridCell = (
           'lnsTableCell--multiline': fitRowToContent,
           'lnsTableCell--colored': colorMode !== 'none',
           [`lnsTableCell--${currentAlignment}`]: true,
+          [`lnsTableCell--density--${density}`]: !!density,
         })}
       />
     );
