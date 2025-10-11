@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - alterada a configuração default para português e duas casas decimais
 import { i18n } from '@kbn/i18n';
 import { schema } from '@kbn/config-schema';
 import { UiSettingsParams } from '@kbn/core/server';
@@ -17,7 +17,7 @@ import { FORMATS_UI_SETTINGS } from '../common';
 // We add the `en` key manually here, since that's not a real numeral locale, but the
 // default fallback in case the locale is not found.
 const numeralLanguageIds = [
-  'en',
+  'pt-br',
   ...numeralLanguages.map((numeralLanguage: { id: string }) => {
     return numeralLanguage.id;
   }),
@@ -105,7 +105,7 @@ export function getUiSettings(): Record<string, UiSettingsParams<unknown>> {
       name: i18n.translate('fieldFormats.advancedSettings.format.numberFormatTitle', {
         defaultMessage: 'Number format',
       }),
-      value: '0,0.[000]',
+      value: '0,0.[00]',
       type: 'string',
       description: i18n.translate('fieldFormats.advancedSettings.format.numberFormatText', {
         defaultMessage: 'Default {numeralFormatLink} for the "number" format',
@@ -130,7 +130,7 @@ export function getUiSettings(): Record<string, UiSettingsParams<unknown>> {
       name: i18n.translate('fieldFormats.advancedSettings.format.percentFormatTitle', {
         defaultMessage: 'Percent format',
       }),
-      value: '0,0.[000]%',
+      value: '0,0.[00]%',
       type: 'string',
       description: i18n.translate('fieldFormats.advancedSettings.format.percentFormatText', {
         defaultMessage: 'Default {numeralFormatLink} for the "percent" format',
@@ -205,7 +205,7 @@ export function getUiSettings(): Record<string, UiSettingsParams<unknown>> {
       name: i18n.translate('fieldFormats.advancedSettings.format.formattingLocaleTitle', {
         defaultMessage: 'Formatting locale',
       }),
-      value: 'en',
+      value: 'pt-br',
       type: 'select',
       options: numeralLanguageIds,
       optionLabels: Object.fromEntries(
