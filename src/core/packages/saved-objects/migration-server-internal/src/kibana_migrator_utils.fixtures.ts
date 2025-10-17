@@ -1282,6 +1282,12 @@ export const INDEX_MAP_BEFORE_SPLIT: IndexMap = {
           description: {
             type: 'text',
           },
+          titleNotes: {
+            type: 'text',
+          },
+          titleSummary: {
+            type: 'text',
+          },
           kibanaSavedObjectMeta: {
             properties: {
               searchSourceJSON: {

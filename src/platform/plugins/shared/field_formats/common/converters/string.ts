@@ -13,9 +13,9 @@ import { KBN_FIELD_TYPES } from '@kbn/field-types';
 import { asPrettyString, getHighlightHtml, shortenDottedString } from '../utils';
 import { FieldFormat } from '../field_format';
 import { TextContextTypeConvert, FIELD_FORMAT_IDS, HtmlContextTypeConvert } from '../types';
-
+//Edmar Moretti - substituição de (empty) por ''
 const emptyLabel = i18n.translate('fieldFormats.string.emptyLabel', {
-  defaultMessage: '(empty)',
+  defaultMessage: ' ',
 });
 
 const TRANSFORM_OPTIONS = [

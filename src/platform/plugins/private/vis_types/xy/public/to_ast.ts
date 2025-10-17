@@ -365,13 +365,13 @@ export const toExpressionAst: VisToExpressionAst<VisParams> = async (vis, params
   const xScale = vis.params.categoryAxes[0].scale;
 
   let mapColumn;
-
+//Edmar Moretti - remove 'all documents'
   if (!dimensions.x) {
     mapColumn = buildExpressionFunction('mapColumn', {
       id: 'all',
-      expression: '_all',
+      expression: ' ',
       name: i18n.translate('visTypeXy.allDocsTitle', {
-        defaultMessage: 'All docs',
+        defaultMessage: ' ',
       }),
     });
   }

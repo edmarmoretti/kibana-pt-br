@@ -119,6 +119,8 @@ export const getSerializedState = ({
     timeFrom,
     title,
     timeTo,
+    titleNotes: dashboardState.titleNotes ?? '',
+    titleSummary: dashboardState.titleSummary ?? '',
   };
 
   // TODO Provide tags as an array of tag names in the attribute. In that case, tag references

@@ -216,6 +216,8 @@ export const toExpression = (
     maxCols: state.maxCols ?? DEFAULT_MAX_COLUMNS,
     minTiles: maxPossibleTiles ?? undefined,
     inspectorTableId: state.layerId,
+    firstTermPosition: state.firstTermPosition ?? metricStateDefaults.firstTermPosition,
+    titulo: ''
   });
 
   return {

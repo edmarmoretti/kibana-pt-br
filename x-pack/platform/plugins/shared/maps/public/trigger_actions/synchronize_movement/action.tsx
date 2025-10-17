@@ -35,13 +35,13 @@ export const synchronizeMovementAction = createAction<EmbeddableApiContext>({
     }),
   getIconType: () => 'crosshairs',
   isCompatible: async ({ embeddable }: EmbeddableApiContext) => {
-    return (
-      mapEmbeddablesSingleton.hasMultipleMaps() &&
-      (apiIsOfType(embeddable, MAP_SAVED_OBJECT_TYPE) ||
-        (isLensApi(embeddable) &&
-          embeddable.getSavedVis()?.visualizationType === 'lnsChoropleth') ||
-        (apiHasVisualizeConfig(embeddable) && isLegacyMapApi(embeddable)))
-    );
+    //Edmar Moretti - remove a opção de sincronização entre mapas
+    return false;
+    /*
+    if (!isApiCompatible(embeddable)) return false;
+    const { isCompatible } = await import('./is_compatible');
+    return isCompatible(embeddable);
+    */
   },
   execute: async () => {
     const core = getCore();

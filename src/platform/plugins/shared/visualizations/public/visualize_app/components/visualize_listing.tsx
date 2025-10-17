@@ -378,9 +378,9 @@ export const VisualizeListing = () => {
         }}
       />
     );
-
+//Edmar Moretti - tradução
     return {
-      title: 'Visualizations',
+      title: 'Visualizações',
       id: 'visualizations',
       getTableList: (propsFromParent) => (
         <>

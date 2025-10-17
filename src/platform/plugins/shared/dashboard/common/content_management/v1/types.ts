@@ -75,6 +75,8 @@ export type DashboardAttributes = {
   controlGroupInput?: ControlGroupAttributesV1;
   refreshInterval?: RefreshInterval;
   timeRestore: boolean;
+  titleNotes: string;
+  titleSummary: string;
   optionsJSON?: string;
   useMargins?: boolean;
   description: string;

@@ -21,7 +21,7 @@ export interface TitlesAndTextPopoverProps {
   setState: (newState: MetricVisualizationState) => void;
   groupPosition?: ToolbarPopoverProps['groupPosition'];
 }
-
+//Edmar Moretti - firstTermPosition
 export const TitlesAndTextPopover: FC<TitlesAndTextPopoverProps> = ({
   state,
   setState,
@@ -30,7 +30,7 @@ export const TitlesAndTextPopover: FC<TitlesAndTextPopoverProps> = ({
   return (
     <ToolbarPopover
       title={i18n.translate('xpack.lens.metric.toolbarTitlesText.label', {
-        defaultMessage: 'Titles and text',
+        defaultMessage: 'Títulos e texto',
       })}
       type="titlesAndText"
       groupPosition={groupPosition}
@@ -74,6 +74,14 @@ export const TitlesAndTextPopover: FC<TitlesAndTextPopoverProps> = ({
           setState({ ...state, valueFontMode: value });
         }}
       />
+
+      <FirstTermPositionOption
+        value={state.firstTermPosition ?? metricStateDefaults.firstTermPosition}
+        onChange={(firstTermPosition) => {
+          setState({ ...state, firstTermPosition });
+        }}
+      />
+
     </ToolbarPopover>
   );
 };
@@ -96,7 +104,7 @@ function SubtitleOption({
   return (
     <EuiFormRow
       label={i18n.translate('xpack.lens.metric.subtitleLabel', {
-        defaultMessage: 'Subtitle',
+        defaultMessage: 'Subtítulo',
       })}
       fullWidth
       display="columnCompressed"
@@ -124,7 +132,7 @@ const valueFontModes: Array<{
   {
     id: 'fit',
     label: i18n.translate('xpack.lens.metric.toolbarTitlesText.fit', {
-      defaultMessage: 'Fit',
+      defaultMessage: 'Ajustado',
     }),
   },
 ];
@@ -137,7 +145,7 @@ function ValueFontSizeOption({
   onChange: (mode: ValueFontMode) => void;
 }) {
   const label = i18n.translate('xpack.lens.metric.toolbarTitlesText.valueFontSize', {
-    defaultMessage: 'Value font size',
+    defaultMessage: 'Tamanho da fonte para os valores',
   });
 
   return (
@@ -148,7 +156,7 @@ function ValueFontSizeOption({
           {label}{' '}
           <EuiIconTip
             content={i18n.translate('xpack.lens.metric.toolbarTitlesText.valueFontSizeTip', {
-              defaultMessage: 'Font size of the Primary metric value',
+              defaultMessage: 'Tamanho da fonte para o valor da métrica principal',
             })}
             iconProps={{
               className: 'eui-alignTop',
@@ -183,19 +191,19 @@ const alignmentOptions: Array<{
   {
     id: 'left',
     label: i18n.translate('xpack.lens.shared.left', {
-      defaultMessage: 'Left',
+      defaultMessage: 'Esquerda',
     }),
   },
   {
     id: 'center',
     label: i18n.translate('xpack.lens.shared.center', {
-      defaultMessage: 'Center',
+      defaultMessage: 'Centro',
     }),
   },
   {
     id: 'right',
     label: i18n.translate('xpack.lens.shared.right', {
-      defaultMessage: 'Right',
+      defaultMessage: 'Direita',
     }),
   },
 ];
@@ -208,7 +216,7 @@ function TitlesAlignmentOption({
   onChange: (alignment: MetricStyle['titlesTextAlign']) => void;
 }) {
   const label = i18n.translate('xpack.lens.metric.toolbarTitlesText.titlesAlignment', {
-    defaultMessage: 'Titles alignment',
+    defaultMessage: 'Alinhamento dos títulos',
   });
 
   return (
@@ -219,7 +227,7 @@ function TitlesAlignmentOption({
           {label}{' '}
           <EuiIconTip
             content={i18n.translate('xpack.lens.metric.toolbarTitlesText.titlesAlignmentTip', {
-              defaultMessage: 'Alignment of the Title and Subtitle',
+              defaultMessage: 'Alinhamento do título e subtítulo',
             })}
             iconProps={{
               className: 'eui-alignTop',
@@ -255,7 +263,7 @@ function ValuesAlignmentOption({
   onChange: (alignment: MetricStyle['valuesTextAlign']) => void;
 }) {
   const label = i18n.translate('xpack.lens.metric.toolbarTitlesText.valuesAlignment', {
-    defaultMessage: 'Values alignment',
+    defaultMessage: 'Alinhamento dos valores',
   });
 
   return (
@@ -267,7 +275,7 @@ function ValuesAlignmentOption({
           <EuiIconTip
             color="subdued"
             content={i18n.translate('xpack.lens.metric.toolbarTitlesText.valuesAlignmentTip', {
-              defaultMessage: 'Alignment of the Primary and Secondary Metrics',
+              defaultMessage: 'Alinhamento das métricas primárias e secundárias',
             })}
             iconProps={{
               className: 'eui-alignTop',
@@ -294,6 +302,72 @@ function ValuesAlignmentOption({
   );
 }
 
+//Edmar Moretti - FirstTermPosition
+
+const firstTermPositionModes: Array<{
+  id: 'default' | 'bottom';
+  label: string;
+}> = [
+  {
+    id: 'default',
+    label: i18n.translate('xpack.lens.metric.toolbarTitlesText.default', {
+      defaultMessage: 'Default',
+    }),
+  },
+  {
+    id: 'bottom',
+    label: i18n.translate('xpack.lens.metric.toolbarTitlesText.rodape', {
+      defaultMessage: 'Rodapé',
+    }),
+  },
+];
+function FirstTermPositionOption({
+  value,
+  onChange,
+}: {
+  value: MetricStyle['firstTermPosition'];
+  onChange: (alignment: MetricStyle['firstTermPosition']) => void;
+}) {
+  const label = i18n.translate('xpack.lens.metric.toolbarTitlesText.firstTermPosition', {
+    defaultMessage: 'Posição do primeiro termo',
+  });
+
+  return (
+    <EuiFormRow
+      display="columnCompressed"
+      label={
+        <span>
+          {label}{' '}
+          <EuiIconTip
+            content={i18n.translate('xpack.lens.metric.toolbarTitlesText.firstTermPositionTip', {
+              defaultMessage: 'Posicionamento do primeiro termo',
+            })}
+            iconProps={{
+              className: 'eui-alignTop',
+            }}
+            color="subdued"
+            position="top"
+            size="s"
+            type="questionInCircle"
+          />
+        </span>
+      }
+    >
+      <EuiButtonGroup
+        isFullWidth
+        legend={label}
+        data-test-subj="lens-titles-alignment-btn"
+        buttonSize="compressed"
+        options={firstTermPositionModes}
+        idSelected={value}
+        onChange={(alignment) => {
+          onChange(alignment as MetricStyle['firstTermPosition']);
+        }}
+      />
+    </EuiFormRow>
+  );
+}
+
 const iconAlignmentOptions: Array<{
   id: MetricStyle['titlesTextAlign'] | MetricStyle['valuesTextAlign'];
   label: string;
@@ -301,13 +375,13 @@ const iconAlignmentOptions: Array<{
   {
     id: 'left',
     label: i18n.translate('xpack.lens.shared.left', {
-      defaultMessage: 'Left',
+      defaultMessage: 'Esquerda',
     }),
   },
   {
     id: 'right',
     label: i18n.translate('xpack.lens.shared.right', {
-      defaultMessage: 'Right',
+      defaultMessage: 'Direita',
     }),
   },
 ];
@@ -320,7 +394,7 @@ function IconAlignmentOption({
   onChange: (alignment: MetricStyle['iconAlign']) => void;
 }) {
   const label = i18n.translate('xpack.lens.metric.toolbarTitlesText.iconAlignment', {
-    defaultMessage: 'Icon alignment',
+    defaultMessage: 'Alinhamento do ícone',
   });
 
   return (

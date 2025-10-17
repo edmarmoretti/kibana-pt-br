@@ -20,6 +20,7 @@ import {
   ACTION_UNLINK_FROM_LIBRARY,
   BADGE_FILTERS_NOTIFICATION,
 } from './constants';
+import { ACTION_EXPORT_PNG } from './export_png_action';
 
 export const registerActions = async (plugins: DashboardStartDependencies) => {
   const { uiActions, share } = plugins;
@@ -55,6 +56,17 @@ export const registerActions = async (plugins: DashboardStartDependencies) => {
     });
     uiActions.attachAction(CONTEXT_MENU_TRIGGER, ACTION_EXPORT_CSV);
   }
+
+  //Edmar Moretti - exportar para png
+  
+  if (share) {
+    uiActions.registerActionAsync(ACTION_EXPORT_PNG, async () => {
+      const { ExportPNGAction } = await import('../dashboard_renderer/dashboard_module');
+      return new ExportPNGAction();
+    });
+    uiActions.attachAction(CONTEXT_MENU_TRIGGER, ACTION_EXPORT_PNG);
+  }
+  
 
   uiActions.registerActionAsync(ACTION_ADD_TO_LIBRARY, async () => {
     const { AddToLibraryAction } = await import('../dashboard_renderer/dashboard_module');

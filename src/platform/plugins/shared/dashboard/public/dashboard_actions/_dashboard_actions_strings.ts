@@ -52,7 +52,7 @@ export const dashboardAddToLibraryActionStrings = {
 export const dashboardClonePanelActionStrings = {
   getDisplayName: () =>
     i18n.translate('dashboard.panel.clonePanel', {
-      defaultMessage: 'Duplicate',
+      defaultMessage: 'Duplicar',
     }),
   getClonedTag: () =>
     i18n.translate('dashboard.panel.title.clonedTag', {
@@ -85,6 +85,14 @@ export const dashboardExportCsvActionStrings = {
       defaultMessage: 'untitled',
     }),
 };
+
+//Edmar Moretti - Inclusão da exportação para PNG
+export const dashboardExportPngActionStrings = {
+  getDisplayName: () => 'Exportar como PNG',
+  getUntitledFilename: () => 'untitled'
+};
+
+
 
 export const dashboardUnlinkFromLibraryActionStrings = {
   getDisplayName: () =>

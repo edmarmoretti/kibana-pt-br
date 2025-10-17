@@ -256,18 +256,26 @@ export function SecondaryMetric({
   const value = metricColumn ? row[metricColumn.id] : undefined;
 
   return (
-    <span css={styles.wrapper} data-test-subj="metric-secondary-element">
-      {prefix && <span css={styles.prefix}>{prefix}</span>}
-      <span css={styles.value}>
-        <SecondaryMetricValue
-          rawValue={value}
-          formattedValue={metricFormatter?.(value)}
-          trendConfig={color ? undefined : trendConfig}
-          color={color}
-          formatter={metricFormatter}
-        />
+    <>
+      <span css={styles.wrapper} data-test-subj="metric-secondary-element">
+        {prefix && <span css={styles.prefix}>{prefix}</span>}
+        <span css={styles.value}>
+          <SecondaryMetricValue
+            rawValue={value}
+            formattedValue={metricFormatter?.(value)}
+            trendConfig={color ? undefined : trendConfig}
+            color={color}
+            formatter={metricFormatter}
+          />
+        </span>
       </span>
-    </span>
+      {config.metric.firstTermPosition == 'bottom' && (
+        <>
+          <br />
+          <span className='data-big-number'>{config.metric.titulo}</span>
+        </>
+      )}
+    </>
   );
 }
 

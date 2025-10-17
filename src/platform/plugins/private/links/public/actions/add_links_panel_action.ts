@@ -15,6 +15,8 @@ import { apiIsPresentationContainer } from '@kbn/presentation-containers';
 import {
   apiPublishesDescription,
   apiPublishesTitle,
+  apiPublishesPanelTitleNotes,
+  apiPublishesPanelTitleSummary,
   apiPublishesSavedObjectId,
 } from '@kbn/presentation-publishing';
 import type { LinksParentApi, LinksSerializedState } from '../types';
@@ -27,6 +29,8 @@ export const isParentApiCompatible = (parentApi: unknown): parentApi is LinksPar
   apiIsPresentationContainer(parentApi) &&
   apiPublishesSavedObjectId(parentApi) &&
   apiPublishesTitle(parentApi) &&
+  apiPublishesPanelTitleNotes(parentApi) &&
+  apiPublishesPanelTitleSummary(parentApi) &&
   apiPublishesDescription(parentApi);
 
 export const addLinksPanelAction: ActionDefinition<EmbeddableApiContext> = {

@@ -22,6 +22,8 @@ import {
   PublishesWritableUnifiedSearch,
   PublishesWritableDescription,
   PublishesWritableTitle,
+  PublishesWritablePanelTitleNotes,
+  PublishesWritablePanelTitleSummary,
   PublishesUnifiedSearch,
 } from '@kbn/presentation-publishing';
 import { Action, IncompatibleActionError } from '@kbn/ui-actions-plugin/public';
@@ -34,6 +36,8 @@ export type CustomizePanelActionApi = CanAccessViewMode &
       PublishesWritableUnifiedSearch &
       PublishesWritableDescription &
       PublishesWritableTitle &
+      PublishesWritablePanelTitleNotes &
+      PublishesWritablePanelTitleSummary &
       HasParentApi<Partial<PublishesUnifiedSearch & TracksOverlays>>
   >;
 

@@ -179,12 +179,19 @@ export function getAggsFormats(getFieldFormat: GetFieldFormat): FieldFormatInsta
         }
 
         const joinTemplate = `${params.separator ?? ' › '}`;
-
-        return (
-          (val as MultiFieldKey)?.keys
-            ?.map((valPart, i) => formats[i].convert(valPart, type))
-            .join(joinTemplate) ?? ''
-        );
+        var texto = '';
+        if (val instanceof MultiFieldKey) {
+          texto = val.keys
+            .map((key, i) => {
+              const format = formats[i] || formats[formats.length - 1];
+              return format.convert(key, type);
+            })
+            .join(joinTemplate);
+        } else {
+          //Edmar Moretti - resolve a divisão da string de multitermos
+          texto = String(val).replace(', ', '!#').split(',').join(joinTemplate).replace('!#', ', ');
+        }
+        return texto.trim().replace(/\s*›\s*$/, '');
       };
       getConverterFor = (type: FieldFormatsContentType) => (val: string) => this.convert(val, type);
     },

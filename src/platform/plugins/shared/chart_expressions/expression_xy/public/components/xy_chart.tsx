@@ -210,7 +210,7 @@ export function XYChart({
   layerCellValueActions,
   onSelectRange,
   setChartSize,
-  interactive = true,
+  interactive = false,
   syncColors,
   syncTooltips,
   syncCursor,
@@ -235,7 +235,7 @@ export function XYChart({
     annotations,
     pointVisibility,
   } = args;
-
+  interactive = false; // Edmar Moretti - Disable interactivity for report mode
   const chartRef = useRef<Chart>(null);
   const chartBaseTheme = chartsThemeService.useChartsBaseTheme();
   const darkMode = useKibanaIsDarkMode();
@@ -761,6 +761,17 @@ export function XYChart({
   const canCreateAlerts =
     isEsqlMode && applicationQuery && !isOfAggregateQueryType(applicationQuery);
 
+  //Edmar Moretti - remove a linha do eixo quando a categoria estiver no eixo y
+  if (getOriginalAxisPosition('bottom', shouldRotate) == 'left') {
+    xAxisStyle.axisLine = {
+      stroke: 'white'
+    };
+  } else {
+    xAxisStyle.tickLine = {
+      visible: true,
+      size: 5
+    };
+  }
   return (
     <>
       <GlobalXYChartStyles />
@@ -966,6 +977,9 @@ export function XYChart({
                     if (axis.truncate && value.length > axis.truncate) {
                       value = `${value.slice(0, axis.truncate)}...`;
                     }
+                    //Edmar Moretti - Formata corretamente os números curtos;
+                    value = value.replace("milhões", "mi");
+
                     return value;
                   }}
                   style={getYAxesStyle(axis)}
