@@ -80,7 +80,11 @@ export const DashboardViewport = ({
   const simpleAccordionId = 'simpleAccordionFiltros';
   let aberto = true;
   const windowWidth = window.innerWidth;
-  if (windowWidth < 1024) {
+
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMobile = /iphone|ipad|ipod|android|blackberry|windows phone/g.test(userAgent);
+
+  if (isMobile || windowWidth < 1024) {
     aberto = false
   }
 
@@ -116,6 +120,49 @@ export const DashboardViewport = ({
 
   const styles = useMemoCss(dashboardViewportStyles);
 
+  const filters = useMemo(() => {
+    if (viewMode === 'print') return null;
+
+    return <div ref={controlsRoot} className={hasControls ? 'dshDashboardViewport-controls' : ''}>
+      <EmbeddableRenderer<object, ControlGroupApi>
+        key={dashboardApi.uuid}
+        hidePanelChrome={true}
+        panelProps={{ hideLoader: true }}
+        type={CONTROL_GROUP_TYPE}
+        maybeId={CONTROL_GROUP_EMBEDDABLE_ID}
+        getParentApi={() => {
+          return {
+            ...dashboardApi,
+            reload$: dashboardInternalApi.controlGroupReload$,
+          };
+        }}
+        onApiAvailable={(api) => dashboardInternalApi.setControlGroupApi(api)}
+      />
+    </div>
+  }, [
+    controlGroupApi,
+    viewMode,
+    hasControls,
+    dashboardApi,
+    dashboardInternalApi
+  ]);
+
+  const accordionFilters = useMemo(() => {
+    if (viewMode === 'print') return null;
+    if (isMobile || windowWidth < 1024) {
+      return <div id='accordionFilters' css={{ position: 'relative' }}>
+        <EuiAccordion
+          buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros" initialIsOpen={aberto}  >
+          {filters}
+        </EuiAccordion>
+      </div>
+    } else {
+      return <div id='filtros'>
+        {filters}
+      </div>
+    };
+  }, [viewMode, isMobile, filters, aberto, simpleAccordionId, windowWidth]);
+
   return (
     <div
       className={classNames('dshDashboardViewportWrapper', {
@@ -124,30 +171,7 @@ export const DashboardViewport = ({
       })}
       css={styles.wrapper}
     >
-      {viewMode !== 'print' ? (
-        <div id='filtros'>
-          <EuiAccordion
-            buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros" initialIsOpen={aberto}  >
-
-            <div ref={controlsRoot} className={hasControls ? 'dshDashboardViewport-controls' : ''}>
-              <EmbeddableRenderer<object, ControlGroupApi>
-                key={dashboardApi.uuid}
-                hidePanelChrome={true}
-                panelProps={{ hideLoader: true }}
-                type={CONTROL_GROUP_TYPE}
-                maybeId={CONTROL_GROUP_EMBEDDABLE_ID}
-                getParentApi={() => {
-                  return {
-                    ...dashboardApi,
-                    reload$: dashboardInternalApi.controlGroupReload$,
-                  };
-                }}
-                onApiAvailable={(api) => dashboardInternalApi.setControlGroupApi(api)}
-              />
-            </div>
-          </EuiAccordion>
-        </div>
-      ) : null}
+      {!isMobile && windowWidth > 1024 ? accordionFilters : ''}
       {fullScreenMode && (
         <EuiPortal>
           <ExitFullScreenButton onExit={onExit} toggleChrome={!dashboardApi.isEmbeddedExternally} />
@@ -162,6 +186,7 @@ export const DashboardViewport = ({
         data-shared-items-count={visiblePanelCount}
         data-test-subj={'dshDashboardViewport'}
       >
+        {isMobile || windowWidth < 1024 ? accordionFilters : ''}
         {panelCount === 0 && sectionCount === 0 ? (
           <DashboardEmptyScreen />
         ) : (

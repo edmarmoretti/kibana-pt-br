@@ -207,7 +207,10 @@ export const getControlGroupEmbeddableFactory = () => {
               controlGroupApi={api}
               controlsManager={controlsManager}
               hasUnappliedSelections={hasUnappliedSelections}
-              labelPosition={labelPosition}
+              labelPosition={labelPosition} 
+              cancelSelections={function (): void {
+                throw new Error('Function not implemented.');
+              } }
             />
           );
         },

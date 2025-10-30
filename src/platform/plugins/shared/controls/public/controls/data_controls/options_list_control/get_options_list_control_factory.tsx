@@ -73,11 +73,13 @@ export const getOptionsListControlFactory = (): DataControlFactory<
     },
     CustomOptionsComponent: OptionsListEditorOptions,
     buildControl: async ({ initialState, finalizeApi, uuid, controlGroupApi }) => {
+
+
       /** Serializable state - i.e. the state that is saved with the control */
       const editorStateManager = initializeEditorStateManager(initialState);
 
       //Edmar Moretti - aplica a ordenação sempre conforme o default
- 
+
       const sort$ = new BehaviorSubject<OptionsListSortingType | undefined>(
         OPTIONS_LIST_DEFAULT_SORT ?? OPTIONS_LIST_DEFAULT_SORT
       );
@@ -189,6 +191,30 @@ export const getOptionsListControlFactory = (): DataControlFactory<
           new Set(successResponse.invalidSelections ?? [])
         );
 
+        //Edmar Moretti - inicializa o filtro com o primeiro da lista como o Default se tiver um título com * no final
+        if (initialState.title?.endsWith('*') === true && initialState) {
+          // --- define o primeiro valor das sugestões como seleção padrão quando não houver seleção ---
+          //const currentSelections = selectionsManager.api.selectedOptions$.getValue() ?? [];
+          //const existsSelected = selectionsManager.api.existsSelected$.getValue();
+          if (
+            //currentSelections.length === 0 &&
+            //!existsSelected &&
+            Array.isArray(successResponse.suggestions) &&
+            successResponse.suggestions.length > 0
+          ) {
+            const firstSuggestion = successResponse.suggestions[0];
+            // tenta extrair a propriedade chave se o item for um objeto; caso contrário usa o próprio item
+            const firstValue =
+              typeof firstSuggestion === 'string'
+                ? firstSuggestion
+                : (firstSuggestion as any).key ?? (firstSuggestion as any).value ?? firstSuggestion;
+            if(firstValue.trim() != ""){
+                selectionsManager.api.setSelectedOptions([firstValue as string]);
+            }
+          }
+          // ------------------------------------------------------------------------------
+        }
+        //
         // reset the request size back to the minimum (if it's not already)
         if (temporaryStateManager.api.requestSize$.getValue() !== MIN_OPTIONS_LIST_REQUEST_SIZE) {
           temporaryStateManager.api.setRequestSize(MIN_OPTIONS_LIST_REQUEST_SIZE);
@@ -465,12 +491,18 @@ export const getOptionsListControlFactory = (): DataControlFactory<
               errorsSubscription.unsubscribe();
             };
           }, []);
-
+          
           return (
             <OptionsListControlContext.Provider
               value={{
                 componentApi,
-                displaySettings: { placeholder, hideActionBar, hideExclude, hideExists, hideSort },
+                displaySettings: {
+                  placeholder,
+                  hideActionBar,
+                  hideExclude,
+                  hideExists,
+                  hideSort
+                },
               }}
             >
               <OptionsListControl controlPanelClassName={controlPanelClassName} />
@@ -479,5 +511,5 @@ export const getOptionsListControlFactory = (): DataControlFactory<
         },
       };
     },
-  };
-};
+  }
+}

@@ -26,7 +26,6 @@ import {
   EuiDataGridSorting,
   EuiDataGridStyle,
   EuiText,
-  EuiFieldSearch,
   EuiFieldText,
   EuiFormControlLayout,
 } from '@elastic/eui';

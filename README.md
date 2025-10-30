@@ -1,5 +1,7 @@
 # Alterações feitas no código original do Kibana
 
+- Força a seleção de um item na inicialização de um controle quando o nome do controle terminar com '*'.
+
 - Inclusão da opção de busca em tabelas feitas com Lens.
 
 - Ativação da opção de busca nas tabelas do Discover.

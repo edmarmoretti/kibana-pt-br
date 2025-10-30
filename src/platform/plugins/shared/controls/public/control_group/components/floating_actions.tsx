@@ -47,6 +47,7 @@ export const FloatingActions: FC<FloatingActionsProps> = ({
 }) => {
   const [floatingActions, setFloatingActions] = useState<FloatingActionItem[]>([]);
 
+  
   useEffect(() => {
     if (!api) return;
 
@@ -61,6 +62,7 @@ export const FloatingActions: FC<FloatingActionsProps> = ({
     };
 
     const getActions: () => Promise<FloatingActionItem[]> = async () => {
+
       const actions = (
         await uiActionsService.getTriggerCompatibleActions(CONTROL_HOVER_TRIGGER, context)
       )
@@ -75,6 +77,7 @@ export const FloatingActions: FC<FloatingActionsProps> = ({
 
     const handleActionCompatibilityChange = (isCompatible: boolean, action: Action) => {
       if (canceled) return;
+      
       setFloatingActions((currentActions) => {
         const newActions: FloatingActionItem[] = currentActions
           ?.filter((current) => current.id !== action.id)
@@ -98,7 +101,7 @@ export const FloatingActions: FC<FloatingActionsProps> = ({
         );
       if (canceled) return;
 
-      for (const action of frequentlyChangingActions) {
+      for (const action of frequentlyChangingActions) { 
         const compatibilitySubscription = action
           .getCompatibilityChangesSubject(context)
           ?.pipe(
@@ -132,6 +135,7 @@ export const FloatingActions: FC<FloatingActionsProps> = ({
           className={classNames(
             'presentationUtil__floatingActions',
             `controlFrameFloatingActions--${isTwoLine ? 'twoLine' : 'oneLine'}`,
+            `${children?.props?.label?.endsWith('*') && viewMode != 'edit'? 'hidden' : ''}`, //Edmar Moretti - esconde as ações flutuantes quando o título termina com *
             className
           )}
           css={styles.floatingActions}
