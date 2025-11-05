@@ -70,6 +70,7 @@ import {
 } from '../../../../common/expressions/impl/datatable/utils';
 import { CellColorFn, getCellColorFn } from '../../../shared_components/coloring/get_cell_color_fn';
 import { getColumnAlignment } from '../utils';
+import { DatatableRow } from '@kbn/expressions-plugin/common';
 
 export const DataContext = React.createContext<DataContextType>({});
 
@@ -586,7 +587,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     // toda a lógica de renderização (formatters, cores, paginação) continue válida.
     if (!query) {
       updateTable(props.data);
-    } else {
+    } else if (query && filteredRows.length > 0) {
       updateTable({
         ...props.data,
         rows: filteredRows,
@@ -720,9 +721,11 @@ const datatableContainerStyles = css`
     background-color: transparent;
     border: none;
     box-shadow: none;
-    font-size: 10px;
+    font-size: 12px;
     padding-top: 0px;
     padding-bottom: 0px;
     height: var(--altura-filtro, 20px);
   }
 `;
+
+
