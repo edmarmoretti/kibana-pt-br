@@ -7,7 +7,7 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
-import { EuiErrorBoundary, EuiFlexGroup, EuiPanel, htmlIdGenerator } from '@elastic/eui';
+import { EuiErrorBoundary, EuiFlexGroup, EuiPanel, htmlIdGenerator, EuiToolTip, EuiText } from '@elastic/eui';
 import { css } from '@emotion/react';
 import { PanelLoader } from '@kbn/panel-loader';
 import {
@@ -224,23 +224,33 @@ function formatPanelNotes(panelTitleNotes: string | undefined) {
     replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
     //return replacedText;
     const theObj = { __html: replacedText };
-    return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
+    return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj}  />
   };
   const titleNotesStyles = css`
   > div {
-    max-height: 20px;
-    font-size: 10px;
+    max-height: 13px;
+    font-size: 12px;
     padding-left: 8px;
-    margin: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: normal;
   }
   > div:empty {
     padding: 0px;
   }
 `;
   return (
-    <figcaption css={titleNotesStyles} className='embPanel__notes'>
+    <>
+    <EuiToolTip
+      position="top"
+      content={panelTitleNotes}
+    >
+    <EuiText css={titleNotesStyles} className='embPanel__notes'>
       {panelTitleNotes ? linkify(panelTitleNotes) : ''}
-    </figcaption>
+    </EuiText>
+    </EuiToolTip>
+    </>
   );
 }
 

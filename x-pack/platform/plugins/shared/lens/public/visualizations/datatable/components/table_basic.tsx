@@ -70,7 +70,6 @@ import {
 } from '../../../../common/expressions/impl/datatable/utils';
 import { CellColorFn, getCellColorFn } from '../../../shared_components/coloring/get_cell_color_fn';
 import { getColumnAlignment } from '../utils';
-import { DatatableRow } from '@kbn/expressions-plugin/common';
 
 export const DataContext = React.createContext<DataContextType>({});
 
@@ -85,23 +84,24 @@ const PAGE_SIZE_OPTIONS = [DEFAULT_PAGE_SIZE, 20, 30, 50, 100];
 
 export const DatatableComponent = (props: DatatableRenderProps) => {
   //Edmar Moretti - mostra apenas um elemento na primeira coluna quando o size for 1, evitando mostrar mais de um nos casos em que ocorre divisão de colunas por determinado campo
-  const params = props.data.columns?.[0]?.meta?.sourceParams?.params;
-  const size =
-    params && typeof params === 'object' && 'size' in params
-      ? (params as { size?: unknown }).size
-      : undefined;
+  const coluna0id = props.args.columns[0]?.columnId; //pega o id da primeira coluna
+  const primeiraColuna = props.data.columns.find(
+    (col) => col.id === coluna0id
+  ); //pega as informações da primeira coluna
+  const primeiraColunaEscondida = props.args.columns[0]?.hidden; //verifica se a primeira coluna está escondida
 
-  props.args.title = ''; //reseta o título para evitar mostrar o campo da primeira coluna quando size for 1
+  const size = primeiraColuna?.meta?.sourceParams?.params?.size; //pega o size da primeira coluna
+
+  //reseta o título para evitar mostrar o campo da primeira coluna quando size for 1
+  //se o número de registros definidos para a tabela for 1, aplica o filtro na tabela para mostrar apenas o que corresponde ao primeiro registro
   if (size === 1) {
-    const firstTermName = props.data.rows?.[0]?.[props.data.columns?.[0]?.id];
-    props.data.rows = props.data.rows?.filter((row) => row[props.data.columns?.[0]?.id] === firstTermName);
+    const firstTermName = props.data.rows?.[0]?.[coluna0id];
+    //filtra a tabela para mostrar apenas o valor da primeira linha da primeira coluna
+    props.data.rows = props.data.rows?.filter((row) => row[coluna0id] === firstTermName);
     //Edmar Moretti - inclusão do título
     // Verifica se a primeira coluna está visível antes de alterar o título
-    const firstColumnConfig = props.args.columns?.find(
-      (col) => col.columnId === props.data.columns?.[0]?.id
-    );
-    if (firstColumnConfig?.hidden) {
-      props.args.title = firstTermName ?? props.args.title;
+    if (primeiraColunaEscondida == true) {
+      props.args.title = firstTermName.keys ? firstTermName.keys.join(' › ') : firstTermName;
     }
   }
 
@@ -606,6 +606,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   const alturaTitulo = props.args.title === '' ? 0 : 20;
   const alturaFiltro = initialRowCountRef.current > 10 ? 20 : 0;
   //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela
+      console.log("oii");
   return (
     <div
       css={datatableContainerStyles}

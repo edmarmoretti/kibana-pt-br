@@ -157,6 +157,38 @@ export const createGridCell = (
         </div>
       );
     }
+// Edmar Moretti - remoção do ,00 dos valores
+  const suffixes = [
+    { suffix: ',00', replace: '' },
+    { suffix: ',00%', replace: '%' },
+    { suffix: ',00mil', replace: 'mil' },
+    { suffix: ',00mi', replace: 'mi' },
+    { suffix: ',00bi', replace: 'bi' },
+    { suffix: ',00tri', replace: 'tri' },
+    { suffix: ',00 %', replace: ' %' },
+    { suffix: ',00 mil', replace: ' mil' },
+    { suffix: ',00 mi', replace: ' mi' },
+    { suffix: ',00 bi', replace: ' bi' },
+    { suffix: ',00 tri', replace: ' tri' },
+    { suffix: ',000', replace: '' },
+    { suffix: ',000%', replace: '%' },
+    { suffix: ',000mil', replace: 'mil' },
+    { suffix: ',000mi', replace: 'mi' },
+    { suffix: ',000bi', replace: 'bi' },
+    { suffix: ',000tri', replace: 'tri' },
+    { suffix: ',000 %', replace: ' %' },
+    { suffix: ',000 mil', replace: ' mil' },
+    { suffix: ',000 mi', replace: ' mi' },
+    { suffix: ',000 bi', replace: ' bi' },
+    { suffix: ',000 tri', replace: ' tri' },
+  ];
+
+  for (const { suffix, replace } of suffixes) {
+    if (content.endsWith(suffix)) {
+      content = content.slice(0, -suffix.length) + replace;
+      break;
+    }
+  }  
     //Edmar Moretti - adiciona a classe com o valor de density
     return (
       <div
