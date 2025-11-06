@@ -606,7 +606,6 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   const alturaTitulo = props.args.title === '' ? 0 : 20;
   const alturaFiltro = initialRowCountRef.current > 10 ? 20 : 0;
   //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela
-      console.log("oii");
   return (
     <div
       css={datatableContainerStyles}
