@@ -187,8 +187,7 @@ function getIconForSeriesType(layer: CommonXYDataLayerConfig): IconType {
     visualizationDefinitions.find(
       (c) =>
         c.id ===
-        `${layer.seriesType}${layer.isHorizontal ? '_horizontal' : ''}${
-          layer.isPercentage ? '_percentage' : ''
+        `${layer.seriesType}${layer.isHorizontal ? '_horizontal' : ''}${layer.isPercentage ? '_percentage' : ''
         }${layer.isStacked ? '_stacked' : ''}`
     )?.icon || 'empty'
   );
@@ -314,21 +313,21 @@ export function XYChart({
     const chartSizeSpec: ChartSizeSpec =
       isTimeViz && !isHorizontalChart(dataLayers)
         ? {
-            aspectRatio: {
-              x: 16,
-              y: 9,
-            },
-            minDimensions: {
-              y: { value: 300, unit: 'pixels' },
-              x: { value: 100, unit: 'percentage' },
-            },
-          }
+          aspectRatio: {
+            x: 16,
+            y: 9,
+          },
+          minDimensions: {
+            y: { value: 300, unit: 'pixels' },
+            x: { value: 100, unit: 'percentage' },
+          },
+        }
         : {
-            maxDimensions: {
-              x: { value: 100, unit: 'percentage' },
-              y: { value: 100, unit: 'percentage' },
-            },
-          };
+          maxDimensions: {
+            x: { value: 100, unit: 'percentage' },
+            y: { value: 100, unit: 'percentage' },
+          },
+        };
 
     setChartSize(chartSizeSpec);
   }, [dataLayers, isTimeViz, setChartSize]);
@@ -465,7 +464,7 @@ export function XYChart({
         ...config,
         position: config
           ? getAxisGroupForReferenceLine(axesConfiguration, config, shouldRotate)?.position ??
-            Position.Left
+          Position.Left
           : Position.Bottom,
       })),
     ...groupedLineAnnotations,
@@ -491,8 +490,8 @@ export function XYChart({
         padding:
           linesPaddings[position] != null
             ? {
-                inner: linesPaddings[position],
-              }
+              inner: linesPaddings[position],
+            }
             : undefined,
       },
       axisTitle: {
@@ -501,8 +500,8 @@ export function XYChart({
         padding:
           !tickVisible && linesPaddings[position] != null
             ? {
-                inner: linesPaddings[position],
-              }
+              inner: linesPaddings[position],
+            }
             : undefined,
       },
     };
@@ -668,9 +667,9 @@ export function XYChart({
       column: xAxisColumnIndex,
       ...(isEsqlMode
         ? {
-            timeFieldName:
-              table.columns[xAxisColumnIndex].meta.sourceParams?.sourceField?.toString(),
-          }
+          timeFieldName:
+            table.columns[xAxisColumnIndex].meta.sourceParams?.sourceField?.toString(),
+        }
         : {}),
     };
     onSelectRange(context);
@@ -699,32 +698,32 @@ export function XYChart({
   };
   const xAxisStyle: RecursivePartial<AxisStyle> = isHorizontalTimeAxis
     ? {
-        tickLabel: {
-          visible: Boolean(xAxisConfig?.showLabels),
-          fill: xAxisConfig?.labelColor,
-        },
-        tickLine: {
-          visible: Boolean(xAxisConfig?.showLabels),
-        },
-        axisTitle: {
-          visible: xAxisConfig?.showTitle,
-        },
-      }
+      tickLabel: {
+        visible: Boolean(xAxisConfig?.showLabels),
+        fill: xAxisConfig?.labelColor,
+      },
+      tickLine: {
+        visible: Boolean(xAxisConfig?.showLabels),
+      },
+      axisTitle: {
+        visible: xAxisConfig?.showTitle,
+      },
+    }
     : {
-        tickLabel: {
-          visible: xAxisConfig?.showLabels,
-          rotation: xAxisConfig?.labelsOrientation,
-          padding: linesPaddings.bottom != null ? { inner: linesPaddings.bottom } : undefined,
-          fill: xAxisConfig?.labelColor,
-        },
-        axisTitle: {
-          visible: xAxisConfig?.showTitle,
-          padding:
-            !xAxisConfig?.showLabels && linesPaddings.bottom != null
-              ? { inner: linesPaddings.bottom }
-              : undefined,
-        },
-      };
+      tickLabel: {
+        visible: xAxisConfig?.showLabels,
+        rotation: xAxisConfig?.labelsOrientation,
+        padding: linesPaddings.bottom != null ? { inner: linesPaddings.bottom } : undefined,
+        fill: xAxisConfig?.labelColor,
+      },
+      axisTitle: {
+        visible: xAxisConfig?.showTitle,
+        padding:
+          !xAxisConfig?.showLabels && linesPaddings.bottom != null
+            ? { inner: linesPaddings.bottom }
+            : undefined,
+      },
+    };
   const isSplitChart = splitColumnAccessor || splitRowAccessor;
   const splitTable = isSplitChart ? dataLayers[0].table : undefined;
   const splitColumnId =
@@ -773,6 +772,15 @@ export function XYChart({
       size: 5
     };
   }
+  //Edmar Moretti - coloca a legenda sempre na posição bottom em dispositivos móveis
+  const windowWidth = window.innerWidth;
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMobile = /iphone|ipad|ipod|android|blackberry|windows phone/g.test(userAgent);
+
+  if (legend.position == 'left' && (isMobile || windowWidth < 1024)) {
+    legend.position = 'bottom';
+  }
+
   return (
     <>
       <GlobalXYChartStyles />
@@ -802,12 +810,12 @@ export function XYChart({
               headerFormatter={
                 !args.detailedTooltip && xAxisColumn
                   ? ({ value }) => (
-                      <TooltipHeader
-                        value={value}
-                        formatter={safeXAccessorLabelRenderer}
-                        xDomain={rawXDomain}
-                      />
-                    )
+                    <TooltipHeader
+                      value={value}
+                      formatter={safeXAccessorLabelRenderer}
+                      xDomain={rawXDomain}
+                    />
+                  )
                   : undefined
               }
               actions={getTooltipActions(
@@ -825,21 +833,21 @@ export function XYChart({
               customTooltip={
                 args.detailedTooltip
                   ? ({ header, values }) => (
-                      <CustomTooltip
-                        header={header}
-                        values={values}
-                        titles={titles}
-                        fieldFormats={fieldFormats}
-                        formatFactory={formatFactory}
-                        formattedDatatables={formattedDatatables}
-                        splitAccessors={{
-                          splitColumnAccessor: splitColumnId,
-                          splitRowAccessor: splitRowId,
-                        }}
-                        layers={dataLayers}
-                        xDomain={isTimeViz ? rawXDomain : undefined}
-                      />
-                    )
+                    <CustomTooltip
+                      header={header}
+                      values={values}
+                      titles={titles}
+                      fieldFormats={fieldFormats}
+                      formatFactory={formatFactory}
+                      formattedDatatables={formattedDatatables}
+                      splitAccessors={{
+                        splitColumnAccessor: splitColumnId,
+                        splitRowAccessor: splitRowId,
+                      }}
+                      layers={dataLayers}
+                      xDomain={isTimeViz ? rawXDomain : undefined}
+                    />
+                  )
                   : undefined
               }
               type={args.showTooltip ? TooltipType.VerticalCursor : TooltipType.None}
@@ -904,14 +912,14 @@ export function XYChart({
               legendAction={
                 interactive && canCreateFilters
                   ? getLegendAction(
-                      dataLayers,
-                      onClickValue,
-                      layerCellValueActions,
-                      fieldFormats,
-                      formattedDatatables,
-                      titles,
-                      singleTable
-                    )
+                    dataLayers,
+                    onClickValue,
+                    layerCellValueActions,
+                    fieldFormats,
+                    formattedDatatables,
+                    titles,
+                    singleTable
+                  )
                   : undefined
               }
               ariaLabel={args.ariaLabel}
@@ -919,8 +927,8 @@ export function XYChart({
               orderOrdinalBinsBy={
                 args.orderBucketsBySum
                   ? {
-                      direction: Direction.Descending,
-                    }
+                    direction: Direction.Descending,
+                  }
                   : undefined
               }
               locale={i18n.getLocale()}
@@ -1067,8 +1075,8 @@ export function XYChart({
                   rangeAnnotations.length && shouldHideDetails
                     ? OUTSIDE_RECT_ANNOTATION_WIDTH_SUGGESTION
                     : isHorizontalTimeAxis
-                    ? MULTILAYER_TIME_AXIS_TICKLINE_PADDING + chartBaseTheme.axes.tickLabel.fontSize
-                    : Math.max(chartBaseTheme.axes.tickLine.size, OUTSIDE_RECT_ANNOTATION_WIDTH)
+                      ? MULTILAYER_TIME_AXIS_TICKLINE_PADDING + chartBaseTheme.axes.tickLabel.fontSize
+                      : Math.max(chartBaseTheme.axes.tickLine.size, OUTSIDE_RECT_ANNOTATION_WIDTH)
                 }
               />
             ) : null}
