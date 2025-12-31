@@ -1,5 +1,7 @@
 # Alterações feitas no código original do Kibana
 
+- Reposiciona a legenda para a parte de baixo do gráfico em dispositivos móveis se a legenda estiver posicionada à esquerda.
+
 - Força a seleção de um item na inicialização de um controle quando o nome do controle terminar com '*'.
 
 - Inclusão da opção de busca em tabelas feitas com Lens.

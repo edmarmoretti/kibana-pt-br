@@ -160,11 +160,11 @@ export type XYChartRenderProps = Omit<XYChartProps, 'canNavigateToLens'> & {
 function nonNullable<T>(v: T): v is NonNullable<T> {
   return v != null;
 }
-//Edmar Moretti - ajusta o posicionamento dos labels dentro dos gráficos de barras
+//Edmar Moretti - ajusta o posicionamento e tamanho dos labels dentro dos gráficos de barras
 function getValueLabelsStyling(isHorizontal: boolean): {
   displayValue: RecursivePartial<DisplayValueStyle>;
 } {
-  const VALUE_LABELS_MAX_FONTSIZE = 14;
+  const VALUE_LABELS_MAX_FONTSIZE = 12;
   const VALUE_LABELS_MIN_FONTSIZE = 8;
   const VALUE_LABELS_VERTICAL_OFFSET = 0;
   const VALUE_LABELS_HORIZONTAL_OFFSET = 0;

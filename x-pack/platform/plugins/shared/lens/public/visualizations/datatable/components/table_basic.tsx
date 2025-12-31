@@ -83,6 +83,7 @@ export const DEFAULT_PAGE_SIZE = 10;
 const PAGE_SIZE_OPTIONS = [DEFAULT_PAGE_SIZE, 20, 30, 50, 100];
 
 export const DatatableComponent = (props: DatatableRenderProps) => {
+  props.args.title = '';
   //Edmar Moretti - mostra apenas um elemento na primeira coluna quando o size for 1, evitando mostrar mais de um nos casos em que ocorre divisão de colunas por determinado campo
   const coluna0id = props.args.columns[0]?.columnId; //pega o id da primeira coluna
   const primeiraColuna = props.data.columns.find(
