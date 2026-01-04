@@ -3,7 +3,9 @@
 ## Please note you should specify one option per line
 
 ## max size of old space in megabytes
-#--max-old-space-size=4096
+##--max-old-space-size=8192
+
+--optimize_for_size
 
 ## do not terminate process on unhandled promise rejection
  --unhandled-rejections=warn

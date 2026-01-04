@@ -39,7 +39,7 @@
   "author": "Rashid Khan <rashid.khan@elastic.co>",
   "scripts": {
     "backport-skip-ci": "backport --prDescription \"[skip-ci]\"",
-    "build": "node --no-experimental-require-module scripts/build --all-platforms",
+    "build": "node --no-experimental-require-module scripts/build",
     "build:apidocs": "node --no-experimental-require-module scripts/build_api_docs",
     "checkLicenses": "node --no-experimental-require-module scripts/check_licenses --dev",
     "debug": "node --no-experimental-require-module --nolazy --inspect scripts/kibana --dev",
