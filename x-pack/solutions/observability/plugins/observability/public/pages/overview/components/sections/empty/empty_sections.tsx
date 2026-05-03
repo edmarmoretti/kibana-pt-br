@@ -128,7 +128,7 @@ const getEmptySections = ({ http }: { http: HttpSetup }): Section[] => {
     {
       id: 'ux',
       title: i18n.translate('xpack.observability.emptySection.apps.ux.title', {
-        defaultMessage: 'User Experience',
+        defaultMessage: 'Experiência do usuário',
       }),
       icon: 'logoObservability',
       description: i18n.translate('xpack.observability.emptySection.apps.ux.description', {

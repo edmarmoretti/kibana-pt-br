@@ -19,18 +19,18 @@ const densityValues = Object.values(DataGridDensity);
 
 const getValidDensity = (density: string) => {
   const isValidDensity = densityValues.includes(density as DataGridDensity);
-  return isValidDensity ? (density as DataGridDensity) : DataGridDensity.NORMAL;
+  return isValidDensity ? (density as DataGridDensity) : DataGridDensity.COMPACT;
 };
 
 const densityLabel = i18n.translate('xpack.lens.table.densityLabel', {
-  defaultMessage: 'Density',
+  defaultMessage: 'Densidade',
 });
-
+//Edmar Moretti - tradução das opções de estilo da tabela
 const densityOptions = [
   {
     id: DataGridDensity.COMPACT,
     label: i18n.translate('xpack.lens.table.labelCompact', {
-      defaultMessage: 'Compact',
+      defaultMessage: 'Compacto',
     }),
   },
   {
@@ -42,7 +42,7 @@ const densityOptions = [
   {
     id: DataGridDensity.EXPANDED,
     label: i18n.translate('xpack.lens.table.labelExpanded', {
-      defaultMessage: 'Expanded',
+      defaultMessage: 'Expandido',
     }),
   },
 ];

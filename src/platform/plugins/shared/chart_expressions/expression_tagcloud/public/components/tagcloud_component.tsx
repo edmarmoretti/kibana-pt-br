@@ -234,7 +234,7 @@ export const TagCloudChart = ({
   if (visData.rows.length === 0) {
     return <EmptyPlaceholder icon={IconChartTagcloud} renderComplete={renderComplete} />;
   }
-
+//Edmar Moretti - remove as interações sobre a legenda e o gráfico
   return (
     <EuiResizeObserver onResize={updateChart}>
       {(resizeRef) => (
@@ -242,7 +242,7 @@ export const TagCloudChart = ({
           <Chart size="100%" {...getOverridesFor(overrides, 'chart')}>
             <Settings
               baseTheme={chartBaseTheme}
-              onElementClick={handleWordClick}
+              onElementClick={undefined}
               onRenderChange={onRenderChange}
               ariaLabel={visParams.ariaLabel}
               ariaUseDefaultSummary={!visParams.ariaLabel}

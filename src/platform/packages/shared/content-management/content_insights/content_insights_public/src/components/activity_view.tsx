@@ -6,7 +6,8 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+// Edmar Moretti - tradução de termos que são apresentados no popup de "ActivityView", 
+// aberto na opção de configuração de um painel, na lista de painéis.
 import { EuiFlexGroup, EuiFlexItem, EuiPanel, EuiSpacer, EuiText } from '@elastic/eui';
 import { i18n } from '@kbn/i18n';
 import moment from 'moment-timezone';
@@ -36,7 +37,7 @@ export const ActivityView = ({ item, entityNamePlural }: ActivityViewProps) => {
   const UnknownUserLabel = (
     <FormattedMessage
       id="contentManagement.contentEditor.activity.unkownUserLabel"
-      defaultMessage="Unknown"
+      defaultMessage="Desconhecido"
     />
   );
 
@@ -45,7 +46,7 @@ export const ActivityView = ({ item, entityNamePlural }: ActivityViewProps) => {
       <ManagedAvatarTip />{' '}
       <FormattedMessage
         id="contentManagement.contentEditor.activity.managedUserLabel"
-        defaultMessage="System"
+        defaultMessage="Sistema"
       />
     </>
   );
@@ -55,7 +56,7 @@ export const ActivityView = ({ item, entityNamePlural }: ActivityViewProps) => {
       <EuiFlexItem grow={1} css={{ flexBasis: '50%', minWidth: 0 }}>
         <ActivityCard
           what={i18n.translate('contentManagement.contentEditor.activity.createdByLabelText', {
-            defaultMessage: 'Created by',
+            defaultMessage: 'Criado por',
           })}
           who={
             item.createdBy ? (
@@ -81,7 +82,7 @@ export const ActivityView = ({ item, entityNamePlural }: ActivityViewProps) => {
           <ActivityCard
             what={i18n.translate(
               'contentManagement.contentEditor.activity.lastUpdatedByLabelText',
-              { defaultMessage: 'Last updated by' }
+              { defaultMessage: 'Última atualização por' }
             )}
             who={
               item.updatedBy ? (
@@ -144,7 +145,7 @@ const ActivityCard = ({
           <EuiText title={when} color={'subdued'} size={'s'}>
             <FormattedMessage
               id="contentManagement.contentEditor.activity.lastUpdatedByDateTime"
-              defaultMessage="on {dateTime}"
+              defaultMessage="em {dateTime}"
               values={{
                 dateTime: formatDate(when),
               }}

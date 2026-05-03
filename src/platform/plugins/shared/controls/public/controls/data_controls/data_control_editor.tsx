@@ -262,7 +262,7 @@ export const DataControlEditor = <State extends DefaultDataControlState = Defaul
       </div>
     );
   }, [fieldRegistry, controlFactory, initialState, editorState, controlGroupApi]);
-
+  //Edmar Moretti - inclui texto de ajuda no formulário de definição de um controle
   return (
     <>
       <EuiFlyoutHeader hasBorder>
@@ -372,6 +372,7 @@ export const DataControlEditor = <State extends DefaultDataControlState = Defaul
           </EuiFormRow>
           <EuiFormRow
             label={DataControlEditorStrings.manageControl.displaySettings.getTitleInputTitle()}
+            helpText="Utilize * após o nome para indicar que é obrigatório escolher uma opção"
           >
             <EuiFieldText
               data-test-subj="control-editor-title-input"

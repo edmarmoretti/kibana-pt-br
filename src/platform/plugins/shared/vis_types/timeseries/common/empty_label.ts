@@ -10,7 +10,7 @@
 import { i18n } from '@kbn/i18n';
 
 export const emptyLabel = i18n.translate('visTypeTimeseries.emptyTextValue', {
-  defaultMessage: '(empty)',
+  defaultMessage: ' ',
 });
 
 export const getValueOrEmpty = (value: unknown) => {

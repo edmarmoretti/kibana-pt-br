@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - utilizado nas definições das notas e sumário nos quadros de um painel
 export { isEmbeddableApiContext, type EmbeddableApiContext } from './embeddable_api_context';
 
 export {
@@ -138,6 +138,21 @@ export {
   type PublishesDescription,
   type PublishesWritableDescription,
 } from './interfaces/titles/publishes_description';
+export {
+  apiPublishesPanelTitleNotes,
+  apiPublishesWritablePanelTitleNotes,
+  getTitleNotes,
+  type PublishesPanelTitleNotes,
+  type PublishesWritablePanelTitleNotes,
+} from './interfaces/titles/publishes_panel_title_notes';
+export {
+  apiPublishesPanelTitleSummary,
+  apiPublishesWritablePanelTitleSummary,
+  getTitleSummary,
+  type PublishesPanelTitleSummary,
+  type PublishesWritablePanelTitleSummary,
+} from './interfaces/titles/publishes_panel_title_summary';
+
 export {
   apiPublishesTitle,
   apiPublishesWritableTitle,

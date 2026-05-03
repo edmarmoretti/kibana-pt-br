@@ -14,9 +14,10 @@ import type { File } from '../../common/types';
 export function getFileHttpResponseOptions(
   file: File
 ): Pick<FileHttpResponseOptions<Readable>, 'headers' | 'fileContentType'> {
+//Edmar Moretti - alterar o tempo de cache
   return {
     fileContentType: file.data.mimeType ?? 'application/octet-stream',
-    headers: { 'cache-control': 'max-age=31536000, immutable' },
+    headers: { 'cache-control': 'max-age=86400, immutable' },
   };
 }
 

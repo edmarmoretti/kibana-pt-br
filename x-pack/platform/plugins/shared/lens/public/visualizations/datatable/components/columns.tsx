@@ -81,8 +81,11 @@ export const createGridColumns = (
         return undefined;
       }
       const { name, index: colIndex } = columnsReverseLookup[field];
-      const filterable = columnFilterable?.[colIndex] || false;
-
+      //const filterable = columnFilterable?.[colIndex] || false;
+    //Edmar moretti - remove filtro
+    //const filterable = columnFilterable?.[colIndex] || false;
+    const filterable = false;
+ 
       const columnArgs = columnConfig.columns.find(({ columnId }) => columnId === field);
 
       const cellActions: EuiDataGridColumnCellAction[] = [];
@@ -283,13 +286,15 @@ export const createGridColumns = (
         }),
         textAlign: currentAlignment,
       });
+    //Edmar Moretti - corrige o nome da coluna quando do tipo multitermos e adiciona uma classe para permitir a aplicação de estilos no plugin sageIntegration
+    const nname = name.trim().replace(/\s*›\s*$/, '');
 
       const columnDefinition: EuiDataGridColumn = {
         id: field,
         cellActions,
         visibleCellActions: 5,
-        display: <div css={columnStyle}>{name}</div>,
-        displayAsText: name,
+        display: <div className='nomeDaColuna' css={columnStyle}>{nname}</div>,
+        displayAsText: nname,
         schema: field,
         actions: {
           showHide: false,

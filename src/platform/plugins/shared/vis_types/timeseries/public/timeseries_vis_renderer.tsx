@@ -18,6 +18,13 @@ import { VisualizationContainer, PersistedState } from '@kbn/visualizations-plug
 import type { ExpressionRenderDefinition } from '@kbn/expressions-plugin/common';
 import { KibanaRenderContextProvider } from '@kbn/react-kibana-context-render';
 import { getUsageCollectionStart } from './services';
+
+//Edmar Moretti
+declare global {
+  interface Window {
+    abreFichaIndicador?: (indicador: string) => void;
+  }
+}
 import { TIME_RANGE_DATA_MODES } from '../common/enums';
 import type { TimeseriesVisData } from '../common/types';
 import { isVisTableData } from '../common/vis_data_utils';
@@ -94,8 +101,23 @@ export const getTimeseriesVisRenderer: (deps: {
       }
 
       handlers.done();
+      //
+      //Edmar Moretti - Adiciona a função que abre o link em um modal
+      //Veja markdown.tsx
+      document.querySelectorAll('[data-href-link-open]').forEach((el) => {
+        const content = el.getAttribute('data-href-link-open') || '';
+        if (content.indexOf('flyout') > 0 && typeof window.abreFichaIndicador === 'function') {
+          el.addEventListener('click', (event) => {
+            event.preventDefault(); // Impede a navegação padrão
+            const match = content.match((/\/indicador\/([^\/]+)-headless/));
+            const codigo = match ? match[1] : '';
+            console.log(codigo);
+            // @ts-ignore
+            window.abreFichaIndicador(codigo); // eslint-disable-line react/no-danger
+          });
+        }
+      });
     };
-
     render(
       <KibanaRenderContextProvider {...startServices}>
         <VisualizationContainer

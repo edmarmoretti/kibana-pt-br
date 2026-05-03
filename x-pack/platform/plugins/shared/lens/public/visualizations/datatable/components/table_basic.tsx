@@ -25,6 +25,9 @@ import {
   EuiDataGridColumn,
   EuiDataGridSorting,
   EuiDataGridStyle,
+  EuiText,
+  EuiFieldText,
+  EuiFormControlLayout,
 } from '@elastic/eui';
 import { CustomPaletteState, EmptyPlaceholder } from '@kbn/charts-plugin/public';
 import { ClickTriggerEvent } from '@kbn/charts-plugin/public';
@@ -80,6 +83,29 @@ export const DEFAULT_PAGE_SIZE = 10;
 const PAGE_SIZE_OPTIONS = [DEFAULT_PAGE_SIZE, 20, 30, 50, 100];
 
 export const DatatableComponent = (props: DatatableRenderProps) => {
+  props.args.title = '';
+  //Edmar Moretti - mostra apenas um elemento na primeira coluna quando o size for 1, evitando mostrar mais de um nos casos em que ocorre divisão de colunas por determinado campo
+  const coluna0id = props.args.columns[0]?.columnId; //pega o id da primeira coluna
+  const primeiraColuna = props.data.columns.find(
+    (col) => col.id === coluna0id
+  ); //pega as informações da primeira coluna
+  const primeiraColunaEscondida = props.args.columns[0]?.hidden; //verifica se a primeira coluna está escondida
+
+  const size = primeiraColuna?.meta?.sourceParams?.params?.size; //pega o size da primeira coluna
+
+  //reseta o título para evitar mostrar o campo da primeira coluna quando size for 1
+  //se o número de registros definidos para a tabela for 1, aplica o filtro na tabela para mostrar apenas o que corresponde ao primeiro registro
+  if (size === 1) {
+    const firstTermName = props.data.rows?.[0]?.[coluna0id];
+    //filtra a tabela para mostrar apenas o valor da primeira linha da primeira coluna
+    props.data.rows = props.data.rows?.filter((row) => row[coluna0id] === firstTermName);
+    //Edmar Moretti - inclusão do título
+    // Verifica se a primeira coluna está visível antes de alterar o título
+    if (primeiraColunaEscondida == true) {
+      props.args.title = firstTermName.keys ? firstTermName.keys.join(' › ') : firstTermName;
+    }
+  }
+
   const dataGridRef = useRef<EuiDataGridRefProps>(null);
 
   const isInteractive = props.interactive;
@@ -109,9 +135,9 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     setPagination(
       props.args.pageSize
         ? {
-            pageIndex: 0,
-            pageSize: props.args.pageSize ?? DEFAULT_PAGE_SIZE,
-          }
+          pageIndex: 0,
+          pageSize: props.args.pageSize ?? DEFAULT_PAGE_SIZE,
+        }
         : undefined
     );
   }, [props.args.pageSize]);
@@ -406,16 +432,16 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
 
       const data: ColorMappingInputData = colorByTerms
         ? {
-            type: 'categories',
-            categories: colorMapping
-              ? getColorCategories(categoryRows, originalId, [null])
-              : getLegacyColorCategories(categoryRows, originalId, [null]),
-          }
+          type: 'categories',
+          categories: colorMapping
+            ? getColorCategories(categoryRows, originalId, [null])
+            : getLegacyColorCategories(categoryRows, originalId, [null]),
+        }
         : {
-            type: 'ranges',
-            bins: 0,
-            ...(minMaxByColumnId.get(originalId) ?? getFallbackDataBounds()),
-          };
+          type: 'ranges',
+          bins: 0,
+          ...(minMaxByColumnId.get(originalId) ?? getFallbackDataBounds()),
+        };
       const colorFn = getCellColorFn(
         props.paletteService,
         palettes,
@@ -430,20 +456,22 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
 
       return colorFn;
     };
-
+    //Edmar Moretti - retorna o valor de density
     return createGridCell(
       formatters,
       columnConfig,
       DataContext,
       isDarkMode,
       getCellColor,
-      props.args.fitRowToContent
+      props.args.fitRowToContent,
+      props.args.density
     );
   }, [
     formatters,
     columnConfig,
     isDarkMode,
     props.args.fitRowToContent,
+    props.args.density,
     props.paletteService,
     palettes,
     firstLocalTable,
@@ -455,7 +483,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   const columnVisibility = useMemo(
     () => ({
       visibleColumns,
-      setVisibleColumns: () => {},
+      setVisibleColumns: () => { },
     }),
     [visibleColumns]
   );
@@ -479,12 +507,15 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
         ...getFinalSummaryConfiguration(config.columnId, config, props.data),
       }))
       .filter(({ summaryRow }) => summaryRow !== 'none');
-
+    //Edmar Moretti - altera o estilo do sumário dividindo em linhas. Ver também o scss
     if (columnsWithSummary.length) {
       const summaryLookup = Object.fromEntries(
         columnsWithSummary.map(({ summaryRowValue, summaryLabel, columnId }) => [
           columnId,
-          summaryLabel === '' ? `${summaryRowValue}` : `${summaryLabel}: ${summaryRowValue}`,
+          {
+            'l': summaryLabel,
+            'v': summaryRowValue + ''
+          }
         ])
       );
       return ({ columnId }: { columnId: string }) => {
@@ -493,12 +524,18 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
         const columnName =
           columns.find(({ id }) => id === columnId)?.displayAsText?.replace(/ /g, '-') || columnId;
         return summaryLookup[columnId] != null ? (
-          <div
+          <><div
             className={`lnsTableCell ${alignmentClassName}`}
             data-test-subj={`lnsDataTable-footer-${columnName}`}
           >
-            {summaryLookup[columnId]}
+            {summaryLookup[columnId].l}
           </div>
+            <div
+              className={`lnsTableCell ${alignmentClassName} lnsTableCellSummaryValue`}
+              data-test-subj={`lnsDataTable-footer-${columnName}`}
+            >
+              {summaryLookup[columnId].v}
+            </div></>
         ) : null;
       };
     }
@@ -532,11 +569,54 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
       defaultMessage: 'Data table visualization',
     });
 
+  //Edmar Moretti - inclusão da opção de busca na tabela
+  const initialRowCountRef = useRef<number>(props.data.rows?.length ?? 0);
+  const [query, setQuery] = useState('');
+  const filteredRows = useMemo(() => {
+    if (!query) {
+      return props.data.rows;
+    }
+    // Pesquisa simples case-insensitive em todos os campos
+    return props.data.rows.filter((row) =>
+      Object.values(row).some((value) =>
+        String(value).toLowerCase().includes(query.toLowerCase())
+      )
+    );
+  }, [props.data, query]);
+  useEffect(() => {
+    // Atualiza a tabela local com as linhas filtradas para que
+    // toda a lógica de renderização (formatters, cores, paginação) continue válida.
+    if (!query) {
+      updateTable(props.data);
+    } else if (query && filteredRows.length > 0) {
+      updateTable({
+        ...props.data,
+        rows: filteredRows,
+      });
+      // garante que volte para a página inicial ao filtrar
+      setPagination((pag) =>
+        pag ? { ...pag, pageIndex: 0 } : pag
+      );
+    }
+  }, [query, filteredRows, props.data]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value ?? '');
+  };
+  //calcula o valor que precisa ser reduzido da altura da tabela para caber o título
+  const alturaTitulo = props.args.title === '' ? 0 : 20;
+  const alturaFiltro = initialRowCountRef.current > 10 ? 20 : 0;
+  //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela
   return (
     <div
       css={datatableContainerStyles}
-      className="eui-scrollBar"
+      className="eui-scrollBar, tableContainerFilter"
       data-test-subj="lnsVisualizationContainer"
+      // define CSS custom property para ser usada pelo emotion css
+      style={{
+        ['--altura-titulo' as any]: `${alturaTitulo}px`,
+        ['--altura-filtro' as any]: `${alturaFiltro}px`,
+      }}
     >
       <DataContext.Provider
         value={{
@@ -547,6 +627,24 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
           handleFilterClick,
         }}
       >
+        {props.args.title != '' && (
+          <EuiText>
+            <div className='tituloDaTabela'>{props.args.title}</div>
+          </EuiText>
+        )}
+        {initialRowCountRef.current > 10 && (
+          <EuiFormControlLayout icon="search" fullWidth={true} compressed={true} style={
+            { blockSize: 'unset'}
+          }>
+            <EuiFieldText
+              type="search"
+              controlOnly
+              placeholder='Filtrar'
+              className='tableSearch'
+              onChange={handleSearchChange}
+            />
+          </EuiFormControlLayout>
+        )}
         <EuiDataGrid
           aria-label={dataGridAriaLabel}
           data-test-subj="lnsDataTable"
@@ -554,10 +652,10 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
             defaultHeight: props.args.fitRowToContent
               ? RowHeightMode.auto
               : props.args.rowHeightLines && props.args.rowHeightLines !== 1
-              ? {
+                ? {
                   lineCount: props.args.rowHeightLines,
                 }
-              : undefined,
+                : undefined,
           }}
           inMemory={{ level: 'sorting' }}
           columns={columns}
@@ -606,4 +704,29 @@ const datatableContainerStyles = css`
   .lnsTableCell--center {
     text-align: center;
   }
+
+  //Precisa reduzir para caber todas as linhas da tabela
+  // Usa a variavel CSS --altura-titulo definida no elemento root do componente.
+ 
+  .euiDataGrid {
+    height: calc(100% - var(--altura-titulo,0) - var(--altura-filtro,0)) !important;
+  }
+  .tituloDaTabela:not(:empty) {
+    font-size: 10px;
+    font-weight: 600;
+    height: var(--altura-titulo, 20px);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .tableSearch {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    font-size: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: var(--altura-filtro, 20px);
+  }
 `;
+
+

@@ -6,11 +6,11 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+// Edmar Moretti - remove os botões Incluir Excluir dos filtros
 import React from 'react';
 
 import {
-  EuiButtonGroup,
+//  EuiButtonGroup,
   EuiFlexGroup,
   EuiFlexItem,
   EuiIconTip,
@@ -26,6 +26,7 @@ import { useBatchedPublishingSubjects } from '@kbn/presentation-publishing';
 import { useOptionsListContext } from '../options_list_context_provider';
 import { OptionsListStrings } from '../options_list_strings';
 
+/*
 const aggregationToggleButtons = [
   {
     id: 'optionsList__includeResults',
@@ -38,6 +39,7 @@ const aggregationToggleButtons = [
     label: OptionsListStrings.popover.getExcludeLabel(),
   },
 ];
+*/
 
 export const OptionsListPopoverFooter = () => {
   const { euiTheme } = useEuiTheme();
@@ -49,6 +51,7 @@ export const OptionsListPopoverFooter = () => {
     componentApi.parentApi.allowExpensiveQueries$
   );
 
+  /*
   return (
     <>
       <EuiPopoverFooter
@@ -102,4 +105,62 @@ export const OptionsListPopoverFooter = () => {
       </EuiPopoverFooter>
     </>
   );
+*/
+  return (
+    <>
+      <EuiPopoverFooter
+        paddingSize="none"
+        css={css`
+          background-color: ${useEuiBackgroundColor('subdued')};
+        `}
+      >
+        {loading && (
+          <div css={{ position: 'absolute', width: '100%' }}>
+            <EuiProgress
+              data-test-subj="optionsList-control-popover-loading"
+              size="xs"
+              color="accent"
+            />
+          </div>
+        )}
+
+        <EuiFlexGroup
+          gutterSize="xs"
+          responsive={false}
+          alignItems="center"
+          css={css`
+            padding: ${useEuiPaddingSize('s')};
+          `}
+          justifyContent={'spaceBetween'}
+        >
+          <EuiFlexItem grow={false}>
+            {/* Edmar Moretti - remove os botões Incluir Excluir dos filtros
+            <EuiButtonGroup
+              legend={OptionsListStrings.popover.getIncludeExcludeLegend()}
+              options={aggregationToggleButtons}
+              idSelected={exclude ? 'optionsList__excludeResults' : 'optionsList__includeResults'}
+              onChange={(optionId) =>
+                componentApi.setExclude(optionId === 'optionsList__excludeResults')
+              }
+              buttonSize="compressed"
+              data-test-subj="optionsList__includeExcludeButtonGroup"
+            />
+            */}
+          </EuiFlexItem>
+          {!allowExpensiveQueries && (
+            <EuiFlexItem data-test-subj="optionsList-allow-expensive-queries-warning" grow={false}>
+              <EuiIconTip
+                type="warning"
+                color={euiTheme.colors.textWarning}
+                content={OptionsListStrings.popover.getAllowExpensiveQueriesWarning()}
+                aria-label={OptionsListStrings.popover.getAllowExpensiveQueriesWarning()}
+              />
+            </EuiFlexItem>
+          )}
+        </EuiFlexGroup>
+      </EuiPopoverFooter>
+    </>
+  );
+
 };
+

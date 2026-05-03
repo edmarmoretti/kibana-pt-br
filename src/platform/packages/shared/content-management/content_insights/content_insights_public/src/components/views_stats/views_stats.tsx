@@ -6,7 +6,8 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+// Edmar Moretti - tradução de termos que são apresentados no popup de "ActivityView", 
+// aberto na opção de configuração de um painel, na lista de painéis.
 import { EuiPanel, EuiStat, EuiSpacer, useEuiTheme, EuiIconTip } from '@elastic/eui';
 import React from 'react';
 import { FormattedMessage } from '@kbn/i18n-react';
@@ -52,7 +53,7 @@ export const ViewsStats = ({ item }: { item: Item }) => {
           <>
             <FormattedMessage
               id="contentManagement.contentEditor.viewsStats.viewsLastNDaysLabel"
-              defaultMessage="Views (last {n} days)"
+              defaultMessage="Visaualizações (últimos {n} dias)"
               values={{ n: data?.totalDays }}
             />
             <NoViewsTip />
@@ -78,7 +79,7 @@ const NoViewsTip = () => {
   return (
     <EuiIconTip
       aria-label={i18n.translate('contentManagement.contentEditor.viewsStats.noViewsTipAriaLabel', {
-        defaultMessage: 'Additional information',
+        defaultMessage: 'Informação adicional',
       })}
       position="top"
       color="inherit"
@@ -89,7 +90,7 @@ const NoViewsTip = () => {
         <>
           <FormattedMessage
             id="contentManagement.contentEditor.viewsStats.noViewsTip"
-            defaultMessage="Views are counted every time someone opens a dashboard"
+            defaultMessage="Visualizações são contadas toda vez que alguém abre o painel"
           />
           {isKibanaVersioningEnabled && (
             <>

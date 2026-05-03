@@ -84,6 +84,13 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
         defaultMessage: 'The alignment of the Title and Subtitle.',
       }),
     },
+    //Edmar Moretti - firstTermPosition
+    firstTermPosition: {
+      types: ['string'],
+      help: i18n.translate('expressionMetricVis.function.firstTermPosition.help', {
+        defaultMessage: 'Posiciona o primeiro termo da lista no rodapé.',
+      }),
+    },
     valuesTextAlign: {
       types: ['string'],
       help: i18n.translate('expressionMetricVis.function.valuesTextAlign.help', {
@@ -171,6 +178,12 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
       multi: true,
       required: false,
     },
+    titulo: {
+      types: ['string'],
+      help: i18n.translate('expressionMetricVis.function.titulo.help', {
+        defaultMessage: 'O título para o metric vis.',
+      }),
+    },
   },
   fn(input, args, handlers) {
     validateAccessor(args.metric, input.columns);
@@ -228,6 +241,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
         );
       }
     }
+    //Edmar Moretti - firstTermPosition
 
     return {
       type: 'render',
@@ -237,6 +251,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
         visType,
         visConfig: {
           metric: {
+            titulo: args.titulo, // Add this line to provide the required 'titulo' property
             subtitle: args.subtitle,
             secondaryPrefix: args.secondaryPrefix,
             color: args.color,
@@ -244,6 +259,7 @@ export const metricVisFunction = (): MetricVisExpressionFunctionDefinition => ({
             palette: args.palette,
             progressDirection: args.progressDirection,
             titlesTextAlign: args.titlesTextAlign,
+            firstTermPosition: args.firstTermPosition === 'bottom' ? 'bottom' : 'default',
             valuesTextAlign: args.valuesTextAlign,
             iconAlign: args.iconAlign,
             valueFontSize: args.valueFontSize,

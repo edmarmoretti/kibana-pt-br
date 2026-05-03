@@ -2035,10 +2035,9 @@
   dependencies:
     object-hash "^1.3.0"
 
-"@elastic/charts@70.1.4":
-  version "70.1.4"
-  resolved "https://registry.yarnpkg.com/@elastic/charts/-/charts-70.1.4.tgz#648bae6a0b23ac51978f8a0e5ee8c00151e09169"
-  integrity sha512-ZYejGjrYWyQxDaR6+TYsA3r8pnieZB49dCNW9b/cToZqZ/5Pg94Q9uR8WqNhi2pcLezV+cqE7mZKRvjll+kVYg==
+"@elastic/charts@file:./elastic-charts-70.1.4-pt-br-ms-3.tgz":
+  version "70.1.4-pt-br-ms-3"
+  resolved "file:./elastic-charts-70.1.4-pt-br-ms-3.tgz#79fa6c3d0cca8cb3dcfc8ff606fe80f3a35231e2"
   dependencies:
     "@popperjs/core" "^2.11.8"
     "@reduxjs/toolkit" "1.9.7"
@@ -2265,10 +2264,9 @@
   resolved "https://registry.yarnpkg.com/@elastic/node-crypto/-/node-crypto-1.2.3.tgz#7ebd71964ea09cf085c713c1a6edfc2dfac08b29"
   integrity sha512-S9L6jb0rx7M8WJd6m4EzgRJp/U7Wb1bq2x9GDh7DRcCD6MoNN1/wyYoPGxPrF3XgOsixmO1tcy70qUyw1b+OkA==
 
-"@elastic/numeral@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@elastic/numeral/-/numeral-2.5.1.tgz#96acf39c3d599950646ef8ccfd24a3f057cf4932"
-  integrity sha512-Tby6TKjixRFY+atVNeYUdGr9m0iaOq8230KTwn8BbUhkh7LwozfgKq0U98HRX7n63ZL62szl+cDKTYzh5WPCFQ==
+"@elastic/numeral@file:./numeral-js-2.5.0-ms.tar.gz":
+  version "2.5.0"
+  resolved "file:./numeral-js-2.5.0-ms.tar.gz#8db30c85028a8db4dcda0c09a56ca04f44b9e547"
 
 "@elastic/opamp-client-node@^0.2.0":
   version "0.2.0"
@@ -15713,9 +15711,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001335, caniuse-lite@^1.0.30001718:
-  version "1.0.30001720"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001720.tgz#c138cb6026d362be9d8d7b0e4bcd0183a850edfd"
-  integrity sha512-Ec/2yV2nNPwb4DnTANEV99ZWwm3ZWfdlfkQbWSDDt+PsXEVYwlhPH8tdMaPunYTKKmz7AnHi2oNEi1GcmKCD8g==
+  version "1.0.30001791"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001791.tgz"
+  integrity sha512-yk0l/YSrOnFZk3UROpDLQD9+kC1l4meK/wed583AXrzoarMGJcbRi2Q4RaUYbKxYAsZ8sWmaSa/DsLmdBeI1vQ==
 
 canvg@^3.0.11:
   version "3.0.11"

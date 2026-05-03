@@ -147,6 +147,7 @@ export class ESPewPewSource extends AbstractESAggSource {
     const indexPattern = await this.getIndexPattern();
     const searchSource = await this.makeSearchSource(requestMeta, 0);
     searchSource.setField('trackTotalHits', false);
+    //Edmar Moretti - aumenta o limite de pontos destino em camadas de ligação entre origem-destino
     searchSource.setField('aggs', {
       destSplit: {
         terms: {
@@ -157,7 +158,7 @@ export class ESPewPewSource extends AbstractESAggSource {
           order: {
             _count: 'desc',
           },
-          size: 100,
+          size: 10000,
         },
         aggs: {
           sourceGrid: {

@@ -1425,19 +1425,20 @@ export type TriggerEvent =
   | MultiClickTriggerEvent
   | LensTableRowContextMenuEvent
   | LensAlertRulesEvent;
+//Edmar Moretti - bloqueia o uso de filtros no clique do mouse
 
 export function isLensFilterEvent(event: ExpressionRendererEvent): event is ClickTriggerEvent {
-  return event.name === 'filter';
+  return false;//event.name === 'filter';
 }
 
 export function isLensMultiFilterEvent(
   event: ExpressionRendererEvent
 ): event is MultiClickTriggerEvent {
-  return event.name === 'multiFilter';
+  return false; //event.name === 'multiFilter';
 }
 
 export function isLensBrushEvent(event: ExpressionRendererEvent): event is BrushTriggerEvent {
-  return event.name === 'brush';
+  return false; //event.name === 'brush';
 }
 
 export function isLensEditEvent<T extends LensEditSupportedActions>(

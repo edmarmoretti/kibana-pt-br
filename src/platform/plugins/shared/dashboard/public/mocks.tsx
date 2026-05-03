@@ -116,6 +116,8 @@ export function getSampleDashboardState(overrides?: Partial<DashboardState>): Da
     tags: [],
     filters: [],
     title: 'My Dashboard',
+    titleNotes: '',
+    titleSummary: '',
     query: {
       language: 'kuery',
       query: 'hi',

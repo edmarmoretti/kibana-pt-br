@@ -76,7 +76,8 @@
     }
   },
   "messages": {
-    "core.ui.welcomeMessage": "Carregando o Kibana",
+    "core.ui.welcomeMessage": "Kibana",
+    "core.ui.welcomeMessageDados": "Aguarde, carregando os dados...",
     "unifiedSearch.filter.filterBar.addFilterButtonLabel": "Adicionar filtro",
     "unifiedSearch.filter.filterBar.deleteFilterButtonLabel": "Apagar",
     "unifiedSearch.filter.filterBar.disabledFilterPrefix": "Desativar",

@@ -149,7 +149,7 @@ export const OptionsListPopoverActionBar = ({
     }
   }, [availableOptions, selectedOptions, areAllSelected]);
   const styles = useMemoCss(optionsListPopoverStyles);
-
+  //Edmar Moretti - Remove a opção de selecionar todos, nos controles de lista de opções em popover
   return (
     <div className="optionsList__actions" css={styles.actions}>
       {compatibleSearchTechniques.length > 0 && (
@@ -190,40 +190,7 @@ export const OptionsListPopoverActionBar = ({
               </EuiFlexItem>
             </>
           )}
-          {!singleSelect && (
-            <EuiFlexItem grow={false}>
-              <EuiToolTip
-                content={
-                  hasTooManyOptions
-                    ? OptionsListStrings.popover.getMaximumBulkSelectionTooltip()
-                    : undefined
-                }
-              >
-                <EuiCheckbox
-                  checked={areAllSelected}
-                  id={`optionsList-control-selectAll-checkbox-${componentApi.uuid}`}
-                  // indeterminate={selectedOptions.length > 0 && !areAllSelected}
-                  disabled={isBulkSelectDisabled}
-                  data-test-subj="optionsList-control-selectAll"
-                  onChange={() => {
-                    if (areAllSelected) {
-                      handleBulkAction(componentApi.deselectAll);
-                      setAllSelected(false);
-                    } else {
-                      handleBulkAction(componentApi.selectAll);
-                      setAllSelected(true);
-                    }
-                  }}
-                  css={styles.selectAllCheckbox}
-                  label={
-                    <EuiText size="xs">
-                      {OptionsListStrings.popover.getSelectAllButtonLabel()}
-                    </EuiText>
-                  }
-                />
-              </EuiToolTip>
-            </EuiFlexItem>
-          )}
+
           <EuiFlexItem grow={true}>
             <EuiFlexGroup
               gutterSize="xs"

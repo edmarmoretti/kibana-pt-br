@@ -18,7 +18,8 @@ import { FormRow } from './form_row';
 interface ListControlUiState {
   isLoading: boolean;
 }
-
+//Edmar Moretti
+//Ordenamento dos meses
 export type ListControlUiProps = WrappedComponentProps & {
   id: string;
   label: string;
@@ -116,7 +117,33 @@ class ListControlUi extends PureComponent<ListControlUiProps, ListControlUiState
         />
       );
     }
-
+    //Edmar Moretti - corrige o sort numérico e ordenamento de mêses
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const options = this.props.options
+      ?.map((option) => {
+        return {
+          label: this.props.formatOptionLabel(option).toString(),
+          value: option,
+          ['data-test-subj']: `option_${option.toString().replace(' ', '_')}`,
+        };
+      })
+      .sort((a, b) => {
+        //return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+        if(typeof a.label==='number' && typeof b.label==='number'){
+          if(a.label*1 > b.label*1) return 1;
+          if(a.label*1 < b.label*1) return -1;
+          return 0;
+        } else {
+          //compara meses
+          if(meses.includes(a.label.toLowerCase()) && meses.includes(b.label.toLowerCase())){
+            if(meses.indexOf(a.label.toLowerCase()) > meses.indexOf(b.label.toLowerCase())) return 1;
+            if(meses.indexOf(a.label.toLowerCase()) < meses.indexOf(b.label.toLowerCase())) return -1;
+            return 0;
+          }
+          return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+        }
+      });
+    /*   
     const options = this.props.options
       ?.map((option) => {
         return {
@@ -128,6 +155,7 @@ class ListControlUi extends PureComponent<ListControlUiProps, ListControlUiState
       .sort((a, b) => {
         return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
       });
+    */
 
     const selectedOptions = this.props.selectedOptions.map((selectedOption) => {
       return {

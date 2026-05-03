@@ -45,6 +45,7 @@ export const setStubKibanaServices = () => {
   });
 };
 
+/*
 export const getMockLinksParentApi = (
   serializedState: LinksSerializedState,
   references?: Reference[]
@@ -64,3 +65,38 @@ export const getMockLinksParentApi = (
   description$: new BehaviorSubject<string | undefined>(''),
   getSerializedStateForChild: () => ({ rawState: serializedState, references }),
 });
+*/
+export const getMockLinksParentApi = (
+  serializedState: LinksSerializedState,
+  references?: Reference[]
+): LinksParentApi => {
+  const titleNotes$ = new BehaviorSubject<string | undefined>(serializedState.titleNotes);
+  const titleSummary$ = new BehaviorSubject<string | undefined>(serializedState.titleSummary);
+console.log(serializedState);
+  return {
+    ...getMockPresentationContainer(),
+    type: 'dashboard',
+    filters$: new BehaviorSubject<Filter[] | undefined>(undefined),
+    query$: new BehaviorSubject<Query | AggregateQuery | undefined>(undefined),
+    timeRange$: new BehaviorSubject<TimeRange | undefined>({
+      from: 'now-15m',
+      to: 'now',
+    }),
+    timeslice$: new BehaviorSubject<[number, number] | undefined>(undefined),
+    savedObjectId$: new BehaviorSubject<string | undefined>('999'),
+    hideTitle$: new BehaviorSubject<boolean | undefined>(false),
+    title$: new BehaviorSubject<string | undefined>('My Dashboard'),
+    description$: new BehaviorSubject<string | undefined>(''),
+    titleNotes$,
+    titleSummary$,
+    getSerializedStateForChild: () => ({
+      rawState: {
+        ...serializedState,
+        titleNotes: titleNotes$.getValue(),
+        titleSummary: titleSummary$.getValue(),
+      },
+      references,
+    }),
+  };
+};
+// ...existing code...

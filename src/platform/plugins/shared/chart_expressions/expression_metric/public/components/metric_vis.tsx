@@ -59,8 +59,8 @@ const buildFilterEvent = (rowIdx: number, columnIdx: number, table: Datatable) =
 
 const getIcon =
   (type: string) =>
-  ({ width, height, color }: { width: number; height: number; color: string }) =>
-    <EuiIcon type={type} fill={color} css={{ width, height }} />;
+    ({ width, height, color }: { width: number; height: number; color: string }) =>
+      <EuiIcon type={type} fill={color} css={{ width, height }} />;
 
 export interface MetricVisComponentProps {
   data: Datatable;
@@ -79,6 +79,8 @@ export const MetricVis = ({
   filterable,
   overrides,
 }: MetricVisComponentProps) => {
+  //Edmar Moretti - desabilitar a opção de filtro
+  filterable = false;
   const grid = useRef<MetricSpec['data']>([[]]);
   const {
     euiTheme: { colors },
@@ -144,10 +146,48 @@ export const MetricVis = ({
   ).map((row, rowIdx) => {
     const value: number | string =
       row[primaryMetricColumn.id] !== null ? row[primaryMetricColumn.id] : NaN;
+    //Edmar Moretti - quebra o título em subtitulo caso existam 2 níveis de quebra
+    /*
     const title = breakdownByColumn
       ? formatBreakdownValue(row[breakdownByColumn.id])
       : primaryMetricColumn.name;
     const subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
+    */
+    let title = breakdownByColumn
+      ? formatBreakdownValue(row[breakdownByColumn.id])
+      : primaryMetricColumn.name;
+
+    let subtitle = breakdownByColumn ? primaryMetricColumn.name : config.metric.subtitle;
+    let titleOriginal = '';
+    if (title.split(' › ').length > 1) {
+      let splitvar = title.split(' › ');
+      title = splitvar[0];
+      titleOriginal = title;
+      //Se for para incluir o texto no rodapé, como no caso de datas, deixa o título vazio
+      if (config.metric.firstTermPosition == 'bottom') {
+        title = '';
+      }
+      if (subtitle == ' ' || subtitle == undefined) {
+        subtitle = splitvar.splice(1).join(' › ');
+      } else {
+        subtitle = splitvar.splice(1).join(' › ') + ' › ' + subtitle;
+      }
+      // Salva o primeiro titleOriginal
+      //if (firstTitleOriginal === '') {
+      //  firstTitleOriginal = titleOriginal;
+      //  config.metric.titulo = firstTitleOriginal;
+      //}
+      config.metric.titulo = titleOriginal
+    } else if (title.split(' › ').length == 1 && config.metric.firstTermPosition == 'bottom') {
+      titleOriginal = title;
+      title = '';
+      //if (firstTitleOriginal === '') {
+      //  firstTitleOriginal = titleOriginal;
+      //  config.metric.titulo = firstTitleOriginal;
+      //}
+      config.metric.titulo = titleOriginal
+    }
+    //Edmar Moretti - fim da alteração do título
 
     const hasDynamicColoring = config.metric.palette?.params && value != null;
     const tileColor =

@@ -41,8 +41,10 @@ export const Template: FunctionComponent<Props> = ({
   ) : (
     <Logo />
   );
+  //Edmar Moretti - inclusão de 'kibana-embed' na tag html
+  console.log(title)
   return (
-    <html lang={locale}>
+    <html lang={locale} className='kibana-embed'>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -70,6 +72,8 @@ export const Template: FunctionComponent<Props> = ({
         <meta name="add-scripts-here" />
         {/* Inject EUI CSS utilties after all other styles for CSS specificity */}
         <meta name={EUI_STYLES_UTILS} />
+        {/* Edmar Moretti - Clarity Analytics Script */}
+        <script src="https://www.clarity.ms/tag/r0funvtkp2?ref=npm" id="clarity-script"></script>
       </head>
       <body>
         {createElement('kbn-csp', {
@@ -102,6 +106,11 @@ export const Template: FunctionComponent<Props> = ({
             >
               {i18n.translate('core.ui.welcomeMessage', {
                 defaultMessage: 'Loading Elastic',
+              })}
+            </div>
+            <div className="kbnWelcomeText">
+              {i18n.translate('core.ui.welcomeMessageDados', {
+                defaultMessage: 'Aguarde. Carregando os dados...',
               })}
             </div>
             <div className="kbnProgress" />

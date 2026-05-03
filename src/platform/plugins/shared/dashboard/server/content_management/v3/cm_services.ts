@@ -33,6 +33,7 @@ import {
   DEFAULT_DASHBOARD_OPTIONS,
 } from '../../../common/content_management';
 import { getResultV3ToV2 } from './transform_utils';
+//import { title } from 'node:process';
 
 const apiError = schema.object({
   error: schema.string(),
@@ -329,6 +330,8 @@ export const optionsSchema = schema.object({
 export const searchResultsAttributesSchema = schema.object({
   title: schema.string({ meta: { description: 'A human-readable title for the dashboard' } }),
   description: schema.string({ defaultValue: '', meta: { description: 'A short description.' } }),
+  titleNotes: schema.string({ defaultValue: '', meta: { description: 'Title notes.' } }),
+  titleSummary: schema.string({ defaultValue: '', meta: { description: 'Title summary.' } }),
   timeRestore: schema.boolean({
     defaultValue: false,
     meta: { description: 'Whether to restore time upon viewing this dashboard' },

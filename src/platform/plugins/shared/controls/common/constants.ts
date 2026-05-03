@@ -13,16 +13,19 @@ import { ControlLabelPosition, ControlWidth } from './types';
 export const CONTROL_WIDTH_OPTIONS = { SMALL: 'small', MEDIUM: 'medium', LARGE: 'large' } as const;
 export const CONTROL_LABEL_POSITION_OPTIONS = { ONE_LINE: 'oneLine', TWO_LINE: 'twoLine' } as const;
 export const CONTROL_CHAINING_OPTIONS = { NONE: 'NONE', HIERARCHICAL: 'HIERARCHICAL' } as const;
-export const DEFAULT_CONTROL_WIDTH: ControlWidth = CONTROL_WIDTH_OPTIONS.MEDIUM;
+//Edmar Moretti - altera o valor default de CONTROL_WIDTH_OPTIONS de 'medium' para 'SMALL'
+export const DEFAULT_CONTROL_WIDTH: ControlWidth = CONTROL_WIDTH_OPTIONS.SMALL;
+//Edmar Moretti - altera o valor default de CONTROL_LABEL_POSITION_OPTIONS de 'oneLine' para 'TWO_LINE'
 export const DEFAULT_CONTROL_LABEL_POSITION: ControlLabelPosition =
-  CONTROL_LABEL_POSITION_OPTIONS.ONE_LINE;
+  CONTROL_LABEL_POSITION_OPTIONS.TWO_LINE;
 export const DEFAULT_CONTROL_GROW: boolean = false;
 export const DEFAULT_CONTROL_CHAINING: ControlGroupChainingSystem =
   CONTROL_CHAINING_OPTIONS.HIERARCHICAL;
+//Edmar Moretti - altera o valor default de DEFAULT_IGNORE_PARENT_SETTINGS de 'true' para 'false'
 export const DEFAULT_IGNORE_PARENT_SETTINGS = {
   ignoreFilters: false,
   ignoreQuery: false,
-  ignoreTimerange: false,
+  ignoreTimerange: true,
   ignoreValidations: false,
 } as const;
 export const DEFAULT_AUTO_APPLY_SELECTIONS = true;

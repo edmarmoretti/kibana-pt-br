@@ -156,6 +156,8 @@ export const HeatmapComponent: FC<HeatmapRenderProps> = memo(
     renderComplete,
     overrides,
   }) => {
+    //Edmar Moretti - desabilita as interações de filtragem
+    interactive = false;
     const chartRef = useRef<Chart>(null);
     const isDarkTheme = useKibanaIsDarkMode();
     // legacy heatmap legend is handled by the uiState

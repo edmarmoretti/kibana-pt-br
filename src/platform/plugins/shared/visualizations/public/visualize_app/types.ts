@@ -134,6 +134,8 @@ export interface VisInstance {
   savedSearch?: SavedSearch;
   embeddableHandler: VisualizeEmbeddableContract;
   panelTitle?: string;
+  panelTitleNotes?: string;
+  panelTitleSummary?: string;
   panelDescription?: string;
   panelTimeRange?: TimeRange;
 }

@@ -35,6 +35,7 @@ import { ControlError } from './control_error';
 import { isCompressed } from '../utils/is_compressed';
 import { controlWidthStyles } from './control_panel.styles';
 import { DragHandle } from './drag_handle';
+//import { colorPalette } from '@elastic/eui/src/services/color/color_palette';
 
 export const ControlPanel = <ApiType extends DefaultControlApi = DefaultControlApi>({
   Component,
@@ -123,7 +124,7 @@ export const ControlPanel = <ApiType extends DefaultControlApi = DefaultControlA
       className={classNames({
         'controlFrameWrapper--medium': controlWidth === 'medium',
         'controlFrameWrapper--small': controlWidth === 'small',
-        'controlFrameWrapper--large': controlWidth === 'large',
+        'controlFrameWrapper--large': controlWidth === 'large'
       })}
     >
       <FloatingActions

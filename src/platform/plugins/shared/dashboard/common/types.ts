@@ -33,6 +33,8 @@ export type DashboardSettings = Writable<DashboardOptions> & {
   tags: string[];
   timeRestore: DashboardAttributes['timeRestore'];
   title: DashboardAttributes['description'];
+  titleNotes: DashboardAttributes['titleNotes'];
+  titleSummary: DashboardAttributes['titleSummary'];
 };
 
 export interface DashboardState extends DashboardSettings {

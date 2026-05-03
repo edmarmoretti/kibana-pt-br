@@ -7,7 +7,7 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
-import { EuiErrorBoundary, EuiFlexGroup, EuiPanel, htmlIdGenerator } from '@elastic/eui';
+import { EuiErrorBoundary, EuiFlexGroup, EuiPanel, htmlIdGenerator, EuiToolTip, EuiText } from '@elastic/eui';
 import { css } from '@emotion/react';
 import { PanelLoader } from '@kbn/panel-loader';
 import {
@@ -60,8 +60,12 @@ export const PresentationPanelInternal = <
     panelTitle,
     hidePanelTitle,
     panelDescription,
+    panelTitleNotes,
+    panelTitleSummary,
     defaultPanelTitle,
     defaultPanelDescription,
+    defaultPanelTitleNotes,
+    defaultPanelTitleSummary,
     rawViewMode,
     parentHidePanelTitle,
   ] = useBatchedOptionalPublishingSubjects(
@@ -70,8 +74,12 @@ export const PresentationPanelInternal = <
     api?.title$,
     api?.hideTitle$,
     api?.description$,
+    api?.titleNotes$,
+    api?.titleSummary$,
     api?.defaultTitle$,
     api?.defaultDescription$,
+    api?.defaultTitleNotes$,
+    api?.defaultTitleSummary$,
     viewModeSubject,
     (api?.parentApi as Partial<PublishesTitle>)?.hideTitle$
   );
@@ -143,6 +151,9 @@ export const PresentationPanelInternal = <
             showNotifications={showNotifications}
             panelTitle={panelTitle ?? defaultPanelTitle}
             panelDescription={panelDescription ?? defaultPanelDescription}
+            panelTitleSummary={panelTitleSummary ?? defaultPanelTitleSummary}
+            panelTitleNotes={panelTitleNotes ?? defaultPanelTitleNotes}
+
           />
         )}
         {blockingError && api && (
@@ -170,6 +181,8 @@ export const PresentationPanelInternal = <
             />
           </EuiErrorBoundary>
         </div>
+        {formatPanelNotes(panelTitleNotes)}
+
       </EuiPanel>
     </PresentationPanelHoverActions>
   );
@@ -202,3 +215,42 @@ const styles = {
     },
   }),
 };
+//Edmar Moretti - adicionado titleNotes
+function formatPanelNotes(panelTitleNotes: string | undefined) {
+  const linkify = (inputText: string) => {
+    var replacedText, replacePattern1;
+    //URLs starting with http://, https://, or ftp://
+    replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+    //return replacedText;
+    const theObj = { __html: replacedText };
+    return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj}  />
+  };
+  const titleNotesStyles = css`
+  > div {
+    max-height: 13px;
+    font-size: 12px;
+    padding-left: 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: normal;
+  }
+  > div:empty {
+    padding: 0px;
+  }
+`;
+  return (
+    <>
+    <EuiToolTip
+      position="top"
+      content={panelTitleNotes}
+    >
+    <EuiText css={titleNotesStyles} className='embPanel__notes'>
+      {panelTitleNotes ? linkify(panelTitleNotes) : ''}
+    </EuiText>
+    </EuiToolTip>
+    </>
+  );
+}
+

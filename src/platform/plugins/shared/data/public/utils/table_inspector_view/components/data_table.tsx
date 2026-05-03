@@ -7,7 +7,7 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import {
@@ -15,6 +15,7 @@ import {
   EuiFlexGroup,
   EuiFlexItem,
   EuiInMemoryTable,
+  EuiSearchBarProps,
   EuiToolTip,
 } from '@elastic/eui';
 
@@ -201,6 +202,15 @@ class DataTableFormatClass extends Component<
       pageSize,
     };
 
+  const onQueryChange: EuiSearchBarProps['onChange'] = ({ query }) => {
+  };    
+  const search: EuiSearchBarProps = {
+    onChange: onQueryChange,
+    box: {
+      incremental: true,
+    },
+  };
+  
     return (
       <EuiInMemoryTable
         tableLayout="auto"
@@ -211,6 +221,7 @@ class DataTableFormatClass extends Component<
         sorting={sorting}
         pagination={pagination}
         onTableChange={onTableChange}
+        search={search}
         css={css`
           // Set a min width on each column - you can use [data-test-subj] to target specific columns
           .euiTableHeaderCell {

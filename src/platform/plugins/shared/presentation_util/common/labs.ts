@@ -16,7 +16,7 @@ export const BY_VALUE_EMBEDDABLE = `${LABS_PROJECT_PREFIX}canvas:byValueEmbeddab
 export const projectIDs = [DEFER_BELOW_FOLD, BY_VALUE_EMBEDDABLE] as const;
 export const environmentNames = ['kibana', 'browser', 'session'] as const;
 export const solutionNames = ['canvas', 'dashboard', 'presentation'] as const;
-
+//Edmar Moretti - ativa defer loading por padrão
 /**
  * This is a list of active Labs Projects for the Presentation Team.  It is the "source of truth" for all projects
  * provided to users of our solutions in Kibana.
@@ -24,7 +24,7 @@ export const solutionNames = ['canvas', 'dashboard', 'presentation'] as const;
 export const projects: { [ID in ProjectID]: ProjectConfig & { id: ID } } = {
   [DEFER_BELOW_FOLD]: {
     id: DEFER_BELOW_FOLD,
-    isActive: false,
+    isActive: true,
     isDisplayed: true,
     environments: ['kibana', 'browser', 'session'],
     name: i18n.translate('presentationUtil.labs.enableDeferBelowFoldProjectName', {

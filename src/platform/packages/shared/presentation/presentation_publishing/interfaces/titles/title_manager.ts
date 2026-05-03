@@ -12,22 +12,30 @@ import { initializeStateManager } from '../../state_manager/state_manager';
 import { StateComparators, StateManager } from '../../state_manager/types';
 import { PublishesWritableDescription } from './publishes_description';
 import { PublishesTitle, PublishesWritableTitle } from './publishes_title';
+import { PublishesWritablePanelTitleNotes } from './publishes_panel_title_notes';
+import { PublishesWritablePanelTitleSummary } from './publishes_panel_title_summary';
 
 export interface SerializedTitles {
   title?: string;
   description?: string;
   hidePanelTitles?: boolean;
+  titleNotes?: string;
+  titleSummary?: string;
 }
 
 const defaultTitlesState: WithAllKeys<SerializedTitles> = {
   title: undefined,
   description: undefined,
   hidePanelTitles: undefined,
+  titleNotes: undefined,
+  titleSummary: undefined,
 };
 
 export const titleComparators: StateComparators<SerializedTitles> = {
   title: 'referenceEquality',
   description: 'referenceEquality',
+  titleNotes: 'referenceEquality',
+  titleSummary: 'referenceEquality',
   hidePanelTitles: (a, b) => Boolean(a) === Boolean(b),
 };
 
@@ -35,11 +43,13 @@ export const stateHasTitles = (state: unknown): state is SerializedTitles => {
   return (
     (state as SerializedTitles)?.title !== undefined ||
     (state as SerializedTitles)?.description !== undefined ||
+    (state as SerializedTitles)?.titleNotes !== undefined ||
+    (state as SerializedTitles)?.titleSummary !== undefined ||
     (state as SerializedTitles)?.hidePanelTitles !== undefined
   );
 };
 
-export interface TitlesApi extends PublishesWritableTitle, PublishesWritableDescription {}
+export interface TitlesApi extends PublishesWritableTitle, PublishesWritableDescription, PublishesWritablePanelTitleNotes, PublishesWritablePanelTitleSummary {}
 
 export const initializeTitleManager = (
   initialTitlesState: SerializedTitles
