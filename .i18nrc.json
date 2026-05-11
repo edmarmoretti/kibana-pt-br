@@ -201,5 +201,7 @@
     "managedContentBadge": "src/platform/packages/private/kbn-managed-content-badge",
     "responseOpsRuleForm": "src/platform/packages/shared/response-ops/rule_form"
   },
-  "translations": []
+  "translations": [
+    "@kbn/translations-plugin/translations/pt-BR.json"
+  ]
 }

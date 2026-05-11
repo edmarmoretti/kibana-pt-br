@@ -49,6 +49,7 @@ export const FlyoutWrapper = ({
   applyButtonDisabledTooltip,
 }: FlyoutWrapperProps) => {
   const { euiTheme } = useEuiTheme();
+  //Edmar Moretti - tradução
   return (
     <>
       {isInlineFlyoutVisible && displayFlyoutHeader && (
@@ -68,7 +69,7 @@ export const FlyoutWrapper = ({
                   <EuiFlexGroup alignItems="center" responsive={false} gutterSize="xs">
                     <EuiFlexItem grow={false}>
                       {i18n.translate('xpack.lens.config.showVisualizationLabel', {
-                        defaultMessage: 'Configuration',
+                        defaultMessage: 'Configuração',
                       })}
                     </EuiFlexItem>
                     <EuiFlexItem grow={false}>

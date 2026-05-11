@@ -97,7 +97,7 @@ export function DatatableAppearanceSettings({
     },
     [setState, state]
   );
-
+  //Edmar Moretti - tradução
   return (
     <>
       <DensitySettings
@@ -165,7 +165,7 @@ export function DatatableAppearanceSettings({
       </EuiFormRow>
       <EuiFormRow
         label={i18n.translate('xpack.lens.table.visualOptionsShowRowNumbers', {
-          defaultMessage: 'Show row numbers',
+          defaultMessage: 'Mostra o número de linhas',
         })}
         display="columnCompressed"
         fullWidth

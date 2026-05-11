@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - tradução
 import { i18n } from '@kbn/i18n';
 import { filter, map, combineLatest, type Subscription } from 'rxjs';
 import { createHashHistory } from 'history';
@@ -350,7 +350,7 @@ export class VisualizationsPlugin
 
     core.application.register({
       id: VisualizeConstants.APP_ID,
-      title: 'Visualize library',
+      title: 'Biblioteca de visualizações',
       order: 8000,
       euiIconType: 'logoKibana',
       defaultPath: '#/',
@@ -456,7 +456,7 @@ export class VisualizationsPlugin
     if (home) {
       home.featureCatalogue.register({
         id: 'visualize',
-        title: 'Visualize library',
+        title: 'Biblioteca de visualizações',
         description: i18n.translate('visualizations.visualizeDescription', {
           defaultMessage:
             'Create visualizations and aggregate data stores in your Elasticsearch indices.',
@@ -519,7 +519,7 @@ export class VisualizationsPlugin
       version: {
         latest: LATEST_VERSION,
       },
-      name: 'Visualize library',
+      name: 'Biblioteca de visualizações',
     });
 
     return {

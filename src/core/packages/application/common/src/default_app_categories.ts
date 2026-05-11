@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - tradução
 import { i18n } from '@kbn/i18n';
 import type { AppCategory } from './app_category';
 
@@ -15,7 +15,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   kibana: {
     id: 'kibana',
     label: i18n.translate('core.ui.kibanaNavList.label', {
-      defaultMessage: 'Analytics',
+      defaultMessage: 'Análise',
     }),
     euiIconType: 'logoKibana',
     order: 1000,
@@ -31,7 +31,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   observability: {
     id: 'observability',
     label: i18n.translate('core.ui.observabilityNavList.label', {
-      defaultMessage: 'Observability',
+      defaultMessage: 'Observabilidade',
     }),
     euiIconType: 'logoObservability',
     order: 3000,
@@ -39,7 +39,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   security: {
     id: 'securitySolution',
     label: i18n.translate('core.ui.securityNavList.label', {
-      defaultMessage: 'Security',
+      defaultMessage: 'Segurança',
     }),
     order: 4000,
     euiIconType: 'logoSecurity',
@@ -55,7 +55,7 @@ export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze
   management: {
     id: 'management',
     label: i18n.translate('core.ui.managementNavList.label', {
-      defaultMessage: 'Management',
+      defaultMessage: 'Gerenciamento',
     }),
     order: 5000,
     euiIconType: 'managementApp',

@@ -58,15 +58,15 @@ import type { AutocompleteService, QuerySuggestion } from '../../autocomplete';
 import { QuerySuggestionTypes } from '../../autocomplete';
 import { getCoreStart } from '../../services';
 import { StyledDiv } from './query_string_input.styles';
-
+//Edmar Moretti - tradução
 export const strings = {
   getSearchInputPlaceholderForText: () =>
     i18n.translate('kql.query.queryBar.searchInputPlaceholderForText', {
-      defaultMessage: 'Filter your data',
+      defaultMessage: 'Filtre os dados',
     }),
   getSearchInputPlaceholder: (language: string) =>
     i18n.translate('kql.query.queryBar.searchInputPlaceholder', {
-      defaultMessage: 'Filter your data using {language} syntax',
+      defaultMessage: 'Filtre os dados utilizando a linguagem {language}',
       values: { language },
     }),
   getQueryBarComboboxAriaLabel: (pageType: string) =>

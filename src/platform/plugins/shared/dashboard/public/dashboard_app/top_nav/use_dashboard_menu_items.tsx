@@ -245,13 +245,13 @@ export const useDashboardMenuItems = ({
   /**
    * Register all of the top nav configs that can be used by dashboard.
    */
-
+  //Edmar Moretti - tradução
   const menuItems = useMemo(() => {
     const exportMenuItem: AppMenuItemType =
       exportItems.length === 1
         ? {
             order: viewMode === 'edit' ? 4 : 2,
-            label: topNavStrings.export.label,
+            label: 'Exportar',
             id: 'export',
             iconType: 'exportAction',
             testId: 'exportTopNavButton',
@@ -260,7 +260,7 @@ export const useDashboardMenuItems = ({
           }
         : {
             order: viewMode === 'edit' ? 4 : 2,
-            label: topNavStrings.export.label,
+            label: 'Exportar',
             id: 'export',
             iconType: 'exportAction',
             testId: 'exportTopNavButton',
@@ -293,12 +293,12 @@ export const useDashboardMenuItems = ({
         testId: 'dashboardInteractiveSaveMenuItem',
         iconType: 'copy',
         run: dashboardInteractiveSave,
-        label: topNavStrings.viewModeInteractiveSave.label,
+        label: 'Duplicar', // Edmar Moretti - tradução
       } as AppMenuItemType,
 
       backgroundSearch: {
         order: viewMode === 'edit' ? 6 : 5,
-        label: topNavStrings.backgroundSearch.label,
+        label: 'busca em segundo plano', // Edmar Moretti - tradução
         id: 'backgroundSearch',
         iconType: 'backgroundTask',
         testId: 'openBackgroundSearchFlyoutButton',
@@ -331,7 +331,7 @@ export const useDashboardMenuItems = ({
       } as AppMenuItemType,
 
       add: {
-        label: topNavStrings.add.label,
+        label: 'Adicionar visualização', // Edmar Moretti - tradução
         id: 'add',
         iconType: 'plus',
         testId: 'dashboardAddTopNavButton',
