@@ -373,6 +373,10 @@ export const getOptionsListControlFactory = (): DataControlFactory<
         ...temporaryStateManager.api,
         loadMoreSubject,
         deselectOption: (key: string | undefined) => {
+          //Edmar Moretti - impede que um item selecionado seja desselecionado quando o campo for obrigatório e tiver apenas um item selecionado  
+          if(initialState.title?.endsWith('*') === true){
+            return;
+          }
           const field = api.field$.getValue();
           if (!key || !field) {
             api.setBlockingError(

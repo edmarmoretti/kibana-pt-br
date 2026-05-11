@@ -776,10 +776,11 @@ export function XYChart({
   const windowWidth = window.innerWidth;
   const userAgent = navigator.userAgent.toLowerCase();
   const isMobile = /iphone|ipad|ipod|android|blackberry|windows phone/g.test(userAgent);
-
+  
   if (legend.position == 'left' && (isMobile || windowWidth < 1024)) {
     legend.position = 'bottom';
   }
+
 
   return (
     <>

@@ -91,8 +91,10 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   ); //pega as informações da primeira coluna
   const primeiraColunaEscondida = props.args.columns[0]?.hidden; //verifica se a primeira coluna está escondida
 
-  const size = primeiraColuna?.meta?.sourceParams?.params?.size; //pega o size da primeira coluna
+  const size = (primeiraColuna?.meta?.sourceParams?.params as any)?.size; //pega o size da primeira coluna
 
+  const nomeCol = primeiraColuna?.name; //pega o nome da coluna
+  
   //reseta o título para evitar mostrar o campo da primeira coluna quando size for 1
   //se o número de registros definidos para a tabela for 1, aplica o filtro na tabela para mostrar apenas o que corresponde ao primeiro registro
   if (size === 1) {
@@ -102,7 +104,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     //Edmar Moretti - inclusão do título
     // Verifica se a primeira coluna está visível antes de alterar o título
     if (primeiraColunaEscondida == true) {
-      props.args.title = firstTermName.keys ? firstTermName.keys.join(' › ') : firstTermName;
+      props.args.title = nomeCol + (firstTermName.keys ? firstTermName.keys.join(' › ') : firstTermName);
     }
   }
 
@@ -604,7 +606,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     setQuery(e.target.value ?? '');
   };
   //calcula o valor que precisa ser reduzido da altura da tabela para caber o título
-  const alturaTitulo = props.args.title === '' ? 0 : 20;
+  const alturaTitulo = props.args.title === '' ? 0 : 30;
   const alturaFiltro = initialRowCountRef.current > 10 ? 20 : 0;
   //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela
   return (
