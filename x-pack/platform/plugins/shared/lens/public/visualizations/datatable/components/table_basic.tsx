@@ -575,7 +575,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   const initialRowCountRef = useRef<number>(props.data.rows?.length ?? 0);
   const [query, setQuery] = useState('');
   const filteredRows = useMemo(() => {
-    if (!query) {
+    if (!query && initialRowCountRef.current > 0) {
       return props.data.rows;
     }
     // Pesquisa simples case-insensitive em todos os campos
@@ -607,7 +607,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   };
   //calcula o valor que precisa ser reduzido da altura da tabela para caber o título
   const alturaTitulo = props.args.title === '' ? 0 : 30;
-  const alturaFiltro = initialRowCountRef.current > 10 ? 20 : 0;
+  const alturaFiltro = initialRowCountRef.current > 20 ? 20 : 0;
   //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela
   return (
     <div
@@ -634,7 +634,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
             <div className='tituloDaTabela'>{props.args.title}</div>
           </EuiText>
         )}
-        {initialRowCountRef.current > 10 && (
+        {initialRowCountRef.current > 20 && (
           <EuiFormControlLayout icon="search" fullWidth={true} compressed={true} style={
             { blockSize: 'unset'}
           }>
