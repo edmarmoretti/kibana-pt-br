@@ -14,6 +14,7 @@ import React, {
   useState,
   useContext,
   useEffect,
+  ChangeEvent,
 } from 'react';
 import { i18n } from '@kbn/i18n';
 import useDeepCompareEffect from 'react-use/lib/useDeepCompareEffect';
@@ -94,7 +95,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   const size = (primeiraColuna?.meta?.sourceParams?.params as any)?.size; //pega o size da primeira coluna
 
   const nomeCol = primeiraColuna?.name; //pega o nome da coluna
-  
+
   //reseta o título para evitar mostrar o campo da primeira coluna quando size for 1
   //se o número de registros definidos para a tabela for 1, aplica o filtro na tabela para mostrar apenas o que corresponde ao primeiro registro
   if (size === 1) {
@@ -156,13 +157,34 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     updateTable(props.data);
   }, [props.data]);
 
+  useDeepCompareEffect(() => {
+    setQueryFiltro('');
+  }, [props.data]);
+
   const firstTableRef = useRef(firstLocalTable);
   firstTableRef.current = firstLocalTable;
 
+  const [queryFiltro, setQueryFiltro] = useState('');
+  const filteredRows = useMemo(() => {
+    const rows = firstLocalTable.rows ?? [];
+    if (queryFiltro === '') {
+      return rows;
+    }
+    return rows.filter((row) =>
+      Object.values(row ?? {}).some((value) =>
+        String(value ?? '').toLowerCase().includes(queryFiltro.toLowerCase())
+      )
+    );
+  }, [firstLocalTable.rows, queryFiltro]);
+  const displayedTable = useMemo(
+    () => ({ ...firstLocalTable, rows: filteredRows }),
+    [firstLocalTable, filteredRows]
+  );
+
   useEffect(() => {
     if (!pagination?.pageIndex && !pagination?.pageSize) return;
-    const lastPageIndex = firstLocalTable.rows.length
-      ? Math.ceil(firstLocalTable.rows.length / pagination.pageSize) - 1
+    const lastPageIndex = displayedTable.rows.length
+      ? Math.ceil(displayedTable.rows.length / pagination.pageSize) - 1
       : 0;
     /**
      * When the underlying data changes, there might be a case when actual pagination page
@@ -178,7 +200,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
         pageSize: pag.pageSize,
       };
     });
-  }, [pagination?.pageIndex, pagination?.pageSize, firstLocalTable.rows.length]);
+  }, [pagination?.pageIndex, pagination?.pageSize, displayedTable.rows.length]);
 
   const untransposedDataRef = useRef(props.untransposedData);
   untransposedDataRef.current = props.untransposedData;
@@ -273,9 +295,9 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   );
 
   const isEmpty =
-    firstLocalTable.rows.length === 0 ||
+    displayedTable.rows.length === 0 ||
     (bucketedColumns.length > 0 &&
-      props.data.rows.every((row) => bucketedColumns.every((col) => row[col] == null)));
+      displayedTable.rows.every((row) => bucketedColumns.every((col) => row[col] == null)));
 
   const visibleColumns = useMemo(
     () =>
@@ -572,47 +594,20 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     });
 
   //Edmar Moretti - inclusão da opção de busca na tabela
-  const initialRowCountRef = useRef<number>(props.data.rows?.length ?? 0);
-  const [query, setQuery] = useState('');
-  const filteredRows = useMemo(() => {
-    if (!query && initialRowCountRef.current > 0) {
-      return props.data.rows;
-    }
-    // Pesquisa simples case-insensitive em todos os campos
-    return props.data.rows.filter((row) =>
-      Object.values(row).some((value) =>
-        String(value).toLowerCase().includes(query.toLowerCase())
-      )
-    );
-  }, [props.data, query]);
-  useEffect(() => {
-    // Atualiza a tabela local com as linhas filtradas para que
-    // toda a lógica de renderização (formatters, cores, paginação) continue válida.
-    if (!query) {
-      updateTable(props.data);
-    } else if (query && filteredRows.length > 0) {
-      updateTable({
-        ...props.data,
-        rows: filteredRows,
-      });
-      // garante que volte para a página inicial ao filtrar
-      setPagination((pag) =>
-        pag ? { ...pag, pageIndex: 0 } : pag
-      );
-    }
-  }, [query, filteredRows, props.data]);
+  const initialRowCountRef = props.data?.rows?.length ?? 0;
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value ?? '');
-  };
   //calcula o valor que precisa ser reduzido da altura da tabela para caber o título
   const alturaTitulo = props.args.title === '' ? 0 : 30;
-  const alturaFiltro = initialRowCountRef.current > 20 ? 20 : 0;
+  const alturaFiltro = initialRowCountRef > 20 ? 20 : 0;
+  function handleSearchChangeLocal(event: ChangeEvent<HTMLInputElement>): void {
+    setQueryFiltro(event.target.value);
+  }
+
   //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela
   return (
     <div
       css={datatableContainerStyles}
-      className="eui-scrollBar, tableContainerFilter"
+      className="eui-scrollBar"
       data-test-subj="lnsVisualizationContainer"
       // define CSS custom property para ser usada pelo emotion css
       style={{
@@ -622,7 +617,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     >
       <DataContext.Provider
         value={{
-          table: firstLocalTable,
+          table: displayedTable,
           rowHasRowClickTriggerActions: props.rowHasRowClickTriggerActions,
           alignments,
           minMaxByColumnId,
@@ -634,16 +629,17 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
             <div className='tituloDaTabela'>{props.args.title}</div>
           </EuiText>
         )}
-        {initialRowCountRef.current > 20 && (
+        {initialRowCountRef > 20 && (
           <EuiFormControlLayout icon="search" fullWidth={true} compressed={true} style={
             { blockSize: 'unset'}
           }>
             <EuiFieldText
               type="search"
               controlOnly
+              value={queryFiltro}
               placeholder='Filtrar'
               className='tableSearch'
-              onChange={handleSearchChange}
+              onChange={handleSearchChangeLocal}
             />
           </EuiFormControlLayout>
         )}
@@ -663,7 +659,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
           columns={columns}
           columnVisibility={columnVisibility}
           trailingControlColumns={trailingControlColumns}
-          rowCount={firstLocalTable.rows.length}
+          rowCount={displayedTable.rows.length}
           renderCellValue={renderCellValue}
           gridStyle={gridStyle}
           schemaDetectors={schemaDetectors}
