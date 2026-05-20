@@ -19,6 +19,8 @@ import type {
   PublishesTitle,
   CanOverrideHoverActions,
   ViewMode,
+  PublishesPanelTitleNotes,
+  PublishesPanelTitleSummary,
 } from '@kbn/presentation-publishing';
 import type { UiActionsStart } from '@kbn/ui-actions-plugin/public';
 import type { MaybePromise } from '@kbn/utility-types';
@@ -86,6 +88,8 @@ export interface DefaultPresentationPanelApi
         PublishesDataLoading &
         PublishesBlockingError &
         PublishesDescription &
+        PublishesPanelTitleNotes &
+        PublishesPanelTitleSummary &
         PublishesDisabledActionIds &
         HasParentApi &
         CanLockHoverActions &

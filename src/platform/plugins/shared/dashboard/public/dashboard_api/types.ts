@@ -34,6 +34,8 @@ import type {
   PublishesHideBorder,
   PublishesSavedObjectId,
   PublishesTitle,
+  PublishesPanelTitleNotes,
+  PublishesPanelTitleSummary,
   PublishesUnifiedSearch,
   PublishesProjectRouting,
   PublishesViewMode,

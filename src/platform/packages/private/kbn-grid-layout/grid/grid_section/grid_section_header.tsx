@@ -282,6 +282,9 @@ export const GridSectionHeader = React.memo(({ sectionId }: GridSectionHeaderPro
            * Add actions at the end of the header section when the layout is editable + the section title
            * is not in edit mode
            */
+          /**
+           * Edmar Moretti - tradução do cabeçalho dos grupos de quadros
+           */
           !editTitleOpen && (
             <>
               <EuiFlexItem
@@ -296,7 +299,7 @@ export const GridSectionHeader = React.memo(({ sectionId }: GridSectionHeaderPro
                 >
                   {i18n.translate('kbnGridLayout.section.panelCount', {
                     defaultMessage:
-                      '({panelCount} {panelCount, plural, one {panel} other {panels}})',
+                      '({panelCount} {panelCount, plural, one {quadro} other {panels}})',
                     values: {
                       panelCount,
                     },

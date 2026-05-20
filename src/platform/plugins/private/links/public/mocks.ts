@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - This file is a copy of src/plugins/links/public/mocks.ts, but with the necessary adjustments to remove the dependency on the dashboard plugin. This is needed to avoid circular dependencies between the links and dashboard plugins, as the links embeddable is used in the dashboard plugin. Once we have a better solution for this, we can remove this file and use the original one instead.
 import { coreMock } from '@kbn/core/public/mocks';
 import { dashboardPluginMock } from '@kbn/dashboard-plugin/public/mocks';
 import { embeddablePluginMock } from '@kbn/embeddable-plugin/public/mocks';
@@ -46,6 +46,9 @@ export const setStubKibanaServices = () => {
 };
 
 export const getMockLinksParentApi = (state: LinksEmbeddableState): LinksParentApi => ({
+  const titleNotes$ = new BehaviorSubject<string | undefined>(serializedState.titleNotes);
+  const titleSummary$ = new BehaviorSubject<string | undefined>(serializedState.titleSummary);
+
   ...getMockPresentationContainer(),
   type: 'dashboard',
   filters$: new BehaviorSubject<Filter[] | undefined>(undefined),
@@ -59,5 +62,7 @@ export const getMockLinksParentApi = (state: LinksEmbeddableState): LinksParentA
   hideTitle$: new BehaviorSubject<boolean | undefined>(false),
   title$: new BehaviorSubject<string | undefined>('My Dashboard'),
   description$: new BehaviorSubject<string | undefined>(''),
+  titleNotes$: new BehaviorSubject<string | undefined>(''),
+  titleSummary$: new BehaviorSubject<string | undefined>(''),
   getSerializedStateForChild: () => state,
 });

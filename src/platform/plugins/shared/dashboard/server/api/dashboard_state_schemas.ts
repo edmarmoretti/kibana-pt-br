@@ -278,6 +278,22 @@ export function getDashboardStateSchema(isDashboardAppRequest: boolean) {
       ),
       time_range: schema.maybe(timeRangeSchema),
       title: schema.string({ meta: { description: 'A human-readable title for the dashboard.' } }),
+      title_notes: schema.maybe(
+        schema.string({
+          meta: {
+            description:
+              'Optional notes about the dashboard title. These notes are not displayed on the dashboard itself, but can be used to provide additional context in other parts of the UI, such as when listing dashboards.',
+          },
+        })
+      ),
+      title_summary: schema.maybe(
+        schema.string({
+          meta: {
+            description:
+              'Optional summary of the dashboard. This summary is not displayed on the dashboard itself, but can be used to provide additional context in other parts of the UI, such as when listing dashboards.',
+          },
+        })
+      ),
       access_control: accessControlSchema,
     },
     {

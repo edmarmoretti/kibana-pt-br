@@ -33,6 +33,8 @@ export const PresentationPanelTitle = ({
   panelTitle,
   panelDescription,
   titleHighlight,
+  panelTitleNotes,
+  panelTitleSummary,
 }: {
   api: unknown;
   headerId: string;
@@ -41,6 +43,8 @@ export const PresentationPanelTitle = ({
   panelDescription?: string;
   viewMode?: ViewMode;
   titleHighlight?: string;
+  panelTitleNotes?: string;
+  panelTitleSummary?: string;
 }) => {
   const { euiTheme } = useEuiTheme();
 

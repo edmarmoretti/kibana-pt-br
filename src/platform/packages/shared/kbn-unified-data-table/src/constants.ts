@@ -36,7 +36,7 @@ export const kibanaJSON = 'kibana-json';
 
 export const DATA_GRID_STYLE_COMPACT: EuiDataGridStyle = {
   cellPadding: 's',
-  fontSize: 's',
+  fontSize: 'xs',
 };
 
 export const DATA_GRID_STYLE_NORMAL: EuiDataGridStyle = {

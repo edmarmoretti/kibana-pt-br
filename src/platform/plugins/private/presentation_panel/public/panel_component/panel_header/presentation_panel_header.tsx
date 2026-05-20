@@ -7,7 +7,7 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
-import { transparentize, useEuiTheme } from '@elastic/eui';
+import { transparentize, useEuiTheme, EuiTextColor } from '@elastic/eui';
 import { css } from '@emotion/react';
 import type { ViewMode } from '@kbn/presentation-publishing';
 import React, { useCallback, useMemo } from 'react';
@@ -21,6 +21,8 @@ export type PresentationPanelHeaderProps<ApiType extends DefaultPresentationPane
   viewMode?: ViewMode;
   hideTitle?: boolean;
   panelTitle?: string;
+  panelTitleNotes?: string;
+  panelTitleSummary?: string;
   panelDescription?: string;
   setDragHandle: (id: string, ref: HTMLDivElement | null) => void;
 } & Pick<
@@ -37,6 +39,8 @@ export const PresentationPanelHeader = <
   getActions,
   hideTitle,
   panelTitle,
+  panelTitleNotes,
+  panelTitleSummary,
   panelDescription,
   setDragHandle,
   showBadges = true,
@@ -59,8 +63,8 @@ export const PresentationPanelHeader = <
     },
     [setDragHandle]
   );
-
-  const { captionStyles, headerStyles } = useMemo(() => {
+  //Edmar Moretti - estilos dos títulos, resumo, etc dos quadros
+  const { captionStyles, headerStyles, titleSummaryStyles } = useMemo(() => {
     return {
       captionStyles: css`
         .dshLayout--editing &:hover {
@@ -69,11 +73,11 @@ export const PresentationPanelHeader = <
         }
       `,
       headerStyles: css`
-        height: ${euiTheme.size.xl};
+        height: ${euiTheme.size.l};
         overflow: hidden;
-        line-height: ${euiTheme.size.xl};
+        line-height: ${euiTheme.size.l};
         padding: 0px ${euiTheme.size.s};
-
+        height: 60px;
         display: flex;
         flex-wrap: nowrap;
         column-gap: ${euiTheme.size.s};
@@ -85,6 +89,11 @@ export const PresentationPanelHeader = <
           max-width: fit-content !important;
         }
       `,
+      titleSummaryStyles: css`
+        font-size: 12px;
+        padding: 8px;
+      `,
+
     };
   }, [euiTheme.size, euiTheme.colors]);
 
@@ -94,6 +103,7 @@ export const PresentationPanelHeader = <
   if (!showPanelBar) return null;
 
   return (
+    <>
     <figcaption
       data-test-subj={`embeddablePanelHeading-${(panelTitle || '').replace(/\s/g, '')}`}
       className={'embPanel__header'}
@@ -112,11 +122,14 @@ export const PresentationPanelHeader = <
           hideTitle={hideTitle}
           panelTitle={panelTitle}
           panelDescription={panelDescription}
-          titleHighlight={titleHighlight}
+          panelTitleSummary={panelTitleSummary}
+          panelTitleNotes={panelTitleNotes}
         />
         {showBadges && badgeElements}
       </div>
       {showNotifications && notificationElements}
     </figcaption>
+    <EuiTextColor css={titleSummaryStyles} color="subdued" className='embPanel__titleSummary'>{panelTitleSummary}</EuiTextColor>
+    </>
   );
 };

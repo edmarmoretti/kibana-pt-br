@@ -10,10 +10,10 @@
 import classNames from 'classnames';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
-import { EuiErrorBoundary, EuiPanel, htmlIdGenerator } from '@elastic/eui';
+import { EuiErrorBoundary, EuiPanel, htmlIdGenerator, EuiToolTip, EuiText } from '@elastic/eui';
 import { css } from '@emotion/react';
 import { PanelLoader } from '@kbn/panel-loader';
-import type { PublishesHideBorder, PublishesTitle } from '@kbn/presentation-publishing';
+import type { PublishesHideBorder, PublishesTitle, PublishesPanelTitleNotes, PublishesPanelTitleSummary } from '@kbn/presentation-publishing';
 import {
   apiHasParentApi,
   apiPublishesViewMode,
@@ -67,8 +67,12 @@ const PresentationPanelChrome = <
     panelTitle,
     hidePanelTitle,
     panelDescription,
+    panelTitleNotes,
+    panelTitleSummary,
     defaultPanelTitle,
     defaultPanelDescription,
+    defaultPanelTitleNotes,
+    defaultPanelTitleSummary,
     rawViewMode,
     parentHidePanelTitle,
   ] = useBatchedOptionalPublishingSubjects(
@@ -77,8 +81,12 @@ const PresentationPanelChrome = <
     api?.title$,
     api?.hideTitle$,
     api?.description$,
+    api?.titleNotes$,
+    api?.titleSummary$,
     api?.defaultTitle$,
     api?.defaultDescription$,
+    api?.defaultTitleNotes$,
+    api?.defaultTitleSummary$,
     viewModeSubject,
     (api?.parentApi as Partial<PublishesTitle>)?.hideTitle$
   );
@@ -138,6 +146,9 @@ const PresentationPanelChrome = <
             panelTitle={panelTitle ?? defaultPanelTitle}
             panelDescription={panelDescription ?? defaultPanelDescription}
             titleHighlight={titleHighlight}
+            panelTitleSummary={panelTitleSummary ?? defaultPanelTitleSummary}
+            panelTitleNotes={panelTitleNotes ?? defaultPanelTitleNotes}
+
           />
         )}
         {children}
@@ -158,12 +169,14 @@ export const PresentationPanelInternal = <
   ...rest
 }: PresentationPanelInternalProps<ApiType, ComponentPropsType>) => {
   const [api, setApi] = useState<ApiType | null>(null);
-  const [dataLoading, blockingError, panelHideBorder, parentHideBorder] =
+  const [dataLoading, blockingError, panelHideBorder, parentHideBorder, panelTitleNotes, panelTitleSummary] =
     useBatchedOptionalPublishingSubjects(
       api?.dataLoading$,
       api?.blockingError$,
       api?.hideBorder$,
-      (api?.parentApi as Partial<PublishesHideBorder>)?.hideBorder$
+      (api?.parentApi as Partial<PublishesHideBorder>)?.hideBorder$,
+      api?.titleNotes$,
+      api?.titleSummary$
     );
   const hideBorder = Boolean(panelHideBorder) || Boolean(parentHideBorder);
 
@@ -200,6 +213,7 @@ export const PresentationPanelInternal = <
             />
           </EuiErrorBoundary>
         </div>
+        {formatPanelNotes(panelTitleNotes)}
       </>
     );
   }, [blockingError, api, initialLoadComplete, Component, componentProps]);
@@ -247,3 +261,42 @@ const styles = {
     },
   }),
 };
+//Edmar Moretti - adicionado titleNotes
+function formatPanelNotes(panelTitleNotes: string | undefined) {
+  const linkify = (inputText: string) => {
+    var replacedText, replacePattern1;
+    //URLs starting with http://, https://, or ftp://
+    replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
+    //return replacedText;
+    const theObj = { __html: replacedText };
+    return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj}  />
+  };
+  const titleNotesStyles = css`
+  > div {
+    max-height: 13px;
+    font-size: 12px;
+    padding-left: 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: normal;
+  }
+  > div:empty {
+    padding: 0px;
+  }
+`;
+  return (
+    <>
+    <EuiToolTip
+      position="top"
+      content={panelTitleNotes}
+    >
+    <EuiText css={titleNotesStyles} className='embPanel__notes'>
+      {panelTitleNotes ? linkify(panelTitleNotes) : ''}
+    </EuiText>
+    </EuiToolTip>
+    </>
+  );
+}
+

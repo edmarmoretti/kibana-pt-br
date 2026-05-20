@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - This action is used to open the customize panel flyout, which allows users to customize the panel's title, description, data view, and other settings. The action is only compatible with embeddables that can be customized and can access view mode.
 import { i18n } from '@kbn/i18n';
 import type { TracksOverlays } from '@kbn/presentation-util';
 import type {
@@ -17,6 +17,8 @@ import type {
   PublishesWritableUnifiedSearch,
   PublishesWritableDescription,
   PublishesWritableTitle,
+  PublishesWritablePanelTitleNotes,
+  PublishesWritablePanelTitleSummary,
   PublishesUnifiedSearch,
   IsCustomizable,
   PublishesWritableHideBorder,
@@ -43,6 +45,8 @@ export type CustomizePanelActionApi = CanAccessViewMode &
       PublishesWritableDescription &
       PublishesWritableTitle &
       PublishesWritableHideBorder &
+      PublishesWritablePanelTitleNotes &
+      PublishesWritablePanelTitleSummary &
       HasParentApi<Partial<PublishesUnifiedSearch & TracksOverlays>>
   >;
 

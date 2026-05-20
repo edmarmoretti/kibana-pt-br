@@ -20,6 +20,8 @@ export type DashboardSettings = Required<DashboardOptions> & {
   time_restore: boolean;
   project_routing_restore: boolean;
   title: DashboardState['title'];
+  titleNotes?: DashboardState['title_notes'];
+  titleSummary?: DashboardState['title_summary'];
 };
 
 const DEFAULT_SETTINGS: WithAllKeys<DashboardSettings> = {
@@ -29,6 +31,8 @@ const DEFAULT_SETTINGS: WithAllKeys<DashboardSettings> = {
   time_restore: false,
   project_routing_restore: false,
   title: '',
+  titleNotes: undefined,
+  titleSummary: undefined,
 };
 
 const comparators: StateComparators<DashboardSettings> = {
@@ -44,6 +48,8 @@ const comparators: StateComparators<DashboardSettings> = {
   use_margins: 'referenceEquality',
   project_routing_restore: 'referenceEquality',
   tags: 'deepEquality',
+  titleNotes: 'referenceEquality',
+  titleSummary: 'referenceEquality',
 };
 
 function deserializeState(state: DashboardState) {
@@ -54,6 +60,8 @@ function deserializeState(state: DashboardState) {
     time_restore: Boolean(state.time_range),
     project_routing_restore: Boolean(state.project_routing),
     title: state.title,
+    titleNotes: state.title_notes,
+    titleSummary: state.title_summary,
   };
 }
 
@@ -65,8 +73,16 @@ export function initializeSettingsManager(initialState: DashboardState) {
   );
 
   function serializeSettings() {
-    const { description, tags, time_restore, project_routing_restore, title, ...options } =
-      stateManager.getLatestState();
+    const {
+      description,
+      tags,
+      time_restore,
+      project_routing_restore,
+      title,
+      titleNotes,
+      titleSummary,
+      ...options
+    } = stateManager.getLatestState();
     return {
       ...(description && { description }),
       tags,
@@ -87,6 +103,8 @@ export function initializeSettingsManager(initialState: DashboardState) {
       },
       projectRoutingRestore$: stateManager.api.projectRoutingRestore$,
       title$: stateManager.api.title$,
+      titleNotes$: stateManager.api.titleNotes$,
+      titleSummary$: stateManager.api.titleSummary$,
       description$: stateManager.api.description$,
       timeRestore$: stateManager.api.timeRestore$,
       hideTitle$: stateManager.api.hidePanelTitles$,
@@ -110,9 +128,9 @@ export function initializeSettingsManager(initialState: DashboardState) {
             const {
               description,
               tags,
-
+              titleNotes,
+              titleSummary,
               time_restore,
-
               project_routing_restore,
               title,
               ...optionDiffs

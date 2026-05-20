@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - This file was copied and adapted from src/plugins/embeddable/public/actions/add_panel_action.ts to be used in the links plugin. The main reason for copying and adapting instead of reusing the existing action is to avoid adding a dependency on the embeddable plugin, which would create a circular dependency since the embeddable plugin also depends on the links plugin.
 import type { EmbeddableApiContext } from '@kbn/presentation-publishing';
 import { IncompatibleActionError } from '@kbn/ui-actions-plugin/public';
 import { ADD_PANEL_ANNOTATION_GROUP } from '@kbn/embeddable-plugin/public';
@@ -14,6 +14,8 @@ import type { ActionDefinition } from '@kbn/ui-actions-plugin/public/actions';
 import {
   apiPublishesDescription,
   apiPublishesTitle,
+  apiPublishesPanelTitleNotes,
+  apiPublishesPanelTitleSummary,
   apiPublishesSavedObjectId,
   apiIsPresentationContainer,
 } from '@kbn/presentation-publishing';
@@ -30,6 +32,8 @@ export const isParentApiCompatible = (parentApi: unknown): parentApi is LinksPar
   apiIsPresentationContainer(parentApi) &&
   apiPublishesSavedObjectId(parentApi) &&
   apiPublishesTitle(parentApi) &&
+  apiPublishesPanelTitleNotes(parentApi) &&
+  apiPublishesPanelTitleSummary(parentApi) &&
   apiPublishesDescription(parentApi);
 
 export const addLinksPanelAction: ActionDefinition<EmbeddableApiContext> = {
