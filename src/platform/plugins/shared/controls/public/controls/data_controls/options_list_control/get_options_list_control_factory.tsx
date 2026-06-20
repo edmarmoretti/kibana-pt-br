@@ -191,14 +191,18 @@ export const getOptionsListControlFactory = (): DataControlFactory<
           new Set(successResponse.invalidSelections ?? [])
         );
 
-        //Edmar Moretti - inicializa o filtro com o primeiro da lista como o Default se tiver um título com * no final
+        //Edmar Moretti - inicializa o filtro com o primeiro da lista como o Default se tiver um título com * no final, se for ** mantém o valor selecionado
         if (initialState.title?.endsWith('*') === true && initialState) {
           // --- define o primeiro valor das sugestões como seleção padrão quando não houver seleção ---
-          //const currentSelections = selectionsManager.api.selectedOptions$.getValue() ?? [];
-          //const existsSelected = selectionsManager.api.existsSelected$.getValue();
+          let currentSelections = [];
+          let existsSelected = false;
+          if (initialState.title?.endsWith('**') === true) {
+            currentSelections = selectionsManager.api.selectedOptions$.getValue() ?? [];
+            existsSelected = selectionsManager.api.existsSelected$.getValue() ?? false;
+          }
           if (
-            //currentSelections.length === 0 &&
-            //!existsSelected &&
+            currentSelections.length === 0 &&
+            !existsSelected &&
             Array.isArray(successResponse.suggestions) &&
             successResponse.suggestions.length > 0
           ) {
@@ -214,6 +218,7 @@ export const getOptionsListControlFactory = (): DataControlFactory<
           }
           // ------------------------------------------------------------------------------
         }
+
         //
         // reset the request size back to the minimum (if it's not already)
         if (temporaryStateManager.api.requestSize$.getValue() !== MIN_OPTIONS_LIST_REQUEST_SIZE) {

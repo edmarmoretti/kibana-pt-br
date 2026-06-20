@@ -72,8 +72,10 @@ export const Template: FunctionComponent<Props> = ({
         <meta name="add-scripts-here" />
         {/* Inject EUI CSS utilties after all other styles for CSS specificity */}
         <meta name={EUI_STYLES_UTILS} />
-        {/* Edmar Moretti - Clarity Analytics Script */}
+        {/* Edmar Moretti - Clarity Analytics Script 
         <script src="https://www.clarity.ms/tag/r0funvtkp2?ref=npm" id="clarity-script"></script>
+        */}
+        
       </head>
       <body>
         {createElement('kbn-csp', {

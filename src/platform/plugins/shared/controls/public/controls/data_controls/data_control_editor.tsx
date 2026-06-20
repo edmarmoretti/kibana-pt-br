@@ -372,7 +372,7 @@ export const DataControlEditor = <State extends DefaultDataControlState = Defaul
           </EuiFormRow>
           <EuiFormRow
             label={DataControlEditorStrings.manageControl.displaySettings.getTitleInputTitle()}
-            helpText="Utilize * após o nome para indicar que é obrigatório escolher uma opção"
+            helpText="Utilize * após o nome para indicar que é obrigatório escolher uma opção. Utilize ** para indicar que é obrigatório mas o que valor escolhido será preservado"
           >
             <EuiFieldText
               data-test-subj="control-editor-title-input"
