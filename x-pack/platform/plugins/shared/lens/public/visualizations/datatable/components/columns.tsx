@@ -285,6 +285,9 @@ export const createGridColumns = (
           WebkitBoxOrient: 'vertical',
         }),
         textAlign: currentAlignment,
+        ...((headerRowHeight === 'hidden') && {
+          display: 'none',
+        }),
       });
     //Edmar Moretti - corrige o nome da coluna quando do tipo multitermos e adiciona uma classe para permitir a aplicação de estilos no plugin sageIntegration
     const nname = name.trim().replace(/\s*›\s*$/, '');

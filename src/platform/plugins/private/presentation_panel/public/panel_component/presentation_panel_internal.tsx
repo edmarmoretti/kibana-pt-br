@@ -11,6 +11,7 @@ import { EuiErrorBoundary, EuiFlexGroup, EuiPanel, htmlIdGenerator, EuiToolTip, 
 import { css } from '@emotion/react';
 import { PanelLoader } from '@kbn/panel-loader';
 import {
+  PublishesHideBorder,
   PublishesTitle,
   apiHasParentApi,
   apiPublishesViewMode,
@@ -68,6 +69,7 @@ export const PresentationPanelInternal = <
     defaultPanelTitleSummary,
     rawViewMode,
     parentHidePanelTitle,
+    panelHideBorder, 
   ] = useBatchedOptionalPublishingSubjects(
     api?.dataLoading$,
     api?.blockingError$,
@@ -81,10 +83,11 @@ export const PresentationPanelInternal = <
     api?.defaultTitleNotes$,
     api?.defaultTitleSummary$,
     viewModeSubject,
-    (api?.parentApi as Partial<PublishesTitle>)?.hideTitle$
+    (api?.parentApi as Partial<PublishesTitle>)?.hideTitle$,
+    (api as Partial<PublishesHideBorder>)?.hideBorder$,
   );
   const viewMode = rawViewMode ?? 'view';
-
+  const hideBorder = Boolean(panelHideBorder);
   const [initialLoadComplete, setInitialLoadComplete] = useState(!dataLoading);
   if (!initialLoadComplete && (dataLoading === false || (api && !api.dataLoading$))) {
     setInitialLoadComplete(true);
@@ -126,6 +129,7 @@ export const PresentationPanelInternal = <
         showBorder,
       }}
       setDragHandle={setDragHandle}
+      showBorder={showBorder && !hideBorder}
     >
       <EuiPanel
         role="figure"
@@ -136,6 +140,7 @@ export const PresentationPanelInternal = <
         hasShadow={showShadow}
         aria-labelledby={headerId}
         data-test-subj="embeddablePanel"
+
         {...contentAttrs}
         css={styles.embPanel}
       >
@@ -153,7 +158,6 @@ export const PresentationPanelInternal = <
             panelDescription={panelDescription ?? defaultPanelDescription}
             panelTitleSummary={panelTitleSummary ?? defaultPanelTitleSummary}
             panelTitleNotes={panelTitleNotes ?? defaultPanelTitleNotes}
-
           />
         )}
         {blockingError && api && (

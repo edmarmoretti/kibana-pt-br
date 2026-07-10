@@ -40,6 +40,7 @@ import {
   getTitle,
   getTitleNotes,
   getTitleSummary,
+  getHideBorder,
   PublishesUnifiedSearch,
 } from '@kbn/presentation-publishing';
 
@@ -72,10 +73,12 @@ export const CustomizePanelEditor = ({
   const [panelDescription, setPanelDescription] = useState(getDescription(api));
   const [panelTitleSummary, setPanelTitleSummary] = useState(getTitleSummary(api));
   const [panelTitleNotes, setPanelTitleNotes] = useState(getTitleNotes(api));
+  const [hideBorder, setHideBorder] = useState(getHideBorder(api));
 
   const [timeRange, setTimeRange] = useState(
     api.timeRange$?.value ?? api.parentApi?.timeRange$?.value
   );
+//  const [isPanelBorderless, setIsPanelBorderless] = useState(getHideBorder(api));
 
   const initialFocusRef = useRef<HTMLInputElement | null>(null);
 
@@ -114,6 +117,7 @@ export const CustomizePanelEditor = ({
       api.setTitle?.(panelTitle);
     }
     if (hideTitle !== api.hideTitle$?.value) api.setHideTitle?.(hideTitle);
+    if (hideBorder !== api.hideBorder$?.value) api.setHideBorder?.(hideBorder);
     if (panelDescription !== api.description$?.value) api.setDescription?.(panelDescription);
     if (panelTitleNotes !== api.titleNotes$?.value) api.setTitleNotes?.(panelTitleNotes);
     if (panelTitleSummary !== api.titleSummary$?.value) api.setTitleSummary?.(panelTitleSummary);
@@ -377,6 +381,27 @@ export const CustomizePanelEditor = ({
     );
   };
 
+  const renderBorderlessToggleComponent = () => {
+
+
+    return (
+      <EuiFormRow>
+        <EuiSwitch
+          checked={!hideBorder}
+          data-test-subj="customizePanelBorderlessToggle"
+          id="borderlessToggle"
+          label={
+            <FormattedMessage
+              defaultMessage="Show panel border"
+              id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.borderlessToggleSwitch"
+            />
+          }
+          onChange={(e) => setHideBorder(!e.target.checked)}
+        />
+      </EuiFormRow>
+    );
+  };
+
   const renderFilterDetails = () => {
     if (!apiPublishesUnifiedSearch(api)) return null;
 
@@ -403,6 +428,8 @@ export const CustomizePanelEditor = ({
       <EuiFlyoutBody>
         <EuiForm data-test-subj="customizePanelForm">
           {renderCustomTitleComponent()}
+          {renderBorderlessToggleComponent()}
+          
           {renderCustomTimeRangeComponent()}
           {renderFilterDetails()}
         </EuiForm>

@@ -258,6 +258,7 @@ export const DashboardSettingsFlyout = ({ onClose }: DashboardSettingsProps) => 
               data-test-subj="dashboardPanelTitlesCheckbox"
             />
           </EuiFormRow>
+
           <EuiFormRow
             label={i18n.translate(
               'dashboard.embeddableApi.showSettings.flyout.formRow.syncAcrossPanelsLabel',

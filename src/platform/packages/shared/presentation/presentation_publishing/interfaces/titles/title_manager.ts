@@ -14,6 +14,7 @@ import { PublishesWritableDescription } from './publishes_description';
 import { PublishesTitle, PublishesWritableTitle } from './publishes_title';
 import { PublishesWritablePanelTitleNotes } from './publishes_panel_title_notes';
 import { PublishesWritablePanelTitleSummary } from './publishes_panel_title_summary';
+import { PublishesHideBorder } from './publishes_hide_border';
 
 export interface SerializedTitles {
   title?: string;
@@ -21,6 +22,7 @@ export interface SerializedTitles {
   hidePanelTitles?: boolean;
   titleNotes?: string;
   titleSummary?: string;
+  hideBorder?: boolean;
 }
 
 const defaultTitlesState: WithAllKeys<SerializedTitles> = {
@@ -29,6 +31,7 @@ const defaultTitlesState: WithAllKeys<SerializedTitles> = {
   hidePanelTitles: undefined,
   titleNotes: undefined,
   titleSummary: undefined,
+  hideBorder: undefined,
 };
 
 export const titleComparators: StateComparators<SerializedTitles> = {
@@ -37,6 +40,7 @@ export const titleComparators: StateComparators<SerializedTitles> = {
   titleNotes: 'referenceEquality',
   titleSummary: 'referenceEquality',
   hidePanelTitles: (a, b) => Boolean(a) === Boolean(b),
+  hideBorder: (a, b) => Boolean(a) === Boolean(b),
 };
 
 export const stateHasTitles = (state: unknown): state is SerializedTitles => {
@@ -45,11 +49,12 @@ export const stateHasTitles = (state: unknown): state is SerializedTitles => {
     (state as SerializedTitles)?.description !== undefined ||
     (state as SerializedTitles)?.titleNotes !== undefined ||
     (state as SerializedTitles)?.titleSummary !== undefined ||
-    (state as SerializedTitles)?.hidePanelTitles !== undefined
+    (state as SerializedTitles)?.hidePanelTitles !== undefined ||
+    (state as SerializedTitles)?.hideBorder !== undefined
   );
 };
 
-export interface TitlesApi extends PublishesWritableTitle, PublishesWritableDescription, PublishesWritablePanelTitleNotes, PublishesWritablePanelTitleSummary {}
+export interface TitlesApi extends PublishesWritableTitle, PublishesWritableDescription, PublishesWritablePanelTitleNotes, PublishesWritablePanelTitleSummary, PublishesHideBorder {}
 
 export const initializeTitleManager = (
   initialTitlesState: SerializedTitles

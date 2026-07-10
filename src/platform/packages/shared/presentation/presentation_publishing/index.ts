@@ -168,6 +168,14 @@ export {
   type SerializedTitles,
 } from './interfaces/titles/title_manager';
 export {
+  apiPublishesHideBorder,
+  apiPublishesWritableHideBorder,
+  getHideBorder,
+  type PublishesHideBorder,
+  type PublishesWritableHideBorder,
+} from './interfaces/titles/publishes_hide_border';
+
+export {
   useBatchedOptionalPublishingSubjects,
   useBatchedPublishingSubjects,
   usePublishingSubject,

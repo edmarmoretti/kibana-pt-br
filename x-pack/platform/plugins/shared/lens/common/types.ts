@@ -103,4 +103,5 @@ export interface LegacyMetricState {
 export enum RowHeightMode {
   auto = 'auto',
   custom = 'custom',
+  hidden = 'hidden',
 }

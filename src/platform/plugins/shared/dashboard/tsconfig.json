@@ -1,7 +1,8 @@
 {
   "extends": "../../../../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "target/types"
+    "outDir": "target/types",
+    "ignoreDeprecations": "6.0"
   },
   "include": ["*.ts", ".storybook/**/*.ts", "common/**/*", "public/**/*", "server/**/*"],
   "kbn_references": [

@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import { i18n } from '@kbn/i18n';
 import {
   EuiButtonGroup,
   EuiFormRow,
@@ -20,6 +19,7 @@ import {
 export enum RowHeightMode {
   auto = 'auto',
   custom = 'custom',
+  hidden = 'hidden',
 }
 export interface RowHeightSettingsProps {
   lineCountInput: number | undefined;
@@ -45,16 +45,17 @@ export function RowHeightSettings({
   const rowHeightModeOptions = [
     {
       id: `${idPrefix}${RowHeightMode.auto}`,
-      label: i18n.translate('unifiedDataTable.rowHeight.auto', {
-        defaultMessage: 'Auto',
-      }),
+      label: 'Auto',
       'data-test-subj': `${dataTestSubj}_rowHeight_${RowHeightMode.auto}`,
     },
     {
+      id: `${idPrefix}${RowHeightMode.hidden}`,
+      label: 'Hidden',
+      'data-test-subj': `${dataTestSubj}_rowHeight_${RowHeightMode.hidden}`,
+    },
+    {
       id: `${idPrefix}${RowHeightMode.custom}`,
-      label: i18n.translate('unifiedDataTable.rowHeight.custom', {
-        defaultMessage: 'Custom',
-      }),
+      label: 'Custom',
       'data-test-subj': `${dataTestSubj}_rowHeight_${RowHeightMode.custom}`,
     },
   ];
