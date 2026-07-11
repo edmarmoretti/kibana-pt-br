@@ -76,7 +76,7 @@ export const markdownFactory = memoize(
           // Adiciona um token de texto manualmente para alterar o conteúdo do link
           const textToken = {
             type: 'text',
-            content: 'Ficha do indicador',
+            content: 'Ficha de qualificação do indicador',
             level: tokens[idx].level + 1,
           };
           // Insere o texto após o token de abertura do link

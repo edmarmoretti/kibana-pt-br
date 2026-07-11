@@ -105,11 +105,15 @@ export const createGridCell = (
         match = content.match((/\/indicador\/([^\/]+)-headless/));
         const codigo = match ? match[1] : '';
         return (
-          <div>
-          <EuiButtonEmpty iconType="lensApp" size="xs" color='primary' onClick={() => abreFicha(codigo)}>
-            {label != "" ? label : "Abrir"}
-          </EuiButtonEmpty>
-        </div>
+          <div data-test-subj="lnsTableCellContent"
+            className={classNames({
+              'lnsTableCell--multiline': fitRowToContent,
+              [`lnsTableCell--${currentAlignment}`]: true,
+            })}>
+            <EuiButtonEmpty iconType="article" size="xs" color='primary' onClick={() => abreFicha(codigo)}>
+              {label}
+            </EuiButtonEmpty>
+          </div>
         );
       }
       const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
@@ -129,9 +133,13 @@ export const createGridCell = (
       }
       
       return (
-        <div>
-        <EuiButtonEmpty iconType="lensApp" size="xs" color='primary' onClick={() => setIsFlyoutVisible(true)}>
-        {label != "" ? label : "Abrir"}
+        <div data-test-subj="lnsTableCellContent"
+          className={classNames({
+            'lnsTableCell--multiline': fitRowToContent,
+            [`lnsTableCell--${currentAlignment}`]: true,
+          })}>
+        <EuiButtonEmpty iconType="article" size="xs" color='primary' onClick={() => setIsFlyoutVisible(true)}>
+        {label}
         </EuiButtonEmpty>
         {flyout}
       </div>

@@ -98,7 +98,8 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
 
   //reseta o título para evitar mostrar o campo da primeira coluna quando size for 1
   //se o número de registros definidos para a tabela for 1, aplica o filtro na tabela para mostrar apenas o que corresponde ao primeiro registro
-  if (size === 1) {
+
+  if (size === 1 && props.data.rows.length > 0) {
     const firstTermName = props.data.rows?.[0]?.[coluna0id];
     //filtra a tabela para mostrar apenas o valor da primeira linha da primeira coluna
     props.data.rows = props.data.rows?.filter((row) => row[coluna0id] === firstTermName);
