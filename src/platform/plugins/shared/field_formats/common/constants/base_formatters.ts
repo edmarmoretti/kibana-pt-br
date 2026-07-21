@@ -7,6 +7,8 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
+//Edmar Moretti - htmlbar
+
 import { FieldFormatInstanceType } from '../types';
 
 import {
@@ -26,6 +28,7 @@ import {
   TruncateFormat,
   UrlFormat,
   HistogramFormat,
+  HtmlbarFormat,
 } from '../converters';
 
 export const baseFormatters: FieldFormatInstanceType[] = [
@@ -46,4 +49,5 @@ export const baseFormatters: FieldFormatInstanceType[] = [
   // @ts-expect-error upgrade typescript v5.1.6
   UrlFormat,
   HistogramFormat,
+  HtmlbarFormat,
 ];

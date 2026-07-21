@@ -97,8 +97,14 @@ const supportedFormats: Record<
     supportsSuffix: false,
     supportsCompact: false,
   },
+  htmlbar: {
+    title: 'Barras',
+    supportsDecimals: false,
+    supportsSuffix: false,
+    supportsCompact: false,
+  },
 };
-
+//Edmar Moretti - adiciona o formato htmlbar para permitir a criação de barras horizontais no datatable
 const defaultOption = {
   value: '',
   label: i18n.translate('xpack.lens.indexPattern.defaultFormatLabel', {

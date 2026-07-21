@@ -7,6 +7,8 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
+//Edmar Moretti - htmlbar
+
 export { UrlFormat } from './url';
 export { BytesFormat } from './bytes';
 export { CurrencyFormat } from './currency';
@@ -23,3 +25,4 @@ export { TruncateFormat } from './truncate';
 export { BoolFormat } from './boolean';
 export { StaticLookupFormat } from './static_lookup';
 export { HistogramFormat } from './histogram';
+export { HtmlbarFormat } from './htmlbar';

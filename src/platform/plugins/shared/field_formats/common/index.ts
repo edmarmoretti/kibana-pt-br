@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - htmlbar 
 import { PublicMethodsOf } from '@kbn/utility-types';
 import { FieldFormatsRegistry } from './field_formats_registry';
 
@@ -32,6 +32,7 @@ export {
   StringFormat,
   TruncateFormat,
   HistogramFormat,
+  HtmlbarFormat,
 } from './converters';
 
 export { getHighlightRequest, geoUtils } from './utils';

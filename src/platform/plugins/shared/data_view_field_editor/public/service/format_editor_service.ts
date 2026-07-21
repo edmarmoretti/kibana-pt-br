@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - htmlbar format editor
 import { FieldFormatEditors } from './field_format_editors';
 
 import {
@@ -24,6 +24,7 @@ import {
   urlFormatEditorFactory,
   histogramFormatEditorFactory,
   FieldFormatEditorFactory,
+  htmlbarFormatEditorFactory,
 } from '../components';
 
 /**
@@ -53,6 +54,7 @@ export class FormatEditorService {
       truncateFormatEditorFactory,
       urlFormatEditorFactory,
       histogramFormatEditorFactory,
+      htmlbarFormatEditorFactory,
     ] as FieldFormatEditorFactory[];
 
     const fieldFormatEditorsSetup = this.fieldFormatEditors.setup(

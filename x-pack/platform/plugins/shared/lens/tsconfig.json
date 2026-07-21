@@ -1,7 +1,11 @@
 {
   "extends": "../../../../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "target/types"
+    "outDir": "target/types",
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "downlevelIteration": true,
+    "moduleResolution": "bundler"
   },
   "include": ["*.ts", "common/**/*", "public/**/*", "server/**/*", "../../../../../typings/**/*"],
   "kbn_references": [

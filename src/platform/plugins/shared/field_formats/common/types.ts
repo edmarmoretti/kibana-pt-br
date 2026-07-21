@@ -7,6 +7,8 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
+//Edmar Moretti - htmlbar
+
 import { Serializable, SerializableRecord } from '@kbn/utility-types';
 import { FieldFormat } from './field_format';
 import { FieldFormatsRegistry } from './field_formats_registry';
@@ -77,6 +79,7 @@ export enum FIELD_FORMAT_IDS {
   TRUNCATE = 'truncate',
   URL = 'url',
   HISTOGRAM = 'histogram',
+  HTMLBAR = 'htmlbar',
 }
 
 /** @public */

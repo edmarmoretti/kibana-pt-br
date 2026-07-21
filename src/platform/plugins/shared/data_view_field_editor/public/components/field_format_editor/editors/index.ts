@@ -6,7 +6,7 @@
  * your election, the "Elastic License 2.0", the "GNU Affero General Public
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
-
+//Edmar Moretti - htmlbar
 export type { DefaultFormatEditor } from './default';
 export type { FieldFormatEditor, FieldFormatEditorFactory, FormatEditorProps } from './types';
 export type { UrlFormatEditorFormatParams } from './url';
@@ -25,3 +25,4 @@ export { type StaticLookupFormatEditor, staticLookupFormatEditorFactory } from '
 export { type StringFormatEditor, stringFormatEditorFactory } from './string';
 export { type TruncateFormatEditor, truncateFormatEditorFactory } from './truncate';
 export { type UrlFormatEditor, urlFormatEditorFactory } from './url';
+export { type HtmlbarFormatEditor, htmlbarFormatEditorFactory } from './htmlbar';
