@@ -20,7 +20,8 @@ import { CellColorFn } from '../../../shared_components/coloring/get_cell_color_
 import {
   EuiFlyout,
   EuiFlyoutBody,
-  EuiButtonEmpty
+  EuiButtonEmpty,
+  EuiButtonIcon,
 } from '@elastic/eui';
 export const createGridCell = (
   formatters: Record<string, ReturnType<FormatFactory>>,
@@ -91,17 +92,20 @@ export const createGridCell = (
       }
     }, [rawValue, columnId, setCellProps, colorMode, palette, colorMapping, isExpanded]);
     //Edmar Moretti - cria o botão que abre o link em um iframe quando a url possuir a palavra flyout
-    const regex = /<a[^>]*>(.*?)<\/a>/;
-    let match = content.match(regex);
+    //<a href="http://localhost:5602/fuy/app/dashboards#/view/1105dbc2-dd08-4a86-aeb5-6d6d296bd3e7?embed=true&amp;_g=%28refreshInterval%3A%28pause%3A%21t%2Cvalue%3A60000%29%2Ctime%3A%28from%3Anow-1y%2Fd%2Cto%3Anow%29%29&amp;hide-filter-bar=true&amp;openLink" target="_self" rel="noopener noreferrer"> </a>
+
+    let match = content.match((/<a[^>]*>(.*?)<\/a>/));
     const label = match ? match[1] : "";
+    //pega os parametros do link
+    const parametros = ('?'+content.match(/[^?]*\?([^"]*)/)?.[1] || '').replace(/&amp/g, '');
     if (content.indexOf('flyout') > 0) {
       // @ts-ignore
       if(typeof window.abreFichaIndicador === 'function'){
-        const abreFicha = function(indicador: string){
+        const abreFicha = function(indicador: string, parametros: string | null){
           // @ts-ignore
-          window.abreFichaIndicador(indicador); // eslint-disable-line react/no-danger
+          window.abreFichaIndicador(indicador, parametros); // eslint-disable-line react/no-danger
         };
-
+        
         match = content.match((/\/indicador\/([^\/]+)-headless/));
         const codigo = match ? match[1] : '';
         return (
@@ -110,19 +114,28 @@ export const createGridCell = (
               'lnsTableCell--multiline': fitRowToContent,
               [`lnsTableCell--${currentAlignment}`]: true,
             })}>
-            <EuiButtonEmpty iconType="article" size="xs" color='primary' onClick={() => abreFicha(codigo)}>
+            <EuiButtonIcon iconType="article" size="xs" color='primary' onClick={() => abreFicha(codigo,parametros)}>
               {label}
-            </EuiButtonEmpty>
+            </EuiButtonIcon>
           </div>
         );
       }
+    }
+    //Edmar Moretti - cria o botão que abre o link em um iframe quando a url possuir a palavra openLink
+    if (content.indexOf('openLink') > 0) {
+      // @ts-ignore
+      let regex = /href="([^"]*)"/i;
+      const hrefMatch = content.match(regex);
+      const iframeUrl = hrefMatch?.[1] ?? '';
       const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
-      let iframe = '<iframe class="flyoutIframe" style="position: fixed; height: 100vh; width: 45vw;" src="' + content + '"></iframe>';
+      const iframe = iframeUrl
+        ? `<iframe class="flyoutIframe" style="position: fixed; height: 100vh; width: 45vw;" src="${iframeUrl}"></iframe>`
+        : '';
       function Iframe(props: { iframe: string; }) {
-        return (<div dangerouslySetInnerHTML={ {__html:  props.iframe?props.iframe:""}} />);
-      };
+        return (<div dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : '' }} />);
+      }
       let flyout;
-      if (isFlyoutVisible) {
+      if (isFlyoutVisible && iframe) {
         flyout = (
           <EuiFlyout onClose={() => setIsFlyoutVisible(false)}>
             <EuiFlyoutBody>
@@ -131,18 +144,23 @@ export const createGridCell = (
           </EuiFlyout>
         );
       }
-      
+      const iconlink = label == ' ' ? 'link' : '';
       return (
         <div data-test-subj="lnsTableCellContent"
           className={classNames({
             'lnsTableCell--multiline': fitRowToContent,
             [`lnsTableCell--${currentAlignment}`]: true,
           })}>
-        <EuiButtonEmpty iconType="article" size="xs" color='primary' onClick={() => setIsFlyoutVisible(true)}>
-        {label}
-        </EuiButtonEmpty>
-        {flyout}
-      </div>
+          <EuiButtonIcon
+            iconType={iconlink}
+            size="xs"
+            color="primary"
+            onClick={() => iframeUrl && setIsFlyoutVisible(true)}
+          >
+            {label}
+          </EuiButtonIcon>
+          {flyout}
+        </div>
       );
     }
 

@@ -22,7 +22,7 @@ import { getUsageCollectionStart } from './services';
 //Edmar Moretti
 declare global {
   interface Window {
-    abreFichaIndicador?: (indicador: string) => void;
+    abreFichaIndicador?: (indicador: string, parametros?: string) => void;
   }
 }
 import { TIME_RANGE_DATA_MODES } from '../common/enums';
@@ -111,9 +111,9 @@ export const getTimeseriesVisRenderer: (deps: {
             event.preventDefault(); // Impede a navegação padrão
             const match = content.match((/\/indicador\/([^\/]+)-headless/));
             const codigo = match ? match[1] : '';
-            console.log(codigo);
+            const parametros = ('?' + content.match(/[^?]*\?([^"]*)/)?.[1] || '').replace(/&amp/g, '');
             // @ts-ignore
-            window.abreFichaIndicador(codigo); // eslint-disable-line react/no-danger
+            window.abreFichaIndicador(codigo, parametros); // eslint-disable-line react/no-danger
           });
         }
       });
