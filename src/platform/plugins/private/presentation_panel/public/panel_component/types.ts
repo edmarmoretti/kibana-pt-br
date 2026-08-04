@@ -15,6 +15,8 @@ import {
   PublishesDataLoading,
   PublishesDisabledActionIds,
   PublishesDescription,
+  PublishesHideBorder,
+  PublishesHideShadow,
   PublishesTitle,
   PublishesPanelTitleNotes,
   PublishesPanelTitleSummary,
@@ -80,6 +82,8 @@ export interface DefaultPresentationPanelApi
         PublishesDescription &
         PublishesPanelTitleNotes &
         PublishesPanelTitleSummary &
+        PublishesHideBorder &
+        PublishesHideShadow &
         PublishesDisabledActionIds &
         HasParentApi &
         CanLockHoverActions

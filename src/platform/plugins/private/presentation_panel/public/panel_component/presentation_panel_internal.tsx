@@ -12,6 +12,7 @@ import { css } from '@emotion/react';
 import { PanelLoader } from '@kbn/panel-loader';
 import {
   PublishesHideBorder,
+  PublishesHideShadow,
   PublishesTitle,
   apiHasParentApi,
   apiPublishesViewMode,
@@ -70,6 +71,7 @@ export const PresentationPanelInternal = <
     rawViewMode,
     parentHidePanelTitle,
     panelHideBorder, 
+    panelHideShadow,
   ] = useBatchedOptionalPublishingSubjects(
     api?.dataLoading$,
     api?.blockingError$,
@@ -85,9 +87,12 @@ export const PresentationPanelInternal = <
     viewModeSubject,
     (api?.parentApi as Partial<PublishesTitle>)?.hideTitle$,
     (api as Partial<PublishesHideBorder>)?.hideBorder$,
+    (api as Partial<PublishesHideShadow>)?.hideShadow$,
   );
   const viewMode = rawViewMode ?? 'view';
   const hideBorder = Boolean(panelHideBorder);
+  const hideShadow = Boolean(panelHideShadow);
+  //console.log(hideShadow);
   const [initialLoadComplete, setInitialLoadComplete] = useState(!dataLoading);
   if (!initialLoadComplete && (dataLoading === false || (api && !api.dataLoading$))) {
     setInitialLoadComplete(true);
@@ -127,6 +132,7 @@ export const PresentationPanelInternal = <
         viewMode,
         showNotifications,
         showBorder,
+        hideShadow,
       }}
       setDragHandle={setDragHandle}
       showBorder={showBorder && !hideBorder}
@@ -137,12 +143,12 @@ export const PresentationPanelInternal = <
         className={classNames('embPanel', {
           'embPanel--editing': viewMode === 'edit',
         })}
-        hasShadow={showShadow}
+        hasBorder={showBorder && !hideBorder}
         aria-labelledby={headerId}
         data-test-subj="embeddablePanel"
 
         {...contentAttrs}
-        css={styles.embPanel}
+        css={hideShadow ? styles.embPanelNoShadow : styles.embPanel}
       >
         {!hideHeader && api && (
           <PresentationPanelHeader
@@ -158,6 +164,7 @@ export const PresentationPanelInternal = <
             panelDescription={panelDescription ?? defaultPanelDescription}
             panelTitleSummary={panelTitleSummary ?? defaultPanelTitleSummary}
             panelTitleNotes={panelTitleNotes ?? defaultPanelTitleNotes}
+            hideShadow={hideShadow}
           />
         )}
         {blockingError && api && (
@@ -174,7 +181,7 @@ export const PresentationPanelInternal = <
         {!initialLoadComplete && <PanelLoader />}
         <div
           className={blockingError ? 'embPanel__content--hidden' : 'embPanel__content'}
-          css={styles.embPanelContent}
+          css={hideShadow ? styles.embPanelContentNoShadow : styles.embPanelContent}
         >
           <EuiErrorBoundary>
             <Component
@@ -213,6 +220,29 @@ const styles = {
       zIndex: 1,
       minHeight: 0, // Absolute must for Firefox to scroll contents
       overflow: 'hidden',
+    },
+    '&.embPanel__content--hidden, &[data-error]': {
+      display: 'none',
+    },
+  }),
+  embPanelNoShadow: css({
+    zIndex: 'auto',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    position: 'relative',
+    overflow: 'hidden',
+    backgroundColor: 'var(--cor-bkg)',
+  }),
+  embPanelContentNoShadow: css({
+    '&.embPanel__content': {
+      display: 'flex',
+      flex: '1 1 100%',
+      zIndex: 1,
+      minHeight: 0, // Absolute must for Firefox to scroll contents
+      overflow: 'hidden',
+      backgroundColor: 'var(--cor-bkg)',
     },
     '&.embPanel__content--hidden, &[data-error]': {
       display: 'none',

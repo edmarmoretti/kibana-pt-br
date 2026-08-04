@@ -35,6 +35,7 @@ export const PresentationPanelTitle = ({
   panelDescription,
   panelTitleNotes,
   panelTitleSummary,
+  hideShadow,
 }: {
   api: unknown;
   headerId: string;
@@ -44,6 +45,7 @@ export const PresentationPanelTitle = ({
   viewMode?: ViewMode;
   panelTitleNotes?: string;
   panelTitleSummary?: string;
+  hideShadow?: boolean;
 }) => {
   const { euiTheme } = useEuiTheme();
 
@@ -88,7 +90,7 @@ export const PresentationPanelTitle = ({
         {panelTitle}
       </EuiLink>
     );
-  }, [onClick, hideTitle, panelTitle, viewMode, api, euiTheme]);
+  }, [onClick, hideTitle, panelTitle, viewMode, api, euiTheme, hideShadow]);
 
   const describedPanelTitleElement = useMemo(() => {
     if (hideTitle) return null;
@@ -149,7 +151,7 @@ export const PresentationPanelTitle = ({
         </div>
       </EuiToolTip>
     );
-  }, [hideTitle, panelDescription, panelTitle, panelTitleElement, headerId, euiTheme.size.xs]);
+  }, [hideTitle, panelDescription, panelTitle, panelTitleElement, headerId, euiTheme.size.xs, hideShadow]);
 
   return describedPanelTitleElement;
 };

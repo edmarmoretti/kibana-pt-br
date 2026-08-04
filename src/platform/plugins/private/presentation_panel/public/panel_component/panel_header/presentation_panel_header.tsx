@@ -24,6 +24,7 @@ export type PresentationPanelHeaderProps<ApiType extends DefaultPresentationPane
   panelTitleNotes?: string;
   panelTitleSummary?: string;
   panelDescription?: string;
+  hideShadow?: boolean;
   setDragHandle: (id: string, ref: HTMLDivElement | null) => void;
 } & Pick<PresentationPanelInternalProps, 'showBadges' | 'getActions' | 'showNotifications'>;
 
@@ -42,6 +43,7 @@ const PresentationPanelHeader = <
   setDragHandle,
   showBadges = true,
   showNotifications = true,
+  hideShadow = false,
 }: PresentationPanelHeaderProps<ApiType>) => {
   const { euiTheme } = useEuiTheme();
 
@@ -60,6 +62,7 @@ const PresentationPanelHeader = <
     [setDragHandle]
   );
   //Edmar Moretti - estilos dos títulos, resumo, etc dos quadros
+
   const { captionStyles, headerStyles, titleSummaryStyles } = useMemo(() => {
     return {
       captionStyles: css`
@@ -67,6 +70,7 @@ const PresentationPanelHeader = <
           cursor: move;
           background-color: ${transparentize(euiTheme.colors.warning, 0.2)};
         }
+          background-color: ${hideShadow ? 'var(--cor-bkg)' : 'var(--cor-panel-bkg)'} !Important;
       `,
       headerStyles: css`
         height: ${euiTheme.size.l};
@@ -78,6 +82,7 @@ const PresentationPanelHeader = <
         flex-wrap: nowrap;
         column-gap: ${euiTheme.size.s};
         align-items: center;
+        background-color: ${hideShadow ? 'var(--cor-bkg) !Important' : 'var(--cor-panel-bkg) !Important'} ;
         // all direct children now share the available parent width equally, ensuring consistent layout regardless of their content length
         > * {
           min-width: 0;
@@ -91,7 +96,7 @@ const PresentationPanelHeader = <
       `,
 
     };
-  }, [euiTheme.colors.warning, euiTheme.size]);
+  }, [euiTheme.colors.warning, euiTheme.size, hideShadow]);
 
   const showPanelBar =
     (!hideTitle && panelTitle) || badgeElements.length > 0 || notificationElements.length > 0;
@@ -120,6 +125,7 @@ const PresentationPanelHeader = <
           panelDescription={panelDescription}
           panelTitleSummary={panelTitleSummary}
           panelTitleNotes={panelTitleNotes}
+          hideShadow={hideShadow}
         />
         {showBadges && badgeElements}
       </div>

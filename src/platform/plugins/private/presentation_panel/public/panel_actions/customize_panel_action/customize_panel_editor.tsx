@@ -41,6 +41,7 @@ import {
   getTitleNotes,
   getTitleSummary,
   getHideBorder,
+  getHideShadow,
   PublishesUnifiedSearch,
 } from '@kbn/presentation-publishing';
 
@@ -74,6 +75,7 @@ export const CustomizePanelEditor = ({
   const [panelTitleSummary, setPanelTitleSummary] = useState(getTitleSummary(api));
   const [panelTitleNotes, setPanelTitleNotes] = useState(getTitleNotes(api));
   const [hideBorder, setHideBorder] = useState(getHideBorder(api));
+  const [hideShadow, setHideShadow] = useState(getHideShadow(api));
 
   const [timeRange, setTimeRange] = useState(
     api.timeRange$?.value ?? api.parentApi?.timeRange$?.value
@@ -118,6 +120,7 @@ export const CustomizePanelEditor = ({
     }
     if (hideTitle !== api.hideTitle$?.value) api.setHideTitle?.(hideTitle);
     if (hideBorder !== api.hideBorder$?.value) api.setHideBorder?.(hideBorder);
+    if (hideShadow !== api.hideShadow$?.value) api.setHideShadow?.(hideShadow);
     if (panelDescription !== api.description$?.value) api.setDescription?.(panelDescription);
     if (panelTitleNotes !== api.titleNotes$?.value) api.setTitleNotes?.(panelTitleNotes);
     if (panelTitleSummary !== api.titleSummary$?.value) api.setTitleSummary?.(panelTitleSummary);
@@ -381,6 +384,28 @@ export const CustomizePanelEditor = ({
     );
   };
 
+  //Edmar Moretti - adiciona a opção de mostrar ou não a sombra do quadro
+  const renderShadowlessToggleComponent = () => {
+
+
+    return (
+      <EuiFormRow>
+        <EuiSwitch
+          checked={!hideShadow}
+          data-test-subj="customizePanelShadowlessToggle"
+          id="shadowlessToggle"
+          label={
+            <FormattedMessage
+              defaultMessage="Mostra a sombra do quadro"
+              id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.shadowlessToggleSwitch"
+            />
+          }
+          onChange={(e) => setHideShadow(!e.target.checked)}
+        />
+      </EuiFormRow>
+    );
+  };
+
   const renderBorderlessToggleComponent = () => {
 
 
@@ -392,7 +417,7 @@ export const CustomizePanelEditor = ({
           id="borderlessToggle"
           label={
             <FormattedMessage
-              defaultMessage="Show panel border"
+              defaultMessage="Mostra a borda do quadro"
               id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.borderlessToggleSwitch"
             />
           }
@@ -429,6 +454,7 @@ export const CustomizePanelEditor = ({
         <EuiForm data-test-subj="customizePanelForm">
           {renderCustomTitleComponent()}
           {renderBorderlessToggleComponent()}
+          {renderShadowlessToggleComponent()}
           
           {renderCustomTimeRangeComponent()}
           {renderFilterDetails()}

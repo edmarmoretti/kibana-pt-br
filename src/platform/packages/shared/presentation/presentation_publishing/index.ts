@@ -174,7 +174,13 @@ export {
   type PublishesHideBorder,
   type PublishesWritableHideBorder,
 } from './interfaces/titles/publishes_hide_border';
-
+export {
+  apiPublishesHideShadow,
+  apiPublishesWritableHideShadow,
+  getHideShadow,
+  type PublishesHideShadow,
+  type PublishesWritableHideShadow,
+} from './interfaces/titles/publishes_hide_shadow';
 export {
   useBatchedOptionalPublishingSubjects,
   useBatchedPublishingSubjects,

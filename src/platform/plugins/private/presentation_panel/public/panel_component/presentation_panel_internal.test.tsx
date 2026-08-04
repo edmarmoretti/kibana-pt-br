@@ -19,6 +19,7 @@ import { PresentationPanel } from '.';
 import { uiActions } from '../kibana_services';
 import { getMockPresentationPanelCompatibleComponent } from '../mocks';
 import * as openCustomizePanel from '../panel_actions/customize_panel_action/open_customize_panel';
+import { PresentationPanelHeader } from './panel_header/presentation_panel_header';
 import {
   DefaultPresentationPanelApi,
   PanelCompatibleComponent,
@@ -57,6 +58,35 @@ describe('Presentation panel', () => {
     };
     render(<PresentationPanel Component={getMockPresentationPanelCompatibleComponent(api)} />);
     await waitFor(() => expect(screen.getByTestId('embeddableStackError')).toBeInTheDocument());
+  });
+
+  it('recomputes the header styles when hideShadow changes from false to true', () => {
+    const api: DefaultPresentationPanelApi = {
+      uuid: 'test',
+      title$: new BehaviorSubject<string | undefined>('Panel title'),
+    };
+
+    const { rerender } = render(
+      <PresentationPanelHeader
+        api={api}
+        headerId="header-id"
+        panelTitle="Panel title"
+        setDragHandle={jest.fn()}
+        hideShadow={false}
+      />
+    );
+
+    rerender(
+      <PresentationPanelHeader
+        api={api}
+        headerId="header-id"
+        panelTitle="Panel title"
+        setDragHandle={jest.fn()}
+        hideShadow={true}
+      />
+    );
+
+    expect(document.head.textContent).toContain('var(--cor-bkg)');
   });
 
   it('renders error boundary when internal component throws during rendering', async () => {

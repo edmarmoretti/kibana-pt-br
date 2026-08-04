@@ -26,6 +26,7 @@ import {
   PublishesWritablePanelTitleSummary,
   PublishesUnifiedSearch,
   PublishesWritableHideBorder,
+  PublishesWritableHideShadow,
 } from '@kbn/presentation-publishing';
 import { Action, IncompatibleActionError } from '@kbn/ui-actions-plugin/public';
 import { openCustomizePanelFlyout } from './open_customize_panel';
@@ -40,6 +41,7 @@ export type CustomizePanelActionApi = CanAccessViewMode &
       PublishesWritablePanelTitleNotes &
       PublishesWritablePanelTitleSummary &
       PublishesWritableHideBorder &
+      PublishesWritableHideShadow &
       HasParentApi<Partial<PublishesUnifiedSearch & TracksOverlays>>
   >;
 
