@@ -253,12 +253,13 @@ export function SecondaryMetric({
       getEnhancedNumberSignFormatter(trendConfig)
     ) || {};
   const prefix = config.metric.secondaryPrefix ?? metricColumn?.name;
-  const value = metricColumn ? row[metricColumn.id] : undefined;
 
+  const value = metricColumn ? row[metricColumn.id] : undefined;
   return (
     <>
       <span css={styles.wrapper} data-test-subj="metric-secondary-element">
-        {prefix && <span css={styles.prefix}>{prefix}</span>}
+        {prefix == undefined && <span css={styles.hiddenPlaceholder}>-</span>}
+        {prefix != '-' && <span css={styles.prefix}>{prefix}</span>}
         <span css={styles.value}>
           <SecondaryMetricValue
             rawValue={value}
@@ -273,6 +274,12 @@ export function SecondaryMetric({
         <>
           <br />
           <span className='data-big-number'>{config.metric.titulo}</span>
+        </>
+      )}
+      {config.metric.firstTermPosition != 'bottom' && (
+        <>
+          <br />
+          <span className='data-big-number' css={styles.hiddenPlaceholder}>-</span>
         </>
       )}
     </>
@@ -303,5 +310,8 @@ const styles = {
     minWidth: 0,
     marginLeft: 4,
     maxWidth: 'calc(100% - 4px)', // Subtract the marginLeft value
+  }),
+  hiddenPlaceholder: css({
+    visibility: 'hidden',
   }),
 };

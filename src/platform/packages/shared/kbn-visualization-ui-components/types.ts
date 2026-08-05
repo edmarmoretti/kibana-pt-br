@@ -24,6 +24,15 @@ export type SharedSetOfIcons =
   | 'editorComment'
   | 'flag'
   | 'heart'
-  | 'mapMarker'
   | 'starEmpty'
-  | 'tag';
+  | 'starFilled'
+  | 'tag'
+  | 'users'
+  | 'user'
+  | 'sun'
+  | 'stats'
+  | 'storage'
+  | 'sparkles'
+  | 'home'
+  | 'flask'
+  | 'documents';

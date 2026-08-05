@@ -96,4 +96,62 @@ export const sharedSetOfIcons: IconSet<SharedSetOfIcons> = [
       defaultMessage: 'Tag',
     }),
   },
+  {
+    value: 'users',
+    label: 'users',
+  },
+  {
+    value: 'starFilled',
+    label: i18n.translate('visualizationUiComponents.iconSelect.starFilledIconLabel', {
+      defaultMessage: 'Star Filled',
+    }),
+  },
+  {
+    value: 'user',
+    label: i18n.translate('visualizationUiComponents.iconSelect.userIconLabel', {
+      defaultMessage: 'User',
+    }),
+  },
+  {
+    value: 'sun',
+    label: i18n.translate('visualizationUiComponents.iconSelect.sunIconLabel', {
+      defaultMessage: 'Sun',
+    }),
+  },
+  {
+    value: 'stats',
+    label: i18n.translate('visualizationUiComponents.iconSelect.statsIconLabel', {
+      defaultMessage: 'Stats',
+    }),
+  },
+  {
+    value: 'storage',
+    label: i18n.translate('visualizationUiComponents.iconSelect.storageIconLabel', {
+      defaultMessage: 'Storage',
+    }),
+  },
+  {
+    value: 'sparkles',
+    label: i18n.translate('visualizationUiComponents.iconSelect.sparklesIconLabel', {
+      defaultMessage: 'Sparkles',
+    }),
+  },
+  {
+    value: 'home',
+    label: i18n.translate('visualizationUiComponents.iconSelect.homeIconLabel', {
+      defaultMessage: 'Home',
+    }),
+  },
+  {
+    value: 'flask',
+    label: i18n.translate('visualizationUiComponents.iconSelect.flaskIconLabel', {
+      defaultMessage: 'Flask',
+    }),
+  },
+  {
+    value: 'documents',
+    label: i18n.translate('visualizationUiComponents.iconSelect.documentsIconLabel', {
+      defaultMessage: 'Documents',
+    }),
+  },
 ];

@@ -127,6 +127,16 @@ export const AvailableReferenceLineIcons = {
   STAR_FILLED: 'starFilled',
   TAG: 'tag',
   TRIANGLE: 'triangle',
+  USERS: 'users',
+  USER: 'user',
+  TABLE: 'table',
+  SUN: 'sun',
+  STATS: 'stats',
+  STORAGE: 'storage',
+  SPARKLES: 'sparkles',
+  HOME: 'home',
+  FLASK: 'flask',
+  DOCUMENTS: 'documents',
 } as const;
 
 export const AxisModes = {
