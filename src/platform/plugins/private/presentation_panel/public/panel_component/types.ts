@@ -17,6 +17,7 @@ import {
   PublishesDescription,
   PublishesHideBorder,
   PublishesHideShadow,
+  PublishesHideHover,
   PublishesTitle,
   PublishesPanelTitleNotes,
   PublishesPanelTitleSummary,
@@ -43,7 +44,7 @@ export interface PresentationPanelInternalProps<
   showBorder?: boolean;
   showBadges?: boolean;
   showNotifications?: boolean;
-
+  showHover?: boolean;
   /**
    * Set to true to not show PanelLoader component while Panel is loading
    */
@@ -84,6 +85,7 @@ export interface DefaultPresentationPanelApi
         PublishesPanelTitleSummary &
         PublishesHideBorder &
         PublishesHideShadow &
+        PublishesHideHover &
         PublishesDisabledActionIds &
         HasParentApi &
         CanLockHoverActions

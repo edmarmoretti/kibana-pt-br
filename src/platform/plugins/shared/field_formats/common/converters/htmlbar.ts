@@ -31,6 +31,7 @@ export class HtmlbarFormat extends FieldFormat {
       return `<span class="ffString__emptyValue">${emptyLabel}</span>`;
     }
 
+
     return ReactDOM.renderToStaticMarkup(
       React.createElement(
         'div',
@@ -38,8 +39,11 @@ export class HtmlbarFormat extends FieldFormat {
           style: {
             width: '100%',
             height: '12px',
-            backgroundColor: '#edf1f7',
-            borderRadius: '999px',
+            backgroundColor: '#e0e4ea',
+            borderTopLeftRadius: '0px',
+            borderBottomLeftRadius: '0px',
+            borderTopRightRadius: '999px',
+            borderBottomRightRadius: '999px',
             overflow: 'hidden'
           }
         },
@@ -47,14 +51,17 @@ export class HtmlbarFormat extends FieldFormat {
           style: {
             width: `${val}%`,
             height: '100%',
-            borderRadius: '999px',
+            borderTopLeftRadius: '0px',
+            borderBottomLeftRadius: '0px',
+            borderTopRightRadius: '999px',
+            borderBottomRightRadius: '999px',
             background: `
               repeating-linear-gradient(
                 90deg,
-                #4f8ef7 0px,
-                #4f8ef7 10px,
-                #7fb0ff 10px,
-                #7fb0ff 12px
+                #8a8f98 0px,
+                #8a8f98 8px,
+                #b0b5bd 8px,
+                #b0b5bd 10px
               )
             `
           }
@@ -62,5 +69,6 @@ export class HtmlbarFormat extends FieldFormat {
       )
     );
   };
-}
+};
+
 

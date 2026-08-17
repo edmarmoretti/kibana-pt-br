@@ -73,6 +73,7 @@ const getContextMenuAriaLabel = (title?: string, index?: number) => {
 };
 
 const QUICK_ACTION_IDS = {
+  //Edmar Moretti - restringe as opções de ações rápidas para edição e visualização do painel
   edit: [
     'editPanel',
     'ACTION_CONFIGURE_IN_LENS',
@@ -81,10 +82,10 @@ const QUICK_ACTION_IDS = {
     'ACTION_VIEW_SAVED_SEARCH',
   ],
   view: [
-    'ACTION_SHOW_CONFIG_PANEL',
-    'ACTION_OPEN_IN_DISCOVER',
-    'ACTION_VIEW_SAVED_SEARCH',
-    'openInspector',
+    //'ACTION_SHOW_CONFIG_PANEL',
+    //'ACTION_OPEN_IN_DISCOVER',
+    //ACTION_VIEW_SAVED_SEARCH',
+    //'openInspector',
     'togglePanel',
   ],
 } as const;
@@ -120,6 +121,7 @@ export const PresentationPanelHoverActions = ({
   viewMode,
   showNotifications = true,
   showBorder,
+  hideHover,
 }: {
   index?: number;
   api: DefaultPresentationPanelApi | null;
@@ -131,6 +133,7 @@ export const PresentationPanelHoverActions = ({
   viewMode?: ViewMode;
   showNotifications?: boolean;
   showBorder?: boolean;
+  hideHover?: boolean;
 }) => {
   const [quickActions, setQuickActions] = useState<AnyApiAction[]>([]);
   const [contextMenuPanels, setContextMenuPanels] = useState<EuiContextMenuPanelDescriptor[]>([]);
@@ -436,11 +439,13 @@ export const PresentationPanelHoverActions = ({
     ),
     [setDragHandle, euiTheme.size.xs]
   );
+  //Edmar Moretti - não exibir ações
 
-  const hasHoverActions = quickActionElements.length || contextMenuPanels.lastIndexOf.length;
+//  console.log(hideHover);
+  const hasHoverActions = hideHover && viewMode === 'view' ? false : quickActionElements.length || contextMenuPanels.lastIndexOf.length;
   const { containerStyles, hoverActionStyles } = useHoverActionStyles(
     viewMode === 'edit',
-    showBorder
+    showBorder,
   );
 
   return (

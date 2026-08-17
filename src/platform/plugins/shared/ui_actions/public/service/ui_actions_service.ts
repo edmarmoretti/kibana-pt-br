@@ -208,7 +208,12 @@ export class UiActionsService {
         })
       )
     );
+
     return actions.reduce((acc: Action[], action, i) => {
+      //Edmar Moretti - não exibir ações de edição do mapa quando o mapa estiver em modo de visualização
+      //console.log(context.embeddable.type);
+      //console.log(context.embeddable.viewMode$._value);
+      //console.log(action.type);
       if (isCompatibles[i]) {
         acc.push(action);
       }

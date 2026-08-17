@@ -13,6 +13,7 @@ import { PanelLoader } from '@kbn/panel-loader';
 import {
   PublishesHideBorder,
   PublishesHideShadow,
+  PublishesHideHover,
   PublishesTitle,
   apiHasParentApi,
   apiPublishesViewMode,
@@ -26,6 +27,7 @@ import { PresentationPanelErrorInternal } from './presentation_panel_error_inter
 import { DefaultPresentationPanelApi, PresentationPanelInternalProps } from './types';
 import { usePanelErrorCss } from './use_panel_error_css';
 
+
 export const PresentationPanelInternal = <
   ApiType extends DefaultPresentationPanelApi = DefaultPresentationPanelApi,
   ComponentPropsType extends {} = {}
@@ -37,6 +39,7 @@ export const PresentationPanelInternal = <
 
   showBadges,
   showNotifications,
+
   getActions,
   actionPredicate,
 
@@ -70,8 +73,9 @@ export const PresentationPanelInternal = <
     defaultPanelTitleSummary,
     rawViewMode,
     parentHidePanelTitle,
-    panelHideBorder, 
+    panelHideBorder,
     panelHideShadow,
+    panelHideHover
   ] = useBatchedOptionalPublishingSubjects(
     api?.dataLoading$,
     api?.blockingError$,
@@ -88,10 +92,12 @@ export const PresentationPanelInternal = <
     (api?.parentApi as Partial<PublishesTitle>)?.hideTitle$,
     (api as Partial<PublishesHideBorder>)?.hideBorder$,
     (api as Partial<PublishesHideShadow>)?.hideShadow$,
+    (api as Partial<PublishesHideHover>)?.hideHover$,
   );
   const viewMode = rawViewMode ?? 'view';
   const hideBorder = Boolean(panelHideBorder);
   const hideShadow = Boolean(panelHideShadow);
+  const hideHover = Boolean(panelHideHover);
   //console.log(hideShadow);
   const [initialLoadComplete, setInitialLoadComplete] = useState(!dataLoading);
   if (!initialLoadComplete && (dataLoading === false || (api && !api.dataLoading$))) {
@@ -133,6 +139,7 @@ export const PresentationPanelInternal = <
         showNotifications,
         showBorder,
         hideShadow,
+        hideHover,
       }}
       setDragHandle={setDragHandle}
       showBorder={showBorder && !hideBorder}
@@ -148,7 +155,10 @@ export const PresentationPanelInternal = <
         data-test-subj="embeddablePanel"
 
         {...contentAttrs}
-        css={hideShadow ? styles.embPanelNoShadow : styles.embPanel}
+        css={[
+          hideShadow ? styles.embPanelNoShadow : styles.embPanel,
+          hideHover ? styles.noHover : undefined,
+        ]}
       >
         {!hideHeader && api && (
           <PresentationPanelHeader
@@ -180,7 +190,12 @@ export const PresentationPanelInternal = <
         )}
         {!initialLoadComplete && <PanelLoader />}
         <div
-          className={blockingError ? 'embPanel__content--hidden' : 'embPanel__content'}
+          className={classNames(
+            blockingError ? 'embPanel__content--hidden' : 'embPanel__content',
+            {
+              embPanelContentNoShadow: hideShadow,
+            }
+          )}
           css={hideShadow ? styles.embPanelContentNoShadow : styles.embPanelContent}
         >
           <EuiErrorBoundary>
@@ -212,6 +227,11 @@ const styles = {
     height: '100%',
     position: 'relative',
     overflow: 'hidden',
+  }),
+  noHover: css({
+    '&:hover': {
+      boxShadow: 'unset !Important',
+    },
   }),
   embPanelContent: css({
     '&.embPanel__content': {
@@ -258,7 +278,7 @@ function formatPanelNotes(panelTitleNotes: string | undefined) {
     replacedText = inputText.replace(replacePattern1, "<a href='$1' target='_blank' > $1</a>");
     //return replacedText;
     const theObj = { __html: replacedText };
-    return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj}  />
+    return <div data-test-subj="markdownBody" className="kbnMarkdown__body" dangerouslySetInnerHTML={theObj} />
   };
   const titleNotesStyles = css`
   > div {
@@ -276,14 +296,14 @@ function formatPanelNotes(panelTitleNotes: string | undefined) {
 `;
   return (
     <>
-    <EuiToolTip
-      position="top"
-      content={panelTitleNotes}
-    >
-    <EuiText css={titleNotesStyles} className='embPanel__notes'>
-      {panelTitleNotes ? linkify(panelTitleNotes) : ''}
-    </EuiText>
-    </EuiToolTip>
+      <EuiToolTip
+        position="top"
+        content={panelTitleNotes}
+      >
+        <EuiText css={titleNotesStyles} className='embPanel__notes'>
+          {panelTitleNotes ? linkify(panelTitleNotes) : ''}
+        </EuiText>
+      </EuiToolTip>
     </>
   );
 }

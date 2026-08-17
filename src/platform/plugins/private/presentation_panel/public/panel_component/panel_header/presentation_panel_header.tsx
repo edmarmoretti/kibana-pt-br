@@ -25,6 +25,7 @@ export type PresentationPanelHeaderProps<ApiType extends DefaultPresentationPane
   panelTitleSummary?: string;
   panelDescription?: string;
   hideShadow?: boolean;
+  showHover?: boolean;
   setDragHandle: (id: string, ref: HTMLDivElement | null) => void;
 } & Pick<PresentationPanelInternalProps, 'showBadges' | 'getActions' | 'showNotifications'>;
 
@@ -44,6 +45,7 @@ const PresentationPanelHeader = <
   showBadges = true,
   showNotifications = true,
   hideShadow = false,
+  showHover = true,
 }: PresentationPanelHeaderProps<ApiType>) => {
   const { euiTheme } = useEuiTheme();
 

@@ -182,6 +182,13 @@ export {
   type PublishesWritableHideShadow,
 } from './interfaces/titles/publishes_hide_shadow';
 export {
+  apiPublishesHideHover,
+  apiPublishesWritableHideHover,
+  getHideHover,
+  type PublishesHideHover,
+  type PublishesWritableHideHover,
+} from './interfaces/titles/publishes_hide_hover';
+export {
   useBatchedOptionalPublishingSubjects,
   useBatchedPublishingSubjects,
   usePublishingSubject,

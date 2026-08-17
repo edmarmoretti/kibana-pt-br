@@ -42,6 +42,7 @@ import {
   getTitleSummary,
   getHideBorder,
   getHideShadow,
+  getHideHover,
   PublishesUnifiedSearch,
 } from '@kbn/presentation-publishing';
 
@@ -76,7 +77,7 @@ export const CustomizePanelEditor = ({
   const [panelTitleNotes, setPanelTitleNotes] = useState(getTitleNotes(api));
   const [hideBorder, setHideBorder] = useState(getHideBorder(api));
   const [hideShadow, setHideShadow] = useState(getHideShadow(api));
-
+  const [hideHover, setHideHover] = useState(getHideHover(api));
   const [timeRange, setTimeRange] = useState(
     api.timeRange$?.value ?? api.parentApi?.timeRange$?.value
   );
@@ -121,6 +122,7 @@ export const CustomizePanelEditor = ({
     if (hideTitle !== api.hideTitle$?.value) api.setHideTitle?.(hideTitle);
     if (hideBorder !== api.hideBorder$?.value) api.setHideBorder?.(hideBorder);
     if (hideShadow !== api.hideShadow$?.value) api.setHideShadow?.(hideShadow);
+    if (hideHover !== api.hideHover$?.value) api.setHideHover?.(hideHover);
     if (panelDescription !== api.description$?.value) api.setDescription?.(panelDescription);
     if (panelTitleNotes !== api.titleNotes$?.value) api.setTitleNotes?.(panelTitleNotes);
     if (panelTitleSummary !== api.titleSummary$?.value) api.setTitleSummary?.(panelTitleSummary);
@@ -384,10 +386,8 @@ export const CustomizePanelEditor = ({
     );
   };
 
-  //Edmar Moretti - adiciona a opção de mostrar ou não a sombra do quadro
+  //Edmar Moretti - adiciona a opção de mostrar ou não a sombra do quadro e hover do quadro
   const renderShadowlessToggleComponent = () => {
-
-
     return (
       <EuiFormRow>
         <EuiSwitch
@@ -401,6 +401,25 @@ export const CustomizePanelEditor = ({
             />
           }
           onChange={(e) => setHideShadow(!e.target.checked)}
+        />
+      </EuiFormRow>
+    );
+  };
+
+  const renderHoverlessToggleComponent = () => {
+    return (
+      <EuiFormRow>
+        <EuiSwitch
+          checked={!hideHover}
+          data-test-subj="customizePanelHoverlessToggle"
+          id="hoverlessToggle"
+          label={
+            <FormattedMessage
+              defaultMessage="Mostra o hover do quadro"
+              id="presentationPanel.action.customizePanel.flyout.optionsMenuForm.hoverlessToggleSwitch"
+            />
+          }
+          onChange={(e) => setHideHover(!e.target.checked)}
         />
       </EuiFormRow>
     );
@@ -455,7 +474,7 @@ export const CustomizePanelEditor = ({
           {renderCustomTitleComponent()}
           {renderBorderlessToggleComponent()}
           {renderShadowlessToggleComponent()}
-          
+          {renderHoverlessToggleComponent()}
           {renderCustomTimeRangeComponent()}
           {renderFilterDetails()}
         </EuiForm>

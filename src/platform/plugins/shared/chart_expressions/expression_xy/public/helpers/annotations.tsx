@@ -116,14 +116,14 @@ export function MarkerBody({
 }) {
   if (!label) return null;
 
-  const maxWidth = isHorizontal ? LINES_MARKER_SIZE * 3 : LINES_MARKER_SIZE;
-
+  //const maxWidth = isHorizontal ? LINES_MARKER_SIZE * 3 : LINES_MARKER_SIZE * 3;
+  //Edmar Moretti - adicionado font-size: 8px; e removido euiTextTruncate(`${maxWidth}px`)
   return (
     <div
       data-test-subj="xyVisAnnotationText"
       css={[
         css`
-          ${euiTextTruncate(`${maxWidth}px`)}
+          font-size: 10px;  
         `,
         !isHorizontal && styles.rotatedText,
       ]}

@@ -117,6 +117,7 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
     overrides,
     hasOpenedOnAggBasedEditor,
   } = props;
+  //console.log(props);
   //Edmar Moretti: desativa a seleção por clique nos gráficos de pizza
   const interactive = false;
   const visParams = useMemo(() => filterOutConfig(visType, preVisParams), [preVisParams, visType]);
@@ -516,7 +517,8 @@ const PartitionVisComponent = (props: PartitionVisComponentProps) => {
       return lookup[a.key] - lookup[b.key];
     };
   }, [bucketColumns, flatLegend, showLegend, visData.rows]);
-
+  
+  //console.log(visType) mosaic;
   return (
     <div css={chartContainerStyle} data-test-subj="partitionVisChart">
       {!canShowPieChart ? (
