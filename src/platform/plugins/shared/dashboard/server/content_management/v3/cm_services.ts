@@ -324,6 +324,10 @@ export const optionsSchema = schema.object({
     defaultValue: DEFAULT_DASHBOARD_OPTIONS.syncCursor,
     meta: { description: 'Synchronize cursor position between related panels in the dashboard.' },
   }),
+  firstPanelFixed: schema.boolean({
+    defaultValue: DEFAULT_DASHBOARD_OPTIONS.firstPanelFixed,
+    meta: { description: 'Fix the first panel in place in the dashboard layout.' },
+  }),
 });
 
 // These are the attributes that are returned in search results
@@ -332,6 +336,10 @@ export const searchResultsAttributesSchema = schema.object({
   description: schema.string({ defaultValue: '', meta: { description: 'A short description.' } }),
   titleNotes: schema.string({ defaultValue: '', meta: { description: 'Title notes.' } }),
   titleSummary: schema.string({ defaultValue: '', meta: { description: 'Title summary.' } }),
+  firstPanelFixed: schema.boolean({
+    defaultValue: false,
+    meta: { description: 'Whether the first panel is fixed in place.' },
+  }),
   timeRestore: schema.boolean({
     defaultValue: false,
     meta: { description: 'Whether to restore time upon viewing this dashboard' },

@@ -55,11 +55,19 @@ export function initializeSettingsManager(initialState?: DashboardState) {
   function setUseMargins(useMargins: boolean) {
     if (useMargins !== useMargins$.value) useMargins$.next(useMargins);
   }
+  const firstPanelFixed$ = new BehaviorSubject<boolean>(
+    initialState?.firstPanelFixed ?? DEFAULT_DASHBOARD_STATE.firstPanelFixed
+  );
+  function setFirstPanelFixed(firstPanelFixed: boolean) {
+    if (firstPanelFixed !== firstPanelFixed$.value) firstPanelFixed$.next(firstPanelFixed);
+  }
 
   function getSettings(): DashboardSettings {
     const titleState = titleManager.getLatestState();
     return {
       title: titleState.title ?? '',
+      titleNotes: titleState.titleNotes ?? '',
+      titleSummary: titleState.titleSummary ?? '',
       description: titleState.description,
       hidePanelTitles: titleState.hidePanelTitles ?? DEFAULT_DASHBOARD_STATE.hidePanelTitles,
       syncColors: syncColors$.value,
@@ -68,6 +76,7 @@ export function initializeSettingsManager(initialState?: DashboardState) {
       tags: tags$.value,
       timeRestore: timeRestore$.value ?? DEFAULT_DASHBOARD_STATE.timeRestore,
       useMargins: useMargins$.value,
+      firstPanelFixed: firstPanelFixed$.value ?? DEFAULT_DASHBOARD_STATE.firstPanelFixed,
     };
   }
 
@@ -81,18 +90,22 @@ export function initializeSettingsManager(initialState?: DashboardState) {
     titleManager.api.setHideTitle(settings.hidePanelTitles);
     titleManager.api.setDescription(settings.description);
     titleManager.api.setTitle(settings.title);
+    setFirstPanelFixed(settings.firstPanelFixed);
   }
 
   const comparators: StateComparators<DashboardSettings> = {
     title: titleComparators.title,
     description: titleComparators.description,
     hidePanelTitles: 'referenceEquality',
+    firstPanelFixed: 'referenceEquality',
     syncColors: 'referenceEquality',
     syncCursor: 'referenceEquality',
     syncTooltips: 'referenceEquality',
     timeRestore: 'referenceEquality',
     useMargins: 'referenceEquality',
     tags: 'deepEquality',
+    titleNotes: titleComparators.titleNotes,
+    titleSummary: titleComparators.titleSummary,
   };
 
   return {
@@ -104,6 +117,7 @@ export function initializeSettingsManager(initialState?: DashboardState) {
         syncCursor$,
         syncTooltips$,
         useMargins$,
+        firstPanelFixed$,
       },
       setSettings,
       setTags,
@@ -118,7 +132,7 @@ export function initializeSettingsManager(initialState?: DashboardState) {
           tags$,
           timeRestore$,
           useMargins$,
-
+          firstPanelFixed$,
           titleManager.anyStateChange$,
         ]).pipe(
           debounceTime(100),

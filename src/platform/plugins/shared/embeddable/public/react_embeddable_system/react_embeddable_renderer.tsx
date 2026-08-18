@@ -132,7 +132,6 @@ export const EmbeddableRenderer = <
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [type]
   );
-
   return (
     <PresentationPanel<Api, {}>
       hidePanelChrome={hidePanelChrome}

@@ -42,10 +42,13 @@ export const EDITABLE_SAVED_SEARCH_KEYS: Readonly<Array<keyof SavedSearchAttribu
 ] as const;
 
 /** This constant refers to the dashboard panel specific state */
-export const EDITABLE_PANEL_KEYS: Readonly<Array<keyof SearchEmbeddableSerializedState>> = [
+// Use a string array type here because some keys (e.g. 'firstPanelFixed')
+// may not be present on SearchEmbeddableSerializedState's keyof union.
+export const EDITABLE_PANEL_KEYS: Readonly<string[]> = [
   'title', // panel title
   'description', // panel description
   'timeRange', // panel custom time range
   'hidePanelTitles', // panel hidden title
   'enhancements', // panel enhancements (e.g. drilldowns)
+  'firstPanelFixed', // panel fixed first panel
 ] as const;

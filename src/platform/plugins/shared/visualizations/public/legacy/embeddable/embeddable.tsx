@@ -91,6 +91,13 @@ export abstract class Embeddable<
       if (!this.deferEmbeddableLoad) this.initializationFinished.complete();
     }, 0);
   }
+  enhancements?: object | undefined;
+  getTitleNotes(): string | undefined {
+    throw new Error('Method not implemented.');
+  }
+  getTitleSummary(): string | undefined {
+    throw new Error('Method not implemented.');
+  }
 
   public async getEditHref(): Promise<string | undefined> {
     return this.getOutput().editUrl ?? undefined;
@@ -171,6 +178,7 @@ export abstract class Embeddable<
   public getDescription(): string {
     return this.output.description ?? '';
   }
+
 
   public updateInput(changes: Partial<TEmbeddableInput>): void {
     if (this.destroyed) {

@@ -35,6 +35,7 @@ export type DashboardSettings = Writable<DashboardOptions> & {
   title: DashboardAttributes['description'];
   titleNotes: DashboardAttributes['titleNotes'];
   titleSummary: DashboardAttributes['titleSummary'];
+  firstPanelFixed: DashboardAttributes['firstPanelFixed'];
 };
 
 export interface DashboardState extends DashboardSettings {

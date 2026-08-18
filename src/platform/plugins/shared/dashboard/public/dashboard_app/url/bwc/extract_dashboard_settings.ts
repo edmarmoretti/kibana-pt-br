@@ -36,6 +36,10 @@ export function extractSettings(state: { [key: string]: unknown }): Partial<Dash
     settings.description = state.description;
   }
 
+  if (typeof state.firstPanelFixed === 'boolean') {
+    settings.firstPanelFixed = state.firstPanelFixed;
+  }
+
   if (Array.isArray(state.tags)) {
     settings.tags = state.tags;
   }

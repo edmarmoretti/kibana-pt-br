@@ -29,6 +29,7 @@ function transformOptionsProperties({
   syncColors,
   syncCursor,
   syncTooltips,
+  firstPanelFixed,
 }: DashboardAttributes['options']) {
   return {
     hidePanelTitles,
@@ -36,5 +37,6 @@ function transformOptionsProperties({
     syncColors,
     syncCursor,
     syncTooltips,
+    firstPanelFixed,
   };
 }

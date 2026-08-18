@@ -25,7 +25,7 @@ import { DASHBOARD_MARGIN_SIZE } from './constants';
 import { getHighlightStyles } from './highlight_styles';
 
 type DivProps = Pick<React.HTMLAttributes<HTMLDivElement>, 'className' | 'style' | 'children'>;
-
+//Edmar Moretti - inclusão de fixThisPanel para definir se o quadro é o primeiro do dashboard para receber a classe sticky
 export interface Props extends DivProps {
   appFixedViewport?: HTMLElement;
   dashboardContainerRef?: React.MutableRefObject<HTMLElement | null>;
@@ -35,6 +35,7 @@ export interface Props extends DivProps {
   key: string;
   isRenderable?: boolean;
   setDragHandles?: (refs: Array<HTMLElement | null>) => void;
+  fixThisPanel?: boolean;
 }
 
 export const Item = React.forwardRef<HTMLDivElement, Props>(
@@ -47,6 +48,7 @@ export const Item = React.forwardRef<HTMLDivElement, Props>(
       type,
       isRenderable = true,
       setDragHandles,
+      fixThisPanel,
       children,
       className,
       ...rest
@@ -70,7 +72,6 @@ export const Item = React.forwardRef<HTMLDivElement, Props>(
       dashboardApi.settings.useMargins$,
       dashboardApi.viewMode$
     );
-
     const expandPanel = expandedPanelId !== undefined && expandedPanelId === id;
     const hidePanel = expandedPanelId !== undefined && expandedPanelId !== id;
     const focusPanel = focusedPanelId !== undefined && focusedPanelId === id;

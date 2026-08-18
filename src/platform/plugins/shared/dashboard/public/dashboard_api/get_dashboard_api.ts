@@ -189,6 +189,7 @@ export function getDashboardApi({
           tags: saveResult.savedState.tags,
           timeRestore: saveResult.savedState.timeRestore,
           title: saveResult.savedState.title,
+          firstPanelFixed: saveResult.savedState.firstPanelFixed,
         });
         savedObjectId$.next(saveResult.id);
 

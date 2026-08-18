@@ -69,6 +69,7 @@ export const getSerializedState = ({
     syncTooltips,
     hidePanelTitles,
     controlGroupInput,
+    firstPanelFixed,
   } = dashboardState;
 
   let { panels } = dashboardState;
@@ -90,6 +91,7 @@ export const getSerializedState = ({
     syncCursor,
     syncTooltips,
     hidePanelTitles,
+    firstPanelFixed,
   };
 
   /**
@@ -121,6 +123,7 @@ export const getSerializedState = ({
     timeTo,
     titleNotes: dashboardState.titleNotes ?? '',
     titleSummary: dashboardState.titleSummary ?? '',
+    firstPanelFixed: dashboardState.firstPanelFixed ?? false,
   };
 
   // TODO Provide tags as an array of tag names in the attribute. In that case, tag references

@@ -25,6 +25,7 @@ export const DEFAULT_DASHBOARD_STATE: DashboardState = {
   syncCursor: true,
   syncTooltips: false,
   hidePanelTitles: false,
+  firstPanelFixed: false,
   titleNotes: '',
   titleSummary: ''
 };

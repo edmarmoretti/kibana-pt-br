@@ -140,7 +140,7 @@ export const DashboardSettingsFlyout = ({ onClose }: DashboardSettingsProps) => 
       </EuiFormRow>
     );
   };
-
+  //Edmar Moretti - opção para fixar o primeiro quadro do dashboard
   return (
     <>
       <EuiFlyoutHeader hasBorder>
@@ -256,6 +256,17 @@ export const DashboardSettingsFlyout = ({ onClose }: DashboardSettingsProps) => 
                 updateDashboardSetting({ hidePanelTitles: !event.target.checked })
               }
               data-test-subj="dashboardPanelTitlesCheckbox"
+            />
+          </EuiFormRow>
+
+          <EuiFormRow>
+            <EuiSwitch
+              label='Primeiro quadro é fixo'
+              checked={localSettings.firstPanelFixed}
+              onChange={(event) =>
+                updateDashboardSetting({ firstPanelFixed: event.target.checked })
+              }
+              data-test-subj="dashboardPanelfirstPanelFixedCheckbox"
             />
           </EuiFormRow>
 

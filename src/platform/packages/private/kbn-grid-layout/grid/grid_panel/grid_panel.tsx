@@ -177,14 +177,21 @@ export const GridPanel = React.memo(({ panelId }: GridPanelProps) => {
   const panelContents = useMemo(() => {
     return renderPanelContents(panelId, dragHandleApi.setDragHandles);
   }, [panelId, renderPanelContents, dragHandleApi]);
-
+//Edmar Moretti - inclusão da classe fixThisPanel para definir se o quadro é o primeiro do dashboard para receber a classe sticky
+  const classeForFixThisPanel =
+    panelContents &&
+    typeof panelContents === 'object' &&
+    'props' in panelContents &&
+    panelContents.props?.fixThisPanel
+      ? 'fixThisPanel'
+      : '';
   return (
     <div
       ref={(element) => {
         gridLayoutStateManager.panelRefs.current[panelId] = element;
       }}
       css={initialStyles}
-      className="kbnGridPanel"
+      className={`kbnGridPanel ${classeForFixThisPanel}`}
     >
       {!useCustomDragHandle && <DefaultDragHandle dragHandleApi={dragHandleApi} />}
       {panelContents}

@@ -39,13 +39,14 @@ export const DashboardGrid = ({
 
   const layoutStyles = useLayoutStyles();
   const panelRefs = useRef<{ [panelId: string]: React.Ref<HTMLDivElement> }>({});
-
+  //Edmar Moretti - verifica se a propriedade firstPanelFixed está ativa para fixar o primeiro painel do dashboard
   const [topOffset, setTopOffset] = useState(DEFAULT_DASHBOARD_DRAG_TOP_OFFSET);
-  const [expandedPanelId, layout, useMargins, viewMode] = useBatchedPublishingSubjects(
+  const [expandedPanelId, layout, useMargins, viewMode, firstPanelFixed] = useBatchedPublishingSubjects(
     dashboardApi.expandedPanelId$,
     dashboardInternalApi.layout$,
     dashboardApi.settings.useMargins$,
-    dashboardApi.viewMode$
+    dashboardApi.viewMode$,
+    dashboardApi.settings.firstPanelFixed$
   );
 
   useEffect(() => {
@@ -72,6 +73,7 @@ export const DashboardGrid = ({
     });
     Object.keys(layout.panels).forEach((panelId) => {
       const gridData = layout.panels[panelId].gridData;
+
       const basePanel = {
         id: panelId,
         row: gridData.y,
@@ -149,6 +151,8 @@ export const DashboardGrid = ({
       }
 
       const type = panels[id].type;
+      //console.log(panels[id]);
+      const fixThisPanel = firstPanelFixed && panels[id].gridData.y === 0 && panels[id].gridData.x === 0 ? true : false;
       return (
         <DashboardGridItem
           ref={panelRefs.current[id]}
@@ -159,10 +163,11 @@ export const DashboardGrid = ({
           appFixedViewport={appFixedViewport}
           dashboardContainerRef={dashboardContainerRef}
           data-grid-row={panels[id].gridData.y} // initialize data-grid-row
+          fixThisPanel={fixThisPanel}
         />
       );
     },
-    [appFixedViewport, dashboardContainerRef, dashboardInternalApi.layout$]
+    [appFixedViewport, dashboardContainerRef, dashboardInternalApi.layout$, firstPanelFixed]
   );
 
   const styles = useMemoCss(dashboardGridStyles);
