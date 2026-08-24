@@ -110,6 +110,10 @@ export const controlGroupInputSchema = schema.object({
       meta: { description: 'Ignore global filters in controls.' },
       defaultValue: DEFAULT_IGNORE_PARENT_SETTINGS.ignoreFilters,
     }),
+    ocultarFiltros: schema.boolean({
+      meta: { description: 'Ocultar filtros em controls.' },
+      defaultValue: DEFAULT_IGNORE_PARENT_SETTINGS.ocultarFiltros,
+    }),
     ignoreQuery: schema.boolean({
       meta: { description: 'Ignore the global query bar in controls.' },
       defaultValue: DEFAULT_IGNORE_PARENT_SETTINGS.ignoreQuery,

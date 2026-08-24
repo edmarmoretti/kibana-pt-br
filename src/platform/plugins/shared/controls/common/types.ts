@@ -21,6 +21,7 @@ export interface ParentIgnoreSettings extends SerializableRecord {
   ignoreQuery?: boolean;
   ignoreTimerange?: boolean;
   ignoreValidations?: boolean;
+  ocultarFiltros?: boolean;
 }
 
 export interface DefaultControlState {

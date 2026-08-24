@@ -31,5 +31,14 @@ export const editorStateComparators: StateComparators<ControlGroupEditorState> =
 };
 
 export function initializeEditorStateManager(initialState: ControlGroupEditorState) {
-  return initializeStateManager<ControlGroupEditorState>(initialState, defaultEditorState);
+  return initializeStateManager<ControlGroupEditorState>(
+    {
+      ...initialState,
+      ignoreParentSettings: {
+        ...DEFAULT_IGNORE_PARENT_SETTINGS,
+        ...(initialState.ignoreParentSettings ?? {}),
+      },
+    },
+    defaultEditorState
+  );
 }

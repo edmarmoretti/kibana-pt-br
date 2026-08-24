@@ -42,7 +42,6 @@ export const DashboardViewport = ({
     viewMode,
     useMargins,
     fullScreenMode,
-    firstPanelFixed,
   ] = useBatchedPublishingSubjects(
     dashboardApi.controlGroupApi$,
     dashboardApi.title$,
@@ -52,7 +51,6 @@ export const DashboardViewport = ({
     dashboardApi.viewMode$,
     dashboardApi.settings.useMargins$,
     dashboardApi.fullScreenMode$,
-    dashboardApi.settings.firstPanelFixed$,
   );
 
   const onExit = useCallback(() => {
@@ -150,8 +148,22 @@ export const DashboardViewport = ({
     dashboardInternalApi
   ]);
 
+  //Edmar Moretti - verifica se deve ocultar ou não os filtros
+  const [ocultarFiltrosAtivo, setOcultarFiltros] = useState<boolean | undefined>(undefined);
+  useEffect(() => {
+    if (!controlGroupApi) return;
+    const sub = controlGroupApi.ignoreParentSettings$.subscribe((settings) => {
+      // settings pode ser undefined
+      setOcultarFiltros(Boolean(settings?.ocultarFiltros));
+    });
+    return () => sub.unsubscribe();
+  }, [controlGroupApi]);
+
   const accordionFilters = useMemo(() => {
     if (viewMode === 'print') return null;
+    if (viewMode === 'edit' && ocultarFiltrosAtivo === true) {
+      return null;
+    }
     if (isMobile || windowWidth < 1024) {
       return <div id='accordionFilters' css={{ position: 'relative' }}>
         <EuiAccordion
@@ -164,7 +176,7 @@ export const DashboardViewport = ({
         {filters}
       </div>
     };
-  }, [viewMode, isMobile, filters, aberto, simpleAccordionId, windowWidth]);
+  }, [viewMode, isMobile, filters, aberto, simpleAccordionId, windowWidth, ocultarFiltrosAtivo]);
 
   return (
     <div

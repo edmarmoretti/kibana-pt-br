@@ -25,6 +25,7 @@ describe('transformControlGroupIn', () => {
       ignoreQuery: true,
       ignoreTimerange: true,
       ignoreValidations: true,
+      ocultarFiltros: true,
     },
     controls: [
       {

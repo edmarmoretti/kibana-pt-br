@@ -40,7 +40,7 @@ export const sampleOutputData: ControlGroupOutput = {
     },
   ],
 };
-
+//Edmar Moretti - inclusão de opção para ocultar os filtros útil para o modo de edição do dashboard, pois quando o usuário está editando o dashboard, ele não precisa ver os filtros, apenas quando estiver visualizando o dashboard.
 export const initialInputData: ControlGroupRuntimeState<OptionsListControlState> = {
   initialChildControlState: {
     '0': {
@@ -122,5 +122,6 @@ export const initialInputData: ControlGroupRuntimeState<OptionsListControlState>
     ignoreQuery: false,
     ignoreTimerange: false,
     ignoreValidations: false,
+    ocultarFiltros: false,
   },
 };

@@ -27,6 +27,7 @@ export const DEFAULT_IGNORE_PARENT_SETTINGS = {
   ignoreQuery: false,
   ignoreTimerange: true,
   ignoreValidations: false,
+  ocultarFiltros: false,
 } as const;
 export const DEFAULT_AUTO_APPLY_SELECTIONS = true;
 

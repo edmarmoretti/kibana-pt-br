@@ -37,6 +37,7 @@ export function initializeControlGroupManager(
                   ignoreQuery: false,
                   ignoreTimerange: false,
                   ignoreValidations: false,
+                  ocultarFiltros: false,
                 },
                 labelPosition: 'oneLine',
               } as ControlGroupSerializedState),

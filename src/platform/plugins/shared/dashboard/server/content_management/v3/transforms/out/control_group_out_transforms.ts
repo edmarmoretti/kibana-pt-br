@@ -83,11 +83,13 @@ function transformIgnoreParentSettingsProperties({
   ignoreQuery,
   ignoreTimerange,
   ignoreValidations,
+  ocultarFiltros,
 }: ParentIgnoreSettings): ParentIgnoreSettings {
   return {
     ignoreFilters,
     ignoreQuery,
     ignoreTimerange,
     ignoreValidations,
+    ocultarFiltros,
   };
 }

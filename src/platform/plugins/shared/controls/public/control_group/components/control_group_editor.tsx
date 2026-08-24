@@ -28,7 +28,11 @@ import {
 import { useBatchedPublishingSubjects } from '@kbn/presentation-publishing';
 
 import { StateManager } from '@kbn/presentation-publishing/state_manager/types';
-import type { ControlLabelPosition, ParentIgnoreSettings } from '../../../common';
+import {
+  DEFAULT_IGNORE_PARENT_SETTINGS,
+  type ControlLabelPosition,
+  type ParentIgnoreSettings,
+} from '../../../common';
 import { CONTROL_LAYOUT_OPTIONS } from '../../controls/data_controls/editor_constants';
 import { ControlGroupStrings } from '../control_group_strings';
 import type { ControlGroupApi, ControlGroupEditorState } from '../types';
@@ -62,6 +66,7 @@ export const ControlGroupEditor = ({ onCancel, onSave, onDeleteAll, stateManager
   const updateIgnoreSetting = useCallback(
     (newSettings: Partial<ParentIgnoreSettings>) => {
       stateManager.api.setIgnoreParentSettings({
+        ...DEFAULT_IGNORE_PARENT_SETTINGS,
         ...(selectedIgnoreParentSettings ?? {}),
         ...newSettings,
       });
@@ -89,6 +94,18 @@ export const ControlGroupEditor = ({ onCancel, onSave, onDeleteAll, stateManager
                 stateManager.api.setLabelPosition(newPosition as ControlLabelPosition);
               }}
             />
+          </EuiFormRow>
+
+          <EuiFormRow>
+            <div>
+              <EuiSwitch
+                compressed
+                data-test-subj="control-group-ocultarFiltros"
+                label="Ocultar os filtros"
+                onChange={(e) => updateIgnoreSetting({ ocultarFiltros: e.target.checked })}
+                checked={Boolean(selectedIgnoreParentSettings?.ocultarFiltros)}
+              />
+            </div>
           </EuiFormRow>
 
           <EuiFormRow

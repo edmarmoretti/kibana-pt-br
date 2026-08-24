@@ -7,7 +7,7 @@
  * License v3.0 only", or the "Server Side Public License, v 1".
  */
 
-import { flow } from 'lodash';
+import { flow, omit } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DashboardSavedObjectAttributes } from '../../../../dashboard_saved_object';
@@ -47,7 +47,7 @@ function transformIgnoreParentSettings(controlGroupInput: ControlGroupAttributes
   const { ignoreParentSettings, ...restControlGroupInput } = controlGroupInput;
   return {
     ...restControlGroupInput,
-    ignoreParentSettingsJSON: JSON.stringify(ignoreParentSettings),
+    ignoreParentSettingsJSON: JSON.stringify(omit(ignoreParentSettings, 'ocultarFiltros')),
   };
 }
 

@@ -37,6 +37,10 @@ export function serializeRuntimeState(
     rawState: {
       ...defaultRuntimeState,
       ...omit(runtimeState, ['initialChildControlState']),
+      ignoreParentSettings: {
+        ...DEFAULT_IGNORE_PARENT_SETTINGS,
+        ...(runtimeState.ignoreParentSettings ?? {}),
+      },
       controls: Object.entries(runtimeState?.initialChildControlState ?? {}).map(
         ([controlId, value]) => {
           const { grow, order, type, width, ...controlConfig } = value;
