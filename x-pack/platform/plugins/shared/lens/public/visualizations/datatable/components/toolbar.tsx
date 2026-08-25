@@ -8,6 +8,7 @@
 import React, { useCallback, useState } from 'react';
 import { i18n } from '@kbn/i18n';
 import { EuiFlexGroup, EuiFormRow, EuiSwitch, EuiToolTip } from '@elastic/eui';
+import type { EuiSwitchEvent } from '@elastic/eui';
 import { DataGridDensity, RowHeightSettings, ROWS_HEIGHT_OPTIONS } from '@kbn/unified-data-table';
 import { ToolbarPopover } from '../../../shared_components';
 import type { VisualizationToolbarProps } from '../../../types';
@@ -96,7 +97,18 @@ export function DataTableToolbar(props: VisualizationToolbarProps<DatatableVisua
     },
     [setState, state]
   );
+  function onToggleLocalizar(event: EuiSwitchEvent): void {
+    setState({
+      ...state,
+      localizar: {
+        ...state.localizar,
+        enabled: event.target.checked,
+      },
+    });
+  }
+
   //Edmar Moretti - marca corretamente a opção de definição da densidade da tabela quando ainda não tiver sido escolhida
+  //Edmar Moretti - opção para incluir ou não o campo de localizar na tabela
   return (
     <EuiFlexGroup alignItems="center" gutterSize="none" responsive={false}>
       <ToolbarPopover
@@ -168,6 +180,25 @@ export function DataTableToolbar(props: VisualizationToolbarProps<DatatableVisua
             />
           </EuiToolTip>
         </EuiFormRow>
+        
+        <EuiFormRow
+          label='Inclui opção de localizar na tabela'
+          display="columnCompressed"
+        >
+          <EuiToolTip
+            content='A opção de localização só é mostrada se a tabela tiver ao menos 20 linhas, mesmo que essa opção esteja ativada'
+            position="right"
+          >
+            <EuiSwitch
+              compressed
+              data-test-subj="lens-table-localizar-switch"
+              label=""
+              showLabel={false}
+              checked={state.localizar?.enabled ?? true}
+              onChange={onToggleLocalizar}
+            />
+          </EuiToolTip>
+        </EuiFormRow>        
       </ToolbarPopover>
     </EuiFlexGroup>
   );

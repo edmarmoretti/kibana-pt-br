@@ -66,6 +66,9 @@ import { getSimpleColumnType } from './components/table_actions';
 import { convertToRuntimeState } from './runtime_state';
 
 export interface DatatableVisualizationState {
+  localizar?: {
+    enabled?: boolean;
+  };
   columns: ColumnState[];
   layerId: string;
   layerType: LayerType;
@@ -654,6 +657,7 @@ export const getDatatableVisualization = ({
       headerRowHeightLines: state.headerRowHeightLines ?? DEFAULT_HEADER_ROW_HEIGHT_LINES,
       pageSize: state.paging?.enabled ? state.paging.size : undefined,
       density: state.density ?? DataGridDensity.COMPACT,
+      localizar: state.localizar?.enabled ?? true,
     }).toAst();
 
     return {

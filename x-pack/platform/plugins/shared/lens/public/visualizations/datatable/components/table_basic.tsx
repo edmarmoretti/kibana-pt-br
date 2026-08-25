@@ -599,7 +599,8 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
 
   //calcula o valor que precisa ser reduzido da altura da tabela para caber o título
   const alturaTitulo = props.args.title === '' ? 0 : 30;
-  const alturaFiltro = initialRowCountRef > 20 ? 20 : 0;
+  const mostrarLocalizar = props.args.localizar === true && initialRowCountRef > 20;
+  const alturaFiltro = mostrarLocalizar ? 20 : 0;
   //mostra ou não o cabeçalho da tabela dependendo do valor definido em headerRowHeight. Se for 'hidden', não mostra o cabeçalho
   const headerOpacity = props.args.headerRowHeight === 'hidden' ? '0' : '1';
   const headerHeight = props.args.headerRowHeight === 'hidden' ? '0' : 'auto';
@@ -636,7 +637,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
             <div className='tituloDaTabela'>{props.args.title}</div>
           </EuiText>
         )}
-        {initialRowCountRef > 20 && (
+        {mostrarLocalizar && (
           <EuiFormControlLayout icon="search" fullWidth={true} compressed={true} style={
             { blockSize: 'unset'}
           }>
@@ -644,7 +645,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
               type="search"
               controlOnly
               value={queryFiltro}
-              placeholder='Filtrar'
+              placeholder='Localizar na tabela'
               className='tableSearch'
               onChange={handleSearchChangeLocal}
             />
