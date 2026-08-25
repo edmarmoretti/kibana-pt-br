@@ -639,7 +639,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
         )}
         {mostrarLocalizar && (
           <EuiFormControlLayout icon="search" fullWidth={true} compressed={true} style={
-            { blockSize: 'unset'}
+            { blockSize: 'unset' }
           }>
             <EuiFieldText
               type="search"
@@ -654,6 +654,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
         <EuiDataGrid
           aria-label={dataGridAriaLabel}
           data-test-subj="lnsDataTable"
+          // className="lnsDataGridStickyFirstColumn"
           rowHeightsOptions={{
             defaultHeight: props.args.fitRowToContent
               ? RowHeightMode.auto
@@ -737,6 +738,47 @@ const datatableContainerStyles = css`
     opacity: var(--header-opacity, 1);
     height: var(--header-height, auto);
   }
-`;
 
+  /*
+   * Edmar Moretti - mantém a primeira coluna visível durante a rolagem
+   * horizontal da tabela.
+   *
+   * O EuiDataGrid cria as células em .euiDataGridRowCell e os cabeçalhos
+   * em .euiDataGridHeaderCell. A primeira coluna recebe position: sticky
+   * e fica sobre as demais células durante o scroll horizontal.
+   *
+   * O background é obrigatório para impedir que o conteúdo das colunas
+   * seguintes apareça através da primeira coluna.
+   * 
+   * Não funciona
+   */
+  .lnsDataGridStickyFirstColumn {
+    /*
+     * As células do corpo do EuiDataGrid são renderizadas pelo componente
+     * com position:absolute e left definidos inline. Por isso, !important
+     * é necessário para substituir esses valores e permitir o sticky.
+     */
+    .euiDataGridRowCell[data-gridcell-column-index="0"] {
+      position: sticky !important;
+      left: 0 !important;
+      z-index: 10 !important;
+      background-color: var(--euiDataGridRowBackground, inherit);
+    }
+
+    .euiDataGridHeaderCell:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 5;
+      background-color: var(--euiDataGridHeaderBackground, inherit);
+    }
+
+    .euiDataGridRowCell[data-gridcell-column-index="0"] {
+      box-shadow: 1px 0 0 0 var(--euiBorderColor);
+    }
+
+    .euiDataGridHeaderCell:first-child {
+      box-shadow: 1px 0 0 0 var(--euiBorderColor);
+    }
+  }
+`;
 

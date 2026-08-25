@@ -1,33 +1,182 @@
+/* ==========================================================================
+   Estilo moderno para o grupo de filtros do Kibana (.controlsWrapper)
+   ========================================================================== */
+
+/* Container geral: remove peso visual do painel */
 .controlsWrapper {
-  display: flex;
-  align-items: center;
+  background: transparent !important;
+  padding: 8px 0 !important;
+  margin-right: 32px !important;
+}
 
-  .controlGroup--endButtonGroup {
-    align-self: end;
-  }
+/* Espaçamento mais respirável entre os controles */
+.controlsWrapper .controlGroup {
+  gap: 12px !important;
+}
 
-  // Leandro Celes - Adicionando animação para o popover dos filtros
-  .show-popover-filter-animation {
-    animation: show-fade-right-left 1s ease-in-out !important;
-  }
+/* Cada "card" de filtro (Source Country, OS, Bytes...) — agora sem fundo/card,
+   apenas uma linha inferior discreta */
+.controlsWrapper .controlFrameWrapper--small {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color 0.15s ease;
+  padding: 2px 2px 4px;
+}
 
-  @keyframes show-fade-right-left {
-    0% {
-      opacity: 0;
-      margin-left: 100px;
+.controlsWrapper .controlFrameWrapper--small:hover {
+  background: transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.35);
+}
 
-    }
+/* Label acima do filtro: menor, mais discreto, uppercase sutil */
+.controlsWrapper .euiFormRow__label {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #6b7280 !important;
+  margin-bottom: 2px !important;
+}
 
-    20% {
-      opacity: 0;
-      margin-left: 100px;
+/* Remove a "alça" de arrastar (drag handle) do visual — fica só no hover */
+.controlsWrapper [aria-roledescription="sortable"] {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
 
-    }
+.controlsWrapper .controlFrameWrapper--small:hover [aria-roledescription="sortable"] {
+  opacity: 0.5;
+}
 
-    100% {
-      opacity: 1;
-      margin-left: 0;
-    }
-  }
+/* Botão principal do filtro (o combobox) */
+.controlsWrapper .euiFilterButton {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #1f2937 !important;
+  box-shadow: none !important;
+}
 
+.controlsWrapper .euiFilterButton:hover {
+  background: #f5f6f8 !important;
+}
+
+/* Badge de contagem de filtros ativos (ex: "1") */
+.controlsWrapper .euiFilterButton__notification {
+  background: #0b64dd !important;
+  border-radius: 999px !important;
+  font-weight: 600;
+  font-size: 10px;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+/* Texto truncado da seleção — cor mais neutra */
+.controlsWrapper .euiFilterButton__text {
+  color: #374151 !important;
+}
+
+/* Ícone de seta (chevron) mais discreto */
+.controlsWrapper .euiFilterButton svg {
+  opacity: 0.5;
+}
+
+/* Inputs numéricos do range slider (Bytes) */
+.controlsWrapper .euiFieldNumber {
+  border: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+}
+
+.controlsWrapper .euiFieldNumber:focus {
+  border-bottom: 1px solid #0b64dd !important;
+  background: transparent !important;
+}
+
+/* Delimitador "→" entre os campos de range */
+.controlsWrapper .euiFormControlLayoutDelimited__delimiter {
+  color: #9ca3af !important;
+}
+
+/* Botões de ação flutuantes (limpar, editar, remover) — some por padrão */
+.controlsWrapper .presentationUtil__floatingActions {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.controlsWrapper .controlFrameWrapper--small:hover .presentationUtil__floatingActions {
+  opacity: 1;
+}
+
+/* Ícones das ações flutuantes: tamanho e cor mais sutis */
+.controlsWrapper .presentationUtil__floatingActions .euiButtonIcon {
+  color: #9ca3af !important;
+}
+
+.controlsWrapper .presentationUtil__floatingActions .euiButtonIcon:hover {
+  color: #374151 !important;
+}
+
+/* ==========================================================================
+   Remoção de contornos (outline) e bordas internas residuais
+   ========================================================================== */
+
+/* Remove outline de foco padrão do navegador em todos os elementos internos */
+.controlsWrapper *:focus,
+.controlsWrapper *:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Substitui o foco por um reforço na linha inferior */
+.controlsWrapper .controlFrameWrapper--small:focus-within {
+  border-bottom: 1px solid #0b64dd !important;
+}
+
+/* Remove bordas internas de botões, inputs e wrappers de layout */
+.controlsWrapper .euiFormControlLayout,
+.controlsWrapper .euiFormControlLayout--group,
+.controlsWrapper .euiFilterGroup,
+.controlsWrapper .euiFieldNumber,
+.controlsWrapper button {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove qualquer fundo branco residual de elementos internos */
+.controlsWrapper .euiFormRow,
+.controlsWrapper .euiFormRow__fieldWrapper,
+.controlsWrapper .euiFormControlLayout,
+.controlsWrapper .euiFormControlLayout--group,
+.controlsWrapper .euiFilterGroup,
+.controlsWrapper .euiFilterButton__wrapper,
+.controlsWrapper .euiPopover,
+.controlsWrapper .euiPopover__anchor,
+.controlsWrapper .rangeSliderAnchor__button,
+.controlsWrapper .euiFilterButton {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove a linha divisória entre prepend (drag handle) e o restante do controle */
+.controlsWrapper .euiFormControlLayout__prepend {
+  border-right: none !important;
+  background: transparent !important;
+}
+
+/* Remove borda do popover ao abrir a lista de opções */
+.controlsWrapper .euiPopover__panel,
+.controlsWrapper .euiInputPopover {
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(16, 24, 40, 0.12) !important;
 }
