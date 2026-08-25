@@ -149,7 +149,8 @@ export const PresentationPanelInternal = <
         paddingSize="none"
         className={classNames('embPanel', {
           'embPanel--editing': viewMode === 'edit',
-        })}
+        }, {
+          embPanelNoShadow: hideShadow,})}
         hasBorder={showBorder && !hideBorder}
         aria-labelledby={headerId}
         data-test-subj="embeddablePanel"
@@ -253,7 +254,7 @@ const styles = {
     height: '100%',
     position: 'relative',
     overflow: 'hidden',
-    backgroundColor: 'var(--cor-bkg)',
+    backgroundColor: 'var(--cor-bkg) !Important',
   }),
   embPanelContentNoShadow: css({
     '&.embPanel__content': {
@@ -262,7 +263,7 @@ const styles = {
       zIndex: 1,
       minHeight: 0, // Absolute must for Firefox to scroll contents
       overflow: 'hidden',
-      backgroundColor: 'var(--cor-bkg)',
+      backgroundColor: 'var(--cor-bkg) !Important',
     },
     '&.embPanel__content--hidden, &[data-error]': {
       display: 'none',
@@ -282,7 +283,7 @@ function formatPanelNotes(panelTitleNotes: string | undefined) {
   };
   const titleNotesStyles = css`
   > div {
-    max-height: 13px;
+    min-height: 14px;
     font-size: 12px;
     padding-left: 8px;
     text-overflow: ellipsis;
