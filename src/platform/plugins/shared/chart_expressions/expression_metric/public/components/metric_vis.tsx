@@ -404,9 +404,15 @@ export const MetricVis = ({
     </div>
   );
 };
-
+//Edmar Moretti - alteração da classe echMetricText
 const styles = {
   layout: css({
+    '.echMetricText__gap': {
+      display: 'none',
+    },
+    '.echMetricText': {
+      gridTemplateRows: 'none !Important',
+    },
     '.echMetricText__valuesBlock': {
       display: 'flex',
       minWidth: 0,
