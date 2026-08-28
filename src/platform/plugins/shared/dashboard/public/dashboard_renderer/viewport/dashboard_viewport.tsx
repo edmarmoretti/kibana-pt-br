@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 //Edmar Moretti e Leandro Celes inclusão do acordion no bloco de filtros
 
-import { EuiPortal, UseEuiTheme, EuiAccordion } from '@elastic/eui';
+import { EuiPortal, UseEuiTheme, EuiAccordion, EuiText, EuiTitle, EuiTextColor } from '@elastic/eui';
 import { EmbeddableRenderer } from '@kbn/embeddable-plugin/public';
 import { ExitFullScreenButton } from '@kbn/shared-ux-button-exit-full-screen';
 
@@ -167,12 +167,13 @@ export const DashboardViewport = ({
     if (isMobile || windowWidth < 1024) {
       return <div id='accordionFilters' css={{ position: 'relative' }}>
         <EuiAccordion
-          buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="Filtros" initialIsOpen={aberto}  >
+          buttonClassName={'euiAccordionForm__button'} className={'euiAccordionForm'} id={simpleAccordionId} buttonContent="FILTRO" initialIsOpen={aberto}  >
           {filters}
         </EuiAccordion>
       </div>
     } else {
-      return <div id='filtros'>
+      return <div id='filtros' css={{marginTop:'8px'}}>
+        <EuiText size='xs'><p>FILTRO</p></EuiText>
         {filters}
       </div>
     };
@@ -211,7 +212,7 @@ export const DashboardViewport = ({
     </div>
   );
 };
-
+//Edmar Moretti - alteração da margem
 const dashboardViewportStyles = {
   wrapper: ({ euiTheme }: UseEuiTheme) => ({
     flex: 'auto',
@@ -222,7 +223,7 @@ const dashboardViewportStyles = {
       backgroundColor: euiTheme.colors.emptyShade,
     },
     '.dshDashboardViewport-controls': {
-      margin: `0 ${euiTheme.size.s}`,
+      margin: `0 0`,
       paddingTop: euiTheme.size.s,
     },
   }),

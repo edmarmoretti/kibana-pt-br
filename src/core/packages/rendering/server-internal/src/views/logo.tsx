@@ -10,7 +10,7 @@
 import React, { FC } from 'react';
 
 export const Logo: FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
     <g fill="none">
       <path
         fill="#FDD009"

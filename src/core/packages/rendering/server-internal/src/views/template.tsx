@@ -37,12 +37,11 @@ export const Template: FunctionComponent<Props> = ({
   const favIcon = customBranding.faviconSVG ?? `${uiPublicUrl}/favicons/favicon.svg`;
   const favIconPng = customBranding.faviconPNG ?? `${uiPublicUrl}/favicons/favicon.png`;
   const logo = customBranding.logo ? (
-    <img src={customBranding.logo} width="64" height="64" alt="logo" />
+    <img src={customBranding.logo} width="54" height="54" alt="logo" />
   ) : (
     <Logo />
   );
   //Edmar Moretti - inclusão de 'kibana-embed' na tag html
-  console.log(title)
   return (
     <html lang={locale} className='kibana-embed'>
       <head>
