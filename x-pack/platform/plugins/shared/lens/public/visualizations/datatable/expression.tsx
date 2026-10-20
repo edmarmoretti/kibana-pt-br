@@ -179,6 +179,7 @@ export const getDatatableRenderer = (dependencies: {
         <DatatableComponent
           {...config}
           formatFactory={dependencies.formatFactory}
+          uiSettings={dependencies.uiSettings}
           dispatchEvent={handlers.event}
           renderMode={handlers.getRenderMode()}
           paletteService={dependencies.paletteService}

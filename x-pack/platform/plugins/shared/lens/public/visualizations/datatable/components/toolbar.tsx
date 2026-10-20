@@ -106,6 +106,15 @@ export function DataTableToolbar(props: VisualizationToolbarProps<DatatableVisua
       },
     });
   }
+  function onToggleDownload(event: EuiSwitchEvent): void {
+    setState({
+      ...state,
+      download: {
+        ...state.download,
+        enabled: event.target.checked,
+      },
+    });
+  }
 
   //Edmar Moretti - marca corretamente a opção de definição da densidade da tabela quando ainda não tiver sido escolhida
   //Edmar Moretti - opção para incluir ou não o campo de localizar na tabela
@@ -198,7 +207,25 @@ export function DataTableToolbar(props: VisualizationToolbarProps<DatatableVisua
               onChange={onToggleLocalizar}
             />
           </EuiToolTip>
-        </EuiFormRow>        
+        </EuiFormRow>
+        <EuiFormRow
+          label='Inclui opção de download da tabela'
+          display="columnCompressed"
+        >
+          <EuiToolTip
+            content='A opção de download'
+            position="right"
+          >
+            <EuiSwitch
+              compressed
+              data-test-subj="lens-table-download-switch"
+              label=""
+              showLabel={false}
+              checked={state.download?.enabled ?? false}
+              onChange={onToggleDownload}
+            />
+          </EuiToolTip>
+        </EuiFormRow>       
       </ToolbarPopover>
     </EuiFlexGroup>
   );

@@ -381,9 +381,7 @@ export const termsOperation: OperationDefinition<
         defaultMessage: 'Other',
       }),
       missingBucket: column.params.otherBucket && column.params.missingBucket,
-      missingBucketLabel: i18n.translate('xpack.lens.indexPattern.terms.missingLabel', {
-        defaultMessage: '(missing value)',
-      }),
+      missingBucketLabel: '',
     }).toAst();
   },
   getDefaultLabel: (column, columns, indexPattern) =>

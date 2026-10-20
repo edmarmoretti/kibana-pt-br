@@ -6,6 +6,7 @@
  */
 
 import { CoreSetup } from '@kbn/core/public';
+import type { IUiSettingsClient } from '@kbn/core-ui-settings-browser';
 import type { PaletteRegistry } from '@kbn/coloring';
 import type { IAggType } from '@kbn/data-plugin/public';
 import type { Datatable, DatatableColumnMeta, RenderMode } from '@kbn/expressions-plugin/common';
@@ -48,6 +49,7 @@ export type LensPagesizeAction = LensEditEvent<typeof LENS_EDIT_PAGESIZE_ACTION>
 
 export type DatatableRenderProps = DatatableProps & {
   formatFactory: FormatFactory;
+  uiSettings: IUiSettingsClient;
   dispatchEvent: ILensInterpreterRenderHandlers['event'];
   getType: (meta?: DatatableColumnMeta) => IAggType | undefined;
   renderMode: RenderMode;

@@ -19,6 +19,7 @@ import React, {
 import { i18n } from '@kbn/i18n';
 import useDeepCompareEffect from 'react-use/lib/useDeepCompareEffect';
 import {
+  EuiButton,
   EuiButtonIcon,
   EuiDataGrid,
   EuiDataGridRefProps,
@@ -29,7 +30,12 @@ import {
   EuiText,
   EuiFieldText,
   EuiFormControlLayout,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiDataGridToolbarControl,
 } from '@elastic/eui';
+import { exporters } from '@kbn/data-plugin/public';
+import { downloadMultipleAs } from '@kbn/share-plugin/public';
 import { CustomPaletteState, EmptyPlaceholder } from '@kbn/charts-plugin/public';
 import { ClickTriggerEvent } from '@kbn/charts-plugin/public';
 import { IconChartDatatable } from '@kbn/chart-icons';
@@ -171,12 +177,18 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     if (queryFiltro === '') {
       return rows;
     }
-    return rows.filter((row) =>
+    const teste = rows.filter((row) =>
       Object.values(row ?? {}).some((value) =>
         String(value ?? '').toLowerCase().includes(queryFiltro.toLowerCase())
       )
     );
+    if(teste.length === 0){
+      return rows;
+    }
+    return teste;
   }, [firstLocalTable.rows, queryFiltro]);
+
+
   const displayedTable = useMemo(
     () => ({ ...firstLocalTable, rows: filteredRows }),
     [firstLocalTable, filteredRows]
@@ -208,7 +220,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
 
   const hasAtLeastOneRowClickAction = props.rowHasRowClickTriggerActions?.some((x) => x);
 
-  const { getType, dispatchEvent, renderMode, formatFactory, syncColors } = props;
+  const { getType, dispatchEvent, renderMode, formatFactory, syncColors, uiSettings } = props;
 
   const formatters: Record<string, IFieldFormat> = useMemo(
     () =>
@@ -600,6 +612,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
   //calcula o valor que precisa ser reduzido da altura da tabela para caber o título
   const alturaTitulo = props.args.title === '' ? 0 : 30;
   const mostrarLocalizar = props.args.localizar === true && initialRowCountRef > 20;
+  const mostrarDownload = props.args.download === true;
   const alturaFiltro = mostrarLocalizar ? 20 : 0;
   //mostra ou não o cabeçalho da tabela dependendo do valor definido em headerRowHeight. Se for 'hidden', não mostra o cabeçalho
   const headerOpacity = props.args.headerRowHeight === 'hidden' ? '0' : '1';
@@ -609,7 +622,7 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
     setQueryFiltro(event.target.value);
   }
 
-  //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela
+  //Edmar Moretti - inclusão do título e campo de busca na apresentação da tabela. Inclusão da opção de download do CSV da tabela. Inclusão de variáveis CSS para controlar a altura do título, filtro e cabeçalho da tabela
   return (
     <div
       css={datatableContainerStyles}
@@ -637,20 +650,55 @@ export const DatatableComponent = (props: DatatableRenderProps) => {
             <div className='tituloDaTabela'>{props.args.title}</div>
           </EuiText>
         )}
-        {mostrarLocalizar && (
-          <EuiFormControlLayout icon="search" fullWidth={true} compressed={true} style={
-            { blockSize: 'unset' }
-          }>
-            <EuiFieldText
-              type="search"
-              controlOnly
-              value={queryFiltro}
-              placeholder='Localizar na tabela'
-              className='tableSearch'
-              onChange={handleSearchChangeLocal}
-            />
-          </EuiFormControlLayout>
-        )}
+        <EuiFlexGroup alignItems="center" gutterSize="s" responsive={false}>
+          {mostrarLocalizar && (
+            <EuiFlexItem>
+              <EuiFormControlLayout
+                icon="search"
+                fullWidth={true}
+                compressed={true}
+                style={{ blockSize: 'unset' }}
+              >
+                <EuiFieldText
+                  type="search"
+                  controlOnly
+                  value={queryFiltro}
+                  placeholder="Localizar na tabela"
+                  className="tableSearch"
+                  onChange={handleSearchChangeLocal}
+                />
+              </EuiFormControlLayout>
+            </EuiFlexItem>
+          )}
+          {mostrarDownload && (
+          <EuiFlexItem grow={false}>
+            <EuiDataGridToolbarControl
+              size="xs"
+              iconType="download"
+              data-test-subj="lens-datatable-download-csv"
+              disabled={displayedTable.rows.length === 0}
+              onClick={() => {
+                const title = props.args.title || 'data';
+                downloadMultipleAs({
+                  [`${title}.csv`]: {
+                    content: exporters.datatableToCSV(displayedTable, {
+                      csvSeparator: uiSettings.get('csv:separator', ','),
+                      quoteValues: uiSettings.get('csv:quoteValues', true),
+                      formatFactory,
+                      escapeFormulaValues: false,
+                    }),
+                    type: exporters.CSV_MIME_TYPE,
+                  },
+                });
+              }}
+            >
+              {i18n.translate('xpack.lens.datatable.downloadCsv', {
+                defaultMessage: 'Download CSV',
+              })}
+            </EuiDataGridToolbarControl>
+          </EuiFlexItem>
+          )}
+        </EuiFlexGroup>
         <EuiDataGrid
           aria-label={dataGridAriaLabel}
           data-test-subj="lnsDataTable"

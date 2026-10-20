@@ -35,6 +35,7 @@ export interface DatatableArgs {
   pageSize?: PagingState['size'];
   density?: DataGridDensity;
   localizar?: boolean;
+  download?: boolean;
 }
 
 /**
@@ -103,6 +104,10 @@ export const getDatatable = (
       help: '',
     },
     localizar: {
+      types: ['boolean'],
+      help: '',
+    },
+    download: {
       types: ['boolean'],
       help: '',
     },

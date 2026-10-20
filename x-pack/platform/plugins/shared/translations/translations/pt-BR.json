@@ -414,7 +414,7 @@
     "expressionXY.partialData.bucketTooltipText": "O intervalo de tempo selecionado não inclui todo esse intervalo. Pode conter dados parciais.",
     "expressionXY.xyChart.legendTitle": "Legenda",
     "xpack.lens.indexPattern.terms.otherLabel": "Outro",
-    "xpack.lens.indexPattern.terms.missingLabel": "(valor não encontrado)",
+    "xpack.lens.indexPattern.terms.missingLabel": " ",
     "charts.partialData.bucketTooltipText": "O intervalo de tempo selecionado não inclui todo esse intervalo. Pode conter dados parciais.",
     "charts.legend.toggleLegendButtonTitle": "Mostra ou esconde a legenda",
     "charts.legend.toggleLegendButtonAriaLabel": "Mostra ou esconde a legenda",

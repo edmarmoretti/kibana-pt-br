@@ -69,6 +69,9 @@ export interface DatatableVisualizationState {
   localizar?: {
     enabled?: boolean;
   };
+  download?: {
+    enabled?: boolean;
+  };
   columns: ColumnState[];
   layerId: string;
   layerType: LayerType;
@@ -658,6 +661,7 @@ export const getDatatableVisualization = ({
       pageSize: state.paging?.enabled ? state.paging.size : undefined,
       density: state.density ?? DataGridDensity.COMPACT,
       localizar: state.localizar?.enabled ?? true,
+      download: state.download?.enabled ?? false, //Edmar Moretti - define o parametro download como false por default
     }).toAst();
 
     return {

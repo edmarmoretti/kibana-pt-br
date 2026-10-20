@@ -24,6 +24,12 @@ import { getTransposeId } from '@kbn/transpose-utils';
 import { CustomPaletteState } from '@kbn/charts-plugin/common';
 import { getCellColorFn } from '../../../shared_components/coloring/get_cell_color_fn';
 import { DataGridDensity } from '@kbn/unified-data-table';
+import { downloadMultipleAs } from '@kbn/share-plugin/public';
+
+jest.mock('@kbn/share-plugin/public', () => ({
+  ...jest.requireActual('@kbn/share-plugin/public'),
+  downloadMultipleAs: jest.fn(),
+}));
 
 jest.mock('../../../shared_components/coloring/get_cell_color_fn', () => {
   const mod = jest.requireActual('../../../shared_components/coloring/get_cell_color_fn');
@@ -129,6 +135,7 @@ describe('DatatableComponent', () => {
       data,
       args,
       formatFactory: () => ({ convert: (x) => x } as IFieldFormat),
+      uiSettings: coreMock.createSetup().uiSettings,
       dispatchEvent: onDispatchEvent,
       getType: jest.fn().mockReturnValue({
         type: 'buckets',
@@ -158,6 +165,21 @@ describe('DatatableComponent', () => {
       '1588024800000',
       '3',
     ]);
+  });
+
+  test('it downloads the displayed rows as CSV', async () => {
+    renderDatatableComponent();
+
+    await userEvent.click(screen.getByTestId('lens-datatable-download-csv'));
+
+    expect(downloadMultipleAs).toHaveBeenCalledWith(
+      expect.objectContaining({
+        'data.csv': expect.objectContaining({
+          content: expect.stringContaining('shoes'),
+          type: 'text/plain;charset=utf-8',
+        }),
+      })
+    );
   });
 
   test('it renders actions column when there are row actions', () => {
